@@ -53,7 +53,7 @@ pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
 fn replicate_file(file: fs::DirEntry, src: &str, dst: &str, times: u32) {
     let file_name_base: String = file.file_name().into_string().unwrap();
 
-    for i in 0..times {
+    for i in 1..times + 1 {
         let dst_file_name =
             replicate_file_name(file_name_base.as_str(), format!(".replicate{}", i).as_str());
 

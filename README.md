@@ -1,12 +1,14 @@
 # scale-testing
 Utility for testing trustification at scale.
 
-This tool is tool help replicating existing SBOMs (SPDX or CycloneDX) file in order to augment an existing data set by multipling the number SBOMs files.
+This tool is to help replicating existing SBOMs (SPDX or CycloneDX) file in order to augment an existing data set by multipling the number SBOMs files.
 
 For instance let's say we have a total of 1000 SBMS (500 SPDX and 500) and we'd like to obtain 10K SBOMs file in total for our scale test.
 
 By running this tool we could "replicate" existing SBOMs, by copying each file content and change its file name and its key records.
 
+
+## Usage ##
 After installing trustification/scale-testing repo,
 
 We can run the tool, by providing the size of the replication, the source directory and the destination directory :
@@ -15,7 +17,10 @@ We can run the tool, by providing the size of the replication, the source direct
 
 The latter will replicate 10 times each SBOM file available in /SBOMs/.
 
-Each replicated SBOM file will be created under its corresponding batch directory under `/data-set`:
+Each replicated SBOM file will be created under its corresponding batch directory under `/data-set`.
+
+
+## Example ##
 
 ```
 $ cargo run -- 5 ./SBOMs/ ./data-set/
