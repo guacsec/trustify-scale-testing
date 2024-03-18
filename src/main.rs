@@ -1,7 +1,7 @@
 use std::env;
 use std::process;
 
-use bomplicator::Config;
+use scale_testing::Config;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
@@ -15,7 +15,7 @@ fn main() {
     println!("Source directory {}", config.src);
     println!("Destination directory {}", config.dst);
 
-    if let Err(e) = bomplicator::run(config) {
+    if let Err(e) = scale_testing::run(config) {
         println!("Application error: {}", e);
         process::exit(1);
     }

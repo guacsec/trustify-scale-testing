@@ -29,7 +29,7 @@ impl Config {
 pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
     let files = fs::read_dir(&config.src)?;
 
-    for i in 0..config.replicator.parse::<u32>().unwrap() {
+    for i in 1..config.replicator.parse::<u32>().unwrap() + 1 {
         let batch_path = format!("batch{}", i);
         fs::create_dir(Path::new(&config.dst).join(batch_path))
             .expect("Unable to create directory");
