@@ -11,7 +11,7 @@ fn main() {
         process::exit(1);
     });
 
-    println!("Duplication size {}", config.dup_size);
+    println!("Replication multiplier {}", config.replicator);
     println!("Source directory {}", config.src);
     println!("Destination directory {}", config.dst);
 
