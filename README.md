@@ -3,9 +3,9 @@ Utility for testing trustification at scale.
 
 This tool is to help replicating existing SBOMs (SPDX or CycloneDX) file in order to augment an existing data set by multipling the number SBOMs files.
 
-For instance let's say we have a total of 1000 SBMS (500 SPDX and 500) and we'd like to obtain 10K SBOMs file in total for our scale test.
+For instance let's say we have a total of 1000 SBMS (500 SPDX and 500) and we'd like to obtain a total of 10K SBOMs files for our scale test, so we can run the tool using a replication size of 10. 
 
-By running this tool we could "replicate" existing SBOMs, by copying each file content and change its file name and its key records.
+The tool replicates existing SBOMs, by copying each file content and change its file name and its key records.
 
 
 ## Usage ##
