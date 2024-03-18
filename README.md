@@ -88,6 +88,5 @@ data-set/
 - Run the replication tool : `cargo run -- 10 /SBOMs/ /data-set/`
 - In each batch directory, add a metadata subdirectory containting https://github.com/trustification/trustification/tree/main/data/ds1/sbom/metadata/metadata.json file.
   This is necessary for the bombastic-walker to parse the files.
-- Run the bombastice_walker on each batch directory :
-  `# For example in devmode:`  
+- Run the bombastice_walker on each batch directory, for example in devmode :  
   `RUST_LOG=info cargo run -p trust bombastic walker --sink http://localhost:8082 --source /data-set/batch1/ --devmode -3`
