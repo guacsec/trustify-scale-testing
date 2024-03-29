@@ -1,22 +1,28 @@
 use std::env;
 use std::process;
+use std::process::ExitCode;
 
-use scale_testing::Config;
+mod config;
+mod replicator;
 
-fn main() {
+fn main() -> ExitCode {
     let args: Vec<String> = env::args().collect();
 
-    let config = Config::build(&args).unwrap_or_else(|err| {
+    let config = config::Config::build(&args).unwrap_or_else(|err| {
         println!("Problem parsing arguments: {err}");
         process::exit(1);
     });
+
+    config.validate();
 
     println!("Replication multiplier {}", config.replicator);
     println!("Source directory {}", config.src);
     println!("Destination directory {}", config.dst);
 
-    if let Err(e) = scale_testing::run(config) {
-        println!("Application error: {}", e);
-        process::exit(1);
-    }
+    replicator::run(config).unwrap_or_else(|err| {
+        println!("Application error: {err}");
+        process::exit(1)
+    });
+
+    0.into()
 }

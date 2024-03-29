@@ -76,17 +76,23 @@ data-set/
 ```
 
 
-## scale test example ##
+## scale test example
 
-### Using bombastic_walker ###
+### Using bombastic_walker
 
-#### Prepare initial SBOMs data set ####
+#### Prepare initial SBOMs data set
 
-- Copy the SBOMs files which are going to be used for replication, i.e `/SBOMs/`.
-  Use only SPDX files, for now, because the CycloneDX files tested were rejected with following error: `JSON: Unsupported CycloneDX version: 1.4`
-- Create a replication directory: '`/data-set/`.
-- Run the replication tool : `cargo run -- 10 /SBOMs/ /data-set/`
-- In each batch directory, add a metadata subdirectory containting https://github.com/trustification/trustification/tree/main/data/ds1/sbom/metadata/metadata.json file.
-  This is necessary for the bombastic-walker to parse the files.
-- Run the bombastice_walker on each batch directory, for example in devmode :  
-  `RUST_LOG=info cargo run -p trust bombastic walker --sink http://localhost:8082 --source /data-set/batch1/ --devmode -3`
+Provide initial set of SBOMs files to be replicated, i.e `/SBOMs/`.
+Use only SPDX files, for now, because the CycloneDX files tested were rejected with following error: `JSON: Unsupported CycloneDX version: 1.4`
+
+#### Replicate SBOMs
+
+Run the replication tool to multiply your existing SBOM files set
+
+`cargo run -- 10 /SBOMs /data-set`
+
+#### Use the replicated SBOMs
+
+The bombastic_walker could exploit each replicated SBOMs batch, for example in devmode :  
+
+`RUST_LOG=info cargo run -p trust bombastic walker --sink http://localhost:8082 --source /data-set/batch1/ --devmode -3`

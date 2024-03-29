@@ -3,36 +3,34 @@ use std::fs::{self, File};
 use std::io::prelude::*;
 use std::path::Path;
 
-pub struct Config {
-    pub replicator: String,
-    pub src: String,
-    pub dst: String,
-}
-
-impl Config {
-    pub fn build(args: &[String]) -> Result<Config, &'static str> {
-        if args.len() <= 3 {
-            return Err("not enough arguments");
-        }
-        let replicator = args[1].clone();
-        let src = args[2].clone();
-        let dst = args[3].clone();
-
-        Ok(Config {
-            replicator,
-            src,
-            dst,
-        })
-    }
-}
-
-pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
+pub fn run(config: crate::config::Config) -> Result<(), Box<dyn Error>> {
     let files = fs::read_dir(&config.src)?;
+    let batch_size = config.replicator.parse::<u32>().unwrap();
 
-    for i in 1..config.replicator.parse::<u32>().unwrap() + 1 {
+    fs::create_dir(Path::new(&config.dst))?;
+
+    // In the dst dir. create as many batch directories as replicator value.
+    for i in 1..batch_size + 1 {
         let batch_path = format!("batch{}", i);
-        fs::create_dir(Path::new(&config.dst).join(batch_path))
-            .expect("Unable to create directory");
+        // In each batch directory, add a metadata subdirectory containting
+        // https://github.com/trustification/trustification/tree/main/data/ds1/sbom/metadata/metadata.json file.
+        // This is necessary for the bombastic-walker to parse the files.
+        fs::create_dir_all(Path::new(&config.dst).join(&batch_path).join("metadata"))?;
+        static METADATA: &str = "{\n  \"keys\": []\n}";
+        let metadata_file_path = Path::new(&config.dst)
+            .join(&batch_path)
+            .join("metadata")
+            .join("metadata.json");
+
+        let mut file = match fs::File::create(metadata_file_path) {
+            Err(why) => panic!("couldn't create metadata file: {}", why),
+            Ok(file) => file,
+        };
+
+        match file.write_all(METADATA.as_bytes()) {
+            Err(why) => panic!("couldn't write to metadata file: {}", why),
+            Ok(_) => println!("successfully wrote to metadata file"),
+        }
     }
 
     for file in files {
