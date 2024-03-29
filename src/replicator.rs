@@ -4,6 +4,7 @@ use std::io::prelude::*;
 use std::path::Path;
 
 static METADATA: &str = "{\n  \"keys\": []\n}";
+
 pub struct Replication {
     config: crate::config::Config,
 }
