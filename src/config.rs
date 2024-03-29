@@ -1,5 +1,5 @@
 use std::path::Path;
-
+#[derive(Clone)]
 pub struct Config {
     pub replicator: String,
     pub src: String,
@@ -30,5 +30,9 @@ impl Config {
         if Path::new(&self.dst).exists() {
             panic!("Destination directory {} already exists", self.dst);
         }
+
+        println!("Replication multiplier {}", &self.replicator);
+        println!("Source directory {}", &self.src);
+        println!("Destination directory {}", &self.dst);
     }
 }

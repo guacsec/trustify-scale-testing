@@ -3,45 +3,59 @@ use std::fs::{self, File};
 use std::io::prelude::*;
 use std::path::Path;
 
-pub fn run(config: crate::config::Config) -> Result<(), Box<dyn Error>> {
-    fs::create_dir(Path::new(&config.dst))?;
+pub struct Replication {
+    config: crate::config::Config,
+}
 
-    // In the dst dir. create as many batch directories as replicator value.
-    // In each batch directory, add a metadata subdirectory containting metadata.json file.
-    // This is necessary for the bombastic-walker to parse the files.
-    for i in 1..config.replicator.parse::<u32>().unwrap() + 1 {
-        let batch_path = format!("batch{}", i);
-        fs::create_dir_all(Path::new(&config.dst).join(&batch_path).join("metadata"))?;
-        static METADATA: &str = "{\n  \"keys\": []\n}";
-        let metadata_file_path = Path::new(&config.dst)
-            .join(&batch_path)
-            .join("metadata")
-            .join("metadata.json");
-
-        let mut file = match fs::File::create(metadata_file_path) {
-            Err(why) => panic!("couldn't create metadata file: {}", why),
-            Ok(file) => file,
-        };
-
-        match file.write_all(METADATA.as_bytes()) {
-            Err(why) => panic!("couldn't write to metadata file: {}", why),
-            Ok(_) => println!("successfully wrote to metadata file"),
-        }
+impl Replication {
+    pub fn new(config: crate::config::Config) -> Replication {
+        Replication { config }
     }
 
-    for file in fs::read_dir(&config.src)? {
-        match file {
-            Ok(file) => replicate_file(
-                file,
-                &config.src.clone(),
-                &config.dst.clone(),
-                config.replicator.parse::<u32>().unwrap(),
-            ),
-            Err(e) => println!("Error: {}", e),
-        }
-    }
+    pub fn run(self) -> Result<(), Box<dyn Error>> {
+        fs::create_dir(Path::new(&self.config.dst))?;
 
-    Ok(())
+        // In the dst dir. create as many batch directories as replicator value.
+        // In each batch directory, add a metadata subdirectory containting metadata.json file.
+        // This is necessary for the bombastic-walker to parse the files.
+        for i in 1..self.config.replicator.parse::<u32>().unwrap() + 1 {
+            let batch_path = format!("batch{}", i);
+            fs::create_dir_all(
+                Path::new(&self.config.dst)
+                    .join(&batch_path)
+                    .join("metadata"),
+            )?;
+            static METADATA: &str = "{\n  \"keys\": []\n}";
+            let metadata_file_path = Path::new(&self.config.dst)
+                .join(&batch_path)
+                .join("metadata")
+                .join("metadata.json");
+
+            let mut file = match fs::File::create(metadata_file_path) {
+                Err(why) => panic!("couldn't create metadata file: {}", why),
+                Ok(file) => file,
+            };
+
+            match file.write_all(METADATA.as_bytes()) {
+                Err(why) => panic!("couldn't write to metadata file: {}", why),
+                Ok(_) => println!("successfully wrote to metadata file"),
+            }
+        }
+
+        for file in fs::read_dir(&self.config.src)? {
+            match file {
+                Ok(file) => replicate_file(
+                    file,
+                    &self.config.src.clone(),
+                    &self.config.dst.clone(),
+                    self.config.replicator.parse::<u32>().unwrap(),
+                ),
+                Err(e) => println!("Error: {}", e),
+            }
+        }
+
+        Ok(())
+    }
 }
 
 fn replicate_file(file: fs::DirEntry, src: &str, dst: &str, times: u32) {

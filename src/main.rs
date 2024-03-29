@@ -15,11 +15,8 @@ fn main() -> ExitCode {
 
     config.validate();
 
-    println!("Replication multiplier {}", config.replicator);
-    println!("Source directory {}", config.src);
-    println!("Destination directory {}", config.dst);
-
-    replicator::run(config).unwrap_or_else(|err| {
+    let replication = replicator::Replication::new(config.clone());
+    replication.run().unwrap_or_else(|err| {
         println!("Application error: {err}");
         process::exit(1)
     });
