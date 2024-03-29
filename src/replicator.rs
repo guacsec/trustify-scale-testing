@@ -3,6 +3,7 @@ use std::fs::{self, File};
 use std::io::prelude::*;
 use std::path::Path;
 
+static METADATA: &str = "{\n  \"keys\": []\n}";
 pub struct Replication {
     config: crate::config::Config,
 }
@@ -25,7 +26,6 @@ impl Replication {
                     .join(&batch_path)
                     .join("metadata"),
             )?;
-            static METADATA: &str = "{\n  \"keys\": []\n}";
             let metadata_file_path = Path::new(&self.config.dst)
                 .join(&batch_path)
                 .join("metadata")
