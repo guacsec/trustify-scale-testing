@@ -4,17 +4,13 @@ use std::io::prelude::*;
 use std::path::Path;
 
 pub fn run(config: crate::config::Config) -> Result<(), Box<dyn Error>> {
-    let files = fs::read_dir(&config.src)?;
-    let batch_size = config.replicator.parse::<u32>().unwrap();
-
     fs::create_dir(Path::new(&config.dst))?;
 
     // In the dst dir. create as many batch directories as replicator value.
-    for i in 1..batch_size + 1 {
+    // In each batch directory, add a metadata subdirectory containting metadata.json file.
+    // This is necessary for the bombastic-walker to parse the files.
+    for i in 1..config.replicator.parse::<u32>().unwrap() + 1 {
         let batch_path = format!("batch{}", i);
-        // In each batch directory, add a metadata subdirectory containting
-        // https://github.com/trustification/trustification/tree/main/data/ds1/sbom/metadata/metadata.json file.
-        // This is necessary for the bombastic-walker to parse the files.
         fs::create_dir_all(Path::new(&config.dst).join(&batch_path).join("metadata"))?;
         static METADATA: &str = "{\n  \"keys\": []\n}";
         let metadata_file_path = Path::new(&config.dst)
@@ -33,7 +29,7 @@ pub fn run(config: crate::config::Config) -> Result<(), Box<dyn Error>> {
         }
     }
 
-    for file in files {
+    for file in fs::read_dir(&config.src)? {
         match file {
             Ok(file) => replicate_file(
                 file,
