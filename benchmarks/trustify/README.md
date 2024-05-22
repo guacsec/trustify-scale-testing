@@ -1,23 +1,24 @@
-# Basic performance test with hyperfoil (in-vm) and PM-mode
+# Basic benchmarks with hyperfoil (in-vm) and Trustify (PM-mode)
 
 * Open a terminal and run PM-mode with **UI** `cargo run --bin trustd`
 * Open other terminal and run hyperfoil:
 
 ```shell
-cd bench
+cd benchmarks/trustify
 ./get-hf.sh
 cd hyperfoil*/
-./bin/cli.sh
 ```
 
 > [!NOTE]
 > Change from `-Djava.net.preferIPv4Stack=true` to `-Djava.net.preferIPv4Stack=false` in `hyperfoil*/bin/parse-opts.sh` see: <https://github.com/Hyperfoil/Hyperfoil/issues/346>
 
+Run hyperfoil
+
 ```shell
 ./bin/cli.sh
 ```
 
-Run the following commands inside hyperfoil (in-vm):
+Run the following commands:
 
 ```shell
 start-local

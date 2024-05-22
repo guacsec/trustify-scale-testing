@@ -14,7 +14,7 @@ phases:
       # The only sequence in this scenario is called `fetchSboms`.
       - fetchSboms:
         # In the only step in this sequence we'll do a HTTP GET request
-        # to `http://localhost:8080/sboms`
+        # to `http://[::1]:8080`
         - httpRequest:
             GET: /sboms
             # Inject helpers to make this request synchronous, i.e. keep
