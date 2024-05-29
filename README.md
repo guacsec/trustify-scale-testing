@@ -1,14 +1,15 @@
 # scale-testing
+
 Utility for testing trustification at scale.
 
-This tool is to help replicating existing SBOMs (SPDX or CycloneDX) file in order to augment an existing data set by multipling the number SBOMs files.
+This tool is to help replicating existing SBOMs (SPDX or CycloneDX) file in order to augment an existing data set by multiplying the number SBOMs files.
 
-For instance let's say we have a total of 1000 SBMS (500 SPDX and 500) and we'd like to obtain a total of 10K SBOMs files for our scale test, so we can run the tool using a replication size of 10. 
+For instance let's say we have a total of 1000 SBMS (500 SPDX and 500) and we'd like to obtain a total of 10K SBOMs files for our scale test, so we can run the tool using a replication size of 10.
 
 The tool replicates existing SBOMs, by copying each file content and change its file name and its key records.
 
+## Usage
 
-## Usage ##
 After installing trustification/scale-testing repo,
 
 We can run the tool, by providing the size of the replication, the source directory and the destination directory :
@@ -19,8 +20,7 @@ The latter will replicate 10 times each SBOM file available in /SBOMs/.
 
 Each replicated SBOM file will be created under its corresponding batch directory under `/data-set`.
 
-
-## Example ##
+> Example
 
 ```sh
 $ cargo run -- 2 ./SBOMs ./data-set
@@ -61,23 +61,21 @@ data-set/
 5 directories, 6 files
 ```
 
-## scale test example
+## Using bombastic_walker
 
-### Using bombastic_walker
-
-#### Prepare initial SBOMs data set
+### Prepare initial SBOMs data set
 
 Provide initial set of SBOMs files to be replicated, i.e `/SBOMs/`.
 Use only SPDX files, for now, because the CycloneDX files tested were rejected with following error: `JSON: Unsupported CycloneDX version: 1.4`
 
-#### Replicate SBOMs
+### Replicate SBOMs
 
 Run the replication tool to multiply your existing SBOM files set
 
 `cargo run -- 10 /SBOMs /data-set`
 
-#### Use the replicated SBOMs
+### Use the replicated SBOMs
 
-The bombastic_walker could exploit each replicated SBOMs batch, for example in devmode :  
+The bombastic_walker could exploit each replicated SBOMs batch, for example in devmode :
 
 `RUST_LOG=info cargo run -p trust bombastic walker --sink http://localhost:8082 --source /data-set/batch1/ --devmode -3`
