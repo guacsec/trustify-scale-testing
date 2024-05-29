@@ -1,5 +1,7 @@
 # scale-testing
 
+[![ci](https://github.com/trustification/scale-testing/actions/workflows/ci.yaml/badge.svg)](https://github.com/trustification/scale-testing/actions/workflows/ci.yaml)
+
 Utility for testing trustification at scale.
 
 This tool is to help replicating existing SBOMs (SPDX or CycloneDX) file in order to augment an existing data set by multiplying the number SBOMs files.
