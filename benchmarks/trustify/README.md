@@ -1,6 +1,6 @@
 # Basic benchmarks with hyperfoil (in-vm) and Trustify (PM-mode)
 
-* Open a terminal and run PM-mode with **UI** `cargo run --bin trustd`
+* Open a terminal and run PM-mode with **UI** `cargo run --bin trustd --features pm`
 * Open other terminal and run hyperfoil:
 
 ```shell
