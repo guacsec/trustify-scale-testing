@@ -11,12 +11,17 @@ For instance let's say we have a total of 1000 SBMS (500 SPDX and 500) and we'd 
 The tool replicates existing SBOMs, by copying each file content and change its file name and its key records.
 
 ## Usage
-
 After installing trustification/scale-testing repo,
 
 We can run the tool, by providing the size of the replication, the source directory and the destination directory :
 
-`cargo run -- 10 /SBOMs/ /data-set/`
+We need to provide a source of SBOMs, here located in /SBOMs which contains SBOM files in json format.
+
+Also the target directory must not exists, this is to ensure we're not erasing an existing test set.
+
+```sh
+$ rm -rf /data-set
+$ cargo run -- 10 /SBOMs/ /data-set/
 
 The latter will replicate 10 times each SBOM file available in /SBOMs/.
 
