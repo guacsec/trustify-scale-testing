@@ -1,0 +1,13 @@
+[workspace]
+
+[package]
+name = "loadtest"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+goose = "^0.17"
+goose-eggs = "0.5.2"
+tokio = "1.38.0"
+reqwest = "0.11.27"
+log = "0.4"
