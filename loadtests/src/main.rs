@@ -1,8 +1,10 @@
 // The simplest loadtest example
+mod graphql;
 mod oidc;
 mod restapi;
 mod website;
 
+use crate::graphql::graphql_query_advisory;
 use crate::oidc::get_token;
 use crate::restapi::{
     get_advisory, get_importer, get_oganizations, get_packages, get_products, get_sboms,
@@ -48,6 +50,16 @@ async fn main() -> Result<(), GooseError> {
                 .register_transaction(transaction!(get_sboms).set_name("/api/v1/sbom"))
                 .register_transaction(
                     transaction!(get_vulnerabilities).set_name("/api/v1/vulnerability"),
+                ),
+        )
+        .register_scenario(
+            scenario!("GraphQLUser")
+                .set_weight(1)?
+                .register_transaction(transaction!(setup_custom_client).set_on_start())
+                // After each transactions runs, sleep randomly from 5 to 15 seconds.
+                .set_wait_time(Duration::from_secs(5), Duration::from_secs(15))?
+                .register_transaction(
+                    transaction!(graphql_query_advisory).set_name("query advisory with /graphql"),
                 ),
         )
         .execute()
