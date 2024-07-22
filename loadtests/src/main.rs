@@ -23,7 +23,11 @@ async fn main() -> Result<(), GooseError> {
         .register_scenario(
             scenario!("WebsiteUser")
                 .set_weight(1)?
-                .register_transaction(transaction!(setup_custom_client).set_on_start())
+                .register_transaction(
+                    transaction!(setup_custom_client)
+                        .set_on_start()
+                        .set_name("logon"),
+                )
                 // After each transactions runs, sleep randomly from 5 to 15 seconds.
                 .set_wait_time(Duration::from_secs(5), Duration::from_secs(15))?
                 .register_transaction(transaction!(website_index).set_name("/index"))
@@ -36,7 +40,11 @@ async fn main() -> Result<(), GooseError> {
         .register_scenario(
             scenario!("RestAPIUser")
                 .set_weight(1)?
-                .register_transaction(transaction!(setup_custom_client).set_on_start())
+                .register_transaction(
+                    transaction!(setup_custom_client)
+                        .set_on_start()
+                        .set_name("logon"),
+                )
                 // After each transactions runs, sleep randomly from 5 to 15 seconds.
                 .set_wait_time(Duration::from_secs(5), Duration::from_secs(15))?
                 .register_transaction(
@@ -55,7 +63,11 @@ async fn main() -> Result<(), GooseError> {
         .register_scenario(
             scenario!("GraphQLUser")
                 .set_weight(1)?
-                .register_transaction(transaction!(setup_custom_client).set_on_start())
+                .register_transaction(
+                    transaction!(setup_custom_client)
+                        .set_on_start()
+                        .set_name("logon"),
+                )
                 // After each transactions runs, sleep randomly from 5 to 15 seconds.
                 .set_wait_time(Duration::from_secs(5), Duration::from_secs(15))?
                 .register_transaction(
