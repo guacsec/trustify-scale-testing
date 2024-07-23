@@ -32,11 +32,11 @@ pub fn get_token(issuer_url: String, client_id: String, client_secret: String) -
 
     let mut auth_token: String = String::new();
 
-    if let Some(_) = fetch_token.status.code() {
+    if fetch_token.status.code().is_some() {
         auth_token = String::from_utf8_lossy(&fetch_token.stdout)
             .to_string()
             .replace(['\n', '\r'], "");
     }
 
-    return auth_token;
+    auth_token
 }
