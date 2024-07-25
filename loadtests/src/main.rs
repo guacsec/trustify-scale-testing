@@ -1,3 +1,5 @@
+extern crate core;
+
 // The simplest loadtest example
 mod graphql;
 mod oidc;
@@ -5,7 +7,7 @@ mod restapi;
 mod website;
 
 use crate::graphql::graphql_query_advisory;
-use crate::oidc::get_token;
+use crate::oidc::{OpenIdTokenProvider, OpenIdTokenProviderConfigArguments};
 use crate::restapi::{
     get_advisory, get_importer, get_oganizations, get_packages, get_products, get_sboms,
     get_vulnerabilities, search_packages,
@@ -97,28 +99,42 @@ async fn main() -> Result<(), GooseError> {
 }
 
 async fn setup_custom_client(user: &mut GooseUser) -> TransactionResult {
-    use reqwest::{header, Client};
+    use reqwest_0_11::{header, Client};
 
-    let issuer_url: String = std::env::var("ISSUER_URL").unwrap();
-    let client_id: String = std::env::var("CLIENT_ID").unwrap();
-    let client_secret: String = std::env::var("CLIENT_SECRET").unwrap();
+    let issuer_url = std::env::var("ISSUER_URL").unwrap();
+    let client_id = std::env::var("CLIENT_ID").unwrap();
+    let client_secret = std::env::var("CLIENT_SECRET").unwrap();
 
-    let auth_token: String = get_token(issuer_url, client_id, client_secret);
-    {
-        let mut headers = header::HeaderMap::new();
-        headers.insert(
-            "Authorization",
-            header::HeaderValue::from_str(&auth_token).unwrap(),
-        );
+    let provider = OpenIdTokenProvider::with_config(OpenIdTokenProviderConfigArguments {
+        client_id,
+        client_secret,
+        issuer_url,
+        refresh_before: Duration::from_secs(30).into(),
+        tls_insecure: false,
+    })
+    .await
+    .expect("discover OIDC client");
 
-        // Build a custom client.
-        let builder = Client::builder()
-            .default_headers(headers)
-            .user_agent("loadtest-ua")
-            .timeout(Duration::from_secs(30));
+    let auth_token: String = provider
+        .provide_token()
+        .await
+        .expect("get OIDC token")
+        .access_token;
 
-        // Assign the custom client to this GooseUser.
-        user.set_client_builder(builder).await?;
-        Ok(())
-    }
+    let mut headers = header::HeaderMap::new();
+    headers.insert(
+        "Authorization",
+        header::HeaderValue::from_str(&format!("Bearer {auth_token}")).unwrap(),
+    );
+
+    // Build a custom client.
+    let builder = Client::builder()
+        .default_headers(headers)
+        .user_agent("loadtest-ua")
+        .timeout(Duration::from_secs(30));
+
+    // Assign the custom client to this GooseUser.
+    user.set_client_builder(builder).await?;
+
+    Ok(())
 }
