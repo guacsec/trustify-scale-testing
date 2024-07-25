@@ -17,6 +17,14 @@ A set of simple [goose](https://book.goose.rs/) load tests against the web and r
 > export CLIENT_SECRET = "****************"
 ```
 
+To change wait times between http invokes set the following env vars:
+```bash
+> export WAIT_TIME_FROM = 1
+> export WAIT_TIME_TO =  2
+```
+
+Alternately, for no wait times between http invokes set these env vars to 0.
+
 4. To load trustify endpoints with 3 concurrent users.
 ```
 > cargo run --release --bin loadtest -- --host http://localhost:8080 -u 3
