@@ -99,7 +99,7 @@ async fn main() -> Result<(), GooseError> {
 }
 
 async fn setup_custom_client(user: &mut GooseUser) -> TransactionResult {
-    use reqwest_0_11::{header, Client};
+    use reqwest::{header, Client};
 
     let issuer_url = std::env::var("ISSUER_URL").unwrap();
     let client_id = std::env::var("CLIENT_ID").unwrap();
