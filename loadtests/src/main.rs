@@ -6,18 +6,20 @@ mod oidc;
 mod restapi;
 mod website;
 
-use crate::graphql::graphql_query_advisory;
-use crate::oidc::{OpenIdTokenProvider, OpenIdTokenProviderConfigArguments};
-use crate::restapi::{
-    get_advisory, get_importer, get_oganizations, get_packages, get_products, get_sboms,
-    get_vulnerabilities, search_packages,
-};
-use crate::website::{
-    website_advisories, website_importers, website_index, website_openapi, website_packages,
-    website_sboms,
+use crate::{
+    graphql::graphql_query_advisory,
+    oidc::{OpenIdTokenProvider, OpenIdTokenProviderConfigArguments},
+    restapi::{
+        get_advisory, get_importer, get_oganizations, get_packages, get_products, get_sboms,
+        get_vulnerabilities, search_packages,
+    },
+    website::{
+        website_advisories, website_importers, website_index, website_openapi, website_packages,
+        website_sboms,
+    },
 };
 use goose::prelude::*;
-use std::time::Duration;
+use std::{str::FromStr, time::Duration};
 
 #[tokio::main]
 async fn main() -> Result<(), GooseError> {
@@ -101,15 +103,20 @@ async fn main() -> Result<(), GooseError> {
 async fn setup_custom_client(user: &mut GooseUser) -> TransactionResult {
     use reqwest::{header, Client};
 
+    log::info!("Creating a new custom client");
+
     let issuer_url = std::env::var("ISSUER_URL").unwrap();
     let client_id = std::env::var("CLIENT_ID").unwrap();
     let client_secret = std::env::var("CLIENT_SECRET").unwrap();
+    let refresh_before = std::env::var("OIDC_REFRESH_BEFORE").unwrap_or_else(|_| "30s".to_string());
+    let refresh_before =
+        humantime::Duration::from_str(&refresh_before).expect("OIDC_REFRESH_BEFORE must parse");
 
     let provider = OpenIdTokenProvider::with_config(OpenIdTokenProviderConfigArguments {
         client_id,
         client_secret,
         issuer_url,
-        refresh_before: Duration::from_secs(30).into(),
+        refresh_before,
         tls_insecure: false,
     })
     .await
