@@ -9,14 +9,8 @@ mod website;
 use crate::{
     graphql::graphql_query_advisory,
     oidc::{OpenIdTokenProvider, OpenIdTokenProviderConfigArguments},
-    restapi::{
-        get_advisory, get_importer, get_organizations, get_packages, get_products, get_sboms,
-        get_vulnerabilities, search_packages,
-    },
-    website::{
-        website_advisories, website_importers, website_index, website_openapi, website_packages,
-        website_sboms,
-    },
+    restapi::*,
+    website::*,
 };
 use anyhow::Context;
 use goose::prelude::*;
@@ -47,12 +41,12 @@ async fn main() -> Result<(), anyhow::Error> {
                     Duration::from_secs(wait_time_from),
                     Duration::from_secs(wait_time_to),
                 )?
-                .register_transaction(transaction!(website_index).set_name("/index"))
-                .register_transaction(transaction!(website_openapi).set_name("/openapi"))
-                .register_transaction(transaction!(website_sboms).set_name("/sboms"))
-                .register_transaction(transaction!(website_packages).set_name("/packages"))
-                .register_transaction(transaction!(website_advisories).set_name("/advisories"))
-                .register_transaction(transaction!(website_importers).set_name("/importers")),
+                .register_transaction(transaction!(website_index))
+                .register_transaction(transaction!(website_openapi))
+                .register_transaction(transaction!(website_sboms))
+                .register_transaction(transaction!(website_packages))
+                .register_transaction(transaction!(website_advisories))
+                .register_transaction(transaction!(website_importers)),
         )
         .register_scenario(
             scenario!("RestAPIUser")
@@ -63,18 +57,19 @@ async fn main() -> Result<(), anyhow::Error> {
                     Duration::from_secs(wait_time_from),
                     Duration::from_secs(wait_time_to),
                 )?
-                .register_transaction(
-                    transaction!(get_organizations).set_name("/api/v1/organization"),
-                )
-                .register_transaction(transaction!(get_advisory).set_name("/api/v1/advisory"))
-                .register_transaction(
-                    transaction!(get_vulnerabilities).set_name("/api/v1/vulnerability"),
-                )
-                .register_transaction(transaction!(get_importer).set_name("/api/v1/importer"))
-                .register_transaction(transaction!(get_packages).set_name("/api/v1/purl"))
-                .register_transaction(transaction!(search_packages).set_name("/api/v1/purl?q=curl"))
-                .register_transaction(transaction!(get_products).set_name("/api/v1/product"))
-                .register_transaction(transaction!(get_sboms).set_name("/api/v1/sbom")),
+                .register_transaction(transaction!(list_organizations))
+                .register_transaction(transaction!(list_advisory))
+                .register_transaction(transaction!(list_advisory_paginated))
+                .register_transaction(transaction!(get_advisory_by_doc_id))
+                .register_transaction(transaction!(list_vulnerabilities))
+                .register_transaction(transaction!(list_vulnerabilities_paginated))
+                .register_transaction(transaction!(list_importer))
+                .register_transaction(transaction!(list_packages))
+                .register_transaction(transaction!(list_packages_paginated))
+                .register_transaction(transaction!(search_packages))
+                .register_transaction(transaction!(list_products))
+                .register_transaction(transaction!(list_sboms))
+                .register_transaction(transaction!(list_sboms_paginated)),
         )
         .register_scenario(
             scenario!("GraphQLUser")
@@ -135,7 +130,7 @@ async fn set_custom_client(
 ) -> anyhow::Result<()> {
     use reqwest::{header, Client};
 
-    log::info!("Creating a new custom client");
+    log::debug!("Creating a new custom client");
 
     let auth_token: String = provider
         .provide_token()
