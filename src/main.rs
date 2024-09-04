@@ -10,7 +10,7 @@ use crate::{
     graphql::graphql_query_advisory,
     oidc::{OpenIdTokenProvider, OpenIdTokenProviderConfigArguments},
     restapi::{
-        get_advisory, get_importer, get_oganizations, get_packages, get_products, get_sboms,
+        get_advisory, get_importer, get_organizations, get_packages, get_products, get_sboms,
         get_vulnerabilities, search_packages,
     },
     website::{
@@ -64,7 +64,7 @@ async fn main() -> Result<(), anyhow::Error> {
                     Duration::from_secs(wait_time_to),
                 )?
                 .register_transaction(
-                    transaction!(get_oganizations).set_name("/api/v1/organization"),
+                    transaction!(get_organizations).set_name("/api/v1/organization"),
                 )
                 .register_transaction(transaction!(get_advisory).set_name("/api/v1/advisory"))
                 .register_transaction(

@@ -12,7 +12,7 @@ pub async fn get_importer(user: &mut GooseUser) -> TransactionResult {
     Ok(())
 }
 
-pub async fn get_oganizations(user: &mut GooseUser) -> TransactionResult {
+pub async fn get_organizations(user: &mut GooseUser) -> TransactionResult {
     let _response = user.get("/api/v1/organization").await?;
 
     Ok(())
@@ -41,6 +41,7 @@ pub async fn get_sboms(user: &mut GooseUser) -> TransactionResult {
 
     Ok(())
 }
+
 pub async fn get_vulnerabilities(user: &mut GooseUser) -> TransactionResult {
     let _response = user.get("/api/v1/vulnerability").await?;
 
