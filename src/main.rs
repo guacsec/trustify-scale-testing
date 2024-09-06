@@ -16,6 +16,13 @@ use anyhow::Context;
 use goose::prelude::*;
 use std::{str::FromStr, sync::Arc, time::Duration};
 
+/// Define a transaction and use its function identifier as name
+macro_rules! tx {
+    ($n:ident) => {
+        transaction!($n).set_name(stringify!($n))
+    };
+}
+
 #[tokio::main]
 async fn main() -> Result<(), anyhow::Error> {
     let wait_time_from: u64 = std::env::var("WAIT_TIME_FROM")
@@ -41,12 +48,12 @@ async fn main() -> Result<(), anyhow::Error> {
                     Duration::from_secs(wait_time_from),
                     Duration::from_secs(wait_time_to),
                 )?
-                .register_transaction(transaction!(website_index))
-                .register_transaction(transaction!(website_openapi))
-                .register_transaction(transaction!(website_sboms))
-                .register_transaction(transaction!(website_packages))
-                .register_transaction(transaction!(website_advisories))
-                .register_transaction(transaction!(website_importers)),
+                .register_transaction(tx!(website_index))
+                .register_transaction(tx!(website_openapi))
+                .register_transaction(tx!(website_sboms))
+                .register_transaction(tx!(website_packages))
+                .register_transaction(tx!(website_advisories))
+                .register_transaction(tx!(website_importers)),
         )
         .register_scenario(
             scenario!("RestAPIUser")
@@ -57,19 +64,19 @@ async fn main() -> Result<(), anyhow::Error> {
                     Duration::from_secs(wait_time_from),
                     Duration::from_secs(wait_time_to),
                 )?
-                .register_transaction(transaction!(list_organizations))
-                .register_transaction(transaction!(list_advisory))
-                .register_transaction(transaction!(list_advisory_paginated))
-                .register_transaction(transaction!(get_advisory_by_doc_id))
-                .register_transaction(transaction!(list_vulnerabilities))
-                .register_transaction(transaction!(list_vulnerabilities_paginated))
-                .register_transaction(transaction!(list_importer))
-                .register_transaction(transaction!(list_packages))
-                .register_transaction(transaction!(list_packages_paginated))
-                .register_transaction(transaction!(search_packages))
-                .register_transaction(transaction!(list_products))
-                .register_transaction(transaction!(list_sboms))
-                .register_transaction(transaction!(list_sboms_paginated)),
+                .register_transaction(tx!(list_organizations))
+                .register_transaction(tx!(list_advisory))
+                .register_transaction(tx!(list_advisory_paginated))
+                .register_transaction(tx!(get_advisory_by_doc_id))
+                .register_transaction(tx!(list_vulnerabilities))
+                .register_transaction(tx!(list_vulnerabilities_paginated))
+                .register_transaction(tx!(list_importer))
+                .register_transaction(tx!(list_packages))
+                .register_transaction(tx!(list_packages_paginated))
+                .register_transaction(tx!(search_packages))
+                .register_transaction(tx!(list_products))
+                .register_transaction(tx!(list_sboms))
+                .register_transaction(tx!(list_sboms_paginated)),
         )
         .register_scenario(
             scenario!("GraphQLUser")
@@ -81,7 +88,7 @@ async fn main() -> Result<(), anyhow::Error> {
                     Duration::from_secs(wait_time_to),
                 )?
                 .register_transaction(
-                    transaction!(graphql_query_advisory).set_name("query advisory with /graphql"),
+                    tx!(graphql_query_advisory).set_name("query advisory with /graphql"),
                 ),
         )
         .execute()
