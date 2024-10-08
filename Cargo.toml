@@ -16,6 +16,7 @@ log = "0.4"
 openid = "0.14"
 reqwest = "0.12"
 tokio = { version = "1.38.0", features = ["sync"] }
+urlencoding = "2"
 
 [patch.crates-io]
 #goose = { path = "../../goose" }
