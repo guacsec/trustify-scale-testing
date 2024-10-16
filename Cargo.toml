@@ -5,6 +5,16 @@ edition = "2021"
 
 [workspace]
 
+default-run = "loadtest"
+
+[[bin]]
+name = "loadtest"
+path = "src/main.rs"
+
+[[bin]]
+name = "loadtest-graphql-memory"
+path = "src/loadtest-graphql-memory.rs"
+
 [dependencies]
 anyhow = "1"
 chrono = "0.4"
@@ -16,7 +26,6 @@ log = "0.4"
 openid = "0.14"
 reqwest = "0.12"
 tokio = { version = "1.38.0", features = ["sync"] }
-urlencoding = "2"
 
 [patch.crates-io]
 #goose = { path = "../../goose" }
