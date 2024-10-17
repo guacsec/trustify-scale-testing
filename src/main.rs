@@ -7,7 +7,7 @@ mod restapi;
 mod website;
 
 use crate::{
-    graphql::graphql_query_advisory,
+    graphql::*,
     oidc::{OpenIdTokenProvider, OpenIdTokenProviderConfigArguments},
     restapi::*,
     website::*,
@@ -25,6 +25,10 @@ macro_rules! tx {
 
 #[tokio::main]
 async fn main() -> Result<(), anyhow::Error> {
+    let mem_prof: bool = std::env::var("MEM_PROF")
+        .map(|s| s.parse().unwrap_or(false))
+        .unwrap_or(false);
+
     let wait_time_from: u64 = std::env::var("WAIT_TIME_FROM")
         .map(|s| s.parse().unwrap_or(5))
         .unwrap_or(5);
@@ -32,68 +36,89 @@ async fn main() -> Result<(), anyhow::Error> {
         .map(|s| s.parse().unwrap_or(15))
         .unwrap_or(15);
 
-    let provider = create_oidc_provider().await?;
-    let custom_client = Transaction::new(Arc::new(move |user| {
-        let provider = provider.clone();
-        Box::pin(async move { setup_custom_client(&provider, user).await })
-    }));
+    if !mem_prof {
+        let provider = create_oidc_provider().await?;
+        let custom_client = Transaction::new(Arc::new(move |user| {
+            let provider = provider.clone();
+            Box::pin(async move { setup_custom_client(&provider, user).await })
+        }));
 
-    GooseAttack::initialize()?
-        .register_scenario(
-            scenario!("WebsiteUser")
-                // .set_weight(1)?
-                .register_transaction(custom_client.clone().set_name("logon"))
-                // After each transactions runs, sleep randomly from 5 to 15 seconds.
-                .set_wait_time(
-                    Duration::from_secs(wait_time_from),
-                    Duration::from_secs(wait_time_to),
-                )?
-                .register_transaction(tx!(website_index))
-                .register_transaction(tx!(website_openapi))
-                .register_transaction(tx!(website_sboms))
-                .register_transaction(tx!(website_packages))
-                .register_transaction(tx!(website_advisories))
-                .register_transaction(tx!(website_importers)),
-        )
-        .register_scenario(
-            scenario!("RestAPIUser")
-                // .set_weight(1)?
-                .register_transaction(custom_client.clone().set_name("logon"))
-                // After each transactions runs, sleep randomly from 5 to 15 seconds.
-                .set_wait_time(
-                    Duration::from_secs(wait_time_from),
-                    Duration::from_secs(wait_time_to),
-                )?
-                .register_transaction(tx!(list_organizations))
-                .register_transaction(tx!(list_advisory))
-                .register_transaction(tx!(list_advisory_paginated))
-                .register_transaction(tx!(get_advisory_by_doc_id))
-                .register_transaction(tx!(list_vulnerabilities))
-                .register_transaction(tx!(list_vulnerabilities_paginated))
-                .register_transaction(tx!(list_importer))
-                .register_transaction(tx!(list_packages))
-                .register_transaction(tx!(list_packages_paginated))
-                .register_transaction(tx!(search_packages))
-                .register_transaction(tx!(list_products))
-                .register_transaction(tx!(list_sboms))
-                .register_transaction(tx!(list_sboms_paginated)),
-        )
-        .register_scenario(
-            scenario!("GraphQLUser")
-                // .set_weight(1)?
-                .register_transaction(custom_client.set_name("logon"))
-                // After each transactions runs, sleep randomly from 5 to 15 seconds.
-                .set_wait_time(
-                    Duration::from_secs(wait_time_from),
-                    Duration::from_secs(wait_time_to),
-                )?
-                .register_transaction(
-                    tx!(graphql_query_advisory).set_name("query advisory with /graphql"),
-                ),
-        )
-        .execute()
-        .await?;
-
+        GooseAttack::initialize()?
+            .register_scenario(
+                scenario!("WebsiteUser")
+                    // .set_weight(1)?
+                    .register_transaction(custom_client.clone().set_name("logon"))
+                    // After each transactions runs, sleep randomly from 5 to 15 seconds.
+                    .set_wait_time(
+                        Duration::from_secs(wait_time_from),
+                        Duration::from_secs(wait_time_to),
+                    )?
+                    .register_transaction(tx!(website_index))
+                    .register_transaction(tx!(website_openapi))
+                    .register_transaction(tx!(website_sboms))
+                    .register_transaction(tx!(website_packages))
+                    .register_transaction(tx!(website_advisories))
+                    .register_transaction(tx!(website_importers)),
+            )
+            .register_scenario(
+                scenario!("RestAPIUser")
+                    // .set_weight(1)?
+                    .register_transaction(custom_client.clone().set_name("logon"))
+                    // After each transactions runs, sleep randomly from 5 to 15 seconds.
+                    .set_wait_time(
+                        Duration::from_secs(wait_time_from),
+                        Duration::from_secs(wait_time_to),
+                    )?
+                    .register_transaction(tx!(list_organizations))
+                    .register_transaction(tx!(list_advisory))
+                    .register_transaction(tx!(list_advisory_paginated))
+                    .register_transaction(tx!(get_advisory_by_doc_id))
+                    .register_transaction(tx!(list_vulnerabilities))
+                    .register_transaction(tx!(list_vulnerabilities_paginated))
+                    .register_transaction(tx!(list_importer))
+                    .register_transaction(tx!(list_packages))
+                    .register_transaction(tx!(list_packages_paginated))
+                    .register_transaction(tx!(search_packages))
+                    .register_transaction(tx!(list_products))
+                    .register_transaction(tx!(list_sboms))
+                    .register_transaction(tx!(list_sboms_paginated)),
+            )
+            .register_scenario(
+                scenario!("GraphQLUser")
+                    // .set_weight(1)?
+                    .register_transaction(custom_client.set_name("logon"))
+                    // After each transactions runs, sleep randomly from 5 to 15 seconds.
+                    .set_wait_time(
+                        Duration::from_secs(wait_time_from),
+                        Duration::from_secs(wait_time_to),
+                    )?
+                    .register_transaction(tx!(g_get_advisories))
+                    .register_transaction(tx!(g_get_advisory_by_id))
+                    .register_transaction(tx!(g_get_organization_by_name))
+                    .register_transaction(tx!(g_get_sbom_by_id))
+                    .register_transaction(tx!(g_get_sbom_by_labels))
+                    .register_transaction(tx!(g_cves_by_sbom))
+                    .register_transaction(tx!(g_get_vulnerability_by_id))
+                    .register_transaction(tx!(g_get_vulnerabilities)),
+            )
+            .execute()
+            .await?;
+    } else {
+        GooseAttack::initialize()?
+            .register_scenario(
+                scenario!("GraphQLUser")
+                    .register_transaction(tx!(g_get_advisories))
+                    .register_transaction(tx!(g_get_advisory_by_id))
+                    .register_transaction(tx!(g_get_organization_by_name))
+                    .register_transaction(tx!(g_get_sbom_by_id))
+                    .register_transaction(tx!(g_get_sbom_by_labels))
+                    .register_transaction(tx!(g_cves_by_sbom))
+                    .register_transaction(tx!(g_get_vulnerability_by_id))
+                    .register_transaction(tx!(g_get_vulnerabilities)),
+            )
+            .execute()
+            .await?;
+    }
     Ok(())
 }
 
