@@ -51,6 +51,11 @@ pub async fn search_packages(user: &mut GooseUser) -> TransactionResult {
     Ok(())
 }
 
+pub async fn search_exact_packages(user: &mut GooseUser) -> TransactionResult {
+    let _response = user.get("/api/v2/purl?q=name=curl").await?;
+
+    Ok(())
+}
 pub async fn list_products(user: &mut GooseUser) -> TransactionResult {
     let _response = user.get("/api/v2/product").await?;
 
