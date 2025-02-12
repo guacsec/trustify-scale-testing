@@ -74,6 +74,7 @@ async fn main() -> Result<(), anyhow::Error> {
                 .register_transaction(tx!(list_packages))
                 .register_transaction(tx!(list_packages_paginated))
                 .register_transaction(tx!(search_packages))
+                .register_transaction(tx!(search_exact_packages))
                 .register_transaction(tx!(list_products))
                 .register_transaction(tx!(list_sboms))
                 .register_transaction(tx!(list_sboms_paginated)),
