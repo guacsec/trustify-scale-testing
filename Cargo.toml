@@ -9,11 +9,11 @@ edition = "2021"
 anyhow = "1"
 chrono = "0.4"
 clap = { version = "4", features = ["derive", "env"] }
-goose = "=0.17.3-dev"
-goose-eggs = "0.5.3-dev"
+goose = "0.18"
+goose-eggs = "0.6.0"
 humantime = "2"
 log = "0.4"
-openid = "0.14"
+openid = "0.16.1"
 reqwest = "0.12"
 tokio = { version = "1.38.0", features = ["sync"] }
 
@@ -21,5 +21,5 @@ tokio = { version = "1.38.0", features = ["sync"] }
 #goose = { path = "../../goose" }
 #goose-eggs = { path = "../../goose-eggs" }
 
-goose = { git = "https://github.com/ctron/goose", branch = "feature/baseline_1" }
-goose-eggs = { git = "https://github.com/ctron/goose-eggs", branch = "feature/uptick_deps_1" }
+#goose = { git = "https://github.com/ctron/goose", branch = "feature/baseline_1" }
+#goose-eggs = { git = "https://github.com/ctron/goose-eggs", branch = "feature/uptick_deps_1" }
