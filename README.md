@@ -9,8 +9,22 @@ A set of simple [goose](https://book.goose.rs/) load tests against the web and r
 2. Set environment variables for OIDC authentication:
    ```bash
    export ISSUER_URL = "http://localhost:8090/realms/trustify"
-   export CLIENT_ID =  "testing-user"
+   export CLIENT_ID = "testing-user"
    export CLIENT_SECRET = "****************"
+   ```
+
+   If you're using the devmode auth settings, you can use:
+
+   ```bash
+   export ISSUER_URL = "http://localhost:8090/realms/trustify"
+   export CLIENT_ID = "testing-user"
+   export CLIENT_SECRET = "R8A6KFeyxJsMDBhjfHbpZTIF0GWt43HP"
+   ```
+
+   Or prefix calls with:
+
+   ```shell
+   env ISSUER_URL="http://localhost:8090/realms/trustify" CLIENT_ID="testing-user" CLIENT_SECRET="R8A6KFeyxJsMDBhjfHbpZTIF0GWt43HP"
    ```
 
    To change wait times between http invokes set the following env vars:
@@ -37,6 +51,30 @@ A set of simple [goose](https://book.goose.rs/) load tests against the web and r
 
 4. More goose run-time options [here](https://book.goose.rs/getting-started/runtime-options.html)
 
+## Using an existing database dump
+
+You can either create a database dump using the following command in the `trustify` repository:
+
+```shell
+cargo run --bin xtask generate-dump
+```
+
+Or, download one from the S3 bucket. e.g.:
+`https://trustify-dumps.s3.eu-west-1.amazonaws.com/20250314T010452Z/dump.sql.gz`
+
+Then, add the dump to the compose startup `trustify/etc/deploy/compose/compose.yaml` (in the `trustify` repository):
+
+```yaml
+    volumes:
+      - /dump_path_here/dump.sql.gz:/docker-entrypoint-initdb.d/dump.sql.gz:Z
+```
+
+Start Postgres like you normally would do:
+
+```shell
+podman-compose -f etc/deploy/compose/compose.yaml up
+```
+
 ## Memory profiling with heaptrack
 
 * Install [heaptrack](https://github.com/KDE/heaptrack)
@@ -45,31 +83,12 @@ A set of simple [goose](https://book.goose.rs/) load tests against the web and r
 sudo dnf install heaptrack
 ```
 
-* Clone trustify and generate a database dump
-
-```shell
-cargo run --bin xtask generate-dump
-```
-
-* Use the generated dump
-  * Change `trustify/etc/deploy/compose/compose.yaml`
-  * Add the following:
-
-```yaml
-volumes:
-  - /dump_path_here/dump.sql:/docker-entrypoint-initdb.d/dump.sql:Z
-```
-
-* Open a terminal and start postgres
-
-```shell
-podman-compose -f etc/deploy/compose/compose.yaml up
-```
+* [Use a database dump](#using-an-existing-database-dump)
 
 * Change `trustify/Cargo.toml`
-  * Add the following:
+    * Add the following:
 
-```yaml
+```toml
 [profile.release]
 debug = true
 ```
