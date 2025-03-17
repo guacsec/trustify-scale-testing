@@ -87,3 +87,34 @@ pub async fn list_vulnerabilities_paginated(user: &mut GooseUser) -> Transaction
 
     Ok(())
 }
+
+pub async fn list_analysis_descendants(user: &mut GooseUser) -> TransactionResult {
+    let _response = user
+        .get("/api/v2/analysis/component?descendants=10")
+        .await?;
+
+    Ok(())
+}
+
+pub async fn list_analysis_ancestors(user: &mut GooseUser) -> TransactionResult {
+    let _response = user
+        .get("/api/v2/analysis/component?descendants=10")
+        .await?;
+
+    Ok(())
+}
+
+pub async fn list_analysis_search(user: &mut GooseUser) -> TransactionResult {
+    let _response = user
+        .get("/api/v2/analysis/component?q=lib&descendants=10")
+        .await?;
+
+    Ok(())
+}
+pub async fn list_analysis_paginated(user: &mut GooseUser) -> TransactionResult {
+    let _response = user
+        .get("/api/v2/analysis/component?descendants=10&offset=6&limit=10")
+        .await?;
+
+    Ok(())
+}
