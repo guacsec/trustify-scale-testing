@@ -77,7 +77,11 @@ async fn main() -> Result<(), anyhow::Error> {
                 .register_transaction(tx!(search_exact_packages))
                 .register_transaction(tx!(list_products))
                 .register_transaction(tx!(list_sboms))
-                .register_transaction(tx!(list_sboms_paginated)),
+                .register_transaction(tx!(list_sboms_paginated))
+                .register_transaction(tx!(list_analysis_descendants))
+                .register_transaction(tx!(list_analysis_ancestors))
+                .register_transaction(tx!(list_analysis_search))
+                .register_transaction(tx!(list_analysis_paginated)),
         )
         // .register_scenario(
         //     scenario!("GraphQLUser")
