@@ -87,3 +87,11 @@ pub async fn list_vulnerabilities_paginated(user: &mut GooseUser) -> Transaction
 
     Ok(())
 }
+
+pub async fn get_sbom_advisories(sbom_id: String, user: &mut GooseUser) -> TransactionResult {
+    let _response = user
+        .get(&format!("/api/v2/sbom/{sbom_id}/advisory"))
+        .await?;
+
+    Ok(())
+}
