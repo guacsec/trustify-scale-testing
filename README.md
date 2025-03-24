@@ -75,6 +75,21 @@ Start Postgres like you normally would do:
 podman-compose -f etc/deploy/compose/compose.yaml up
 ```
 
+## Scenario files
+
+Some tests require a single document, like an SBOM. This information can be provided using a "scenario" file, using the
+environment variable `SCENARIO_FILE`. All fields are mandatory, though it is possible to disable tests by providing
+a `null`, value:
+
+```json5
+{
+  "disable_me": null,
+}
+```
+
+If the scenario file is not being provided, the scale tests will try to auto-evaluate candidate documents. However, this
+is not reproducible, and should only be used for local testing.
+
 ## Memory profiling with heaptrack
 
 * Install [heaptrack](https://github.com/KDE/heaptrack)

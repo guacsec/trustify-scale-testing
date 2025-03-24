@@ -1,7 +1,7 @@
 [package]
 name = "loadtest"
 version = "0.1.0"
-edition = "2021"
+edition = "2024"
 
 [workspace]
 
@@ -15,7 +15,15 @@ humantime = "2"
 log = "0.4"
 openid = "0.16.1"
 reqwest = "0.12"
+serde = { version = "1", features = ["derive"] }
+serde_json5 = "0.2.1"
+serde_json = "1"
+sqlx = { version = "0.8", features = ["runtime-tokio", "tls-native-tls", "uuid"] }
 tokio = { version = "1.38.0", features = ["sync"] }
+
+[features]
+default = ["postgres"]
+postgres = ["sqlx/postgres"]
 
 [patch.crates-io]
 #goose = { path = "../../goose" }
