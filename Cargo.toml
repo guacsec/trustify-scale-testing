@@ -9,8 +9,8 @@ edition = "2024"
 anyhow = "1"
 chrono = "0.4"
 clap = { version = "4", features = ["derive", "env"] }
-goose = "=0.17.3-dev"
-goose-eggs = "0.5.3-dev"
+goose = "0.18.0"
+#goose-eggs = "0.5.3-dev"
 humantime = "2"
 log = "0.4"
 openid = "0.16.1"
@@ -26,8 +26,8 @@ default = ["postgres"]
 postgres = ["sqlx/postgres"]
 
 [patch.crates-io]
-#goose = { path = "../../goose" }
+#goose = { path = "../goose" }
 #goose-eggs = { path = "../../goose-eggs" }
 
-goose = { git = "https://github.com/ctron/goose", branch = "feature/baseline_1" }
-goose-eggs = { git = "https://github.com/ctron/goose-eggs", branch = "feature/uptick_deps_1" }
+goose = { git = "https://github.com/ctron/goose" }
+#goose-eggs = { git = "https://github.com/ctron/goose-eggs", branch = "feature/uptick_deps_1" }
