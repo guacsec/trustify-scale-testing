@@ -43,16 +43,19 @@ async fn main() -> Result<(), anyhow::Error> {
     }));
 
     GooseAttack::initialize()?
-        .test_start(Transaction::new(Arc::new({
-            let scenario = scenario.clone();
-            move |_| {
+        .test_start(
+            Transaction::new(Arc::new({
                 let scenario = scenario.clone();
-                Box::pin(async move {
-                    log::info!("Scenario: {scenario:#?}");
-                    Ok(())
-                })
-            }
-        })))
+                move |_| {
+                    let scenario = scenario.clone();
+                    Box::pin(async move {
+                        log::info!("Scenario: {scenario:#?}");
+                        Ok(())
+                    })
+                }
+            }))
+            .set_name("log scenario"),
+        )
         .register_scenario(
             scenario!("WebsiteUser")
                 // .set_weight(1)?
@@ -183,11 +186,18 @@ async fn set_custom_client(
         header::HeaderValue::from_str(&format!("Bearer {auth_token}"))?,
     );
 
+    let timeout = std::env::var("REQUEST_TIMEOUT")
+        .ok()
+        .map(|value| humantime::Duration::from_str(&value))
+        .transpose()?
+        .map(|v| v.into())
+        .unwrap_or(Duration::from_secs(300));
+
     // Build a custom client.
     let builder = Client::builder()
         .default_headers(headers)
         .user_agent("loadtest-ua")
-        .timeout(Duration::from_secs(300));
+        .timeout(timeout);
 
     // Assign the custom client to this GooseUser.
     user.set_client_builder(builder).await?;
