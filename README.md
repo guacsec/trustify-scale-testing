@@ -90,6 +90,11 @@ a `null`, value:
 If the scenario file is not being provided, the scale tests will try to auto-evaluate candidate documents. However, this
 is not reproducible, and should only be used for local testing.
 
+## Request timeouts
+
+To prevent calls from failing due to timeouts, it is possible to use `REQUEST_TIMEOUT` with a humantime format
+(`1s`, `1m` = "60 seconds"). The default is `5m`.
+
 ## Memory profiling with heaptrack
 
 * Install [heaptrack](https://github.com/KDE/heaptrack)
