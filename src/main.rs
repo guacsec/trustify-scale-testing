@@ -1,9 +1,9 @@
-extern crate core;
-
 // The simplest loadtest example
+mod db;
 mod graphql;
 mod oidc;
 mod restapi;
+mod scenario;
 mod website;
 
 use crate::{
@@ -32,6 +32,10 @@ async fn main() -> Result<(), anyhow::Error> {
         .map(|s| s.parse().unwrap_or(15))
         .unwrap_or(15);
 
+    let scenario_file = std::env::var("SCENARIO_FILE").ok();
+
+    let scenario = Arc::new(scenario::Scenario::load(scenario_file.as_deref()).await?);
+
     let provider = create_oidc_provider().await?;
     let custom_client = Transaction::new(Arc::new(move |user| {
         let provider = provider.clone();
@@ -39,6 +43,16 @@ async fn main() -> Result<(), anyhow::Error> {
     }));
 
     GooseAttack::initialize()?
+        .test_start(Transaction::new(Arc::new({
+            let scenario = scenario.clone();
+            move |_| {
+                let scenario = scenario.clone();
+                Box::pin(async move {
+                    log::info!("Scenario: {scenario:#?}");
+                    Ok(())
+                })
+            }
+        })))
         .register_scenario(
             scenario!("WebsiteUser")
                 // .set_weight(1)?
@@ -55,8 +69,8 @@ async fn main() -> Result<(), anyhow::Error> {
                 .register_transaction(tx!(website_advisories))
                 .register_transaction(tx!(website_importers)),
         )
-        .register_scenario(
-            scenario!("RestAPIUser")
+        .register_scenario({
+            let mut s = scenario!("RestAPIUser")
                 // .set_weight(1)?
                 .register_transaction(custom_client.clone().set_name("logon"))
                 // After each transactions runs, sleep randomly from 5 to 15 seconds.
@@ -77,8 +91,20 @@ async fn main() -> Result<(), anyhow::Error> {
                 .register_transaction(tx!(search_exact_packages))
                 .register_transaction(tx!(list_products))
                 .register_transaction(tx!(list_sboms))
-                .register_transaction(tx!(list_sboms_paginated)),
-        )
+                .register_transaction(tx!(list_sboms_paginated));
+
+            if let Some(large_sbom) = scenario.large_sbom.clone() {
+                s = s.register_transaction(
+                    Transaction::new(Arc::new({
+                        let large_sbom = large_sbom.clone();
+                        move |s| Box::pin(get_sbom_advisories(large_sbom.clone(), s))
+                    }))
+                    .set_name(&format!("get_sbom_advisories[{large_sbom}]")),
+                )
+            }
+
+            s
+        })
         // .register_scenario(
         //     scenario!("GraphQLUser")
         //         // .set_weight(1)?
@@ -141,7 +167,7 @@ async fn set_custom_client(
     provider: &OpenIdTokenProvider,
     user: &mut GooseUser,
 ) -> anyhow::Result<()> {
-    use reqwest::{header, Client};
+    use reqwest::{Client, header};
 
     log::debug!("Creating a new custom client");
 
@@ -161,7 +187,7 @@ async fn set_custom_client(
     let builder = Client::builder()
         .default_headers(headers)
         .user_agent("loadtest-ua")
-        .timeout(Duration::from_secs(30));
+        .timeout(Duration::from_secs(300));
 
     // Assign the custom client to this GooseUser.
     user.set_client_builder(builder).await?;
