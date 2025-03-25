@@ -21,6 +21,14 @@ macro_rules! tx {
     ($n:ident) => {
         transaction!($n).set_name(stringify!($n))
     };
+    ($n:ident($v1:expr)) => {{
+        let v1 = ($v1).clone();
+        Transaction::new(Arc::new({
+            let v1 = v1.clone();
+            move |s| Box::pin($n(v1.clone(), s))
+        }))
+        .set_name(&format!("{}[{v1}]", stringify!($n)))
+    }};
 }
 
 #[tokio::main]
@@ -97,13 +105,11 @@ async fn main() -> Result<(), anyhow::Error> {
                 .register_transaction(tx!(list_sboms_paginated));
 
             if let Some(large_sbom) = scenario.large_sbom.clone() {
-                s = s.register_transaction(
-                    Transaction::new(Arc::new({
-                        let large_sbom = large_sbom.clone();
-                        move |s| Box::pin(get_sbom_advisories(large_sbom.clone(), s))
-                    }))
-                    .set_name(&format!("get_sbom_advisories[{large_sbom}]")),
-                )
+                s = s
+                    .register_transaction(tx!(get_sbom_info(large_sbom.clone())))
+                    .register_transaction(tx!(get_sbom_advisories(large_sbom.clone())))
+                    .register_transaction(tx!(get_sbom_packages(large_sbom.clone())))
+                    .register_transaction(tx!(get_sbom_related(large_sbom.clone())))
             }
 
             s
