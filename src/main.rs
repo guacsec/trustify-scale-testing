@@ -44,7 +44,7 @@ async fn main() -> Result<(), anyhow::Error> {
 
     if !matches!(
         std::env::var("GENERATE_SCENARIO").ok().as_deref(),
-        Some("false" | "0")
+        None | Some("false" | "0")
     ) {
         let scenario = scenario::Scenario::eval().await?;
         println!("{}", serde_json5::to_string(&scenario)?);
