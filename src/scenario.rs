@@ -63,6 +63,9 @@ mod required {
 pub(crate) struct Scenario {
     #[serde(with = "required")]
     pub large_sbom: Option<String>,
+
+    #[serde(with = "required")]
+    pub max_vuln: Option<String>,
 }
 
 impl Scenario {
@@ -87,6 +90,7 @@ impl Scenario {
 
         Ok(Self {
             large_sbom: Some(loader.large_sbom().await?),
+            max_vuln: Some(loader.max_vuln().await?),
         })
     }
 }
@@ -100,15 +104,24 @@ impl Loader {
         Self { db }
     }
 
-    /// get the SHA256 of the largest SBOM (by number of packages)
-    pub async fn large_sbom(&self) -> anyhow::Result<String> {
+    async fn find(&self, sql: &str) -> anyhow::Result<String> {
         let mut db = crate::db::connect(&self.db).await?;
 
         // get the largest SBOM in the database
         let row = db
-            .fetch_optional(
-                r#"
-select c.sha256 as sha256,
+            .fetch_optional(sql)
+            .await?
+            .ok_or_else(|| anyhow!("nothing found"))?;
+
+        Ok(row.get("result"))
+    }
+
+    /// get the SHA256 of the largest SBOM (by number of packages)
+    pub async fn large_sbom(&self) -> anyhow::Result<String> {
+        // get the largest SBOM in the database
+        self.find(
+            r#"
+select concat('sha256:', c.sha256) as result,
        count(b.node_id) as num
 from sbom a
          join sbom_node b on a.sbom_id = b.sbom_id
@@ -117,17 +130,23 @@ group by c.sha256
 order by num desc
 limit 1
 "#,
-            )
-            .await?
-            .ok_or_else(|| anyhow!("no SBOM found"))?;
+        )
+        .await
+    }
 
-        let large_sbom: String = row.get("sha256");
-        log::info!(
-            "Largest SBOM - ID: {large_sbom}, Number of nodes: {num}",
-            num = row.get::<i64, _>("num")
-        );
-
-        Ok(format!("sha256:{large_sbom}"))
+    /// A vulnerability, referenced by a lot of advisories
+    pub async fn max_vuln(&self) -> anyhow::Result<String> {
+        self.find(
+            r#"
+select a.id as result
+from vulnerability a
+         join advisory_vulnerability b on a.id = b.vulnerability_id
+group by
+    a.id
+order by num desc
+"#,
+        )
+        .await
     }
 }
 

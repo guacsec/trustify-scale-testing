@@ -121,6 +121,10 @@ async fn main() -> Result<(), anyhow::Error> {
                     .register_transaction(tx!(get_sbom_related(large_sbom.clone())))
             }
 
+            if let Some(max_vuln) = scenario.max_vuln.clone() {
+                s = s.register_transaction(tx!(get_vulnerability(max_vuln.clone())))
+            }
+
             s
         })
         // .register_scenario(

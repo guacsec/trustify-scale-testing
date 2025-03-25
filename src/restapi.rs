@@ -115,3 +115,9 @@ pub async fn get_sbom_related(sbom_id: String, user: &mut GooseUser) -> Transact
 
     Ok(())
 }
+
+pub async fn get_vulnerability(id: String, user: &mut GooseUser) -> TransactionResult {
+    let _response = user.get(&format!("/api/v2/vulnerability/{id}")).await?;
+
+    Ok(())
+}
