@@ -1,5 +1,9 @@
 // an empty file, disabling all tests
 
 {
-  "large_sbom": null,
+  "get_sbom": null,
+  "get_sbom_advisories": null,
+  "get_sbom_packages": null,
+  "get_sbom_related": null,
+  "get_vulnerability": null
 }

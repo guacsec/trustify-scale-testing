@@ -1,5 +1,8 @@
 {
   // RHOSE-4.14 seems to be the biggest (by packages)
-  "large_sbom": "sha256:f293eb898192085804419f9dd40a738f20d67dd81846e88c6720f692ec5f3081",
-  "max_vuln": "CVE-2023-39325",
+  "get_sbom": "sha256:f293eb898192085804419f9dd40a738f20d67dd81846e88c6720f692ec5f3081",
+  "get_sbom_advisories": "sha256:f293eb898192085804419f9dd40a738f20d67dd81846e88c6720f692ec5f3081",
+  "get_sbom_packages": "sha256:f293eb898192085804419f9dd40a738f20d67dd81846e88c6720f692ec5f3081",
+  "get_sbom_related": "sha256:f293eb898192085804419f9dd40a738f20d67dd81846e88c6720f692ec5f3081",
+  "get_vulnerability": "CVE-2023-39325",
 }
