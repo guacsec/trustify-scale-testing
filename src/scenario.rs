@@ -62,10 +62,19 @@ mod required {
 #[derive(Clone, PartialEq, Eq, Debug, serde::Serialize, serde::Deserialize)]
 pub(crate) struct Scenario {
     #[serde(with = "required")]
-    pub large_sbom: Option<String>,
+    pub get_sbom: Option<String>,
 
     #[serde(with = "required")]
-    pub max_vuln: Option<String>,
+    pub get_sbom_advisories: Option<String>,
+
+    #[serde(with = "required")]
+    pub get_sbom_packages: Option<String>,
+
+    #[serde(with = "required")]
+    pub get_sbom_related: Option<String>,
+
+    #[serde(with = "required")]
+    pub get_vulnerability: Option<String>,
 }
 
 impl Scenario {
@@ -88,9 +97,16 @@ impl Scenario {
 
         let loader = Loader::new(db);
 
+        let large_sbom = Some(loader.large_sbom().await?);
+        let max_vuln = Some(loader.max_vuln().await?);
+
         Ok(Self {
-            large_sbom: Some(loader.large_sbom().await?),
-            max_vuln: Some(loader.max_vuln().await?),
+            get_sbom: large_sbom.clone(),
+            get_sbom_advisories: large_sbom.clone(),
+            get_sbom_related: large_sbom.clone(),
+            get_sbom_packages: large_sbom,
+
+            get_vulnerability: max_vuln,
         })
     }
 }
@@ -154,6 +170,12 @@ order by num desc
 mod test {
     use super::*;
 
+    #[derive(Clone, PartialEq, Eq, Debug, serde::Serialize, serde::Deserialize)]
+    pub(crate) struct Scenario {
+        #[serde(with = "required")]
+        pub large_sbom: Option<String>,
+    }
+
     #[test]
     fn missing() {
         let err = serde_json::from_str::<Scenario>(r#"{}"#).expect_err("Must be an error");
@@ -196,7 +218,7 @@ mod test {
     // Ensure the empty file parses
     #[test]
     fn empty() {
-        let _ =
-            serde_json5::from_str::<Scenario>(include_str!("../empty.json5")).expect("Must be ok");
+        let _ = serde_json5::from_str::<super::Scenario>(include_str!("../empty.json5"))
+            .expect("Must be ok");
     }
 }

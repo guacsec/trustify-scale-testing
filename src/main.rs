@@ -113,16 +113,20 @@ async fn main() -> Result<(), anyhow::Error> {
                 .register_transaction(tx!(list_sboms))
                 .register_transaction(tx!(list_sboms_paginated));
 
-            if let Some(large_sbom) = scenario.large_sbom.clone() {
-                s = s
-                    .register_transaction(tx!(get_sbom_info(large_sbom.clone())))
-                    .register_transaction(tx!(get_sbom_advisories(large_sbom.clone())))
-                    .register_transaction(tx!(get_sbom_packages(large_sbom.clone())))
-                    .register_transaction(tx!(get_sbom_related(large_sbom.clone())))
+            if let Some(value) = scenario.get_sbom.clone() {
+                s = s.register_transaction(tx!(get_sbom(value.clone())));
             }
-
-            if let Some(max_vuln) = scenario.max_vuln.clone() {
-                s = s.register_transaction(tx!(get_vulnerability(max_vuln.clone())))
+            if let Some(value) = scenario.get_sbom_advisories.clone() {
+                s = s.register_transaction(tx!(get_sbom_advisories(value.clone())));
+            }
+            if let Some(value) = scenario.get_sbom_packages.clone() {
+                s = s.register_transaction(tx!(get_sbom_packages(value.clone())));
+            }
+            if let Some(value) = scenario.get_sbom_related.clone() {
+                s = s.register_transaction(tx!(get_sbom_related(value.clone())));
+            }
+            if let Some(value) = scenario.get_vulnerability.clone() {
+                s = s.register_transaction(tx!(get_vulnerability(value.clone())))
             }
 
             s
