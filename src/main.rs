@@ -29,6 +29,11 @@ macro_rules! tx {
         }))
         .set_name(&format!("{}[{v1}]", stringify!($n)))
     }};
+    ($s:ident.$n:ident?($v1:expr)) => {
+        if let Some(value) = ($v1).clone() {
+            $s = $s.register_transaction(tx!($n(value.clone())));
+        }
+    };
 }
 
 #[tokio::main]
@@ -113,21 +118,11 @@ async fn main() -> Result<(), anyhow::Error> {
                 .register_transaction(tx!(list_sboms))
                 .register_transaction(tx!(list_sboms_paginated));
 
-            if let Some(value) = scenario.get_sbom.clone() {
-                s = s.register_transaction(tx!(get_sbom(value.clone())));
-            }
-            if let Some(value) = scenario.get_sbom_advisories.clone() {
-                s = s.register_transaction(tx!(get_sbom_advisories(value.clone())));
-            }
-            if let Some(value) = scenario.get_sbom_packages.clone() {
-                s = s.register_transaction(tx!(get_sbom_packages(value.clone())));
-            }
-            if let Some(value) = scenario.get_sbom_related.clone() {
-                s = s.register_transaction(tx!(get_sbom_related(value.clone())));
-            }
-            if let Some(value) = scenario.get_vulnerability.clone() {
-                s = s.register_transaction(tx!(get_vulnerability(value.clone())))
-            }
+            tx!(s.get_sbom?(scenario.get_sbom.clone()));
+            tx!(s.get_sbom_advisories?(scenario.get_sbom_advisories.clone()));
+            tx!(s.get_sbom_packages?(scenario.get_sbom_packages.clone()));
+            tx!(s.get_sbom_related?(scenario.get_sbom_related.clone()));
+            tx!(s.get_vulnerability?(scenario.get_vulnerability.clone()));
 
             s
         })
