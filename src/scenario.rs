@@ -1,5 +1,5 @@
 use anyhow::{Context, anyhow};
-use sqlx::{Executor, Row};
+use sqlx::{Executor, Row, any::AnyRow};
 use std::io::BufReader;
 
 /// implement to that we can explicitly state what we want
@@ -97,14 +97,16 @@ impl Scenario {
 
         let loader = Loader::new(db);
 
-        let large_sbom = Some(loader.large_sbom().await?);
+        let large_sbom = loader.large_sbom().await?;
+        let large_sbom_id = Some(large_sbom.0);
+        let large_sbom_digest = Some(large_sbom.1);
         let max_vuln = Some(loader.max_vuln().await?);
 
         Ok(Self {
-            get_sbom: large_sbom.clone(),
-            get_sbom_advisories: large_sbom.clone(),
-            get_sbom_related: large_sbom.clone(),
-            get_sbom_packages: large_sbom,
+            get_sbom: large_sbom_digest.clone(),
+            get_sbom_advisories: large_sbom_digest.clone(),
+            get_sbom_related: large_sbom_id.clone(),
+            get_sbom_packages: large_sbom_id.clone(),
 
             get_vulnerability: max_vuln,
         })
@@ -121,42 +123,52 @@ impl Loader {
     }
 
     async fn find(&self, sql: &str) -> anyhow::Result<String> {
+        Ok(self.find_row(sql).await?.get("result"))
+    }
+
+    async fn find_row(&self, sql: &str) -> anyhow::Result<AnyRow> {
         let mut db = crate::db::connect(&self.db).await?;
 
-        // get the largest SBOM in the database
-        let row = db
-            .fetch_optional(sql)
+        db.fetch_optional(sql)
             .await?
-            .ok_or_else(|| anyhow!("nothing found"))?;
-
-        Ok(row.get("result"))
+            .ok_or_else(|| anyhow!("nothing found"))
     }
 
     /// get the SHA256 of the largest SBOM (by number of packages)
-    pub async fn large_sbom(&self) -> anyhow::Result<String> {
+    pub async fn large_sbom(&self) -> anyhow::Result<(String, String)> {
         // get the largest SBOM in the database
-        self.find(
-            r#"
-select concat('sha256:', c.sha256) as result,
-       count(b.node_id) as num
+        let row = self
+            .find_row(
+                r#"
+select
+    b.sbom_id::text as id,
+    concat('sha256:', c.sha256) as sha,
+    count(b.node_id) as num
 from sbom a
-         join sbom_node b on a.sbom_id = b.sbom_id
-         join source_document c on a.source_document_id = c.id
-group by c.sha256
-order by num desc
+     join sbom_node b on a.sbom_id = b.sbom_id
+     join source_document c on a.source_document_id = c.id
+group by
+    b.sbom_id,
+    c.sha256
+order by
+    num desc
 limit 1
 "#,
-        )
-        .await
+            )
+            .await?;
+
+        Ok((row.get("id"), row.get("sha")))
     }
 
     /// A vulnerability, referenced by a lot of advisories
     pub async fn max_vuln(&self) -> anyhow::Result<String> {
         self.find(
             r#"
-select a.id as result
+select
+    a.id as result,
+    count(b.vulnerability_id) as num
 from vulnerability a
-         join advisory_vulnerability b on a.id = b.vulnerability_id
+     join advisory_vulnerability b on a.id = b.vulnerability_id
 group by
     a.id
 order by num desc

@@ -47,7 +47,7 @@ async fn main() -> Result<(), anyhow::Error> {
         None | Some("false" | "0")
     ) {
         let scenario = scenario::Scenario::eval().await?;
-        println!("{}", serde_json5::to_string(&scenario)?);
+        println!("{}", serde_json::to_string_pretty(&scenario)?);
         return Ok(());
     }
 
