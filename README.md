@@ -90,6 +90,12 @@ a `null`, value:
 If the scenario file is not being provided, the scale tests will try to auto-evaluate candidate documents. However, this
 is not reproducible, and should only be used for local testing.
 
+It is possible to generate the content for a scenario file by setting the environment variable `GENERATE_SCENARIO=true`:
+
+```bash
+env GENERATE_SCENARIO=true DATABASE_URL=postgresql://postgres:trustify@localhost:5432/trustify cargo run --release 
+```
+
 ## Request timeouts
 
 To prevent calls from failing due to timeouts, it is possible to use `REQUEST_TIMEOUT` with a humantime format
