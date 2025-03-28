@@ -17,7 +17,7 @@ use anyhow::Context;
 use goose::prelude::*;
 use std::{str::FromStr, sync::Arc, time::Duration};
 
-const MAX_ID_DISPLAY: usize = 16;
+const MAX_ID_DISPLAY: usize = 32;
 
 /// Define a transaction and use its function identifier as name
 macro_rules! tx {
