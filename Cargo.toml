@@ -20,6 +20,7 @@ serde_json5 = "0.2.1"
 serde_json = "1"
 sqlx = { version = "0.8", features = ["runtime-tokio", "tls-native-tls", "uuid"] }
 tokio = { version = "1.38.0", features = ["sync"] }
+urlencoding = "2"
 
 [features]
 default = ["postgres"]

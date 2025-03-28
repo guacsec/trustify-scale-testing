@@ -1,4 +1,5 @@
 use goose::goose::{GooseUser, TransactionResult};
+use urlencoding::encode;
 
 pub async fn list_advisory(user: &mut GooseUser) -> TransactionResult {
     let _response = user.get("/api/v2/advisory").await?;
@@ -45,13 +46,13 @@ pub async fn list_packages_paginated(user: &mut GooseUser) -> TransactionResult 
     Ok(())
 }
 
-pub async fn search_packages(user: &mut GooseUser) -> TransactionResult {
+pub async fn search_purls(user: &mut GooseUser) -> TransactionResult {
     let _response = user.get("/api/v2/purl?q=curl").await?;
 
     Ok(())
 }
 
-pub async fn search_exact_packages(user: &mut GooseUser) -> TransactionResult {
+pub async fn search_exact_purl(user: &mut GooseUser) -> TransactionResult {
     let _response = user.get("/api/v2/purl?q=name=curl").await?;
 
     Ok(())
@@ -118,6 +119,14 @@ pub async fn get_sbom_related(sbom_id: String, user: &mut GooseUser) -> Transact
 
 pub async fn get_vulnerability(id: String, user: &mut GooseUser) -> TransactionResult {
     let _response = user.get(&format!("/api/v2/vulnerability/{id}")).await?;
+
+    Ok(())
+}
+
+pub async fn sbom_by_package(purl: String, user: &mut GooseUser) -> TransactionResult {
+    let _response = user
+        .get(&format!("/api/v2/sbom/by-package?purl={}", encode(&purl)))
+        .await?;
 
     Ok(())
 }

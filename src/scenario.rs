@@ -75,6 +75,9 @@ pub(crate) struct Scenario {
 
     #[serde(with = "required")]
     pub get_vulnerability: Option<String>,
+
+    #[serde(with = "required")]
+    pub sbom_by_package: Option<String>,
 }
 
 impl Scenario {
@@ -101,6 +104,7 @@ impl Scenario {
         let large_sbom_id = Some(large_sbom.0);
         let large_sbom_digest = Some(large_sbom.1);
         let max_vuln = Some(loader.max_vuln().await?);
+        let sbom_purl = Some(loader.sbom_purl().await?);
 
         Ok(Self {
             get_sbom: large_sbom_digest.clone(),
@@ -109,6 +113,8 @@ impl Scenario {
             get_sbom_packages: large_sbom_id.clone(),
 
             get_vulnerability: max_vuln,
+
+            sbom_by_package: sbom_purl,
         })
     }
 }
@@ -172,6 +178,17 @@ from vulnerability a
 group by
     a.id
 order by num desc
+"#,
+        )
+        .await
+    }
+
+    /// A purl
+    pub async fn sbom_purl(&self) -> anyhow::Result<String> {
+        self.find(
+            r#"
+select get_purl(qualified_purl_id) as result from sbom_package_purl_ref
+limit 1
 "#,
         )
         .await

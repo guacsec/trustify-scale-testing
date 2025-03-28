@@ -119,8 +119,8 @@ async fn main() -> Result<(), anyhow::Error> {
                 .register_transaction(tx!(list_importer))
                 .register_transaction(tx!(list_packages))
                 .register_transaction(tx!(list_packages_paginated))
-                .register_transaction(tx!(search_packages))
-                .register_transaction(tx!(search_exact_packages))
+                .register_transaction(tx!(search_purls))
+                .register_transaction(tx!(search_exact_purl))
                 .register_transaction(tx!(list_products))
                 .register_transaction(tx!(list_sboms))
                 .register_transaction(tx!(list_sboms_paginated));
@@ -130,6 +130,7 @@ async fn main() -> Result<(), anyhow::Error> {
             tx!(s.get_sbom_packages?(scenario.get_sbom_packages.clone()));
             tx!(s.get_sbom_related?(scenario.get_sbom_related.clone()));
             tx!(s.get_vulnerability?(scenario.get_vulnerability.clone()));
+            tx!(s.sbom_by_package?(scenario.sbom_by_package.clone()));
 
             s
         })
