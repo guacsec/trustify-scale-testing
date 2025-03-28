@@ -4,6 +4,7 @@ mod graphql;
 mod oidc;
 mod restapi;
 mod scenario;
+mod utils;
 mod website;
 
 use crate::{
@@ -16,6 +17,8 @@ use anyhow::Context;
 use goose::prelude::*;
 use std::{str::FromStr, sync::Arc, time::Duration};
 
+const MAX_ID_DISPLAY: usize = 16;
+
 /// Define a transaction and use its function identifier as name
 macro_rules! tx {
     ($n:ident) => {
@@ -27,7 +30,11 @@ macro_rules! tx {
             let v1 = v1.clone();
             move |s| Box::pin($n(v1.clone(), s))
         }))
-        .set_name(&format!("{}[{v1}]", stringify!($n)))
+        .set_name(&format!(
+            "{}[{}]",
+            stringify!($n),
+            utils::truncate_middle(v1, MAX_ID_DISPLAY)
+        ))
     }};
     ($s:ident.$n:ident?($v1:expr)) => {
         if let Some(value) = ($v1).clone() {
