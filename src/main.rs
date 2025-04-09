@@ -65,17 +65,17 @@ async fn main() -> Result<(), anyhow::Error> {
 
     let scenario = Arc::new(scenario::Scenario::load(scenario_file.as_deref()).await?);
 
-    let custom_client = if !matches!(
+    let custom_client = if matches!(
         std::env::var("AUTH_DISABLED").ok().as_deref(),
-        None | Some("true" | "1")
+        Some("true" | "1")
     ) {
+        None
+    } else {
         let provider = create_oidc_provider().await?;
         Some(Transaction::new(Arc::new(move |user| {
             let provider = provider.clone();
             Box::pin(async move { setup_custom_client(&provider, user).await })
         })))
-    } else {
-        None
     };
 
     GooseAttack::initialize()?
