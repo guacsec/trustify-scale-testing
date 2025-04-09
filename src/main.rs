@@ -113,6 +113,7 @@ async fn main() -> Result<(), anyhow::Error> {
                     .register_transaction(tx!(list_advisory))
                     .register_transaction(tx!(list_advisory_paginated))
                     .register_transaction(tx!(get_advisory_by_doc_id))
+                    .register_transaction(tx!(search_advisory))
                     .register_transaction(tx!(list_vulnerabilities))
                     .register_transaction(tx!(list_vulnerabilities_paginated))
                     .register_transaction(tx!(list_importer))
