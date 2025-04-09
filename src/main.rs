@@ -65,11 +65,18 @@ async fn main() -> Result<(), anyhow::Error> {
 
     let scenario = Arc::new(scenario::Scenario::load(scenario_file.as_deref()).await?);
 
-    let provider = create_oidc_provider().await?;
-    let custom_client = Transaction::new(Arc::new(move |user| {
-        let provider = provider.clone();
-        Box::pin(async move { setup_custom_client(&provider, user).await })
-    }));
+    let custom_client = if !matches!(
+        std::env::var("AUTH_DISABLED").ok().as_deref(),
+        None | Some("true" | "1")
+    ) {
+        let provider = create_oidc_provider().await?;
+        Some(Transaction::new(Arc::new(move |user| {
+            let provider = provider.clone();
+            Box::pin(async move { setup_custom_client(&provider, user).await })
+        })))
+    } else {
+        None
+    };
 
     GooseAttack::initialize()?
         .test_start(
@@ -85,45 +92,37 @@ async fn main() -> Result<(), anyhow::Error> {
             }))
             .set_name("log scenario"),
         )
-        .register_scenario(
-            scenario!("WebsiteUser")
-                // .set_weight(1)?
-                .register_transaction(custom_client.clone().set_name("logon"))
-                // After each transactions runs, sleep randomly from 5 to 15 seconds.
-                .set_wait_time(
-                    Duration::from_secs(wait_time_from),
-                    Duration::from_secs(wait_time_to),
-                )?
-                .register_transaction(tx!(website_index))
-                .register_transaction(tx!(website_openapi))
-                .register_transaction(tx!(website_sboms))
-                .register_transaction(tx!(website_packages))
-                .register_transaction(tx!(website_advisories))
-                .register_transaction(tx!(website_importers)),
-        )
         .register_scenario({
-            let mut s = scenario!("RestAPIUser")
-                // .set_weight(1)?
-                .register_transaction(custom_client.clone().set_name("logon"))
-                // After each transactions runs, sleep randomly from 5 to 15 seconds.
-                .set_wait_time(
-                    Duration::from_secs(wait_time_from),
-                    Duration::from_secs(wait_time_to),
-                )?
-                .register_transaction(tx!(list_organizations))
-                .register_transaction(tx!(list_advisory))
-                .register_transaction(tx!(list_advisory_paginated))
-                .register_transaction(tx!(get_advisory_by_doc_id))
-                .register_transaction(tx!(list_vulnerabilities))
-                .register_transaction(tx!(list_vulnerabilities_paginated))
-                .register_transaction(tx!(list_importer))
-                .register_transaction(tx!(list_packages))
-                .register_transaction(tx!(list_packages_paginated))
-                .register_transaction(tx!(search_purls))
-                .register_transaction(tx!(search_exact_purl))
-                .register_transaction(tx!(list_products))
-                .register_transaction(tx!(list_sboms))
-                .register_transaction(tx!(list_sboms_paginated));
+            create_scenario(
+                "WebsiteUser",
+                wait_time_from,
+                wait_time_to,
+                custom_client.clone(),
+            )?
+            .register_transaction(tx!(website_index))
+            .register_transaction(tx!(website_openapi))
+            .register_transaction(tx!(website_sboms))
+            .register_transaction(tx!(website_packages))
+            .register_transaction(tx!(website_advisories))
+            .register_transaction(tx!(website_importers))
+        })
+        .register_scenario({
+            let mut s =
+                create_scenario("RestAPIUser", wait_time_from, wait_time_to, custom_client)?
+                    .register_transaction(tx!(list_organizations))
+                    .register_transaction(tx!(list_advisory))
+                    .register_transaction(tx!(list_advisory_paginated))
+                    .register_transaction(tx!(get_advisory_by_doc_id))
+                    .register_transaction(tx!(list_vulnerabilities))
+                    .register_transaction(tx!(list_vulnerabilities_paginated))
+                    .register_transaction(tx!(list_importer))
+                    .register_transaction(tx!(list_packages))
+                    .register_transaction(tx!(list_packages_paginated))
+                    .register_transaction(tx!(search_purls))
+                    .register_transaction(tx!(search_exact_purl))
+                    .register_transaction(tx!(list_products))
+                    .register_transaction(tx!(list_sboms))
+                    .register_transaction(tx!(list_sboms_paginated));
 
             tx!(s.get_sbom?(scenario.get_sbom.clone()));
             tx!(s.get_sbom_advisories?(scenario.get_sbom_advisories.clone()));
@@ -156,6 +155,22 @@ async fn main() -> Result<(), anyhow::Error> {
         .await?;
 
     Ok(())
+}
+
+fn create_scenario(
+    name: &str,
+    wait_time_from: u64,
+    wait_time_to: u64,
+    custom_client: Option<Transaction>,
+) -> Result<Scenario, GooseError> {
+    let mut s = scenario!(name);
+    if let Some(client) = custom_client {
+        s = s.register_transaction(client.set_name("logon"));
+    }
+    s.set_wait_time(
+        Duration::from_secs(wait_time_from),
+        Duration::from_secs(wait_time_to),
+    )
 }
 
 async fn create_oidc_provider() -> anyhow::Result<OpenIdTokenProvider> {
