@@ -60,7 +60,7 @@ cargo run --bin xtask generate-dump
 ```
 
 Or, download one from the S3 bucket. e.g.:
-`https://trustify-dumps.s3.eu-west-1.amazonaws.com/20250314T010452Z/dump.sql.gz`
+`https://trustify-dumps.s3.eu-west-1.amazonaws.com/20250604T002104Z/dump.sql.gz`
 
 Then, add the dump to the compose startup `trustify/etc/deploy/compose/compose.yaml` (in the `trustify` repository):
 
@@ -86,6 +86,8 @@ a `null`, value:
   "disable_me": null,
 }
 ```
+
+The repository has a default file (`empty.json5`), disabling all such tests.
 
 If the scenario file is not being provided, the scale tests will try to auto-evaluate candidate documents. However, this
 is not reproducible, and should only be used for local testing.
