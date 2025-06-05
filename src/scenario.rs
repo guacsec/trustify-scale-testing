@@ -78,6 +78,9 @@ pub(crate) struct Scenario {
 
     #[serde(with = "required")]
     pub sbom_by_package: Option<String>,
+
+    #[serde(with = "required")]
+    pub sbom_license_ids: Option<String>,
 }
 
 impl Scenario {
@@ -105,6 +108,7 @@ impl Scenario {
         let large_sbom_digest = Some(large_sbom.1);
         let max_vuln = Some(loader.max_vuln().await?);
         let sbom_purl = Some(loader.sbom_purl().await?);
+        let sbom_license_ids = large_sbom_id.clone();
 
         Ok(Self {
             get_sbom: large_sbom_digest.clone(),
@@ -115,6 +119,7 @@ impl Scenario {
             get_vulnerability: max_vuln,
 
             sbom_by_package: sbom_purl,
+            sbom_license_ids,
         })
     }
 }
