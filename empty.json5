@@ -7,4 +7,5 @@
   "get_sbom_related": null,
   "get_vulnerability": null,
   "sbom_by_package": null,
+  "sbom_license_ids": null,
 }
