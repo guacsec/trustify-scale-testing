@@ -1,5 +1,9 @@
+mod purl;
+
+use crate::scenario::purl::CanonicalPurl;
 use anyhow::{Context, anyhow};
-use sqlx::{Executor, Row, any::AnyRow};
+use serde_json::Value;
+use sqlx::{Executor, Row, postgres::PgRow};
 use std::io::BufReader;
 
 /// implement to that we can explicitly state what we want
@@ -137,7 +141,7 @@ impl Loader {
         Ok(self.find_row(sql).await?.get("result"))
     }
 
-    async fn find_row(&self, sql: &str) -> anyhow::Result<AnyRow> {
+    async fn find_row(&self, sql: &str) -> anyhow::Result<PgRow> {
         let mut db = crate::db::connect(&self.db).await?;
 
         db.fetch_optional(sql)
@@ -190,13 +194,22 @@ order by num desc
 
     /// A purl
     pub async fn sbom_purl(&self) -> anyhow::Result<String> {
-        self.find(
+        self.find_row(
             r#"
-select get_purl(qualified_purl_id) as result from sbom_package_purl_ref
+select
+    b.purl as result
+from
+    sbom_package_purl_ref a
+    left join qualified_purl b on a.qualified_purl_id = b.id
 limit 1
 "#,
         )
         .await
+        .and_then(|row| {
+            let value: Value = row.try_get("result")?;
+            let purl: CanonicalPurl = serde_json::from_value(value)?;
+            Ok::<String, anyhow::Error>(purl.to_string())
+        })
     }
 }
 
@@ -252,7 +265,7 @@ mod test {
     // Ensure the empty file parses
     #[test]
     fn empty() {
-        let _ = serde_json5::from_str::<super::Scenario>(include_str!("../empty.json5"))
+        let _ = serde_json5::from_str::<super::Scenario>(include_str!("../../empty.json5"))
             .expect("Must be ok");
     }
 }
