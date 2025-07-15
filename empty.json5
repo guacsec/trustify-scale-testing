@@ -8,4 +8,5 @@
   "get_vulnerability": null,
   "sbom_by_package": null,
   "sbom_license_ids": null,
+  "analyze_purl": null,
 }

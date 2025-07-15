@@ -1,4 +1,5 @@
 use goose::goose::{GooseUser, TransactionResult};
+use serde_json::json;
 use urlencoding::encode;
 
 pub async fn list_advisory(user: &mut GooseUser) -> TransactionResult {
@@ -155,6 +156,21 @@ pub async fn get_analysis_status(user: &mut GooseUser) -> TransactionResult {
 
 pub async fn get_analysis_latest_cpe(user: &mut GooseUser) -> TransactionResult {
     let _response = user.get("/api/v2/analysis/latest/component/cpe%3A%2Fa%3Aredhat%3Aopenshift_builds%3A1.3%3A%3Ael9").await?;
+
+    Ok(())
+}
+
+pub async fn post_vulnerability_analyze(purl: String, user: &mut GooseUser) -> TransactionResult {
+    let _response = user
+        .post_json(
+            "/api/v2/vulnerability/analyze",
+            &json!({
+                "purls": [
+                     purl
+                ]
+            }),
+        )
+        .await?;
 
     Ok(())
 }
