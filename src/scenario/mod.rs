@@ -85,6 +85,9 @@ pub(crate) struct Scenario {
 
     #[serde(with = "required")]
     pub sbom_license_ids: Option<String>,
+
+    #[serde(with = "required")]
+    pub analyze_purl: Option<String>,
 }
 
 impl Scenario {
@@ -113,6 +116,7 @@ impl Scenario {
         let max_vuln = Some(loader.max_vuln().await?);
         let sbom_purl = Some(loader.sbom_purl().await?);
         let sbom_license_ids = large_sbom_id.clone();
+        let analyze_purl = Some(loader.analysis_purl().await?);
 
         Ok(Self {
             get_sbom: large_sbom_digest.clone(),
@@ -124,6 +128,7 @@ impl Scenario {
 
             sbom_by_package: sbom_purl,
             sbom_license_ids,
+            analyze_purl,
         })
     }
 }
@@ -201,6 +206,38 @@ select
 from
     sbom_package_purl_ref a
     left join qualified_purl b on a.qualified_purl_id = b.id
+limit 1
+"#,
+        )
+        .await
+        .and_then(|row| {
+            let value: Value = row.try_get("result")?;
+            let purl: CanonicalPurl = serde_json::from_value(value)?;
+            Ok::<String, anyhow::Error>(purl.to_string())
+        })
+    }
+
+    /// A purl with vulnerabilities
+    pub async fn analysis_purl(&self) -> anyhow::Result<String> {
+        self.find_row(
+            r#"
+select distinct
+    d.vulnerability_id,
+    d.advisory_id,
+    a.purl as result
+from
+    qualified_purl a
+    left join versioned_purl b on a.versioned_purl_id = b.id
+    left join base_purl c on b.base_purl_id = c.id
+    inner join purl_status d on d.base_purl_id = c.id
+    inner join status e on e.id = d.status_id
+    inner join version_range f on d.version_range_id = f.id
+where
+    e.slug = 'affected'
+and
+    version_matches(b.version, f.*) = TRUE
+order by
+    vulnerability_id
 limit 1
 "#,
         )

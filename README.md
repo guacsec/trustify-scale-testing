@@ -36,7 +36,23 @@ A set of simple [goose](https://book.goose.rs/) load tests against the web and r
 
    Alternately, for no wait times between http invokes set these env vars to 0.
 
-3. To load trustify endpoints with 3 concurrent users.
+3. Choose a scenario file or let it evaluate one
+
+   Other provide an existing file using `SCENARIO_FILE`:
+
+   ```bash
+   export SCENARIO_FILE=empty.json5 # for disabling all test with variables
+   ```
+
+   Or provide `DATABASE_URL` to generate one on the fly:
+
+   ```bash
+   export DATABASE_URL="postgresql://postgres:trustify@localhost:5432/trustify"
+   ```
+
+   See below for creating a scenario file. Or check the folder [scenarios/](scenarios/) for existing files.
+
+4. To load trustify endpoints with 3 concurrent users.
    ```bash
    cargo run --release --bin loadtest -- --host http://localhost:8080 -u 3
    ```
@@ -49,7 +65,7 @@ A set of simple [goose](https://book.goose.rs/) load tests against the web and r
    cargo run --release -- --host http://localhost:8080  --report-file=report.html --no-reset-metrics -u 10
    ```
 
-4. More goose run-time options [here](https://book.goose.rs/getting-started/runtime-options.html)
+5. More goose run-time options [here](https://book.goose.rs/getting-started/runtime-options.html)
 
 ## Using an existing database dump
 
