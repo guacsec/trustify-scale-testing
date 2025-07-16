@@ -115,7 +115,7 @@ impl Scenario {
         let large_sbom_digest = Some(large_sbom.1);
         let max_vuln = Some(loader.max_vuln().await?);
         let sbom_purl = Some(loader.sbom_purl().await?);
-        let sbom_license_ids = large_sbom_id.clone();
+        let sbom_license_ids = large_sbom_id.clone().map(|id| format!("urn:uuid:{id}"));
         let analyze_purl = Some(loader.analysis_purl().await?);
 
         Ok(Self {
