@@ -142,7 +142,10 @@ pub async fn sbom_by_package(purl: String, user: &mut GooseUser) -> TransactionR
 
 pub async fn get_sbom_license_ids(sbom_id: String, user: &mut GooseUser) -> TransactionResult {
     let _response = user
-        .get(&format!("/api/v2/sbom/urn:{sbom_id}/all-license-ids"))
+        .get(&format!(
+            "/api/v2/sbom/{}/all-license-ids",
+            encode(&sbom_id)
+        ))
         .await?;
 
     Ok(())
