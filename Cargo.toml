@@ -13,7 +13,7 @@ goose = "0.18.0"
 #goose-eggs = "0.5.3-dev"
 humantime = "2"
 log = "0.4"
-openid = "0.16.1"
+openid = "0.17.0"
 reqwest = "0.12"
 serde = { version = "1", features = ["derive"] }
 serde_json5 = "0.2.1"
