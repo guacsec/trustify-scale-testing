@@ -19,7 +19,7 @@ serde = { version = "1", features = ["derive"] }
 serde_json5 = "0.2.1"
 serde_json = "1"
 sqlx = { version = "0.8", features = ["runtime-tokio", "tls-native-tls", "uuid", "json"] }
-tokio = { version = "1.38.0", features = ["sync"] }
+tokio = { version = "1.43.1", features = ["sync"] }
 urlencoding = "2"
 packageurl = "0.4.2"
 
