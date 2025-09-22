@@ -88,6 +88,9 @@ pub(crate) struct Scenario {
 
     #[serde(with = "required")]
     pub analyze_purl: Option<String>,
+
+    #[serde(with = "required")]
+    pub get_purl_details: Option<String>,
 }
 
 impl Scenario {
@@ -117,6 +120,7 @@ impl Scenario {
         let sbom_purl = Some(loader.sbom_purl().await?);
         let sbom_license_ids = large_sbom_id.clone().map(|id| format!("urn:uuid:{id}"));
         let analyze_purl = Some(loader.analysis_purl().await?);
+        let get_purl_details = Some(loader.purl_details().await?);
 
         Ok(Self {
             get_sbom: large_sbom_digest.clone(),
@@ -129,6 +133,7 @@ impl Scenario {
             sbom_by_package: sbom_purl,
             sbom_license_ids,
             analyze_purl,
+            get_purl_details,
         })
     }
 }
@@ -247,6 +252,29 @@ limit 1
             let purl: CanonicalPurl = serde_json::from_value(value)?;
             Ok::<String, anyhow::Error>(purl.to_string())
         })
+    }
+
+    /// A purl ID for details lookup
+    pub async fn purl_details(&self) -> anyhow::Result<String> {
+        self.find(
+            r#"
+SELECT 
+    spr.qualified_purl_id::text AS result,
+    COUNT(DISTINCT spl.license_id) AS license_count
+FROM 
+    sbom_package_purl_ref spr
+JOIN 
+    sbom_package sp ON spr.sbom_id = sp.sbom_id AND spr.node_id = sp.node_id
+JOIN 
+    sbom_package_license spl ON sp.sbom_id = spl.sbom_id AND sp.node_id = spl.node_id
+GROUP BY 
+    spr.qualified_purl_id
+ORDER BY 
+    license_count DESC
+LIMIT 1;
+"#,
+        )
+        .await
     }
 }
 

@@ -55,6 +55,12 @@ pub async fn list_packages_paginated(user: &mut GooseUser) -> TransactionResult 
     Ok(())
 }
 
+pub async fn get_purl_details(purl_id: String, user: &mut GooseUser) -> TransactionResult {
+    let _response = user.get(&format!("/api/v2/purl/{purl_id}")).await?;
+
+    Ok(())
+}
+
 pub async fn search_purls(user: &mut GooseUser) -> TransactionResult {
     let _response = user.get("/api/v2/purl?q=curl").await?;
 
