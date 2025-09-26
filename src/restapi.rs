@@ -183,3 +183,9 @@ pub async fn post_vulnerability_analyze(purl: String, user: &mut GooseUser) -> T
 
     Ok(())
 }
+
+pub async fn get_purl_gc(user: &mut GooseUser) -> TransactionResult {
+    let _response = user.get("/api/v2/purl/gc").await?;
+
+    Ok(())
+}
