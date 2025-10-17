@@ -125,7 +125,10 @@ async fn main() -> Result<(), anyhow::Error> {
                     .register_transaction(tx!(list_sboms))
                     .register_transaction(tx!(list_sboms_paginated))
                     .register_transaction(tx!(get_analysis_status))
-                    .register_transaction(tx!(get_analysis_latest_cpe));
+                    .register_transaction(tx!(get_analysis_latest_cpe))
+                    .register_transaction(tx!(search_licenses))
+                    .register_transaction(tx!(search_sboms_by_license))
+                    .register_transaction(tx!(search_purls_by_license));
 
             tx!(s.get_sbom?(scenario.get_sbom.clone()));
             tx!(s.get_sbom_advisories?(scenario.get_sbom_advisories.clone()));

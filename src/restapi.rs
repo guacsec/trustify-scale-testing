@@ -183,3 +183,22 @@ pub async fn post_vulnerability_analyze(purl: String, user: &mut GooseUser) -> T
 
     Ok(())
 }
+
+pub async fn search_licenses(user: &mut GooseUser) -> TransactionResult {
+    let _response = user.get("/api/v2/license?q=ASL&sort=license:desc").await?;
+    Ok(())
+}
+
+pub async fn search_sboms_by_license(user: &mut GooseUser) -> TransactionResult {
+    let _response = user
+        .get("/api/v2/sbom?q=license~GPL&sort=name:desc")
+        .await?;
+    Ok(())
+}
+
+pub async fn search_purls_by_license(user: &mut GooseUser) -> TransactionResult {
+    let _response = user
+        .get("/api/v2/purl?q=license~GPLv3+ with exceptions|Apache&sort=name:desc")
+        .await?;
+    Ok(())
+}
