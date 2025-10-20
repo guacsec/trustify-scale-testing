@@ -91,6 +91,9 @@ pub(crate) struct Scenario {
 
     #[serde(with = "required")]
     pub get_purl_details: Option<String>,
+
+    #[serde(with = "required")]
+    pub get_recommendations: Option<String>,
 }
 
 impl Scenario {
@@ -121,6 +124,7 @@ impl Scenario {
         let sbom_license_ids = large_sbom_id.clone().map(|id| format!("urn:uuid:{id}"));
         let analyze_purl = Some(loader.analysis_purl().await?);
         let get_purl_details = Some(loader.purl_details().await?);
+        let recommendations_purl = Some(loader.purl_with_recommendations().await?);
 
         Ok(Self {
             get_sbom: large_sbom_digest.clone(),
@@ -134,6 +138,7 @@ impl Scenario {
             sbom_license_ids,
             analyze_purl,
             get_purl_details,
+            get_recommendations: recommendations_purl,
         })
     }
 }
@@ -275,6 +280,27 @@ LIMIT 1;
 "#,
         )
         .await
+    }
+
+    // A purl whose version matches redhat-[0-9]+$ regex
+    pub async fn purl_with_recommendations(&self) -> anyhow::Result<String> {
+        self.find_row(
+            r#"
+SELECT
+    purl AS result
+FROM
+    qualified_purl
+WHERE
+    purl->>'version' ~ 'redhat-[0-9]+$'
+LIMIT 1;
+"#,
+        )
+        .await
+        .and_then(|row| {
+            let value: Value = row.try_get("result")?;
+            let purl: CanonicalPurl = serde_json::from_value(value)?;
+            Ok::<String, anyhow::Error>(purl.to_string())
+        })
     }
 }
 
