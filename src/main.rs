@@ -107,28 +107,30 @@ async fn main() -> Result<(), anyhow::Error> {
             .register_transaction(tx!(website_importers))
         })
         .register_scenario({
-            let mut s =
-                create_scenario("RestAPIUser", wait_time_from, wait_time_to, custom_client)?
-                    .register_transaction(tx!(list_organizations))
-                    .register_transaction(tx!(list_advisory))
-                    .register_transaction(tx!(list_advisory_paginated))
-                    .register_transaction(tx!(get_advisory_by_doc_id))
-                    .register_transaction(tx!(search_advisory))
-                    .register_transaction(tx!(list_vulnerabilities))
-                    .register_transaction(tx!(list_vulnerabilities_paginated))
-                    .register_transaction(tx!(list_importer))
-                    .register_transaction(tx!(list_packages))
-                    .register_transaction(tx!(list_packages_paginated))
-                    .register_transaction(tx!(search_purls))
-                    .register_transaction(tx!(search_exact_purl))
-                    .register_transaction(tx!(list_products))
-                    .register_transaction(tx!(list_sboms))
-                    .register_transaction(tx!(list_sboms_paginated))
-                    .register_transaction(tx!(get_analysis_status))
-                    .register_transaction(tx!(get_analysis_latest_cpe))
-                    .register_transaction(tx!(search_licenses))
-                    .register_transaction(tx!(search_sboms_by_license))
-                    .register_transaction(tx!(search_purls_by_license));
+            let mut s = create_scenario(
+                "RestAPIUser",
+                wait_time_from,
+                wait_time_to,
+                custom_client.clone(),
+            )?
+            .set_weight(5)?
+            .register_transaction(tx!(list_organizations))
+            .register_transaction(tx!(list_advisory))
+            .register_transaction(tx!(list_advisory_paginated))
+            .register_transaction(tx!(get_advisory_by_doc_id))
+            .register_transaction(tx!(search_advisory))
+            .register_transaction(tx!(list_vulnerabilities))
+            .register_transaction(tx!(list_vulnerabilities_paginated))
+            .register_transaction(tx!(list_importer))
+            .register_transaction(tx!(list_packages))
+            .register_transaction(tx!(list_packages_paginated))
+            .register_transaction(tx!(search_purls))
+            .register_transaction(tx!(search_exact_purl))
+            .register_transaction(tx!(list_products))
+            .register_transaction(tx!(list_sboms))
+            .register_transaction(tx!(list_sboms_paginated))
+            .register_transaction(tx!(get_analysis_status))
+            .register_transaction(tx!(get_analysis_latest_cpe));
 
             tx!(s.get_sbom?(scenario.get_sbom.clone()));
             tx!(s.get_sbom_advisories?(scenario.get_sbom_advisories.clone()));
@@ -141,6 +143,18 @@ async fn main() -> Result<(), anyhow::Error> {
             tx!(s.get_purl_details?(scenario.get_purl_details.clone()));
 
             s
+        })
+        .register_scenario({
+            create_scenario(
+                "RestAPIUserSlow",
+                wait_time_from,
+                wait_time_to,
+                custom_client,
+            )?
+            .set_weight(1)?
+            .register_transaction(tx!(search_licenses))
+            .register_transaction(tx!(search_sboms_by_license))
+            .register_transaction(tx!(search_purls_by_license))
         })
         // .register_scenario(
         //     scenario!("GraphQLUser")
