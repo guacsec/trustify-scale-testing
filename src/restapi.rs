@@ -202,3 +202,15 @@ pub async fn search_purls_by_license(user: &mut GooseUser) -> TransactionResult 
         .await?;
     Ok(())
 }
+
+pub async fn get_recommendations(purl: String, user: &mut GooseUser) -> TransactionResult {
+    let _response = user
+        .post_json(
+            "/api/v2/purl/recommend",
+            &json!({
+             "purls": [purl]
+            }),
+        )
+        .await?;
+    Ok(())
+}
