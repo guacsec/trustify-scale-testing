@@ -1,6 +1,6 @@
 mod purl;
 
-use crate::scenario::purl::CanonicalPurl;
+use crate::{scenario::purl::CanonicalPurl, utils::DisplayVec};
 use anyhow::{Context, anyhow};
 use serde_json::Value;
 use sqlx::{Executor, Row, postgres::PgRow};
@@ -91,6 +91,8 @@ pub(crate) struct Scenario {
 
     #[serde(with = "required")]
     pub get_purl_details: Option<String>,
+
+    pub get_recommendations: Option<DisplayVec<String>>,
 }
 
 impl Scenario {
@@ -121,6 +123,7 @@ impl Scenario {
         let sbom_license_ids = large_sbom_id.clone().map(|id| format!("urn:uuid:{id}"));
         let analyze_purl = Some(loader.analysis_purl().await?);
         let get_purl_details = Some(loader.purl_details().await?);
+        let recommendations_purl = Some(loader.purl_with_recommendations().await?);
 
         Ok(Self {
             get_sbom: large_sbom_digest.clone(),
@@ -134,6 +137,7 @@ impl Scenario {
             sbom_license_ids,
             analyze_purl,
             get_purl_details,
+            get_recommendations: recommendations_purl,
         })
     }
 }
@@ -157,6 +161,12 @@ impl Loader {
         db.fetch_optional(sql)
             .await?
             .ok_or_else(|| anyhow!("nothing found"))
+    }
+
+    async fn find_rows(&self, sql: &str) -> anyhow::Result<Vec<PgRow>> {
+        let mut db = crate::db::connect(&self.db).await?;
+
+        Ok(db.fetch_all(sql).await?)
     }
 
     /// get the SHA256 of the largest SBOM (by number of packages)
@@ -275,6 +285,31 @@ LIMIT 1;
 "#,
         )
         .await
+    }
+
+    // A purl whose version matches redhat-[0-9]+$ regex
+    pub async fn purl_with_recommendations(&self) -> anyhow::Result<DisplayVec<String>> {
+        self.find_rows(
+            r#"
+SELECT
+    purl AS result
+FROM
+    qualified_purl
+WHERE
+    purl->>'version' ~ 'redhat-[0-9]+$'
+LIMIT 10;
+"#,
+        )
+        .await
+        .and_then(|rows| {
+            let mut result = vec![];
+            for row in rows {
+                let value: Value = row.try_get("result")?;
+                let purl: CanonicalPurl = serde_json::from_value(value)?;
+                result.push(purl.to_string());
+            }
+            Ok(DisplayVec(result))
+        })
     }
 }
 
