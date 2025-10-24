@@ -93,6 +93,9 @@ pub(crate) struct Scenario {
     pub get_purl_details: Option<String>,
 
     pub get_recommendations: Option<DisplayVec<String>>,
+
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub delete_sbom_pool: Option<Vec<String>>,
 }
 
 impl Scenario {
@@ -124,6 +127,14 @@ impl Scenario {
         let analyze_purl = Some(loader.analysis_purl().await?);
         let get_purl_details = Some(loader.purl_details().await?);
         let recommendations_purl = Some(loader.purl_with_recommendations().await?);
+        let delete_sbom_pool = Some(
+            loader
+                .deletable_sboms()
+                .await?
+                .iter()
+                .map(|sbom_id| format!("urn:uuid:{sbom_id}"))
+                .collect(),
+        );
 
         Ok(Self {
             get_sbom: large_sbom_digest.clone(),
@@ -138,6 +149,7 @@ impl Scenario {
             analyze_purl,
             get_purl_details,
             get_recommendations: recommendations_purl,
+            delete_sbom_pool,
         })
     }
 }
@@ -310,6 +322,39 @@ LIMIT 10;
             }
             Ok(DisplayVec(result))
         })
+    }
+
+    /// Get a pool of deletable SBOMs (up to 100)
+    /// These SBOMs are selected based on having certain licenses that make them good candidates for deletion testing
+    pub async fn deletable_sboms(&self) -> anyhow::Result<Vec<String>> {
+        let mut db = crate::db::connect(&self.db).await?;
+
+        let rows = sqlx::query(
+            r#"
+SELECT
+    a.sbom_id::text as id
+FROM
+    sbom a
+    JOIN sbom_node b ON a.sbom_id = b.sbom_id
+    JOIN sbom_package c ON b.sbom_id = c.sbom_id AND b.node_id = c.node_id
+    JOIN sbom_package_license d ON c.sbom_id = d.sbom_id AND c.node_id = d.node_id
+    JOIN license e ON d.license_id = e.id
+WHERE
+    e.text IN ('GPLv3+ with exceptions', 'Apache-2.0', 'MIT', 'BSD-3-Clause')
+GROUP BY
+    a.sbom_id
+ORDER BY
+    a.sbom_id
+LIMIT 100
+"#,
+        )
+        .fetch_all(&mut db)
+        .await?;
+
+        Ok(rows
+            .into_iter()
+            .map(|row| row.get::<String, _>("id"))
+            .collect())
     }
 }
 
