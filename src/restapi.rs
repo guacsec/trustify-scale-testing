@@ -2,6 +2,8 @@ use goose::goose::{GooseUser, TransactionResult};
 use serde_json::json;
 use urlencoding::encode;
 
+use crate::utils::DisplayVec;
+
 pub async fn list_advisory(user: &mut GooseUser) -> TransactionResult {
     let _response = user.get("/api/v2/advisory").await?;
 
@@ -203,12 +205,15 @@ pub async fn search_purls_by_license(user: &mut GooseUser) -> TransactionResult 
     Ok(())
 }
 
-pub async fn get_recommendations(purl: String, user: &mut GooseUser) -> TransactionResult {
+pub async fn get_recommendations(
+    purls: DisplayVec<String>,
+    user: &mut GooseUser,
+) -> TransactionResult {
     let _response = user
         .post_json(
             "/api/v2/purl/recommend",
             &json!({
-             "purls": [purl]
+             "purls": purls
             }),
         )
         .await?;
