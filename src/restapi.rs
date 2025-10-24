@@ -1,5 +1,9 @@
 use goose::goose::{GooseUser, TransactionResult};
 use serde_json::json;
+use std::sync::{
+    Arc,
+    atomic::{AtomicUsize, Ordering},
+};
 use urlencoding::encode;
 
 pub async fn list_advisory(user: &mut GooseUser) -> TransactionResult {
@@ -200,5 +204,20 @@ pub async fn search_purls_by_license(user: &mut GooseUser) -> TransactionResult 
     let _response = user
         .get("/api/v2/purl?q=license~GPLv3+ with exceptions|Apache&sort=name:desc")
         .await?;
+    Ok(())
+}
+
+/// Delete an SBOM by ID from a pre-populated pool using sequential iteration
+/// Sequentially iterates through the pool using an atomic counter
+pub async fn delete_sbom_from_pool_sequential(
+    pool: Vec<String>,
+    counter: Arc<AtomicUsize>,
+    user: &mut GooseUser,
+) -> TransactionResult {
+    // Get next index atomically and increment, wrapping around pool size
+    let index = counter.fetch_add(1, Ordering::Relaxed) % pool.len();
+    let sbom_id = &pool[index];
+
+    let _response = user.delete(&format!("/api/v2/sbom/{sbom_id}")).await?;
     Ok(())
 }
