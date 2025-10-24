@@ -13,6 +13,16 @@ pub fn truncate_middle(s: impl Display, max_len: usize) -> String {
     }
 }
 
+#[derive(Clone, Debug, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
+pub struct DisplayVec<T>(pub Vec<T>);
+
+impl<T: std::fmt::Display> std::fmt::Display for DisplayVec<T> {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        let strs: Vec<String> = self.0.iter().map(|item| item.to_string()).collect();
+        write!(f, "{}", strs.join(","))
+    }
+}
+
 #[cfg(test)]
 mod test {
     use super::*;

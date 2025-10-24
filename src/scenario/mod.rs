@@ -1,6 +1,6 @@
 mod purl;
 
-use crate::scenario::purl::CanonicalPurl;
+use crate::{scenario::purl::CanonicalPurl, utils::DisplayVec};
 use anyhow::{Context, anyhow};
 use serde_json::Value;
 use sqlx::{Executor, Row, postgres::PgRow};
@@ -92,8 +92,7 @@ pub(crate) struct Scenario {
     #[serde(with = "required")]
     pub get_purl_details: Option<String>,
 
-    #[serde(with = "required")]
-    pub get_recommendations: Option<String>,
+    pub get_recommendations: Option<DisplayVec<String>>,
 }
 
 impl Scenario {
@@ -162,6 +161,12 @@ impl Loader {
         db.fetch_optional(sql)
             .await?
             .ok_or_else(|| anyhow!("nothing found"))
+    }
+
+    async fn find_rows(&self, sql: &str) -> anyhow::Result<Vec<PgRow>> {
+        let mut db = crate::db::connect(&self.db).await?;
+
+        Ok(db.fetch_all(sql).await?)
     }
 
     /// get the SHA256 of the largest SBOM (by number of packages)
@@ -283,8 +288,8 @@ LIMIT 1;
     }
 
     // A purl whose version matches redhat-[0-9]+$ regex
-    pub async fn purl_with_recommendations(&self) -> anyhow::Result<String> {
-        self.find_row(
+    pub async fn purl_with_recommendations(&self) -> anyhow::Result<DisplayVec<String>> {
+        self.find_rows(
             r#"
 SELECT
     purl AS result
@@ -292,14 +297,18 @@ FROM
     qualified_purl
 WHERE
     purl->>'version' ~ 'redhat-[0-9]+$'
-LIMIT 1;
+LIMIT 10;
 "#,
         )
         .await
-        .and_then(|row| {
-            let value: Value = row.try_get("result")?;
-            let purl: CanonicalPurl = serde_json::from_value(value)?;
-            Ok::<String, anyhow::Error>(purl.to_string())
+        .and_then(|rows| {
+            let mut result = vec![];
+            for row in rows {
+                let value: Value = row.try_get("result")?;
+                let purl: CanonicalPurl = serde_json::from_value(value)?;
+                result.push(purl.to_string());
+            }
+            Ok(DisplayVec(result))
         })
     }
 }
