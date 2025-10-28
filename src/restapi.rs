@@ -1,3 +1,4 @@
+use crate::utils::DisplayVec;
 use goose::goose::{GooseUser, TransactionResult};
 use serde_json::json;
 use std::sync::{
@@ -6,7 +7,36 @@ use std::sync::{
 };
 use urlencoding::encode;
 
-use crate::utils::DisplayVec;
+pub async fn get_advisory(id: String, user: &mut GooseUser) -> TransactionResult {
+    let uri = format!("/api/v2/advisory/{}", encode(&format!("urn:uuid:{}", id)));
+
+    let _response = user.get(&uri).await?;
+
+    Ok(())
+}
+
+pub async fn download_advisory(id: String, user: &mut GooseUser) -> TransactionResult {
+    let uri = format!(
+        "/api/v2/advisory/{}/download",
+        encode(&format!("urn:uuid:{}", id))
+    );
+
+    let _response = user.get(&uri).await?;
+
+    Ok(())
+}
+
+pub async fn list_advisory_labels(user: &mut GooseUser) -> TransactionResult {
+    let uri = format!(
+        "/api/v2/advisory-labels?filter_text={}&limit={}",
+        encode("type"),
+        1000
+    );
+
+    let _response = user.get(&uri).await?;
+
+    Ok(())
+}
 
 pub async fn list_advisory(user: &mut GooseUser) -> TransactionResult {
     let _response = user.get("/api/v2/advisory").await?;

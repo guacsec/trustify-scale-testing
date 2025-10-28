@@ -179,7 +179,8 @@ async fn main() -> Result<(), anyhow::Error> {
             .register_transaction(tx!(list_sboms))
             .register_transaction(tx!(list_sboms_paginated))
             .register_transaction(tx!(get_analysis_status))
-            .register_transaction(tx!(get_analysis_latest_cpe));
+            .register_transaction(tx!(get_analysis_latest_cpe))
+            .register_transaction(tx!(list_advisory_labels));
 
             tx!(s.get_sbom?(scenario.get_sbom.clone()));
             tx!(s.get_sbom_advisories?(scenario.get_sbom_advisories.clone()));
@@ -192,6 +193,8 @@ async fn main() -> Result<(), anyhow::Error> {
             tx!(s.get_purl_details?(scenario.get_purl_details.clone()));
             tx!(s.get_recommendations?(scenario.get_recommendations.clone()));
 
+            tx!(s.download_advisory?(scenario.download_advisory.clone()));
+            tx!(s.get_advisory?(scenario.get_advisory.clone()));
             s
         })
         .register_scenario({
