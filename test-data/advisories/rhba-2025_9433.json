@@ -1,0 +1,874 @@
+{
+  "document": {
+    "aggregate_severity": {
+      "namespace": "https://access.redhat.com/security/updates/classification/",
+      "text": "Moderate"
+    },
+    "category": "csaf_security_advisory",
+    "csaf_version": "2.0",
+    "distribution": {
+      "text": "Copyright © Red Hat, Inc. All rights reserved.",
+      "tlp": {
+        "label": "WHITE",
+        "url": "https://www.first.org/tlp/"
+      }
+    },
+    "lang": "en",
+    "notes": [
+      {
+        "category": "summary",
+        "text": "An update for microcode_ctl is now available for Red Hat Enterprise Linux 9.",
+        "title": "Topic"
+      },
+      {
+        "category": "general",
+        "text": "The microcode_ctl packages provide microcode updates for Intel and AMD processors.\n\nBug Fix(es) and Enhancement(s):\n\n* Update microcode_ctl to latest upstream [rhel-9.6.z] (JIRA:RHEL-96929)\n\n* microcode_ctl: From CVEorg collector [rhel-9.6.z] (JIRA:RHEL-91226)\n\n* microcode_ctl: From CVEorg collector [rhel-9.6.z] (JIRA:RHEL-91233)\n\n* microcode_ctl: From CVEorg collector [rhel-9.6.z] (JIRA:RHEL-91241)",
+        "title": "Details"
+      },
+      {
+        "category": "legal_disclaimer",
+        "text": "This content is licensed under the Creative Commons Attribution 4.0 International License (https://creativecommons.org/licenses/by/4.0/). If you distribute this content, or a modified version of it, you must provide attribution to Red Hat Inc. and provide a link to the original.",
+        "title": "Terms of Use"
+      }
+    ],
+    "publisher": {
+      "category": "vendor",
+      "contact_details": "https://access.redhat.com/security/team/contact/",
+      "issuing_authority": "Red Hat Product Security is responsible for vulnerability handling across all Red Hat products and services.",
+      "name": "Red Hat Product Security",
+      "namespace": "https://www.redhat.com"
+    },
+    "references": [
+      {
+        "category": "self",
+        "summary": "https://access.redhat.com/errata/RHBA-2025:9433",
+        "url": "https://access.redhat.com/errata/RHBA-2025:9433"
+      },
+      {
+        "category": "external",
+        "summary": "RHEL-96929",
+        "url": "https://issues.redhat.com/browse/RHEL-96929"
+      },
+      {
+        "category": "self",
+        "summary": "Canonical URL",
+        "url": "https://security.access.redhat.com/data/csaf/v2/advisories/2025/rhba-2025_9433.json"
+      }
+    ],
+    "title": "Red Hat Bug Fix Advisory: microcode_ctl bug fix and enhancement update",
+    "tracking": {
+      "current_release_date": "2025-09-25T21:28:36+00:00",
+      "generator": {
+        "date": "2025-09-25T21:28:36+00:00",
+        "engine": {
+          "name": "Red Hat SDEngine",
+          "version": "4.6.8"
+        }
+      },
+      "id": "RHBA-2025:9433",
+      "initial_release_date": "2025-06-24T02:16:25+00:00",
+      "revision_history": [
+        {
+          "date": "2025-06-24T02:16:25+00:00",
+          "number": "1",
+          "summary": "Initial version"
+        },
+        {
+          "date": "2025-06-24T02:16:25+00:00",
+          "number": "2",
+          "summary": "Last updated version"
+        },
+        {
+          "date": "2025-09-25T21:28:36+00:00",
+          "number": "3",
+          "summary": "Last generated version"
+        }
+      ],
+      "status": "final",
+      "version": "3"
+    }
+  },
+  "product_tree": {
+    "branches": [
+      {
+        "branches": [
+          {
+            "branches": [
+              {
+                "category": "product_name",
+                "name": "Red Hat Enterprise Linux BaseOS (v. 9)",
+                "product": {
+                  "name": "Red Hat Enterprise Linux BaseOS (v. 9)",
+                  "product_id": "BaseOS-9.6.0.Z.MAIN.EUS",
+                  "product_identification_helper": {
+                    "cpe": "cpe:/o:redhat:enterprise_linux:9::baseos"
+                  }
+                }
+              }
+            ],
+            "category": "product_family",
+            "name": "Red Hat Enterprise Linux"
+          },
+          {
+            "branches": [
+              {
+                "category": "product_version",
+                "name": "microcode_ctl-4:20250211-1.20250512.1.el9_6.src",
+                "product": {
+                  "name": "microcode_ctl-4:20250211-1.20250512.1.el9_6.src",
+                  "product_id": "microcode_ctl-4:20250211-1.20250512.1.el9_6.src",
+                  "product_identification_helper": {
+                    "purl": "pkg:rpm/redhat/microcode_ctl@20250211-1.20250512.1.el9_6?arch=src&epoch=4"
+                  }
+                }
+              }
+            ],
+            "category": "architecture",
+            "name": "src"
+          },
+          {
+            "branches": [
+              {
+                "category": "product_version",
+                "name": "microcode_ctl-4:20250211-1.20250512.1.el9_6.noarch",
+                "product": {
+                  "name": "microcode_ctl-4:20250211-1.20250512.1.el9_6.noarch",
+                  "product_id": "microcode_ctl-4:20250211-1.20250512.1.el9_6.noarch",
+                  "product_identification_helper": {
+                    "purl": "pkg:rpm/redhat/microcode_ctl@20250211-1.20250512.1.el9_6?arch=noarch&epoch=4"
+                  }
+                }
+              }
+            ],
+            "category": "architecture",
+            "name": "noarch"
+          }
+        ],
+        "category": "vendor",
+        "name": "Red Hat"
+      }
+    ],
+    "relationships": [
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "microcode_ctl-4:20250211-1.20250512.1.el9_6.noarch as a component of Red Hat Enterprise Linux BaseOS (v. 9)",
+          "product_id": "BaseOS-9.6.0.Z.MAIN.EUS:microcode_ctl-4:20250211-1.20250512.1.el9_6.noarch"
+        },
+        "product_reference": "microcode_ctl-4:20250211-1.20250512.1.el9_6.noarch",
+        "relates_to_product_reference": "BaseOS-9.6.0.Z.MAIN.EUS"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "microcode_ctl-4:20250211-1.20250512.1.el9_6.src as a component of Red Hat Enterprise Linux BaseOS (v. 9)",
+          "product_id": "BaseOS-9.6.0.Z.MAIN.EUS:microcode_ctl-4:20250211-1.20250512.1.el9_6.src"
+        },
+        "product_reference": "microcode_ctl-4:20250211-1.20250512.1.el9_6.src",
+        "relates_to_product_reference": "BaseOS-9.6.0.Z.MAIN.EUS"
+      }
+    ]
+  },
+  "vulnerabilities": [
+    {
+      "cve": "CVE-2024-28956",
+      "cwe": {
+        "id": "CWE-1421",
+        "name": "Exposure of Sensitive Information in Shared Microarchitectural Structures during Transient Execution"
+      },
+      "discovery_date": "2025-05-13T22:03:30.376335+00:00",
+      "ids": [
+        {
+          "system_name": "Red Hat Bugzilla ID",
+          "text": "2366125"
+        }
+      ],
+      "notes": [
+        {
+          "category": "description",
+          "text": "New Spectre-v2 attack classes have been discovered within CPU architectures that enable self-training exploitation of speculative execution within the same privilege domain. These novel techniques bypass existing hardware and software mitigations, including IBPB, eIBRS, and BHI_NO, by leveraging in-kernel gadgets (potentially accessible via SECCOMP/cBPF), Branch Target Buffer (BTB) aliasing, and direct-to-indirect branch predictor training. While the root cause lies in CPU architectural behavior, the vulnerability manifests through kernel-level speculation paths, allowing attackers to potentially leak sensitive memory.",
+          "title": "Vulnerability description"
+        },
+        {
+          "category": "summary",
+          "text": "microcode_ctl: From CVEorg collector",
+          "title": "Vulnerability summary"
+        },
+        {
+          "category": "other",
+          "text": "The \"Training Solo\" attack classes introduce new self-training methods to exploit Spectre-v2 from within domain isolation implementations. They can be reasonably classified as Moderate severity due to several practical and architectural limitations.\n\nFirst, these attacks rely heavily on the presence of specific in-kernel or in-hypervisor gadgets, such as history-crafting or disclosure gadgets, which are not universally available and vary across kernel versions and configurations.\n\nSecond, the attacks generally require local code execution within the victim domain, meaning they do not expand the threat model beyond existing Spectre-v2 scenarios where attackers already have some degree of execution capability.\n\nThird, the leak rates, while measurable, remain relatively low (1.7–17 KB/s) and demand sustained access and stability to extract meaningful information. So their limited practical exploitability makes them a moderate, not critical, threat in real-world settings.",
+          "title": "Statement"
+        },
+        {
+          "category": "general",
+          "text": "The CVSS score(s) listed for this vulnerability do not reflect the associated product's status, and are included for informational purposes to better understand the severity of this vulnerability.",
+          "title": "CVSS score applicability"
+        }
+      ],
+      "product_status": {
+        "fixed": [
+          "BaseOS-9.6.0.Z.MAIN.EUS:microcode_ctl-4:20250211-1.20250512.1.el9_6.noarch",
+          "BaseOS-9.6.0.Z.MAIN.EUS:microcode_ctl-4:20250211-1.20250512.1.el9_6.src"
+        ]
+      },
+      "references": [
+        {
+          "category": "self",
+          "summary": "Canonical URL",
+          "url": "https://access.redhat.com/security/cve/CVE-2024-28956"
+        },
+        {
+          "category": "external",
+          "summary": "RHBZ#2366125",
+          "url": "https://bugzilla.redhat.com/show_bug.cgi?id=2366125"
+        },
+        {
+          "category": "external",
+          "summary": "https://www.cve.org/CVERecord?id=CVE-2024-28956",
+          "url": "https://www.cve.org/CVERecord?id=CVE-2024-28956"
+        },
+        {
+          "category": "external",
+          "summary": "https://nvd.nist.gov/vuln/detail/CVE-2024-28956",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2024-28956"
+        },
+        {
+          "category": "external",
+          "summary": "https://intel.com/content/www/us/en/security-center/advisory/intel-sa-01153.html",
+          "url": "https://intel.com/content/www/us/en/security-center/advisory/intel-sa-01153.html"
+        },
+        {
+          "category": "external",
+          "summary": "https://www.vusec.net/projects/training-solo/",
+          "url": "https://www.vusec.net/projects/training-solo/"
+        }
+      ],
+      "release_date": "2025-05-13T21:02:56.170000+00:00",
+      "remediations": [
+        {
+          "category": "vendor_fix",
+          "date": "2025-06-24T02:16:25+00:00",
+          "details": "For details on how to apply this update, which includes the changes described in this advisory, refer to:\n\nhttps://access.redhat.com/articles/11258",
+          "product_ids": [
+            "BaseOS-9.6.0.Z.MAIN.EUS:microcode_ctl-4:20250211-1.20250512.1.el9_6.noarch",
+            "BaseOS-9.6.0.Z.MAIN.EUS:microcode_ctl-4:20250211-1.20250512.1.el9_6.src"
+          ],
+          "restart_required": {
+            "category": "none"
+          },
+          "url": "https://access.redhat.com/errata/RHBA-2025:9433"
+        },
+        {
+          "category": "workaround",
+          "details": "No mitigation is currently available that meets Red Hat Product Security’s standards for usability, deployment, applicability, or stability.",
+          "product_ids": [
+            "BaseOS-9.6.0.Z.MAIN.EUS:microcode_ctl-4:20250211-1.20250512.1.el9_6.noarch",
+            "BaseOS-9.6.0.Z.MAIN.EUS:microcode_ctl-4:20250211-1.20250512.1.el9_6.src"
+          ]
+        }
+      ],
+      "scores": [
+        {
+          "cvss_v3": {
+            "attackComplexity": "HIGH",
+            "attackVector": "LOCAL",
+            "availabilityImpact": "NONE",
+            "baseScore": 5.6,
+            "baseSeverity": "MEDIUM",
+            "confidentialityImpact": "HIGH",
+            "integrityImpact": "NONE",
+            "privilegesRequired": "LOW",
+            "scope": "CHANGED",
+            "userInteraction": "NONE",
+            "vectorString": "CVSS:3.1/AV:L/AC:H/PR:L/UI:N/S:C/C:H/I:N/A:N",
+            "version": "3.1"
+          },
+          "products": [
+            "BaseOS-9.6.0.Z.MAIN.EUS:microcode_ctl-4:20250211-1.20250512.1.el9_6.noarch",
+            "BaseOS-9.6.0.Z.MAIN.EUS:microcode_ctl-4:20250211-1.20250512.1.el9_6.src"
+          ]
+        }
+      ],
+      "threats": [
+        {
+          "category": "impact",
+          "details": "Moderate"
+        }
+      ],
+      "title": "microcode_ctl: From CVEorg collector"
+    },
+    {
+      "cve": "CVE-2024-43420",
+      "cwe": {
+        "id": "CWE-1423",
+        "name": "Exposure of Sensitive Information caused by Shared Microarchitectural Predictor State that Influences Transient Execution"
+      },
+      "discovery_date": "2025-05-13T22:05:09.641634+00:00",
+      "ids": [
+        {
+          "system_name": "Red Hat Bugzilla ID",
+          "text": "2366159"
+        }
+      ],
+      "notes": [
+        {
+          "category": "description",
+          "text": "Exposure of sensitive information caused by shared microarchitectural predictor state that influences transient execution for some Intel Atom(R) processors may allow an authenticated user to potentially enable information disclosure via local access.",
+          "title": "Vulnerability description"
+        },
+        {
+          "category": "summary",
+          "text": "microcode_ctl: Exposure of sensitive information",
+          "title": "Vulnerability summary"
+        },
+        {
+          "category": "general",
+          "text": "The CVSS score(s) listed for this vulnerability do not reflect the associated product's status, and are included for informational purposes to better understand the severity of this vulnerability.",
+          "title": "CVSS score applicability"
+        }
+      ],
+      "product_status": {
+        "fixed": [
+          "BaseOS-9.6.0.Z.MAIN.EUS:microcode_ctl-4:20250211-1.20250512.1.el9_6.noarch",
+          "BaseOS-9.6.0.Z.MAIN.EUS:microcode_ctl-4:20250211-1.20250512.1.el9_6.src"
+        ]
+      },
+      "references": [
+        {
+          "category": "self",
+          "summary": "Canonical URL",
+          "url": "https://access.redhat.com/security/cve/CVE-2024-43420"
+        },
+        {
+          "category": "external",
+          "summary": "RHBZ#2366159",
+          "url": "https://bugzilla.redhat.com/show_bug.cgi?id=2366159"
+        },
+        {
+          "category": "external",
+          "summary": "https://www.cve.org/CVERecord?id=CVE-2024-43420",
+          "url": "https://www.cve.org/CVERecord?id=CVE-2024-43420"
+        },
+        {
+          "category": "external",
+          "summary": "https://nvd.nist.gov/vuln/detail/CVE-2024-43420",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2024-43420"
+        },
+        {
+          "category": "external",
+          "summary": "https://intel.com/content/www/us/en/security-center/advisory/intel-sa-01247.html",
+          "url": "https://intel.com/content/www/us/en/security-center/advisory/intel-sa-01247.html"
+        }
+      ],
+      "release_date": "2025-05-13T21:03:09.384000+00:00",
+      "remediations": [
+        {
+          "category": "vendor_fix",
+          "date": "2025-06-24T02:16:25+00:00",
+          "details": "For details on how to apply this update, which includes the changes described in this advisory, refer to:\n\nhttps://access.redhat.com/articles/11258",
+          "product_ids": [
+            "BaseOS-9.6.0.Z.MAIN.EUS:microcode_ctl-4:20250211-1.20250512.1.el9_6.noarch",
+            "BaseOS-9.6.0.Z.MAIN.EUS:microcode_ctl-4:20250211-1.20250512.1.el9_6.src"
+          ],
+          "restart_required": {
+            "category": "none"
+          },
+          "url": "https://access.redhat.com/errata/RHBA-2025:9433"
+        }
+      ],
+      "scores": [
+        {
+          "cvss_v3": {
+            "attackComplexity": "HIGH",
+            "attackVector": "LOCAL",
+            "availabilityImpact": "NONE",
+            "baseScore": 5.6,
+            "baseSeverity": "MEDIUM",
+            "confidentialityImpact": "HIGH",
+            "integrityImpact": "NONE",
+            "privilegesRequired": "LOW",
+            "scope": "CHANGED",
+            "userInteraction": "NONE",
+            "vectorString": "CVSS:3.1/AV:L/AC:H/PR:L/UI:N/S:C/C:H/I:N/A:N",
+            "version": "3.1"
+          },
+          "products": [
+            "BaseOS-9.6.0.Z.MAIN.EUS:microcode_ctl-4:20250211-1.20250512.1.el9_6.noarch",
+            "BaseOS-9.6.0.Z.MAIN.EUS:microcode_ctl-4:20250211-1.20250512.1.el9_6.src"
+          ]
+        }
+      ],
+      "threats": [
+        {
+          "category": "impact",
+          "details": "Moderate"
+        }
+      ],
+      "title": "microcode_ctl: Exposure of sensitive information"
+    },
+    {
+      "cve": "CVE-2024-45332",
+      "cwe": {
+        "id": "CWE-1423",
+        "name": "Exposure of Sensitive Information caused by Shared Microarchitectural Predictor State that Influences Transient Execution"
+      },
+      "discovery_date": "2025-05-13T22:05:16.220402+00:00",
+      "ids": [
+        {
+          "system_name": "Red Hat Bugzilla ID",
+          "text": "2366162"
+        }
+      ],
+      "notes": [
+        {
+          "category": "description",
+          "text": "Exposure of sensitive information caused by shared microarchitectural predictor state that influences transient execution in the indirect branch predictors for some Intel(R) Processors may allow an authenticated user to potentially enable information disclosure via local access.",
+          "title": "Vulnerability description"
+        },
+        {
+          "category": "summary",
+          "text": "microcode_ctl: Exposure of sensitive information",
+          "title": "Vulnerability summary"
+        },
+        {
+          "category": "other",
+          "text": "Intel has recommended through its official advisory that users of the affected processors search their hardware vendor for firmware updates.",
+          "title": "Statement"
+        },
+        {
+          "category": "general",
+          "text": "The CVSS score(s) listed for this vulnerability do not reflect the associated product's status, and are included for informational purposes to better understand the severity of this vulnerability.",
+          "title": "CVSS score applicability"
+        }
+      ],
+      "product_status": {
+        "fixed": [
+          "BaseOS-9.6.0.Z.MAIN.EUS:microcode_ctl-4:20250211-1.20250512.1.el9_6.noarch",
+          "BaseOS-9.6.0.Z.MAIN.EUS:microcode_ctl-4:20250211-1.20250512.1.el9_6.src"
+        ]
+      },
+      "references": [
+        {
+          "category": "self",
+          "summary": "Canonical URL",
+          "url": "https://access.redhat.com/security/cve/CVE-2024-45332"
+        },
+        {
+          "category": "external",
+          "summary": "RHBZ#2366162",
+          "url": "https://bugzilla.redhat.com/show_bug.cgi?id=2366162"
+        },
+        {
+          "category": "external",
+          "summary": "https://www.cve.org/CVERecord?id=CVE-2024-45332",
+          "url": "https://www.cve.org/CVERecord?id=CVE-2024-45332"
+        },
+        {
+          "category": "external",
+          "summary": "https://nvd.nist.gov/vuln/detail/CVE-2024-45332",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2024-45332"
+        },
+        {
+          "category": "external",
+          "summary": "http://www.openwall.com/lists/oss-security/2025/05/13/7",
+          "url": "http://www.openwall.com/lists/oss-security/2025/05/13/7"
+        },
+        {
+          "category": "external",
+          "summary": "https://intel.com/content/www/us/en/security-center/advisory/intel-sa-01247.html",
+          "url": "https://intel.com/content/www/us/en/security-center/advisory/intel-sa-01247.html"
+        }
+      ],
+      "release_date": "2025-05-13T21:03:12.207000+00:00",
+      "remediations": [
+        {
+          "category": "vendor_fix",
+          "date": "2025-06-24T02:16:25+00:00",
+          "details": "For details on how to apply this update, which includes the changes described in this advisory, refer to:\n\nhttps://access.redhat.com/articles/11258",
+          "product_ids": [
+            "BaseOS-9.6.0.Z.MAIN.EUS:microcode_ctl-4:20250211-1.20250512.1.el9_6.noarch",
+            "BaseOS-9.6.0.Z.MAIN.EUS:microcode_ctl-4:20250211-1.20250512.1.el9_6.src"
+          ],
+          "restart_required": {
+            "category": "none"
+          },
+          "url": "https://access.redhat.com/errata/RHBA-2025:9433"
+        }
+      ],
+      "scores": [
+        {
+          "cvss_v3": {
+            "attackComplexity": "HIGH",
+            "attackVector": "LOCAL",
+            "availabilityImpact": "NONE",
+            "baseScore": 5.6,
+            "baseSeverity": "MEDIUM",
+            "confidentialityImpact": "HIGH",
+            "integrityImpact": "NONE",
+            "privilegesRequired": "LOW",
+            "scope": "CHANGED",
+            "userInteraction": "NONE",
+            "vectorString": "CVSS:3.1/AV:L/AC:H/PR:L/UI:N/S:C/C:H/I:N/A:N",
+            "version": "3.1"
+          },
+          "products": [
+            "BaseOS-9.6.0.Z.MAIN.EUS:microcode_ctl-4:20250211-1.20250512.1.el9_6.noarch",
+            "BaseOS-9.6.0.Z.MAIN.EUS:microcode_ctl-4:20250211-1.20250512.1.el9_6.src"
+          ]
+        }
+      ],
+      "threats": [
+        {
+          "category": "impact",
+          "details": "Moderate"
+        }
+      ],
+      "title": "microcode_ctl: Exposure of sensitive information"
+    },
+    {
+      "cve": "CVE-2025-20012",
+      "cwe": {
+        "id": "CWE-696",
+        "name": "Incorrect Behavior Order"
+      },
+      "discovery_date": "2025-05-13T22:02:43.991918+00:00",
+      "ids": [
+        {
+          "system_name": "Red Hat Bugzilla ID",
+          "text": "2366114"
+        }
+      ],
+      "notes": [
+        {
+          "category": "description",
+          "text": "Incorrect behavior order for some Intel(R) Core™ Ultra Processors may allow an unauthenticated user to potentially enable information disclosure via physical access.",
+          "title": "Vulnerability description"
+        },
+        {
+          "category": "summary",
+          "text": "microcode_ctl: From CVEorg collector",
+          "title": "Vulnerability summary"
+        },
+        {
+          "category": "general",
+          "text": "The CVSS score(s) listed for this vulnerability do not reflect the associated product's status, and are included for informational purposes to better understand the severity of this vulnerability.",
+          "title": "CVSS score applicability"
+        }
+      ],
+      "product_status": {
+        "fixed": [
+          "BaseOS-9.6.0.Z.MAIN.EUS:microcode_ctl-4:20250211-1.20250512.1.el9_6.noarch",
+          "BaseOS-9.6.0.Z.MAIN.EUS:microcode_ctl-4:20250211-1.20250512.1.el9_6.src"
+        ]
+      },
+      "references": [
+        {
+          "category": "self",
+          "summary": "Canonical URL",
+          "url": "https://access.redhat.com/security/cve/CVE-2025-20012"
+        },
+        {
+          "category": "external",
+          "summary": "RHBZ#2366114",
+          "url": "https://bugzilla.redhat.com/show_bug.cgi?id=2366114"
+        },
+        {
+          "category": "external",
+          "summary": "https://www.cve.org/CVERecord?id=CVE-2025-20012",
+          "url": "https://www.cve.org/CVERecord?id=CVE-2025-20012"
+        },
+        {
+          "category": "external",
+          "summary": "https://nvd.nist.gov/vuln/detail/CVE-2025-20012",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-20012"
+        },
+        {
+          "category": "external",
+          "summary": "https://intel.com/content/www/us/en/security-center/advisory/intel-sa-01322.html",
+          "url": "https://intel.com/content/www/us/en/security-center/advisory/intel-sa-01322.html"
+        }
+      ],
+      "release_date": "2025-05-13T21:01:33.504000+00:00",
+      "remediations": [
+        {
+          "category": "vendor_fix",
+          "date": "2025-06-24T02:16:25+00:00",
+          "details": "For details on how to apply this update, which includes the changes described in this advisory, refer to:\n\nhttps://access.redhat.com/articles/11258",
+          "product_ids": [
+            "BaseOS-9.6.0.Z.MAIN.EUS:microcode_ctl-4:20250211-1.20250512.1.el9_6.noarch",
+            "BaseOS-9.6.0.Z.MAIN.EUS:microcode_ctl-4:20250211-1.20250512.1.el9_6.src"
+          ],
+          "restart_required": {
+            "category": "none"
+          },
+          "url": "https://access.redhat.com/errata/RHBA-2025:9433"
+        }
+      ],
+      "scores": [
+        {
+          "cvss_v3": {
+            "attackComplexity": "HIGH",
+            "attackVector": "LOCAL",
+            "availabilityImpact": "NONE",
+            "baseScore": 5.6,
+            "baseSeverity": "MEDIUM",
+            "confidentialityImpact": "HIGH",
+            "integrityImpact": "NONE",
+            "privilegesRequired": "LOW",
+            "scope": "CHANGED",
+            "userInteraction": "NONE",
+            "vectorString": "CVSS:3.1/AV:L/AC:H/PR:L/UI:N/S:C/C:H/I:N/A:N",
+            "version": "3.1"
+          },
+          "products": [
+            "BaseOS-9.6.0.Z.MAIN.EUS:microcode_ctl-4:20250211-1.20250512.1.el9_6.noarch",
+            "BaseOS-9.6.0.Z.MAIN.EUS:microcode_ctl-4:20250211-1.20250512.1.el9_6.src"
+          ]
+        }
+      ],
+      "threats": [
+        {
+          "category": "impact",
+          "details": "Moderate"
+        }
+      ],
+      "title": "microcode_ctl: From CVEorg collector"
+    },
+    {
+      "cve": "CVE-2025-20623",
+      "cwe": {
+        "id": "CWE-1423",
+        "name": "Exposure of Sensitive Information caused by Shared Microarchitectural Predictor State that Influences Transient Execution"
+      },
+      "discovery_date": "2025-05-13T22:03:55.575358+00:00",
+      "ids": [
+        {
+          "system_name": "Red Hat Bugzilla ID",
+          "text": "2366133"
+        }
+      ],
+      "notes": [
+        {
+          "category": "description",
+          "text": "Exposure of sensitive information caused by shared microarchitectural predictor state that influences transient execution for some Intel(R) Core™ processors (10th Generation) may allow an authenticated user to potentially enable information disclosure via local access.",
+          "title": "Vulnerability description"
+        },
+        {
+          "category": "summary",
+          "text": "microcode_ctl: Exposure of sensitive information",
+          "title": "Vulnerability summary"
+        },
+        {
+          "category": "general",
+          "text": "The CVSS score(s) listed for this vulnerability do not reflect the associated product's status, and are included for informational purposes to better understand the severity of this vulnerability.",
+          "title": "CVSS score applicability"
+        }
+      ],
+      "product_status": {
+        "fixed": [
+          "BaseOS-9.6.0.Z.MAIN.EUS:microcode_ctl-4:20250211-1.20250512.1.el9_6.noarch",
+          "BaseOS-9.6.0.Z.MAIN.EUS:microcode_ctl-4:20250211-1.20250512.1.el9_6.src"
+        ]
+      },
+      "references": [
+        {
+          "category": "self",
+          "summary": "Canonical URL",
+          "url": "https://access.redhat.com/security/cve/CVE-2025-20623"
+        },
+        {
+          "category": "external",
+          "summary": "RHBZ#2366133",
+          "url": "https://bugzilla.redhat.com/show_bug.cgi?id=2366133"
+        },
+        {
+          "category": "external",
+          "summary": "https://www.cve.org/CVERecord?id=CVE-2025-20623",
+          "url": "https://www.cve.org/CVERecord?id=CVE-2025-20623"
+        },
+        {
+          "category": "external",
+          "summary": "https://nvd.nist.gov/vuln/detail/CVE-2025-20623",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-20623"
+        },
+        {
+          "category": "external",
+          "summary": "https://intel.com/content/www/us/en/security-center/advisory/intel-sa-01247.html",
+          "url": "https://intel.com/content/www/us/en/security-center/advisory/intel-sa-01247.html"
+        }
+      ],
+      "release_date": "2025-05-13T21:02:26.040000+00:00",
+      "remediations": [
+        {
+          "category": "vendor_fix",
+          "date": "2025-06-24T02:16:25+00:00",
+          "details": "For details on how to apply this update, which includes the changes described in this advisory, refer to:\n\nhttps://access.redhat.com/articles/11258",
+          "product_ids": [
+            "BaseOS-9.6.0.Z.MAIN.EUS:microcode_ctl-4:20250211-1.20250512.1.el9_6.noarch",
+            "BaseOS-9.6.0.Z.MAIN.EUS:microcode_ctl-4:20250211-1.20250512.1.el9_6.src"
+          ],
+          "restart_required": {
+            "category": "none"
+          },
+          "url": "https://access.redhat.com/errata/RHBA-2025:9433"
+        }
+      ],
+      "scores": [
+        {
+          "cvss_v3": {
+            "attackComplexity": "HIGH",
+            "attackVector": "LOCAL",
+            "availabilityImpact": "NONE",
+            "baseScore": 5.6,
+            "baseSeverity": "MEDIUM",
+            "confidentialityImpact": "HIGH",
+            "integrityImpact": "NONE",
+            "privilegesRequired": "LOW",
+            "scope": "CHANGED",
+            "userInteraction": "NONE",
+            "vectorString": "CVSS:3.1/AV:L/AC:H/PR:L/UI:N/S:C/C:H/I:N/A:N",
+            "version": "3.1"
+          },
+          "products": [
+            "BaseOS-9.6.0.Z.MAIN.EUS:microcode_ctl-4:20250211-1.20250512.1.el9_6.noarch",
+            "BaseOS-9.6.0.Z.MAIN.EUS:microcode_ctl-4:20250211-1.20250512.1.el9_6.src"
+          ]
+        }
+      ],
+      "threats": [
+        {
+          "category": "impact",
+          "details": "Moderate"
+        }
+      ],
+      "title": "microcode_ctl: Exposure of sensitive information"
+    },
+    {
+      "cve": "CVE-2025-24495",
+      "cwe": {
+        "id": "CWE-1419",
+        "name": "Incorrect Initialization of Resource"
+      },
+      "discovery_date": "2025-05-13T22:01:12.147444+00:00",
+      "ids": [
+        {
+          "system_name": "Red Hat Bugzilla ID",
+          "text": "2366089"
+        }
+      ],
+      "notes": [
+        {
+          "category": "description",
+          "text": "A flaw was found in the Branch Prediction Unit (BPU) of Intel's Lion Core CPUs that make it possible for an attacker to bypass Indirect Branch Predictor Barrier (IBPB) protections. By employing branch predictor training techniques as described in the \"Training Solo\" publication, an attacker with local privileges could use this bypass to exfiltrate sensitive data from an affected system, including from host hypervisors or neighboring guests in virtualized environments.",
+          "title": "Vulnerability description"
+        },
+        {
+          "category": "summary",
+          "text": "microcode_ctl: From CVEorg collector",
+          "title": "Vulnerability summary"
+        },
+        {
+          "category": "other",
+          "text": "This vulnerability was disclosed as part of the \"Training Solo\" report. Training Solo is a technique similar to Spectre-v2 which bypasses extant protections like IBPB or IBRS. While the technique primarily bypasses those protections by performing branch predictor training in a privileged domain, CVE-2025-24495 specifically relates to a hardware flaw in Intel's Lion Core CPUs. Intel has released a microcode update to address this flaw.",
+          "title": "Statement"
+        },
+        {
+          "category": "general",
+          "text": "The CVSS score(s) listed for this vulnerability do not reflect the associated product's status, and are included for informational purposes to better understand the severity of this vulnerability.",
+          "title": "CVSS score applicability"
+        }
+      ],
+      "product_status": {
+        "fixed": [
+          "BaseOS-9.6.0.Z.MAIN.EUS:microcode_ctl-4:20250211-1.20250512.1.el9_6.noarch",
+          "BaseOS-9.6.0.Z.MAIN.EUS:microcode_ctl-4:20250211-1.20250512.1.el9_6.src"
+        ]
+      },
+      "references": [
+        {
+          "category": "self",
+          "summary": "Canonical URL",
+          "url": "https://access.redhat.com/security/cve/CVE-2025-24495"
+        },
+        {
+          "category": "external",
+          "summary": "RHBZ#2366089",
+          "url": "https://bugzilla.redhat.com/show_bug.cgi?id=2366089"
+        },
+        {
+          "category": "external",
+          "summary": "https://www.cve.org/CVERecord?id=CVE-2025-24495",
+          "url": "https://www.cve.org/CVERecord?id=CVE-2025-24495"
+        },
+        {
+          "category": "external",
+          "summary": "https://nvd.nist.gov/vuln/detail/CVE-2025-24495",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-24495"
+        },
+        {
+          "category": "external",
+          "summary": "https://intel.com/content/www/us/en/security-center/advisory/intel-sa-01322.html",
+          "url": "https://intel.com/content/www/us/en/security-center/advisory/intel-sa-01322.html"
+        },
+        {
+          "category": "external",
+          "summary": "https://www.vusec.net/projects/training-solo/",
+          "url": "https://www.vusec.net/projects/training-solo/"
+        }
+      ],
+      "release_date": "2025-05-13T21:02:51.390000+00:00",
+      "remediations": [
+        {
+          "category": "vendor_fix",
+          "date": "2025-06-24T02:16:25+00:00",
+          "details": "For details on how to apply this update, which includes the changes described in this advisory, refer to:\n\nhttps://access.redhat.com/articles/11258",
+          "product_ids": [
+            "BaseOS-9.6.0.Z.MAIN.EUS:microcode_ctl-4:20250211-1.20250512.1.el9_6.noarch",
+            "BaseOS-9.6.0.Z.MAIN.EUS:microcode_ctl-4:20250211-1.20250512.1.el9_6.src"
+          ],
+          "restart_required": {
+            "category": "none"
+          },
+          "url": "https://access.redhat.com/errata/RHBA-2025:9433"
+        },
+        {
+          "category": "workaround",
+          "details": "Mitigation for this issue is either not available or the currently available options do not meet the Red Hat Product Security criteria comprising ease of use and deployment, applicability to widespread installation base or stability. As this is a bypass of previous mitigations for existing hardware flaws, we do not expect that mitigations specifically for this issue will be available.",
+          "product_ids": [
+            "BaseOS-9.6.0.Z.MAIN.EUS:microcode_ctl-4:20250211-1.20250512.1.el9_6.noarch",
+            "BaseOS-9.6.0.Z.MAIN.EUS:microcode_ctl-4:20250211-1.20250512.1.el9_6.src"
+          ]
+        }
+      ],
+      "scores": [
+        {
+          "cvss_v3": {
+            "attackComplexity": "HIGH",
+            "attackVector": "LOCAL",
+            "availabilityImpact": "NONE",
+            "baseScore": 5.6,
+            "baseSeverity": "MEDIUM",
+            "confidentialityImpact": "HIGH",
+            "integrityImpact": "NONE",
+            "privilegesRequired": "LOW",
+            "scope": "CHANGED",
+            "userInteraction": "NONE",
+            "vectorString": "CVSS:3.1/AV:L/AC:H/PR:L/UI:N/S:C/C:H/I:N/A:N",
+            "version": "3.1"
+          },
+          "products": [
+            "BaseOS-9.6.0.Z.MAIN.EUS:microcode_ctl-4:20250211-1.20250512.1.el9_6.noarch",
+            "BaseOS-9.6.0.Z.MAIN.EUS:microcode_ctl-4:20250211-1.20250512.1.el9_6.src"
+          ]
+        }
+      ],
+      "threats": [
+        {
+          "category": "impact",
+          "details": "Moderate"
+        }
+      ],
+      "title": "microcode_ctl: From CVEorg collector"
+    }
+  ]
+}

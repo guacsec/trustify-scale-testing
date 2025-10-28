@@ -1,0 +1,324 @@
+{
+  "document": {
+    "aggregate_severity": {
+      "namespace": "https://access.redhat.com/security/updates/classification/",
+      "text": "Important"
+    },
+    "category": "csaf_security_advisory",
+    "csaf_version": "2.0",
+    "distribution": {
+      "text": "Copyright © Red Hat, Inc. All rights reserved.",
+      "tlp": {
+        "label": "WHITE",
+        "url": "https://www.first.org/tlp/"
+      }
+    },
+    "lang": "en",
+    "notes": [
+      {
+        "category": "summary",
+        "text": "mirror registry for Red Hat OpenShift 2.0.7",
+        "title": "Topic"
+      },
+      {
+        "category": "general",
+        "text": "Release of mirror registry for Red Hat OpenShift provides these changes:",
+        "title": "Details"
+      },
+      {
+        "category": "legal_disclaimer",
+        "text": "This content is licensed under the Creative Commons Attribution 4.0 International License (https://creativecommons.org/licenses/by/4.0/). If you distribute this content, or a modified version of it, you must provide attribution to Red Hat Inc. and provide a link to the original.",
+        "title": "Terms of Use"
+      }
+    ],
+    "publisher": {
+      "category": "vendor",
+      "contact_details": "https://access.redhat.com/security/team/contact/",
+      "issuing_authority": "Red Hat Product Security is responsible for vulnerability handling across all Red Hat products and services.",
+      "name": "Red Hat Product Security",
+      "namespace": "https://www.redhat.com"
+    },
+    "references": [
+      {
+        "category": "self",
+        "summary": "https://access.redhat.com/errata/RHBA-2025:9645",
+        "url": "https://access.redhat.com/errata/RHBA-2025:9645"
+      },
+      {
+        "category": "self",
+        "summary": "Canonical URL",
+        "url": "https://security.access.redhat.com/data/csaf/v2/advisories/2025/rhba-2025_9645.json"
+      }
+    ],
+    "title": "Red Hat Bug Fix Advisory: mirror registry for Red Hat OpenShift 2.0.7 container",
+    "tracking": {
+      "current_release_date": "2025-09-25T11:28:11+00:00",
+      "generator": {
+        "date": "2025-09-25T11:28:11+00:00",
+        "engine": {
+          "name": "Red Hat SDEngine",
+          "version": "4.6.8"
+        }
+      },
+      "id": "RHBA-2025:9645",
+      "initial_release_date": "2025-07-14T08:07:01+00:00",
+      "revision_history": [
+        {
+          "date": "2025-07-14T08:07:01+00:00",
+          "number": "1",
+          "summary": "Initial version"
+        },
+        {
+          "date": "2025-07-14T08:07:01+00:00",
+          "number": "2",
+          "summary": "Last updated version"
+        },
+        {
+          "date": "2025-09-25T11:28:11+00:00",
+          "number": "3",
+          "summary": "Last generated version"
+        }
+      ],
+      "status": "final",
+      "version": "3"
+    }
+  },
+  "product_tree": {
+    "branches": [
+      {
+        "branches": [
+          {
+            "branches": [
+              {
+                "category": "product_name",
+                "name": "mirror registry 2.0.0 for RHEL 8",
+                "product": {
+                  "name": "mirror registry 2.0.0 for RHEL 8",
+                  "product_id": "8Base-MIRROR-REGISTRY-2.0",
+                  "product_identification_helper": {
+                    "cpe": "cpe:/a:redhat:mirror_registry:2.0.0::el8"
+                  }
+                }
+              }
+            ],
+            "category": "product_family",
+            "name": "mirror registry for Red Hat OpenShift"
+          },
+          {
+            "branches": [
+              {
+                "category": "product_version",
+                "name": "openshift/mirror-registry-rhel8@sha256:4681aa3b96101a87f42bf7dd1ca3f11febdf648bfae4c6cde6eff3f14e52a784_s390x",
+                "product": {
+                  "name": "openshift/mirror-registry-rhel8@sha256:4681aa3b96101a87f42bf7dd1ca3f11febdf648bfae4c6cde6eff3f14e52a784_s390x",
+                  "product_id": "openshift/mirror-registry-rhel8@sha256:4681aa3b96101a87f42bf7dd1ca3f11febdf648bfae4c6cde6eff3f14e52a784_s390x",
+                  "product_identification_helper": {
+                    "purl": "pkg:oci/mirror-registry-rhel8@sha256:4681aa3b96101a87f42bf7dd1ca3f11febdf648bfae4c6cde6eff3f14e52a784?arch=s390x&repository_url=registry.redhat.io/openshift/mirror-registry-rhel8&tag=v2.0.7-9"
+                  }
+                }
+              }
+            ],
+            "category": "architecture",
+            "name": "s390x"
+          },
+          {
+            "branches": [
+              {
+                "category": "product_version",
+                "name": "openshift/mirror-registry-rhel8@sha256:13de2fe06d9598bdde12e8599b4229e646469b85263102cbc39548d1c08a648b_ppc64le",
+                "product": {
+                  "name": "openshift/mirror-registry-rhel8@sha256:13de2fe06d9598bdde12e8599b4229e646469b85263102cbc39548d1c08a648b_ppc64le",
+                  "product_id": "openshift/mirror-registry-rhel8@sha256:13de2fe06d9598bdde12e8599b4229e646469b85263102cbc39548d1c08a648b_ppc64le",
+                  "product_identification_helper": {
+                    "purl": "pkg:oci/mirror-registry-rhel8@sha256:13de2fe06d9598bdde12e8599b4229e646469b85263102cbc39548d1c08a648b?arch=ppc64le&repository_url=registry.redhat.io/openshift/mirror-registry-rhel8&tag=v2.0.7-9"
+                  }
+                }
+              }
+            ],
+            "category": "architecture",
+            "name": "ppc64le"
+          },
+          {
+            "branches": [
+              {
+                "category": "product_version",
+                "name": "openshift/mirror-registry-rhel8@sha256:21b12ae6f0c3ad9e70edf56db6ade5454ecc8cb76328b006ac7a3b9fd890ee70_amd64",
+                "product": {
+                  "name": "openshift/mirror-registry-rhel8@sha256:21b12ae6f0c3ad9e70edf56db6ade5454ecc8cb76328b006ac7a3b9fd890ee70_amd64",
+                  "product_id": "openshift/mirror-registry-rhel8@sha256:21b12ae6f0c3ad9e70edf56db6ade5454ecc8cb76328b006ac7a3b9fd890ee70_amd64",
+                  "product_identification_helper": {
+                    "purl": "pkg:oci/mirror-registry-rhel8@sha256:21b12ae6f0c3ad9e70edf56db6ade5454ecc8cb76328b006ac7a3b9fd890ee70?arch=amd64&repository_url=registry.redhat.io/openshift/mirror-registry-rhel8&tag=v2.0.7-9"
+                  }
+                }
+              }
+            ],
+            "category": "architecture",
+            "name": "amd64"
+          }
+        ],
+        "category": "vendor",
+        "name": "Red Hat"
+      }
+    ],
+    "relationships": [
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "openshift/mirror-registry-rhel8@sha256:13de2fe06d9598bdde12e8599b4229e646469b85263102cbc39548d1c08a648b_ppc64le as a component of mirror registry 2.0.0 for RHEL 8",
+          "product_id": "8Base-MIRROR-REGISTRY-2.0:openshift/mirror-registry-rhel8@sha256:13de2fe06d9598bdde12e8599b4229e646469b85263102cbc39548d1c08a648b_ppc64le"
+        },
+        "product_reference": "openshift/mirror-registry-rhel8@sha256:13de2fe06d9598bdde12e8599b4229e646469b85263102cbc39548d1c08a648b_ppc64le",
+        "relates_to_product_reference": "8Base-MIRROR-REGISTRY-2.0"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "openshift/mirror-registry-rhel8@sha256:21b12ae6f0c3ad9e70edf56db6ade5454ecc8cb76328b006ac7a3b9fd890ee70_amd64 as a component of mirror registry 2.0.0 for RHEL 8",
+          "product_id": "8Base-MIRROR-REGISTRY-2.0:openshift/mirror-registry-rhel8@sha256:21b12ae6f0c3ad9e70edf56db6ade5454ecc8cb76328b006ac7a3b9fd890ee70_amd64"
+        },
+        "product_reference": "openshift/mirror-registry-rhel8@sha256:21b12ae6f0c3ad9e70edf56db6ade5454ecc8cb76328b006ac7a3b9fd890ee70_amd64",
+        "relates_to_product_reference": "8Base-MIRROR-REGISTRY-2.0"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "openshift/mirror-registry-rhel8@sha256:4681aa3b96101a87f42bf7dd1ca3f11febdf648bfae4c6cde6eff3f14e52a784_s390x as a component of mirror registry 2.0.0 for RHEL 8",
+          "product_id": "8Base-MIRROR-REGISTRY-2.0:openshift/mirror-registry-rhel8@sha256:4681aa3b96101a87f42bf7dd1ca3f11febdf648bfae4c6cde6eff3f14e52a784_s390x"
+        },
+        "product_reference": "openshift/mirror-registry-rhel8@sha256:4681aa3b96101a87f42bf7dd1ca3f11febdf648bfae4c6cde6eff3f14e52a784_s390x",
+        "relates_to_product_reference": "8Base-MIRROR-REGISTRY-2.0"
+      }
+    ]
+  },
+  "vulnerabilities": [
+    {
+      "acknowledgments": [
+        {
+          "names": [
+            "Antony Di Scala",
+            "Mike Whale"
+          ]
+        }
+      ],
+      "cve": "CVE-2025-3528",
+      "cwe": {
+        "id": "CWE-276",
+        "name": "Incorrect Default Permissions"
+      },
+      "discovery_date": "2025-04-11T18:57:24.546000+00:00",
+      "ids": [
+        {
+          "system_name": "Red Hat Bugzilla ID",
+          "text": "2359143"
+        }
+      ],
+      "notes": [
+        {
+          "category": "description",
+          "text": "A flaw was found in the Mirror Registry. The quay-app container shipped as part of the Mirror Registry for OpenShift has write access to the `/etc/passwd`. This flaw allows a malicious actor with access to the container to modify the passwd file and elevate their privileges to the root user within that pod.",
+          "title": "Vulnerability description"
+        },
+        {
+          "category": "summary",
+          "text": "mirror-registry: Local privilege escalation due to incorrect permissions in mirror-registry",
+          "title": "Vulnerability summary"
+        },
+        {
+          "category": "other",
+          "text": "This issue was classified with and Important severity according to the severity ratings described at https://access.redhat.com/security/updates/classification. This rating was given because the attacker, when a successfully attack is performed, can  elevate its privilege to the root user.",
+          "title": "Statement"
+        },
+        {
+          "category": "general",
+          "text": "The CVSS score(s) listed for this vulnerability do not reflect the associated product's status, and are included for informational purposes to better understand the severity of this vulnerability.",
+          "title": "CVSS score applicability"
+        }
+      ],
+      "product_status": {
+        "fixed": [
+          "8Base-MIRROR-REGISTRY-2.0:openshift/mirror-registry-rhel8@sha256:13de2fe06d9598bdde12e8599b4229e646469b85263102cbc39548d1c08a648b_ppc64le",
+          "8Base-MIRROR-REGISTRY-2.0:openshift/mirror-registry-rhel8@sha256:21b12ae6f0c3ad9e70edf56db6ade5454ecc8cb76328b006ac7a3b9fd890ee70_amd64",
+          "8Base-MIRROR-REGISTRY-2.0:openshift/mirror-registry-rhel8@sha256:4681aa3b96101a87f42bf7dd1ca3f11febdf648bfae4c6cde6eff3f14e52a784_s390x"
+        ]
+      },
+      "references": [
+        {
+          "category": "self",
+          "summary": "Canonical URL",
+          "url": "https://access.redhat.com/security/cve/CVE-2025-3528"
+        },
+        {
+          "category": "external",
+          "summary": "RHBZ#2359143",
+          "url": "https://bugzilla.redhat.com/show_bug.cgi?id=2359143"
+        },
+        {
+          "category": "external",
+          "summary": "https://www.cve.org/CVERecord?id=CVE-2025-3528",
+          "url": "https://www.cve.org/CVERecord?id=CVE-2025-3528"
+        },
+        {
+          "category": "external",
+          "summary": "https://nvd.nist.gov/vuln/detail/CVE-2025-3528",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-3528"
+        }
+      ],
+      "release_date": "2024-04-11T00:00:00+00:00",
+      "remediations": [
+        {
+          "category": "vendor_fix",
+          "date": "2025-07-14T08:07:01+00:00",
+          "details": "mirror registry for Red Hat OpenShift Release",
+          "product_ids": [
+            "8Base-MIRROR-REGISTRY-2.0:openshift/mirror-registry-rhel8@sha256:13de2fe06d9598bdde12e8599b4229e646469b85263102cbc39548d1c08a648b_ppc64le",
+            "8Base-MIRROR-REGISTRY-2.0:openshift/mirror-registry-rhel8@sha256:21b12ae6f0c3ad9e70edf56db6ade5454ecc8cb76328b006ac7a3b9fd890ee70_amd64",
+            "8Base-MIRROR-REGISTRY-2.0:openshift/mirror-registry-rhel8@sha256:4681aa3b96101a87f42bf7dd1ca3f11febdf648bfae4c6cde6eff3f14e52a784_s390x"
+          ],
+          "restart_required": {
+            "category": "none"
+          },
+          "url": "https://access.redhat.com/errata/RHBA-2025:9645"
+        },
+        {
+          "category": "workaround",
+          "details": "This issue can be mitigated by setting this line in each mirror registry systemd configurations:\n\n--security-opt=no-new-privileges\n\nThis would prevent any privilege escalation until the issue is fixed.",
+          "product_ids": [
+            "8Base-MIRROR-REGISTRY-2.0:openshift/mirror-registry-rhel8@sha256:13de2fe06d9598bdde12e8599b4229e646469b85263102cbc39548d1c08a648b_ppc64le",
+            "8Base-MIRROR-REGISTRY-2.0:openshift/mirror-registry-rhel8@sha256:21b12ae6f0c3ad9e70edf56db6ade5454ecc8cb76328b006ac7a3b9fd890ee70_amd64",
+            "8Base-MIRROR-REGISTRY-2.0:openshift/mirror-registry-rhel8@sha256:4681aa3b96101a87f42bf7dd1ca3f11febdf648bfae4c6cde6eff3f14e52a784_s390x"
+          ]
+        }
+      ],
+      "scores": [
+        {
+          "cvss_v3": {
+            "attackComplexity": "LOW",
+            "attackVector": "LOCAL",
+            "availabilityImpact": "HIGH",
+            "baseScore": 8.2,
+            "baseSeverity": "HIGH",
+            "confidentialityImpact": "HIGH",
+            "integrityImpact": "HIGH",
+            "privilegesRequired": "LOW",
+            "scope": "CHANGED",
+            "userInteraction": "REQUIRED",
+            "vectorString": "CVSS:3.1/AV:L/AC:L/PR:L/UI:R/S:C/C:H/I:H/A:H",
+            "version": "3.1"
+          },
+          "products": [
+            "8Base-MIRROR-REGISTRY-2.0:openshift/mirror-registry-rhel8@sha256:13de2fe06d9598bdde12e8599b4229e646469b85263102cbc39548d1c08a648b_ppc64le",
+            "8Base-MIRROR-REGISTRY-2.0:openshift/mirror-registry-rhel8@sha256:21b12ae6f0c3ad9e70edf56db6ade5454ecc8cb76328b006ac7a3b9fd890ee70_amd64",
+            "8Base-MIRROR-REGISTRY-2.0:openshift/mirror-registry-rhel8@sha256:4681aa3b96101a87f42bf7dd1ca3f11febdf648bfae4c6cde6eff3f14e52a784_s390x"
+          ]
+        }
+      ],
+      "threats": [
+        {
+          "category": "impact",
+          "details": "Important"
+        }
+      ],
+      "title": "mirror-registry: Local privilege escalation due to incorrect permissions in mirror-registry"
+    }
+  ]
+}

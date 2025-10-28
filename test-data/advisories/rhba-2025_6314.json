@@ -1,0 +1,1380 @@
+{
+  "document": {
+    "aggregate_severity": {
+      "namespace": "https://access.redhat.com/security/updates/classification/",
+      "text": "Important"
+    },
+    "category": "csaf_security_advisory",
+    "csaf_version": "2.0",
+    "distribution": {
+      "text": "Copyright © Red Hat, Inc. All rights reserved.",
+      "tlp": {
+        "label": "WHITE",
+        "url": "https://www.first.org/tlp/"
+      }
+    },
+    "lang": "en",
+    "notes": [
+      {
+        "category": "summary",
+        "text": "An update for openssl is now available for Red Hat Enterprise Linux 10.",
+        "title": "Topic"
+      },
+      {
+        "category": "general",
+        "text": "For detailed information on changes in this release, see the Red Hat Enterprise Linux 10 Release Notes linked from the References section.",
+        "title": "Details"
+      },
+      {
+        "category": "legal_disclaimer",
+        "text": "This content is licensed under the Creative Commons Attribution 4.0 International License (https://creativecommons.org/licenses/by/4.0/). If you distribute this content, or a modified version of it, you must provide attribution to Red Hat Inc. and provide a link to the original.",
+        "title": "Terms of Use"
+      }
+    ],
+    "publisher": {
+      "category": "vendor",
+      "contact_details": "https://access.redhat.com/security/team/contact/",
+      "issuing_authority": "Red Hat Product Security is responsible for vulnerability handling across all Red Hat products and services.",
+      "name": "Red Hat Product Security",
+      "namespace": "https://www.redhat.com"
+    },
+    "references": [
+      {
+        "category": "self",
+        "summary": "https://access.redhat.com/errata/RHBA-2025:6314",
+        "url": "https://access.redhat.com/errata/RHBA-2025:6314"
+      },
+      {
+        "category": "external",
+        "summary": "https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/10/html/10.0_release_notes/index",
+        "url": "https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/10/html/10.0_release_notes/index"
+      },
+      {
+        "category": "external",
+        "summary": "RHEL-58178",
+        "url": "https://issues.redhat.com/browse/RHEL-58178"
+      },
+      {
+        "category": "external",
+        "summary": "RHEL-66163",
+        "url": "https://issues.redhat.com/browse/RHEL-66163"
+      },
+      {
+        "category": "external",
+        "summary": "RHEL-71132",
+        "url": "https://issues.redhat.com/browse/RHEL-71132"
+      },
+      {
+        "category": "external",
+        "summary": "RHEL-71903",
+        "url": "https://issues.redhat.com/browse/RHEL-71903"
+      },
+      {
+        "category": "external",
+        "summary": "RHEL-73170",
+        "url": "https://issues.redhat.com/browse/RHEL-73170"
+      },
+      {
+        "category": "external",
+        "summary": "RHEL-76182",
+        "url": "https://issues.redhat.com/browse/RHEL-76182"
+      },
+      {
+        "category": "external",
+        "summary": "RHEL-79045",
+        "url": "https://issues.redhat.com/browse/RHEL-79045"
+      },
+      {
+        "category": "self",
+        "summary": "Canonical URL",
+        "url": "https://security.access.redhat.com/data/csaf/v2/advisories/2025/rhba-2025_6314.json"
+      }
+    ],
+    "title": "Red Hat Bug Fix Advisory: openssl bug fix and enhancement update",
+    "tracking": {
+      "current_release_date": "2025-10-08T15:36:45+00:00",
+      "generator": {
+        "date": "2025-10-08T15:36:45+00:00",
+        "engine": {
+          "name": "Red Hat SDEngine",
+          "version": "4.6.9"
+        }
+      },
+      "id": "RHBA-2025:6314",
+      "initial_release_date": "2025-05-13T08:05:47+00:00",
+      "revision_history": [
+        {
+          "date": "2025-05-13T08:05:47+00:00",
+          "number": "1",
+          "summary": "Initial version"
+        },
+        {
+          "date": "2025-05-13T08:05:47+00:00",
+          "number": "2",
+          "summary": "Last updated version"
+        },
+        {
+          "date": "2025-10-08T15:36:45+00:00",
+          "number": "3",
+          "summary": "Last generated version"
+        }
+      ],
+      "status": "final",
+      "version": "3"
+    }
+  },
+  "product_tree": {
+    "branches": [
+      {
+        "branches": [
+          {
+            "branches": [
+              {
+                "category": "product_name",
+                "name": "Red Hat Enterprise Linux AppStream (v. 10)",
+                "product": {
+                  "name": "Red Hat Enterprise Linux AppStream (v. 10)",
+                  "product_id": "AppStream-10.0.GA",
+                  "product_identification_helper": {
+                    "cpe": "cpe:/o:redhat:enterprise_linux:10.0"
+                  }
+                }
+              },
+              {
+                "category": "product_name",
+                "name": "Red Hat Enterprise Linux BaseOS (v. 10)",
+                "product": {
+                  "name": "Red Hat Enterprise Linux BaseOS (v. 10)",
+                  "product_id": "BaseOS-10.0.GA",
+                  "product_identification_helper": {
+                    "cpe": "cpe:/o:redhat:enterprise_linux:10.0"
+                  }
+                }
+              }
+            ],
+            "category": "product_family",
+            "name": "Red Hat Enterprise Linux"
+          },
+          {
+            "branches": [
+              {
+                "category": "product_version",
+                "name": "openssl-1:3.2.2-16.el10.src",
+                "product": {
+                  "name": "openssl-1:3.2.2-16.el10.src",
+                  "product_id": "openssl-1:3.2.2-16.el10.src",
+                  "product_identification_helper": {
+                    "purl": "pkg:rpm/redhat/openssl@3.2.2-16.el10?arch=src&epoch=1"
+                  }
+                }
+              }
+            ],
+            "category": "architecture",
+            "name": "src"
+          },
+          {
+            "branches": [
+              {
+                "category": "product_version",
+                "name": "openssl-1:3.2.2-16.el10.aarch64",
+                "product": {
+                  "name": "openssl-1:3.2.2-16.el10.aarch64",
+                  "product_id": "openssl-1:3.2.2-16.el10.aarch64",
+                  "product_identification_helper": {
+                    "purl": "pkg:rpm/redhat/openssl@3.2.2-16.el10?arch=aarch64&epoch=1"
+                  }
+                }
+              },
+              {
+                "category": "product_version",
+                "name": "openssl-libs-1:3.2.2-16.el10.aarch64",
+                "product": {
+                  "name": "openssl-libs-1:3.2.2-16.el10.aarch64",
+                  "product_id": "openssl-libs-1:3.2.2-16.el10.aarch64",
+                  "product_identification_helper": {
+                    "purl": "pkg:rpm/redhat/openssl-libs@3.2.2-16.el10?arch=aarch64&epoch=1"
+                  }
+                }
+              },
+              {
+                "category": "product_version",
+                "name": "openssl-debugsource-1:3.2.2-16.el10.aarch64",
+                "product": {
+                  "name": "openssl-debugsource-1:3.2.2-16.el10.aarch64",
+                  "product_id": "openssl-debugsource-1:3.2.2-16.el10.aarch64",
+                  "product_identification_helper": {
+                    "purl": "pkg:rpm/redhat/openssl-debugsource@3.2.2-16.el10?arch=aarch64&epoch=1"
+                  }
+                }
+              },
+              {
+                "category": "product_version",
+                "name": "openssl-debuginfo-1:3.2.2-16.el10.aarch64",
+                "product": {
+                  "name": "openssl-debuginfo-1:3.2.2-16.el10.aarch64",
+                  "product_id": "openssl-debuginfo-1:3.2.2-16.el10.aarch64",
+                  "product_identification_helper": {
+                    "purl": "pkg:rpm/redhat/openssl-debuginfo@3.2.2-16.el10?arch=aarch64&epoch=1"
+                  }
+                }
+              },
+              {
+                "category": "product_version",
+                "name": "openssl-libs-debuginfo-1:3.2.2-16.el10.aarch64",
+                "product": {
+                  "name": "openssl-libs-debuginfo-1:3.2.2-16.el10.aarch64",
+                  "product_id": "openssl-libs-debuginfo-1:3.2.2-16.el10.aarch64",
+                  "product_identification_helper": {
+                    "purl": "pkg:rpm/redhat/openssl-libs-debuginfo@3.2.2-16.el10?arch=aarch64&epoch=1"
+                  }
+                }
+              },
+              {
+                "category": "product_version",
+                "name": "openssl-devel-1:3.2.2-16.el10.aarch64",
+                "product": {
+                  "name": "openssl-devel-1:3.2.2-16.el10.aarch64",
+                  "product_id": "openssl-devel-1:3.2.2-16.el10.aarch64",
+                  "product_identification_helper": {
+                    "purl": "pkg:rpm/redhat/openssl-devel@3.2.2-16.el10?arch=aarch64&epoch=1"
+                  }
+                }
+              },
+              {
+                "category": "product_version",
+                "name": "openssl-perl-1:3.2.2-16.el10.aarch64",
+                "product": {
+                  "name": "openssl-perl-1:3.2.2-16.el10.aarch64",
+                  "product_id": "openssl-perl-1:3.2.2-16.el10.aarch64",
+                  "product_identification_helper": {
+                    "purl": "pkg:rpm/redhat/openssl-perl@3.2.2-16.el10?arch=aarch64&epoch=1"
+                  }
+                }
+              }
+            ],
+            "category": "architecture",
+            "name": "aarch64"
+          },
+          {
+            "branches": [
+              {
+                "category": "product_version",
+                "name": "openssl-1:3.2.2-16.el10.ppc64le",
+                "product": {
+                  "name": "openssl-1:3.2.2-16.el10.ppc64le",
+                  "product_id": "openssl-1:3.2.2-16.el10.ppc64le",
+                  "product_identification_helper": {
+                    "purl": "pkg:rpm/redhat/openssl@3.2.2-16.el10?arch=ppc64le&epoch=1"
+                  }
+                }
+              },
+              {
+                "category": "product_version",
+                "name": "openssl-libs-1:3.2.2-16.el10.ppc64le",
+                "product": {
+                  "name": "openssl-libs-1:3.2.2-16.el10.ppc64le",
+                  "product_id": "openssl-libs-1:3.2.2-16.el10.ppc64le",
+                  "product_identification_helper": {
+                    "purl": "pkg:rpm/redhat/openssl-libs@3.2.2-16.el10?arch=ppc64le&epoch=1"
+                  }
+                }
+              },
+              {
+                "category": "product_version",
+                "name": "openssl-debugsource-1:3.2.2-16.el10.ppc64le",
+                "product": {
+                  "name": "openssl-debugsource-1:3.2.2-16.el10.ppc64le",
+                  "product_id": "openssl-debugsource-1:3.2.2-16.el10.ppc64le",
+                  "product_identification_helper": {
+                    "purl": "pkg:rpm/redhat/openssl-debugsource@3.2.2-16.el10?arch=ppc64le&epoch=1"
+                  }
+                }
+              },
+              {
+                "category": "product_version",
+                "name": "openssl-debuginfo-1:3.2.2-16.el10.ppc64le",
+                "product": {
+                  "name": "openssl-debuginfo-1:3.2.2-16.el10.ppc64le",
+                  "product_id": "openssl-debuginfo-1:3.2.2-16.el10.ppc64le",
+                  "product_identification_helper": {
+                    "purl": "pkg:rpm/redhat/openssl-debuginfo@3.2.2-16.el10?arch=ppc64le&epoch=1"
+                  }
+                }
+              },
+              {
+                "category": "product_version",
+                "name": "openssl-libs-debuginfo-1:3.2.2-16.el10.ppc64le",
+                "product": {
+                  "name": "openssl-libs-debuginfo-1:3.2.2-16.el10.ppc64le",
+                  "product_id": "openssl-libs-debuginfo-1:3.2.2-16.el10.ppc64le",
+                  "product_identification_helper": {
+                    "purl": "pkg:rpm/redhat/openssl-libs-debuginfo@3.2.2-16.el10?arch=ppc64le&epoch=1"
+                  }
+                }
+              },
+              {
+                "category": "product_version",
+                "name": "openssl-devel-1:3.2.2-16.el10.ppc64le",
+                "product": {
+                  "name": "openssl-devel-1:3.2.2-16.el10.ppc64le",
+                  "product_id": "openssl-devel-1:3.2.2-16.el10.ppc64le",
+                  "product_identification_helper": {
+                    "purl": "pkg:rpm/redhat/openssl-devel@3.2.2-16.el10?arch=ppc64le&epoch=1"
+                  }
+                }
+              },
+              {
+                "category": "product_version",
+                "name": "openssl-perl-1:3.2.2-16.el10.ppc64le",
+                "product": {
+                  "name": "openssl-perl-1:3.2.2-16.el10.ppc64le",
+                  "product_id": "openssl-perl-1:3.2.2-16.el10.ppc64le",
+                  "product_identification_helper": {
+                    "purl": "pkg:rpm/redhat/openssl-perl@3.2.2-16.el10?arch=ppc64le&epoch=1"
+                  }
+                }
+              }
+            ],
+            "category": "architecture",
+            "name": "ppc64le"
+          },
+          {
+            "branches": [
+              {
+                "category": "product_version",
+                "name": "openssl-1:3.2.2-16.el10.x86_64",
+                "product": {
+                  "name": "openssl-1:3.2.2-16.el10.x86_64",
+                  "product_id": "openssl-1:3.2.2-16.el10.x86_64",
+                  "product_identification_helper": {
+                    "purl": "pkg:rpm/redhat/openssl@3.2.2-16.el10?arch=x86_64&epoch=1"
+                  }
+                }
+              },
+              {
+                "category": "product_version",
+                "name": "openssl-libs-1:3.2.2-16.el10.x86_64",
+                "product": {
+                  "name": "openssl-libs-1:3.2.2-16.el10.x86_64",
+                  "product_id": "openssl-libs-1:3.2.2-16.el10.x86_64",
+                  "product_identification_helper": {
+                    "purl": "pkg:rpm/redhat/openssl-libs@3.2.2-16.el10?arch=x86_64&epoch=1"
+                  }
+                }
+              },
+              {
+                "category": "product_version",
+                "name": "openssl-debugsource-1:3.2.2-16.el10.x86_64",
+                "product": {
+                  "name": "openssl-debugsource-1:3.2.2-16.el10.x86_64",
+                  "product_id": "openssl-debugsource-1:3.2.2-16.el10.x86_64",
+                  "product_identification_helper": {
+                    "purl": "pkg:rpm/redhat/openssl-debugsource@3.2.2-16.el10?arch=x86_64&epoch=1"
+                  }
+                }
+              },
+              {
+                "category": "product_version",
+                "name": "openssl-debuginfo-1:3.2.2-16.el10.x86_64",
+                "product": {
+                  "name": "openssl-debuginfo-1:3.2.2-16.el10.x86_64",
+                  "product_id": "openssl-debuginfo-1:3.2.2-16.el10.x86_64",
+                  "product_identification_helper": {
+                    "purl": "pkg:rpm/redhat/openssl-debuginfo@3.2.2-16.el10?arch=x86_64&epoch=1"
+                  }
+                }
+              },
+              {
+                "category": "product_version",
+                "name": "openssl-libs-debuginfo-1:3.2.2-16.el10.x86_64",
+                "product": {
+                  "name": "openssl-libs-debuginfo-1:3.2.2-16.el10.x86_64",
+                  "product_id": "openssl-libs-debuginfo-1:3.2.2-16.el10.x86_64",
+                  "product_identification_helper": {
+                    "purl": "pkg:rpm/redhat/openssl-libs-debuginfo@3.2.2-16.el10?arch=x86_64&epoch=1"
+                  }
+                }
+              },
+              {
+                "category": "product_version",
+                "name": "openssl-devel-1:3.2.2-16.el10.x86_64",
+                "product": {
+                  "name": "openssl-devel-1:3.2.2-16.el10.x86_64",
+                  "product_id": "openssl-devel-1:3.2.2-16.el10.x86_64",
+                  "product_identification_helper": {
+                    "purl": "pkg:rpm/redhat/openssl-devel@3.2.2-16.el10?arch=x86_64&epoch=1"
+                  }
+                }
+              },
+              {
+                "category": "product_version",
+                "name": "openssl-perl-1:3.2.2-16.el10.x86_64",
+                "product": {
+                  "name": "openssl-perl-1:3.2.2-16.el10.x86_64",
+                  "product_id": "openssl-perl-1:3.2.2-16.el10.x86_64",
+                  "product_identification_helper": {
+                    "purl": "pkg:rpm/redhat/openssl-perl@3.2.2-16.el10?arch=x86_64&epoch=1"
+                  }
+                }
+              }
+            ],
+            "category": "architecture",
+            "name": "x86_64"
+          },
+          {
+            "branches": [
+              {
+                "category": "product_version",
+                "name": "openssl-1:3.2.2-16.el10.s390x",
+                "product": {
+                  "name": "openssl-1:3.2.2-16.el10.s390x",
+                  "product_id": "openssl-1:3.2.2-16.el10.s390x",
+                  "product_identification_helper": {
+                    "purl": "pkg:rpm/redhat/openssl@3.2.2-16.el10?arch=s390x&epoch=1"
+                  }
+                }
+              },
+              {
+                "category": "product_version",
+                "name": "openssl-libs-1:3.2.2-16.el10.s390x",
+                "product": {
+                  "name": "openssl-libs-1:3.2.2-16.el10.s390x",
+                  "product_id": "openssl-libs-1:3.2.2-16.el10.s390x",
+                  "product_identification_helper": {
+                    "purl": "pkg:rpm/redhat/openssl-libs@3.2.2-16.el10?arch=s390x&epoch=1"
+                  }
+                }
+              },
+              {
+                "category": "product_version",
+                "name": "openssl-debugsource-1:3.2.2-16.el10.s390x",
+                "product": {
+                  "name": "openssl-debugsource-1:3.2.2-16.el10.s390x",
+                  "product_id": "openssl-debugsource-1:3.2.2-16.el10.s390x",
+                  "product_identification_helper": {
+                    "purl": "pkg:rpm/redhat/openssl-debugsource@3.2.2-16.el10?arch=s390x&epoch=1"
+                  }
+                }
+              },
+              {
+                "category": "product_version",
+                "name": "openssl-debuginfo-1:3.2.2-16.el10.s390x",
+                "product": {
+                  "name": "openssl-debuginfo-1:3.2.2-16.el10.s390x",
+                  "product_id": "openssl-debuginfo-1:3.2.2-16.el10.s390x",
+                  "product_identification_helper": {
+                    "purl": "pkg:rpm/redhat/openssl-debuginfo@3.2.2-16.el10?arch=s390x&epoch=1"
+                  }
+                }
+              },
+              {
+                "category": "product_version",
+                "name": "openssl-libs-debuginfo-1:3.2.2-16.el10.s390x",
+                "product": {
+                  "name": "openssl-libs-debuginfo-1:3.2.2-16.el10.s390x",
+                  "product_id": "openssl-libs-debuginfo-1:3.2.2-16.el10.s390x",
+                  "product_identification_helper": {
+                    "purl": "pkg:rpm/redhat/openssl-libs-debuginfo@3.2.2-16.el10?arch=s390x&epoch=1"
+                  }
+                }
+              },
+              {
+                "category": "product_version",
+                "name": "openssl-devel-1:3.2.2-16.el10.s390x",
+                "product": {
+                  "name": "openssl-devel-1:3.2.2-16.el10.s390x",
+                  "product_id": "openssl-devel-1:3.2.2-16.el10.s390x",
+                  "product_identification_helper": {
+                    "purl": "pkg:rpm/redhat/openssl-devel@3.2.2-16.el10?arch=s390x&epoch=1"
+                  }
+                }
+              },
+              {
+                "category": "product_version",
+                "name": "openssl-perl-1:3.2.2-16.el10.s390x",
+                "product": {
+                  "name": "openssl-perl-1:3.2.2-16.el10.s390x",
+                  "product_id": "openssl-perl-1:3.2.2-16.el10.s390x",
+                  "product_identification_helper": {
+                    "purl": "pkg:rpm/redhat/openssl-perl@3.2.2-16.el10?arch=s390x&epoch=1"
+                  }
+                }
+              }
+            ],
+            "category": "architecture",
+            "name": "s390x"
+          }
+        ],
+        "category": "vendor",
+        "name": "Red Hat"
+      }
+    ],
+    "relationships": [
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "openssl-1:3.2.2-16.el10.aarch64 as a component of Red Hat Enterprise Linux AppStream (v. 10)",
+          "product_id": "AppStream-10.0.GA:openssl-1:3.2.2-16.el10.aarch64"
+        },
+        "product_reference": "openssl-1:3.2.2-16.el10.aarch64",
+        "relates_to_product_reference": "AppStream-10.0.GA"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "openssl-1:3.2.2-16.el10.ppc64le as a component of Red Hat Enterprise Linux AppStream (v. 10)",
+          "product_id": "AppStream-10.0.GA:openssl-1:3.2.2-16.el10.ppc64le"
+        },
+        "product_reference": "openssl-1:3.2.2-16.el10.ppc64le",
+        "relates_to_product_reference": "AppStream-10.0.GA"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "openssl-1:3.2.2-16.el10.s390x as a component of Red Hat Enterprise Linux AppStream (v. 10)",
+          "product_id": "AppStream-10.0.GA:openssl-1:3.2.2-16.el10.s390x"
+        },
+        "product_reference": "openssl-1:3.2.2-16.el10.s390x",
+        "relates_to_product_reference": "AppStream-10.0.GA"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "openssl-1:3.2.2-16.el10.src as a component of Red Hat Enterprise Linux AppStream (v. 10)",
+          "product_id": "AppStream-10.0.GA:openssl-1:3.2.2-16.el10.src"
+        },
+        "product_reference": "openssl-1:3.2.2-16.el10.src",
+        "relates_to_product_reference": "AppStream-10.0.GA"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "openssl-1:3.2.2-16.el10.x86_64 as a component of Red Hat Enterprise Linux AppStream (v. 10)",
+          "product_id": "AppStream-10.0.GA:openssl-1:3.2.2-16.el10.x86_64"
+        },
+        "product_reference": "openssl-1:3.2.2-16.el10.x86_64",
+        "relates_to_product_reference": "AppStream-10.0.GA"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "openssl-debuginfo-1:3.2.2-16.el10.aarch64 as a component of Red Hat Enterprise Linux AppStream (v. 10)",
+          "product_id": "AppStream-10.0.GA:openssl-debuginfo-1:3.2.2-16.el10.aarch64"
+        },
+        "product_reference": "openssl-debuginfo-1:3.2.2-16.el10.aarch64",
+        "relates_to_product_reference": "AppStream-10.0.GA"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "openssl-debuginfo-1:3.2.2-16.el10.ppc64le as a component of Red Hat Enterprise Linux AppStream (v. 10)",
+          "product_id": "AppStream-10.0.GA:openssl-debuginfo-1:3.2.2-16.el10.ppc64le"
+        },
+        "product_reference": "openssl-debuginfo-1:3.2.2-16.el10.ppc64le",
+        "relates_to_product_reference": "AppStream-10.0.GA"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "openssl-debuginfo-1:3.2.2-16.el10.s390x as a component of Red Hat Enterprise Linux AppStream (v. 10)",
+          "product_id": "AppStream-10.0.GA:openssl-debuginfo-1:3.2.2-16.el10.s390x"
+        },
+        "product_reference": "openssl-debuginfo-1:3.2.2-16.el10.s390x",
+        "relates_to_product_reference": "AppStream-10.0.GA"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "openssl-debuginfo-1:3.2.2-16.el10.x86_64 as a component of Red Hat Enterprise Linux AppStream (v. 10)",
+          "product_id": "AppStream-10.0.GA:openssl-debuginfo-1:3.2.2-16.el10.x86_64"
+        },
+        "product_reference": "openssl-debuginfo-1:3.2.2-16.el10.x86_64",
+        "relates_to_product_reference": "AppStream-10.0.GA"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "openssl-debugsource-1:3.2.2-16.el10.aarch64 as a component of Red Hat Enterprise Linux AppStream (v. 10)",
+          "product_id": "AppStream-10.0.GA:openssl-debugsource-1:3.2.2-16.el10.aarch64"
+        },
+        "product_reference": "openssl-debugsource-1:3.2.2-16.el10.aarch64",
+        "relates_to_product_reference": "AppStream-10.0.GA"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "openssl-debugsource-1:3.2.2-16.el10.ppc64le as a component of Red Hat Enterprise Linux AppStream (v. 10)",
+          "product_id": "AppStream-10.0.GA:openssl-debugsource-1:3.2.2-16.el10.ppc64le"
+        },
+        "product_reference": "openssl-debugsource-1:3.2.2-16.el10.ppc64le",
+        "relates_to_product_reference": "AppStream-10.0.GA"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "openssl-debugsource-1:3.2.2-16.el10.s390x as a component of Red Hat Enterprise Linux AppStream (v. 10)",
+          "product_id": "AppStream-10.0.GA:openssl-debugsource-1:3.2.2-16.el10.s390x"
+        },
+        "product_reference": "openssl-debugsource-1:3.2.2-16.el10.s390x",
+        "relates_to_product_reference": "AppStream-10.0.GA"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "openssl-debugsource-1:3.2.2-16.el10.x86_64 as a component of Red Hat Enterprise Linux AppStream (v. 10)",
+          "product_id": "AppStream-10.0.GA:openssl-debugsource-1:3.2.2-16.el10.x86_64"
+        },
+        "product_reference": "openssl-debugsource-1:3.2.2-16.el10.x86_64",
+        "relates_to_product_reference": "AppStream-10.0.GA"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "openssl-devel-1:3.2.2-16.el10.aarch64 as a component of Red Hat Enterprise Linux AppStream (v. 10)",
+          "product_id": "AppStream-10.0.GA:openssl-devel-1:3.2.2-16.el10.aarch64"
+        },
+        "product_reference": "openssl-devel-1:3.2.2-16.el10.aarch64",
+        "relates_to_product_reference": "AppStream-10.0.GA"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "openssl-devel-1:3.2.2-16.el10.ppc64le as a component of Red Hat Enterprise Linux AppStream (v. 10)",
+          "product_id": "AppStream-10.0.GA:openssl-devel-1:3.2.2-16.el10.ppc64le"
+        },
+        "product_reference": "openssl-devel-1:3.2.2-16.el10.ppc64le",
+        "relates_to_product_reference": "AppStream-10.0.GA"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "openssl-devel-1:3.2.2-16.el10.s390x as a component of Red Hat Enterprise Linux AppStream (v. 10)",
+          "product_id": "AppStream-10.0.GA:openssl-devel-1:3.2.2-16.el10.s390x"
+        },
+        "product_reference": "openssl-devel-1:3.2.2-16.el10.s390x",
+        "relates_to_product_reference": "AppStream-10.0.GA"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "openssl-devel-1:3.2.2-16.el10.x86_64 as a component of Red Hat Enterprise Linux AppStream (v. 10)",
+          "product_id": "AppStream-10.0.GA:openssl-devel-1:3.2.2-16.el10.x86_64"
+        },
+        "product_reference": "openssl-devel-1:3.2.2-16.el10.x86_64",
+        "relates_to_product_reference": "AppStream-10.0.GA"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "openssl-libs-1:3.2.2-16.el10.aarch64 as a component of Red Hat Enterprise Linux AppStream (v. 10)",
+          "product_id": "AppStream-10.0.GA:openssl-libs-1:3.2.2-16.el10.aarch64"
+        },
+        "product_reference": "openssl-libs-1:3.2.2-16.el10.aarch64",
+        "relates_to_product_reference": "AppStream-10.0.GA"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "openssl-libs-1:3.2.2-16.el10.ppc64le as a component of Red Hat Enterprise Linux AppStream (v. 10)",
+          "product_id": "AppStream-10.0.GA:openssl-libs-1:3.2.2-16.el10.ppc64le"
+        },
+        "product_reference": "openssl-libs-1:3.2.2-16.el10.ppc64le",
+        "relates_to_product_reference": "AppStream-10.0.GA"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "openssl-libs-1:3.2.2-16.el10.s390x as a component of Red Hat Enterprise Linux AppStream (v. 10)",
+          "product_id": "AppStream-10.0.GA:openssl-libs-1:3.2.2-16.el10.s390x"
+        },
+        "product_reference": "openssl-libs-1:3.2.2-16.el10.s390x",
+        "relates_to_product_reference": "AppStream-10.0.GA"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "openssl-libs-1:3.2.2-16.el10.x86_64 as a component of Red Hat Enterprise Linux AppStream (v. 10)",
+          "product_id": "AppStream-10.0.GA:openssl-libs-1:3.2.2-16.el10.x86_64"
+        },
+        "product_reference": "openssl-libs-1:3.2.2-16.el10.x86_64",
+        "relates_to_product_reference": "AppStream-10.0.GA"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "openssl-libs-debuginfo-1:3.2.2-16.el10.aarch64 as a component of Red Hat Enterprise Linux AppStream (v. 10)",
+          "product_id": "AppStream-10.0.GA:openssl-libs-debuginfo-1:3.2.2-16.el10.aarch64"
+        },
+        "product_reference": "openssl-libs-debuginfo-1:3.2.2-16.el10.aarch64",
+        "relates_to_product_reference": "AppStream-10.0.GA"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "openssl-libs-debuginfo-1:3.2.2-16.el10.ppc64le as a component of Red Hat Enterprise Linux AppStream (v. 10)",
+          "product_id": "AppStream-10.0.GA:openssl-libs-debuginfo-1:3.2.2-16.el10.ppc64le"
+        },
+        "product_reference": "openssl-libs-debuginfo-1:3.2.2-16.el10.ppc64le",
+        "relates_to_product_reference": "AppStream-10.0.GA"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "openssl-libs-debuginfo-1:3.2.2-16.el10.s390x as a component of Red Hat Enterprise Linux AppStream (v. 10)",
+          "product_id": "AppStream-10.0.GA:openssl-libs-debuginfo-1:3.2.2-16.el10.s390x"
+        },
+        "product_reference": "openssl-libs-debuginfo-1:3.2.2-16.el10.s390x",
+        "relates_to_product_reference": "AppStream-10.0.GA"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "openssl-libs-debuginfo-1:3.2.2-16.el10.x86_64 as a component of Red Hat Enterprise Linux AppStream (v. 10)",
+          "product_id": "AppStream-10.0.GA:openssl-libs-debuginfo-1:3.2.2-16.el10.x86_64"
+        },
+        "product_reference": "openssl-libs-debuginfo-1:3.2.2-16.el10.x86_64",
+        "relates_to_product_reference": "AppStream-10.0.GA"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "openssl-perl-1:3.2.2-16.el10.aarch64 as a component of Red Hat Enterprise Linux AppStream (v. 10)",
+          "product_id": "AppStream-10.0.GA:openssl-perl-1:3.2.2-16.el10.aarch64"
+        },
+        "product_reference": "openssl-perl-1:3.2.2-16.el10.aarch64",
+        "relates_to_product_reference": "AppStream-10.0.GA"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "openssl-perl-1:3.2.2-16.el10.ppc64le as a component of Red Hat Enterprise Linux AppStream (v. 10)",
+          "product_id": "AppStream-10.0.GA:openssl-perl-1:3.2.2-16.el10.ppc64le"
+        },
+        "product_reference": "openssl-perl-1:3.2.2-16.el10.ppc64le",
+        "relates_to_product_reference": "AppStream-10.0.GA"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "openssl-perl-1:3.2.2-16.el10.s390x as a component of Red Hat Enterprise Linux AppStream (v. 10)",
+          "product_id": "AppStream-10.0.GA:openssl-perl-1:3.2.2-16.el10.s390x"
+        },
+        "product_reference": "openssl-perl-1:3.2.2-16.el10.s390x",
+        "relates_to_product_reference": "AppStream-10.0.GA"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "openssl-perl-1:3.2.2-16.el10.x86_64 as a component of Red Hat Enterprise Linux AppStream (v. 10)",
+          "product_id": "AppStream-10.0.GA:openssl-perl-1:3.2.2-16.el10.x86_64"
+        },
+        "product_reference": "openssl-perl-1:3.2.2-16.el10.x86_64",
+        "relates_to_product_reference": "AppStream-10.0.GA"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "openssl-1:3.2.2-16.el10.aarch64 as a component of Red Hat Enterprise Linux BaseOS (v. 10)",
+          "product_id": "BaseOS-10.0.GA:openssl-1:3.2.2-16.el10.aarch64"
+        },
+        "product_reference": "openssl-1:3.2.2-16.el10.aarch64",
+        "relates_to_product_reference": "BaseOS-10.0.GA"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "openssl-1:3.2.2-16.el10.ppc64le as a component of Red Hat Enterprise Linux BaseOS (v. 10)",
+          "product_id": "BaseOS-10.0.GA:openssl-1:3.2.2-16.el10.ppc64le"
+        },
+        "product_reference": "openssl-1:3.2.2-16.el10.ppc64le",
+        "relates_to_product_reference": "BaseOS-10.0.GA"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "openssl-1:3.2.2-16.el10.s390x as a component of Red Hat Enterprise Linux BaseOS (v. 10)",
+          "product_id": "BaseOS-10.0.GA:openssl-1:3.2.2-16.el10.s390x"
+        },
+        "product_reference": "openssl-1:3.2.2-16.el10.s390x",
+        "relates_to_product_reference": "BaseOS-10.0.GA"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "openssl-1:3.2.2-16.el10.src as a component of Red Hat Enterprise Linux BaseOS (v. 10)",
+          "product_id": "BaseOS-10.0.GA:openssl-1:3.2.2-16.el10.src"
+        },
+        "product_reference": "openssl-1:3.2.2-16.el10.src",
+        "relates_to_product_reference": "BaseOS-10.0.GA"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "openssl-1:3.2.2-16.el10.x86_64 as a component of Red Hat Enterprise Linux BaseOS (v. 10)",
+          "product_id": "BaseOS-10.0.GA:openssl-1:3.2.2-16.el10.x86_64"
+        },
+        "product_reference": "openssl-1:3.2.2-16.el10.x86_64",
+        "relates_to_product_reference": "BaseOS-10.0.GA"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "openssl-debuginfo-1:3.2.2-16.el10.aarch64 as a component of Red Hat Enterprise Linux BaseOS (v. 10)",
+          "product_id": "BaseOS-10.0.GA:openssl-debuginfo-1:3.2.2-16.el10.aarch64"
+        },
+        "product_reference": "openssl-debuginfo-1:3.2.2-16.el10.aarch64",
+        "relates_to_product_reference": "BaseOS-10.0.GA"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "openssl-debuginfo-1:3.2.2-16.el10.ppc64le as a component of Red Hat Enterprise Linux BaseOS (v. 10)",
+          "product_id": "BaseOS-10.0.GA:openssl-debuginfo-1:3.2.2-16.el10.ppc64le"
+        },
+        "product_reference": "openssl-debuginfo-1:3.2.2-16.el10.ppc64le",
+        "relates_to_product_reference": "BaseOS-10.0.GA"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "openssl-debuginfo-1:3.2.2-16.el10.s390x as a component of Red Hat Enterprise Linux BaseOS (v. 10)",
+          "product_id": "BaseOS-10.0.GA:openssl-debuginfo-1:3.2.2-16.el10.s390x"
+        },
+        "product_reference": "openssl-debuginfo-1:3.2.2-16.el10.s390x",
+        "relates_to_product_reference": "BaseOS-10.0.GA"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "openssl-debuginfo-1:3.2.2-16.el10.x86_64 as a component of Red Hat Enterprise Linux BaseOS (v. 10)",
+          "product_id": "BaseOS-10.0.GA:openssl-debuginfo-1:3.2.2-16.el10.x86_64"
+        },
+        "product_reference": "openssl-debuginfo-1:3.2.2-16.el10.x86_64",
+        "relates_to_product_reference": "BaseOS-10.0.GA"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "openssl-debugsource-1:3.2.2-16.el10.aarch64 as a component of Red Hat Enterprise Linux BaseOS (v. 10)",
+          "product_id": "BaseOS-10.0.GA:openssl-debugsource-1:3.2.2-16.el10.aarch64"
+        },
+        "product_reference": "openssl-debugsource-1:3.2.2-16.el10.aarch64",
+        "relates_to_product_reference": "BaseOS-10.0.GA"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "openssl-debugsource-1:3.2.2-16.el10.ppc64le as a component of Red Hat Enterprise Linux BaseOS (v. 10)",
+          "product_id": "BaseOS-10.0.GA:openssl-debugsource-1:3.2.2-16.el10.ppc64le"
+        },
+        "product_reference": "openssl-debugsource-1:3.2.2-16.el10.ppc64le",
+        "relates_to_product_reference": "BaseOS-10.0.GA"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "openssl-debugsource-1:3.2.2-16.el10.s390x as a component of Red Hat Enterprise Linux BaseOS (v. 10)",
+          "product_id": "BaseOS-10.0.GA:openssl-debugsource-1:3.2.2-16.el10.s390x"
+        },
+        "product_reference": "openssl-debugsource-1:3.2.2-16.el10.s390x",
+        "relates_to_product_reference": "BaseOS-10.0.GA"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "openssl-debugsource-1:3.2.2-16.el10.x86_64 as a component of Red Hat Enterprise Linux BaseOS (v. 10)",
+          "product_id": "BaseOS-10.0.GA:openssl-debugsource-1:3.2.2-16.el10.x86_64"
+        },
+        "product_reference": "openssl-debugsource-1:3.2.2-16.el10.x86_64",
+        "relates_to_product_reference": "BaseOS-10.0.GA"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "openssl-devel-1:3.2.2-16.el10.aarch64 as a component of Red Hat Enterprise Linux BaseOS (v. 10)",
+          "product_id": "BaseOS-10.0.GA:openssl-devel-1:3.2.2-16.el10.aarch64"
+        },
+        "product_reference": "openssl-devel-1:3.2.2-16.el10.aarch64",
+        "relates_to_product_reference": "BaseOS-10.0.GA"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "openssl-devel-1:3.2.2-16.el10.ppc64le as a component of Red Hat Enterprise Linux BaseOS (v. 10)",
+          "product_id": "BaseOS-10.0.GA:openssl-devel-1:3.2.2-16.el10.ppc64le"
+        },
+        "product_reference": "openssl-devel-1:3.2.2-16.el10.ppc64le",
+        "relates_to_product_reference": "BaseOS-10.0.GA"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "openssl-devel-1:3.2.2-16.el10.s390x as a component of Red Hat Enterprise Linux BaseOS (v. 10)",
+          "product_id": "BaseOS-10.0.GA:openssl-devel-1:3.2.2-16.el10.s390x"
+        },
+        "product_reference": "openssl-devel-1:3.2.2-16.el10.s390x",
+        "relates_to_product_reference": "BaseOS-10.0.GA"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "openssl-devel-1:3.2.2-16.el10.x86_64 as a component of Red Hat Enterprise Linux BaseOS (v. 10)",
+          "product_id": "BaseOS-10.0.GA:openssl-devel-1:3.2.2-16.el10.x86_64"
+        },
+        "product_reference": "openssl-devel-1:3.2.2-16.el10.x86_64",
+        "relates_to_product_reference": "BaseOS-10.0.GA"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "openssl-libs-1:3.2.2-16.el10.aarch64 as a component of Red Hat Enterprise Linux BaseOS (v. 10)",
+          "product_id": "BaseOS-10.0.GA:openssl-libs-1:3.2.2-16.el10.aarch64"
+        },
+        "product_reference": "openssl-libs-1:3.2.2-16.el10.aarch64",
+        "relates_to_product_reference": "BaseOS-10.0.GA"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "openssl-libs-1:3.2.2-16.el10.ppc64le as a component of Red Hat Enterprise Linux BaseOS (v. 10)",
+          "product_id": "BaseOS-10.0.GA:openssl-libs-1:3.2.2-16.el10.ppc64le"
+        },
+        "product_reference": "openssl-libs-1:3.2.2-16.el10.ppc64le",
+        "relates_to_product_reference": "BaseOS-10.0.GA"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "openssl-libs-1:3.2.2-16.el10.s390x as a component of Red Hat Enterprise Linux BaseOS (v. 10)",
+          "product_id": "BaseOS-10.0.GA:openssl-libs-1:3.2.2-16.el10.s390x"
+        },
+        "product_reference": "openssl-libs-1:3.2.2-16.el10.s390x",
+        "relates_to_product_reference": "BaseOS-10.0.GA"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "openssl-libs-1:3.2.2-16.el10.x86_64 as a component of Red Hat Enterprise Linux BaseOS (v. 10)",
+          "product_id": "BaseOS-10.0.GA:openssl-libs-1:3.2.2-16.el10.x86_64"
+        },
+        "product_reference": "openssl-libs-1:3.2.2-16.el10.x86_64",
+        "relates_to_product_reference": "BaseOS-10.0.GA"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "openssl-libs-debuginfo-1:3.2.2-16.el10.aarch64 as a component of Red Hat Enterprise Linux BaseOS (v. 10)",
+          "product_id": "BaseOS-10.0.GA:openssl-libs-debuginfo-1:3.2.2-16.el10.aarch64"
+        },
+        "product_reference": "openssl-libs-debuginfo-1:3.2.2-16.el10.aarch64",
+        "relates_to_product_reference": "BaseOS-10.0.GA"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "openssl-libs-debuginfo-1:3.2.2-16.el10.ppc64le as a component of Red Hat Enterprise Linux BaseOS (v. 10)",
+          "product_id": "BaseOS-10.0.GA:openssl-libs-debuginfo-1:3.2.2-16.el10.ppc64le"
+        },
+        "product_reference": "openssl-libs-debuginfo-1:3.2.2-16.el10.ppc64le",
+        "relates_to_product_reference": "BaseOS-10.0.GA"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "openssl-libs-debuginfo-1:3.2.2-16.el10.s390x as a component of Red Hat Enterprise Linux BaseOS (v. 10)",
+          "product_id": "BaseOS-10.0.GA:openssl-libs-debuginfo-1:3.2.2-16.el10.s390x"
+        },
+        "product_reference": "openssl-libs-debuginfo-1:3.2.2-16.el10.s390x",
+        "relates_to_product_reference": "BaseOS-10.0.GA"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "openssl-libs-debuginfo-1:3.2.2-16.el10.x86_64 as a component of Red Hat Enterprise Linux BaseOS (v. 10)",
+          "product_id": "BaseOS-10.0.GA:openssl-libs-debuginfo-1:3.2.2-16.el10.x86_64"
+        },
+        "product_reference": "openssl-libs-debuginfo-1:3.2.2-16.el10.x86_64",
+        "relates_to_product_reference": "BaseOS-10.0.GA"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "openssl-perl-1:3.2.2-16.el10.aarch64 as a component of Red Hat Enterprise Linux BaseOS (v. 10)",
+          "product_id": "BaseOS-10.0.GA:openssl-perl-1:3.2.2-16.el10.aarch64"
+        },
+        "product_reference": "openssl-perl-1:3.2.2-16.el10.aarch64",
+        "relates_to_product_reference": "BaseOS-10.0.GA"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "openssl-perl-1:3.2.2-16.el10.ppc64le as a component of Red Hat Enterprise Linux BaseOS (v. 10)",
+          "product_id": "BaseOS-10.0.GA:openssl-perl-1:3.2.2-16.el10.ppc64le"
+        },
+        "product_reference": "openssl-perl-1:3.2.2-16.el10.ppc64le",
+        "relates_to_product_reference": "BaseOS-10.0.GA"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "openssl-perl-1:3.2.2-16.el10.s390x as a component of Red Hat Enterprise Linux BaseOS (v. 10)",
+          "product_id": "BaseOS-10.0.GA:openssl-perl-1:3.2.2-16.el10.s390x"
+        },
+        "product_reference": "openssl-perl-1:3.2.2-16.el10.s390x",
+        "relates_to_product_reference": "BaseOS-10.0.GA"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "openssl-perl-1:3.2.2-16.el10.x86_64 as a component of Red Hat Enterprise Linux BaseOS (v. 10)",
+          "product_id": "BaseOS-10.0.GA:openssl-perl-1:3.2.2-16.el10.x86_64"
+        },
+        "product_reference": "openssl-perl-1:3.2.2-16.el10.x86_64",
+        "relates_to_product_reference": "BaseOS-10.0.GA"
+      }
+    ]
+  },
+  "vulnerabilities": [
+    {
+      "cve": "CVE-2024-12797",
+      "cwe": {
+        "id": "CWE-295",
+        "name": "Improper Certificate Validation"
+      },
+      "discovery_date": "2025-01-29T09:25:13.972000+00:00",
+      "ids": [
+        {
+          "system_name": "Red Hat Bugzilla ID",
+          "text": "2342757"
+        }
+      ],
+      "notes": [
+        {
+          "category": "description",
+          "text": "A flaw was found in OpenSSL's RFC7250 Raw Public Key (RPK) authentication. This vulnerability allows man-in-the-middle (MITM) attacks via failure to abort TLS/DTLS handshakes when the server's RPK does not match the expected key despite the SSL_VERIFY_PEER verification mode being set.",
+          "title": "Vulnerability description"
+        },
+        {
+          "category": "summary",
+          "text": "openssl: RFC7250 handshakes with unauthenticated servers don't abort as expected",
+          "title": "Vulnerability summary"
+        },
+        {
+          "category": "other",
+          "text": "This issue was introduced in the initial implementation of RPK support in OpenSSL 3.2, which was first shipped in RHEL 9.5. Earlier releases of OpenSSL provided in RHEL prior to 9.5 are not affected. \n\nRPKs are disabled by default in both TLS clients and TLS servers. The issue only arises when TLS clients explicitly enable RPK use by the server, and the server, likewise, enables sending of an RPK instead of an X.509 certificate chain. The affected clients are those that then rely on the handshake to fail when the server's RPK fails to match one of the expected public keys, by setting the verification mode to SSL_VERIFY_PEER. \n\nClients that enable server-side raw public keys can still find out that raw public key verification failed by calling SSL_get_verify_result(), and those that do, and take appropriate action, are not affected.\n\nrhel9/ruby-33 & ubi9/ruby-33 are not affected because RPK is not present in any form or as any function that could be called from Ruby via Red Hat supported RPMs in RHEL. For example the SSL_dane_enable or SSL_add_expected_rpk or X509_STORE_CTX_get0_rpk or X509_STORE_CTX_init_rpk (and more rpk-related) functions are not callable from Ruby.",
+          "title": "Statement"
+        },
+        {
+          "category": "general",
+          "text": "The CVSS score(s) listed for this vulnerability do not reflect the associated product's status, and are included for informational purposes to better understand the severity of this vulnerability.",
+          "title": "CVSS score applicability"
+        }
+      ],
+      "product_status": {
+        "fixed": [
+          "AppStream-10.0.GA:openssl-1:3.2.2-16.el10.aarch64",
+          "AppStream-10.0.GA:openssl-1:3.2.2-16.el10.ppc64le",
+          "AppStream-10.0.GA:openssl-1:3.2.2-16.el10.s390x",
+          "AppStream-10.0.GA:openssl-1:3.2.2-16.el10.src",
+          "AppStream-10.0.GA:openssl-1:3.2.2-16.el10.x86_64",
+          "AppStream-10.0.GA:openssl-debuginfo-1:3.2.2-16.el10.aarch64",
+          "AppStream-10.0.GA:openssl-debuginfo-1:3.2.2-16.el10.ppc64le",
+          "AppStream-10.0.GA:openssl-debuginfo-1:3.2.2-16.el10.s390x",
+          "AppStream-10.0.GA:openssl-debuginfo-1:3.2.2-16.el10.x86_64",
+          "AppStream-10.0.GA:openssl-debugsource-1:3.2.2-16.el10.aarch64",
+          "AppStream-10.0.GA:openssl-debugsource-1:3.2.2-16.el10.ppc64le",
+          "AppStream-10.0.GA:openssl-debugsource-1:3.2.2-16.el10.s390x",
+          "AppStream-10.0.GA:openssl-debugsource-1:3.2.2-16.el10.x86_64",
+          "AppStream-10.0.GA:openssl-devel-1:3.2.2-16.el10.aarch64",
+          "AppStream-10.0.GA:openssl-devel-1:3.2.2-16.el10.ppc64le",
+          "AppStream-10.0.GA:openssl-devel-1:3.2.2-16.el10.s390x",
+          "AppStream-10.0.GA:openssl-devel-1:3.2.2-16.el10.x86_64",
+          "AppStream-10.0.GA:openssl-libs-1:3.2.2-16.el10.aarch64",
+          "AppStream-10.0.GA:openssl-libs-1:3.2.2-16.el10.ppc64le",
+          "AppStream-10.0.GA:openssl-libs-1:3.2.2-16.el10.s390x",
+          "AppStream-10.0.GA:openssl-libs-1:3.2.2-16.el10.x86_64",
+          "AppStream-10.0.GA:openssl-libs-debuginfo-1:3.2.2-16.el10.aarch64",
+          "AppStream-10.0.GA:openssl-libs-debuginfo-1:3.2.2-16.el10.ppc64le",
+          "AppStream-10.0.GA:openssl-libs-debuginfo-1:3.2.2-16.el10.s390x",
+          "AppStream-10.0.GA:openssl-libs-debuginfo-1:3.2.2-16.el10.x86_64",
+          "AppStream-10.0.GA:openssl-perl-1:3.2.2-16.el10.aarch64",
+          "AppStream-10.0.GA:openssl-perl-1:3.2.2-16.el10.ppc64le",
+          "AppStream-10.0.GA:openssl-perl-1:3.2.2-16.el10.s390x",
+          "AppStream-10.0.GA:openssl-perl-1:3.2.2-16.el10.x86_64",
+          "BaseOS-10.0.GA:openssl-1:3.2.2-16.el10.aarch64",
+          "BaseOS-10.0.GA:openssl-1:3.2.2-16.el10.ppc64le",
+          "BaseOS-10.0.GA:openssl-1:3.2.2-16.el10.s390x",
+          "BaseOS-10.0.GA:openssl-1:3.2.2-16.el10.src",
+          "BaseOS-10.0.GA:openssl-1:3.2.2-16.el10.x86_64",
+          "BaseOS-10.0.GA:openssl-debuginfo-1:3.2.2-16.el10.aarch64",
+          "BaseOS-10.0.GA:openssl-debuginfo-1:3.2.2-16.el10.ppc64le",
+          "BaseOS-10.0.GA:openssl-debuginfo-1:3.2.2-16.el10.s390x",
+          "BaseOS-10.0.GA:openssl-debuginfo-1:3.2.2-16.el10.x86_64",
+          "BaseOS-10.0.GA:openssl-debugsource-1:3.2.2-16.el10.aarch64",
+          "BaseOS-10.0.GA:openssl-debugsource-1:3.2.2-16.el10.ppc64le",
+          "BaseOS-10.0.GA:openssl-debugsource-1:3.2.2-16.el10.s390x",
+          "BaseOS-10.0.GA:openssl-debugsource-1:3.2.2-16.el10.x86_64",
+          "BaseOS-10.0.GA:openssl-devel-1:3.2.2-16.el10.aarch64",
+          "BaseOS-10.0.GA:openssl-devel-1:3.2.2-16.el10.ppc64le",
+          "BaseOS-10.0.GA:openssl-devel-1:3.2.2-16.el10.s390x",
+          "BaseOS-10.0.GA:openssl-devel-1:3.2.2-16.el10.x86_64",
+          "BaseOS-10.0.GA:openssl-libs-1:3.2.2-16.el10.aarch64",
+          "BaseOS-10.0.GA:openssl-libs-1:3.2.2-16.el10.ppc64le",
+          "BaseOS-10.0.GA:openssl-libs-1:3.2.2-16.el10.s390x",
+          "BaseOS-10.0.GA:openssl-libs-1:3.2.2-16.el10.x86_64",
+          "BaseOS-10.0.GA:openssl-libs-debuginfo-1:3.2.2-16.el10.aarch64",
+          "BaseOS-10.0.GA:openssl-libs-debuginfo-1:3.2.2-16.el10.ppc64le",
+          "BaseOS-10.0.GA:openssl-libs-debuginfo-1:3.2.2-16.el10.s390x",
+          "BaseOS-10.0.GA:openssl-libs-debuginfo-1:3.2.2-16.el10.x86_64",
+          "BaseOS-10.0.GA:openssl-perl-1:3.2.2-16.el10.aarch64",
+          "BaseOS-10.0.GA:openssl-perl-1:3.2.2-16.el10.ppc64le",
+          "BaseOS-10.0.GA:openssl-perl-1:3.2.2-16.el10.s390x",
+          "BaseOS-10.0.GA:openssl-perl-1:3.2.2-16.el10.x86_64"
+        ]
+      },
+      "references": [
+        {
+          "category": "self",
+          "summary": "Canonical URL",
+          "url": "https://access.redhat.com/security/cve/CVE-2024-12797"
+        },
+        {
+          "category": "external",
+          "summary": "RHBZ#2342757",
+          "url": "https://bugzilla.redhat.com/show_bug.cgi?id=2342757"
+        },
+        {
+          "category": "external",
+          "summary": "https://www.cve.org/CVERecord?id=CVE-2024-12797",
+          "url": "https://www.cve.org/CVERecord?id=CVE-2024-12797"
+        },
+        {
+          "category": "external",
+          "summary": "https://nvd.nist.gov/vuln/detail/CVE-2024-12797",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2024-12797"
+        }
+      ],
+      "release_date": "2025-02-11T15:00:00+00:00",
+      "remediations": [
+        {
+          "category": "vendor_fix",
+          "date": "2025-05-13T08:05:47+00:00",
+          "details": "For details on how to apply this update, which includes the changes described in this advisory, refer to:\n\nhttps://access.redhat.com/articles/11258",
+          "product_ids": [
+            "AppStream-10.0.GA:openssl-1:3.2.2-16.el10.aarch64",
+            "AppStream-10.0.GA:openssl-1:3.2.2-16.el10.ppc64le",
+            "AppStream-10.0.GA:openssl-1:3.2.2-16.el10.s390x",
+            "AppStream-10.0.GA:openssl-1:3.2.2-16.el10.src",
+            "AppStream-10.0.GA:openssl-1:3.2.2-16.el10.x86_64",
+            "AppStream-10.0.GA:openssl-debuginfo-1:3.2.2-16.el10.aarch64",
+            "AppStream-10.0.GA:openssl-debuginfo-1:3.2.2-16.el10.ppc64le",
+            "AppStream-10.0.GA:openssl-debuginfo-1:3.2.2-16.el10.s390x",
+            "AppStream-10.0.GA:openssl-debuginfo-1:3.2.2-16.el10.x86_64",
+            "AppStream-10.0.GA:openssl-debugsource-1:3.2.2-16.el10.aarch64",
+            "AppStream-10.0.GA:openssl-debugsource-1:3.2.2-16.el10.ppc64le",
+            "AppStream-10.0.GA:openssl-debugsource-1:3.2.2-16.el10.s390x",
+            "AppStream-10.0.GA:openssl-debugsource-1:3.2.2-16.el10.x86_64",
+            "AppStream-10.0.GA:openssl-devel-1:3.2.2-16.el10.aarch64",
+            "AppStream-10.0.GA:openssl-devel-1:3.2.2-16.el10.ppc64le",
+            "AppStream-10.0.GA:openssl-devel-1:3.2.2-16.el10.s390x",
+            "AppStream-10.0.GA:openssl-devel-1:3.2.2-16.el10.x86_64",
+            "AppStream-10.0.GA:openssl-libs-1:3.2.2-16.el10.aarch64",
+            "AppStream-10.0.GA:openssl-libs-1:3.2.2-16.el10.ppc64le",
+            "AppStream-10.0.GA:openssl-libs-1:3.2.2-16.el10.s390x",
+            "AppStream-10.0.GA:openssl-libs-1:3.2.2-16.el10.x86_64",
+            "AppStream-10.0.GA:openssl-libs-debuginfo-1:3.2.2-16.el10.aarch64",
+            "AppStream-10.0.GA:openssl-libs-debuginfo-1:3.2.2-16.el10.ppc64le",
+            "AppStream-10.0.GA:openssl-libs-debuginfo-1:3.2.2-16.el10.s390x",
+            "AppStream-10.0.GA:openssl-libs-debuginfo-1:3.2.2-16.el10.x86_64",
+            "AppStream-10.0.GA:openssl-perl-1:3.2.2-16.el10.aarch64",
+            "AppStream-10.0.GA:openssl-perl-1:3.2.2-16.el10.ppc64le",
+            "AppStream-10.0.GA:openssl-perl-1:3.2.2-16.el10.s390x",
+            "AppStream-10.0.GA:openssl-perl-1:3.2.2-16.el10.x86_64",
+            "BaseOS-10.0.GA:openssl-1:3.2.2-16.el10.aarch64",
+            "BaseOS-10.0.GA:openssl-1:3.2.2-16.el10.ppc64le",
+            "BaseOS-10.0.GA:openssl-1:3.2.2-16.el10.s390x",
+            "BaseOS-10.0.GA:openssl-1:3.2.2-16.el10.src",
+            "BaseOS-10.0.GA:openssl-1:3.2.2-16.el10.x86_64",
+            "BaseOS-10.0.GA:openssl-debuginfo-1:3.2.2-16.el10.aarch64",
+            "BaseOS-10.0.GA:openssl-debuginfo-1:3.2.2-16.el10.ppc64le",
+            "BaseOS-10.0.GA:openssl-debuginfo-1:3.2.2-16.el10.s390x",
+            "BaseOS-10.0.GA:openssl-debuginfo-1:3.2.2-16.el10.x86_64",
+            "BaseOS-10.0.GA:openssl-debugsource-1:3.2.2-16.el10.aarch64",
+            "BaseOS-10.0.GA:openssl-debugsource-1:3.2.2-16.el10.ppc64le",
+            "BaseOS-10.0.GA:openssl-debugsource-1:3.2.2-16.el10.s390x",
+            "BaseOS-10.0.GA:openssl-debugsource-1:3.2.2-16.el10.x86_64",
+            "BaseOS-10.0.GA:openssl-devel-1:3.2.2-16.el10.aarch64",
+            "BaseOS-10.0.GA:openssl-devel-1:3.2.2-16.el10.ppc64le",
+            "BaseOS-10.0.GA:openssl-devel-1:3.2.2-16.el10.s390x",
+            "BaseOS-10.0.GA:openssl-devel-1:3.2.2-16.el10.x86_64",
+            "BaseOS-10.0.GA:openssl-libs-1:3.2.2-16.el10.aarch64",
+            "BaseOS-10.0.GA:openssl-libs-1:3.2.2-16.el10.ppc64le",
+            "BaseOS-10.0.GA:openssl-libs-1:3.2.2-16.el10.s390x",
+            "BaseOS-10.0.GA:openssl-libs-1:3.2.2-16.el10.x86_64",
+            "BaseOS-10.0.GA:openssl-libs-debuginfo-1:3.2.2-16.el10.aarch64",
+            "BaseOS-10.0.GA:openssl-libs-debuginfo-1:3.2.2-16.el10.ppc64le",
+            "BaseOS-10.0.GA:openssl-libs-debuginfo-1:3.2.2-16.el10.s390x",
+            "BaseOS-10.0.GA:openssl-libs-debuginfo-1:3.2.2-16.el10.x86_64",
+            "BaseOS-10.0.GA:openssl-perl-1:3.2.2-16.el10.aarch64",
+            "BaseOS-10.0.GA:openssl-perl-1:3.2.2-16.el10.ppc64le",
+            "BaseOS-10.0.GA:openssl-perl-1:3.2.2-16.el10.s390x",
+            "BaseOS-10.0.GA:openssl-perl-1:3.2.2-16.el10.x86_64"
+          ],
+          "restart_required": {
+            "category": "none"
+          },
+          "url": "https://access.redhat.com/errata/RHBA-2025:6314"
+        },
+        {
+          "category": "workaround",
+          "details": "Mitigation for this issue is either not available or the currently available options do not meet the Red Hat Product Security criteria comprising ease of use and deployment, applicability to widespread installation base or stability.",
+          "product_ids": [
+            "AppStream-10.0.GA:openssl-1:3.2.2-16.el10.aarch64",
+            "AppStream-10.0.GA:openssl-1:3.2.2-16.el10.ppc64le",
+            "AppStream-10.0.GA:openssl-1:3.2.2-16.el10.s390x",
+            "AppStream-10.0.GA:openssl-1:3.2.2-16.el10.src",
+            "AppStream-10.0.GA:openssl-1:3.2.2-16.el10.x86_64",
+            "AppStream-10.0.GA:openssl-debuginfo-1:3.2.2-16.el10.aarch64",
+            "AppStream-10.0.GA:openssl-debuginfo-1:3.2.2-16.el10.ppc64le",
+            "AppStream-10.0.GA:openssl-debuginfo-1:3.2.2-16.el10.s390x",
+            "AppStream-10.0.GA:openssl-debuginfo-1:3.2.2-16.el10.x86_64",
+            "AppStream-10.0.GA:openssl-debugsource-1:3.2.2-16.el10.aarch64",
+            "AppStream-10.0.GA:openssl-debugsource-1:3.2.2-16.el10.ppc64le",
+            "AppStream-10.0.GA:openssl-debugsource-1:3.2.2-16.el10.s390x",
+            "AppStream-10.0.GA:openssl-debugsource-1:3.2.2-16.el10.x86_64",
+            "AppStream-10.0.GA:openssl-devel-1:3.2.2-16.el10.aarch64",
+            "AppStream-10.0.GA:openssl-devel-1:3.2.2-16.el10.ppc64le",
+            "AppStream-10.0.GA:openssl-devel-1:3.2.2-16.el10.s390x",
+            "AppStream-10.0.GA:openssl-devel-1:3.2.2-16.el10.x86_64",
+            "AppStream-10.0.GA:openssl-libs-1:3.2.2-16.el10.aarch64",
+            "AppStream-10.0.GA:openssl-libs-1:3.2.2-16.el10.ppc64le",
+            "AppStream-10.0.GA:openssl-libs-1:3.2.2-16.el10.s390x",
+            "AppStream-10.0.GA:openssl-libs-1:3.2.2-16.el10.x86_64",
+            "AppStream-10.0.GA:openssl-libs-debuginfo-1:3.2.2-16.el10.aarch64",
+            "AppStream-10.0.GA:openssl-libs-debuginfo-1:3.2.2-16.el10.ppc64le",
+            "AppStream-10.0.GA:openssl-libs-debuginfo-1:3.2.2-16.el10.s390x",
+            "AppStream-10.0.GA:openssl-libs-debuginfo-1:3.2.2-16.el10.x86_64",
+            "AppStream-10.0.GA:openssl-perl-1:3.2.2-16.el10.aarch64",
+            "AppStream-10.0.GA:openssl-perl-1:3.2.2-16.el10.ppc64le",
+            "AppStream-10.0.GA:openssl-perl-1:3.2.2-16.el10.s390x",
+            "AppStream-10.0.GA:openssl-perl-1:3.2.2-16.el10.x86_64",
+            "BaseOS-10.0.GA:openssl-1:3.2.2-16.el10.aarch64",
+            "BaseOS-10.0.GA:openssl-1:3.2.2-16.el10.ppc64le",
+            "BaseOS-10.0.GA:openssl-1:3.2.2-16.el10.s390x",
+            "BaseOS-10.0.GA:openssl-1:3.2.2-16.el10.src",
+            "BaseOS-10.0.GA:openssl-1:3.2.2-16.el10.x86_64",
+            "BaseOS-10.0.GA:openssl-debuginfo-1:3.2.2-16.el10.aarch64",
+            "BaseOS-10.0.GA:openssl-debuginfo-1:3.2.2-16.el10.ppc64le",
+            "BaseOS-10.0.GA:openssl-debuginfo-1:3.2.2-16.el10.s390x",
+            "BaseOS-10.0.GA:openssl-debuginfo-1:3.2.2-16.el10.x86_64",
+            "BaseOS-10.0.GA:openssl-debugsource-1:3.2.2-16.el10.aarch64",
+            "BaseOS-10.0.GA:openssl-debugsource-1:3.2.2-16.el10.ppc64le",
+            "BaseOS-10.0.GA:openssl-debugsource-1:3.2.2-16.el10.s390x",
+            "BaseOS-10.0.GA:openssl-debugsource-1:3.2.2-16.el10.x86_64",
+            "BaseOS-10.0.GA:openssl-devel-1:3.2.2-16.el10.aarch64",
+            "BaseOS-10.0.GA:openssl-devel-1:3.2.2-16.el10.ppc64le",
+            "BaseOS-10.0.GA:openssl-devel-1:3.2.2-16.el10.s390x",
+            "BaseOS-10.0.GA:openssl-devel-1:3.2.2-16.el10.x86_64",
+            "BaseOS-10.0.GA:openssl-libs-1:3.2.2-16.el10.aarch64",
+            "BaseOS-10.0.GA:openssl-libs-1:3.2.2-16.el10.ppc64le",
+            "BaseOS-10.0.GA:openssl-libs-1:3.2.2-16.el10.s390x",
+            "BaseOS-10.0.GA:openssl-libs-1:3.2.2-16.el10.x86_64",
+            "BaseOS-10.0.GA:openssl-libs-debuginfo-1:3.2.2-16.el10.aarch64",
+            "BaseOS-10.0.GA:openssl-libs-debuginfo-1:3.2.2-16.el10.ppc64le",
+            "BaseOS-10.0.GA:openssl-libs-debuginfo-1:3.2.2-16.el10.s390x",
+            "BaseOS-10.0.GA:openssl-libs-debuginfo-1:3.2.2-16.el10.x86_64",
+            "BaseOS-10.0.GA:openssl-perl-1:3.2.2-16.el10.aarch64",
+            "BaseOS-10.0.GA:openssl-perl-1:3.2.2-16.el10.ppc64le",
+            "BaseOS-10.0.GA:openssl-perl-1:3.2.2-16.el10.s390x",
+            "BaseOS-10.0.GA:openssl-perl-1:3.2.2-16.el10.x86_64"
+          ]
+        }
+      ],
+      "scores": [
+        {
+          "cvss_v3": {
+            "attackComplexity": "HIGH",
+            "attackVector": "NETWORK",
+            "availabilityImpact": "NONE",
+            "baseScore": 7.4,
+            "baseSeverity": "HIGH",
+            "confidentialityImpact": "HIGH",
+            "integrityImpact": "HIGH",
+            "privilegesRequired": "NONE",
+            "scope": "UNCHANGED",
+            "userInteraction": "NONE",
+            "vectorString": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:N",
+            "version": "3.1"
+          },
+          "products": [
+            "AppStream-10.0.GA:openssl-1:3.2.2-16.el10.aarch64",
+            "AppStream-10.0.GA:openssl-1:3.2.2-16.el10.ppc64le",
+            "AppStream-10.0.GA:openssl-1:3.2.2-16.el10.s390x",
+            "AppStream-10.0.GA:openssl-1:3.2.2-16.el10.src",
+            "AppStream-10.0.GA:openssl-1:3.2.2-16.el10.x86_64",
+            "AppStream-10.0.GA:openssl-debuginfo-1:3.2.2-16.el10.aarch64",
+            "AppStream-10.0.GA:openssl-debuginfo-1:3.2.2-16.el10.ppc64le",
+            "AppStream-10.0.GA:openssl-debuginfo-1:3.2.2-16.el10.s390x",
+            "AppStream-10.0.GA:openssl-debuginfo-1:3.2.2-16.el10.x86_64",
+            "AppStream-10.0.GA:openssl-debugsource-1:3.2.2-16.el10.aarch64",
+            "AppStream-10.0.GA:openssl-debugsource-1:3.2.2-16.el10.ppc64le",
+            "AppStream-10.0.GA:openssl-debugsource-1:3.2.2-16.el10.s390x",
+            "AppStream-10.0.GA:openssl-debugsource-1:3.2.2-16.el10.x86_64",
+            "AppStream-10.0.GA:openssl-devel-1:3.2.2-16.el10.aarch64",
+            "AppStream-10.0.GA:openssl-devel-1:3.2.2-16.el10.ppc64le",
+            "AppStream-10.0.GA:openssl-devel-1:3.2.2-16.el10.s390x",
+            "AppStream-10.0.GA:openssl-devel-1:3.2.2-16.el10.x86_64",
+            "AppStream-10.0.GA:openssl-libs-1:3.2.2-16.el10.aarch64",
+            "AppStream-10.0.GA:openssl-libs-1:3.2.2-16.el10.ppc64le",
+            "AppStream-10.0.GA:openssl-libs-1:3.2.2-16.el10.s390x",
+            "AppStream-10.0.GA:openssl-libs-1:3.2.2-16.el10.x86_64",
+            "AppStream-10.0.GA:openssl-libs-debuginfo-1:3.2.2-16.el10.aarch64",
+            "AppStream-10.0.GA:openssl-libs-debuginfo-1:3.2.2-16.el10.ppc64le",
+            "AppStream-10.0.GA:openssl-libs-debuginfo-1:3.2.2-16.el10.s390x",
+            "AppStream-10.0.GA:openssl-libs-debuginfo-1:3.2.2-16.el10.x86_64",
+            "AppStream-10.0.GA:openssl-perl-1:3.2.2-16.el10.aarch64",
+            "AppStream-10.0.GA:openssl-perl-1:3.2.2-16.el10.ppc64le",
+            "AppStream-10.0.GA:openssl-perl-1:3.2.2-16.el10.s390x",
+            "AppStream-10.0.GA:openssl-perl-1:3.2.2-16.el10.x86_64",
+            "BaseOS-10.0.GA:openssl-1:3.2.2-16.el10.aarch64",
+            "BaseOS-10.0.GA:openssl-1:3.2.2-16.el10.ppc64le",
+            "BaseOS-10.0.GA:openssl-1:3.2.2-16.el10.s390x",
+            "BaseOS-10.0.GA:openssl-1:3.2.2-16.el10.src",
+            "BaseOS-10.0.GA:openssl-1:3.2.2-16.el10.x86_64",
+            "BaseOS-10.0.GA:openssl-debuginfo-1:3.2.2-16.el10.aarch64",
+            "BaseOS-10.0.GA:openssl-debuginfo-1:3.2.2-16.el10.ppc64le",
+            "BaseOS-10.0.GA:openssl-debuginfo-1:3.2.2-16.el10.s390x",
+            "BaseOS-10.0.GA:openssl-debuginfo-1:3.2.2-16.el10.x86_64",
+            "BaseOS-10.0.GA:openssl-debugsource-1:3.2.2-16.el10.aarch64",
+            "BaseOS-10.0.GA:openssl-debugsource-1:3.2.2-16.el10.ppc64le",
+            "BaseOS-10.0.GA:openssl-debugsource-1:3.2.2-16.el10.s390x",
+            "BaseOS-10.0.GA:openssl-debugsource-1:3.2.2-16.el10.x86_64",
+            "BaseOS-10.0.GA:openssl-devel-1:3.2.2-16.el10.aarch64",
+            "BaseOS-10.0.GA:openssl-devel-1:3.2.2-16.el10.ppc64le",
+            "BaseOS-10.0.GA:openssl-devel-1:3.2.2-16.el10.s390x",
+            "BaseOS-10.0.GA:openssl-devel-1:3.2.2-16.el10.x86_64",
+            "BaseOS-10.0.GA:openssl-libs-1:3.2.2-16.el10.aarch64",
+            "BaseOS-10.0.GA:openssl-libs-1:3.2.2-16.el10.ppc64le",
+            "BaseOS-10.0.GA:openssl-libs-1:3.2.2-16.el10.s390x",
+            "BaseOS-10.0.GA:openssl-libs-1:3.2.2-16.el10.x86_64",
+            "BaseOS-10.0.GA:openssl-libs-debuginfo-1:3.2.2-16.el10.aarch64",
+            "BaseOS-10.0.GA:openssl-libs-debuginfo-1:3.2.2-16.el10.ppc64le",
+            "BaseOS-10.0.GA:openssl-libs-debuginfo-1:3.2.2-16.el10.s390x",
+            "BaseOS-10.0.GA:openssl-libs-debuginfo-1:3.2.2-16.el10.x86_64",
+            "BaseOS-10.0.GA:openssl-perl-1:3.2.2-16.el10.aarch64",
+            "BaseOS-10.0.GA:openssl-perl-1:3.2.2-16.el10.ppc64le",
+            "BaseOS-10.0.GA:openssl-perl-1:3.2.2-16.el10.s390x",
+            "BaseOS-10.0.GA:openssl-perl-1:3.2.2-16.el10.x86_64"
+          ]
+        }
+      ],
+      "threats": [
+        {
+          "category": "impact",
+          "details": "Important"
+        }
+      ],
+      "title": "openssl: RFC7250 handshakes with unauthenticated servers don't abort as expected"
+    }
+  ]
+}

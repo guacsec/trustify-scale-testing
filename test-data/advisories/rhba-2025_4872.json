@@ -1,0 +1,790 @@
+{
+  "document": {
+    "aggregate_severity": {
+      "namespace": "https://access.redhat.com/security/updates/classification/",
+      "text": "Moderate"
+    },
+    "category": "csaf_security_advisory",
+    "csaf_version": "2.0",
+    "distribution": {
+      "text": "Copyright © Red Hat, Inc. All rights reserved.",
+      "tlp": {
+        "label": "WHITE",
+        "url": "https://www.first.org/tlp/"
+      }
+    },
+    "lang": "en",
+    "notes": [
+      {
+        "category": "summary",
+        "text": "An update for rpm-ostree is now available for Red Hat Enterprise Linux 10.",
+        "title": "Topic"
+      },
+      {
+        "category": "general",
+        "text": "For detailed information on changes in this release, see the Red Hat Enterprise Linux 10 Release Notes linked from the References section.",
+        "title": "Details"
+      },
+      {
+        "category": "legal_disclaimer",
+        "text": "This content is licensed under the Creative Commons Attribution 4.0 International License (https://creativecommons.org/licenses/by/4.0/). If you distribute this content, or a modified version of it, you must provide attribution to Red Hat Inc. and provide a link to the original.",
+        "title": "Terms of Use"
+      }
+    ],
+    "publisher": {
+      "category": "vendor",
+      "contact_details": "https://access.redhat.com/security/team/contact/",
+      "issuing_authority": "Red Hat Product Security is responsible for vulnerability handling across all Red Hat products and services.",
+      "name": "Red Hat Product Security",
+      "namespace": "https://www.redhat.com"
+    },
+    "references": [
+      {
+        "category": "self",
+        "summary": "https://access.redhat.com/errata/RHBA-2025:4872",
+        "url": "https://access.redhat.com/errata/RHBA-2025:4872"
+      },
+      {
+        "category": "external",
+        "summary": "https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/10/html/10.0_release_notes/index",
+        "url": "https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/10/html/10.0_release_notes/index"
+      },
+      {
+        "category": "external",
+        "summary": "RHEL-57722",
+        "url": "https://issues.redhat.com/browse/RHEL-57722"
+      },
+      {
+        "category": "external",
+        "summary": "RHEL-63021",
+        "url": "https://issues.redhat.com/browse/RHEL-63021"
+      },
+      {
+        "category": "external",
+        "summary": "RHEL-68130",
+        "url": "https://issues.redhat.com/browse/RHEL-68130"
+      },
+      {
+        "category": "external",
+        "summary": "RHEL-72585",
+        "url": "https://issues.redhat.com/browse/RHEL-72585"
+      },
+      {
+        "category": "self",
+        "summary": "Canonical URL",
+        "url": "https://security.access.redhat.com/data/csaf/v2/advisories/2025/rhba-2025_4872.json"
+      }
+    ],
+    "title": "Red Hat Bug Fix Advisory: rpm-ostree bug fix and enhancement update",
+    "tracking": {
+      "current_release_date": "2025-09-25T11:28:08+00:00",
+      "generator": {
+        "date": "2025-09-25T11:28:08+00:00",
+        "engine": {
+          "name": "Red Hat SDEngine",
+          "version": "4.6.8"
+        }
+      },
+      "id": "RHBA-2025:4872",
+      "initial_release_date": "2025-05-13T11:53:36+00:00",
+      "revision_history": [
+        {
+          "date": "2025-05-13T11:53:36+00:00",
+          "number": "1",
+          "summary": "Initial version"
+        },
+        {
+          "date": "2025-05-13T11:53:36+00:00",
+          "number": "2",
+          "summary": "Last updated version"
+        },
+        {
+          "date": "2025-09-25T11:28:08+00:00",
+          "number": "3",
+          "summary": "Last generated version"
+        }
+      ],
+      "status": "final",
+      "version": "3"
+    }
+  },
+  "product_tree": {
+    "branches": [
+      {
+        "branches": [
+          {
+            "branches": [
+              {
+                "category": "product_name",
+                "name": "Red Hat Enterprise Linux AppStream (v. 10)",
+                "product": {
+                  "name": "Red Hat Enterprise Linux AppStream (v. 10)",
+                  "product_id": "AppStream-10.0.GA",
+                  "product_identification_helper": {
+                    "cpe": "cpe:/o:redhat:enterprise_linux:10.0"
+                  }
+                }
+              }
+            ],
+            "category": "product_family",
+            "name": "Red Hat Enterprise Linux"
+          },
+          {
+            "branches": [
+              {
+                "category": "product_version",
+                "name": "rpm-ostree-0:2025.5-1.el10.src",
+                "product": {
+                  "name": "rpm-ostree-0:2025.5-1.el10.src",
+                  "product_id": "rpm-ostree-0:2025.5-1.el10.src",
+                  "product_identification_helper": {
+                    "purl": "pkg:rpm/redhat/rpm-ostree@2025.5-1.el10?arch=src"
+                  }
+                }
+              }
+            ],
+            "category": "architecture",
+            "name": "src"
+          },
+          {
+            "branches": [
+              {
+                "category": "product_version",
+                "name": "rpm-ostree-0:2025.5-1.el10.aarch64",
+                "product": {
+                  "name": "rpm-ostree-0:2025.5-1.el10.aarch64",
+                  "product_id": "rpm-ostree-0:2025.5-1.el10.aarch64",
+                  "product_identification_helper": {
+                    "purl": "pkg:rpm/redhat/rpm-ostree@2025.5-1.el10?arch=aarch64"
+                  }
+                }
+              },
+              {
+                "category": "product_version",
+                "name": "rpm-ostree-libs-0:2025.5-1.el10.aarch64",
+                "product": {
+                  "name": "rpm-ostree-libs-0:2025.5-1.el10.aarch64",
+                  "product_id": "rpm-ostree-libs-0:2025.5-1.el10.aarch64",
+                  "product_identification_helper": {
+                    "purl": "pkg:rpm/redhat/rpm-ostree-libs@2025.5-1.el10?arch=aarch64"
+                  }
+                }
+              },
+              {
+                "category": "product_version",
+                "name": "rpm-ostree-debugsource-0:2025.5-1.el10.aarch64",
+                "product": {
+                  "name": "rpm-ostree-debugsource-0:2025.5-1.el10.aarch64",
+                  "product_id": "rpm-ostree-debugsource-0:2025.5-1.el10.aarch64",
+                  "product_identification_helper": {
+                    "purl": "pkg:rpm/redhat/rpm-ostree-debugsource@2025.5-1.el10?arch=aarch64"
+                  }
+                }
+              },
+              {
+                "category": "product_version",
+                "name": "rpm-ostree-debuginfo-0:2025.5-1.el10.aarch64",
+                "product": {
+                  "name": "rpm-ostree-debuginfo-0:2025.5-1.el10.aarch64",
+                  "product_id": "rpm-ostree-debuginfo-0:2025.5-1.el10.aarch64",
+                  "product_identification_helper": {
+                    "purl": "pkg:rpm/redhat/rpm-ostree-debuginfo@2025.5-1.el10?arch=aarch64"
+                  }
+                }
+              },
+              {
+                "category": "product_version",
+                "name": "rpm-ostree-libs-debuginfo-0:2025.5-1.el10.aarch64",
+                "product": {
+                  "name": "rpm-ostree-libs-debuginfo-0:2025.5-1.el10.aarch64",
+                  "product_id": "rpm-ostree-libs-debuginfo-0:2025.5-1.el10.aarch64",
+                  "product_identification_helper": {
+                    "purl": "pkg:rpm/redhat/rpm-ostree-libs-debuginfo@2025.5-1.el10?arch=aarch64"
+                  }
+                }
+              }
+            ],
+            "category": "architecture",
+            "name": "aarch64"
+          },
+          {
+            "branches": [
+              {
+                "category": "product_version",
+                "name": "rpm-ostree-0:2025.5-1.el10.ppc64le",
+                "product": {
+                  "name": "rpm-ostree-0:2025.5-1.el10.ppc64le",
+                  "product_id": "rpm-ostree-0:2025.5-1.el10.ppc64le",
+                  "product_identification_helper": {
+                    "purl": "pkg:rpm/redhat/rpm-ostree@2025.5-1.el10?arch=ppc64le"
+                  }
+                }
+              },
+              {
+                "category": "product_version",
+                "name": "rpm-ostree-libs-0:2025.5-1.el10.ppc64le",
+                "product": {
+                  "name": "rpm-ostree-libs-0:2025.5-1.el10.ppc64le",
+                  "product_id": "rpm-ostree-libs-0:2025.5-1.el10.ppc64le",
+                  "product_identification_helper": {
+                    "purl": "pkg:rpm/redhat/rpm-ostree-libs@2025.5-1.el10?arch=ppc64le"
+                  }
+                }
+              },
+              {
+                "category": "product_version",
+                "name": "rpm-ostree-debugsource-0:2025.5-1.el10.ppc64le",
+                "product": {
+                  "name": "rpm-ostree-debugsource-0:2025.5-1.el10.ppc64le",
+                  "product_id": "rpm-ostree-debugsource-0:2025.5-1.el10.ppc64le",
+                  "product_identification_helper": {
+                    "purl": "pkg:rpm/redhat/rpm-ostree-debugsource@2025.5-1.el10?arch=ppc64le"
+                  }
+                }
+              },
+              {
+                "category": "product_version",
+                "name": "rpm-ostree-debuginfo-0:2025.5-1.el10.ppc64le",
+                "product": {
+                  "name": "rpm-ostree-debuginfo-0:2025.5-1.el10.ppc64le",
+                  "product_id": "rpm-ostree-debuginfo-0:2025.5-1.el10.ppc64le",
+                  "product_identification_helper": {
+                    "purl": "pkg:rpm/redhat/rpm-ostree-debuginfo@2025.5-1.el10?arch=ppc64le"
+                  }
+                }
+              },
+              {
+                "category": "product_version",
+                "name": "rpm-ostree-libs-debuginfo-0:2025.5-1.el10.ppc64le",
+                "product": {
+                  "name": "rpm-ostree-libs-debuginfo-0:2025.5-1.el10.ppc64le",
+                  "product_id": "rpm-ostree-libs-debuginfo-0:2025.5-1.el10.ppc64le",
+                  "product_identification_helper": {
+                    "purl": "pkg:rpm/redhat/rpm-ostree-libs-debuginfo@2025.5-1.el10?arch=ppc64le"
+                  }
+                }
+              }
+            ],
+            "category": "architecture",
+            "name": "ppc64le"
+          },
+          {
+            "branches": [
+              {
+                "category": "product_version",
+                "name": "rpm-ostree-0:2025.5-1.el10.x86_64",
+                "product": {
+                  "name": "rpm-ostree-0:2025.5-1.el10.x86_64",
+                  "product_id": "rpm-ostree-0:2025.5-1.el10.x86_64",
+                  "product_identification_helper": {
+                    "purl": "pkg:rpm/redhat/rpm-ostree@2025.5-1.el10?arch=x86_64"
+                  }
+                }
+              },
+              {
+                "category": "product_version",
+                "name": "rpm-ostree-libs-0:2025.5-1.el10.x86_64",
+                "product": {
+                  "name": "rpm-ostree-libs-0:2025.5-1.el10.x86_64",
+                  "product_id": "rpm-ostree-libs-0:2025.5-1.el10.x86_64",
+                  "product_identification_helper": {
+                    "purl": "pkg:rpm/redhat/rpm-ostree-libs@2025.5-1.el10?arch=x86_64"
+                  }
+                }
+              },
+              {
+                "category": "product_version",
+                "name": "rpm-ostree-debugsource-0:2025.5-1.el10.x86_64",
+                "product": {
+                  "name": "rpm-ostree-debugsource-0:2025.5-1.el10.x86_64",
+                  "product_id": "rpm-ostree-debugsource-0:2025.5-1.el10.x86_64",
+                  "product_identification_helper": {
+                    "purl": "pkg:rpm/redhat/rpm-ostree-debugsource@2025.5-1.el10?arch=x86_64"
+                  }
+                }
+              },
+              {
+                "category": "product_version",
+                "name": "rpm-ostree-debuginfo-0:2025.5-1.el10.x86_64",
+                "product": {
+                  "name": "rpm-ostree-debuginfo-0:2025.5-1.el10.x86_64",
+                  "product_id": "rpm-ostree-debuginfo-0:2025.5-1.el10.x86_64",
+                  "product_identification_helper": {
+                    "purl": "pkg:rpm/redhat/rpm-ostree-debuginfo@2025.5-1.el10?arch=x86_64"
+                  }
+                }
+              },
+              {
+                "category": "product_version",
+                "name": "rpm-ostree-libs-debuginfo-0:2025.5-1.el10.x86_64",
+                "product": {
+                  "name": "rpm-ostree-libs-debuginfo-0:2025.5-1.el10.x86_64",
+                  "product_id": "rpm-ostree-libs-debuginfo-0:2025.5-1.el10.x86_64",
+                  "product_identification_helper": {
+                    "purl": "pkg:rpm/redhat/rpm-ostree-libs-debuginfo@2025.5-1.el10?arch=x86_64"
+                  }
+                }
+              }
+            ],
+            "category": "architecture",
+            "name": "x86_64"
+          },
+          {
+            "branches": [
+              {
+                "category": "product_version",
+                "name": "rpm-ostree-0:2025.5-1.el10.s390x",
+                "product": {
+                  "name": "rpm-ostree-0:2025.5-1.el10.s390x",
+                  "product_id": "rpm-ostree-0:2025.5-1.el10.s390x",
+                  "product_identification_helper": {
+                    "purl": "pkg:rpm/redhat/rpm-ostree@2025.5-1.el10?arch=s390x"
+                  }
+                }
+              },
+              {
+                "category": "product_version",
+                "name": "rpm-ostree-libs-0:2025.5-1.el10.s390x",
+                "product": {
+                  "name": "rpm-ostree-libs-0:2025.5-1.el10.s390x",
+                  "product_id": "rpm-ostree-libs-0:2025.5-1.el10.s390x",
+                  "product_identification_helper": {
+                    "purl": "pkg:rpm/redhat/rpm-ostree-libs@2025.5-1.el10?arch=s390x"
+                  }
+                }
+              },
+              {
+                "category": "product_version",
+                "name": "rpm-ostree-debugsource-0:2025.5-1.el10.s390x",
+                "product": {
+                  "name": "rpm-ostree-debugsource-0:2025.5-1.el10.s390x",
+                  "product_id": "rpm-ostree-debugsource-0:2025.5-1.el10.s390x",
+                  "product_identification_helper": {
+                    "purl": "pkg:rpm/redhat/rpm-ostree-debugsource@2025.5-1.el10?arch=s390x"
+                  }
+                }
+              },
+              {
+                "category": "product_version",
+                "name": "rpm-ostree-debuginfo-0:2025.5-1.el10.s390x",
+                "product": {
+                  "name": "rpm-ostree-debuginfo-0:2025.5-1.el10.s390x",
+                  "product_id": "rpm-ostree-debuginfo-0:2025.5-1.el10.s390x",
+                  "product_identification_helper": {
+                    "purl": "pkg:rpm/redhat/rpm-ostree-debuginfo@2025.5-1.el10?arch=s390x"
+                  }
+                }
+              },
+              {
+                "category": "product_version",
+                "name": "rpm-ostree-libs-debuginfo-0:2025.5-1.el10.s390x",
+                "product": {
+                  "name": "rpm-ostree-libs-debuginfo-0:2025.5-1.el10.s390x",
+                  "product_id": "rpm-ostree-libs-debuginfo-0:2025.5-1.el10.s390x",
+                  "product_identification_helper": {
+                    "purl": "pkg:rpm/redhat/rpm-ostree-libs-debuginfo@2025.5-1.el10?arch=s390x"
+                  }
+                }
+              }
+            ],
+            "category": "architecture",
+            "name": "s390x"
+          }
+        ],
+        "category": "vendor",
+        "name": "Red Hat"
+      }
+    ],
+    "relationships": [
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "rpm-ostree-0:2025.5-1.el10.aarch64 as a component of Red Hat Enterprise Linux AppStream (v. 10)",
+          "product_id": "AppStream-10.0.GA:rpm-ostree-0:2025.5-1.el10.aarch64"
+        },
+        "product_reference": "rpm-ostree-0:2025.5-1.el10.aarch64",
+        "relates_to_product_reference": "AppStream-10.0.GA"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "rpm-ostree-0:2025.5-1.el10.ppc64le as a component of Red Hat Enterprise Linux AppStream (v. 10)",
+          "product_id": "AppStream-10.0.GA:rpm-ostree-0:2025.5-1.el10.ppc64le"
+        },
+        "product_reference": "rpm-ostree-0:2025.5-1.el10.ppc64le",
+        "relates_to_product_reference": "AppStream-10.0.GA"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "rpm-ostree-0:2025.5-1.el10.s390x as a component of Red Hat Enterprise Linux AppStream (v. 10)",
+          "product_id": "AppStream-10.0.GA:rpm-ostree-0:2025.5-1.el10.s390x"
+        },
+        "product_reference": "rpm-ostree-0:2025.5-1.el10.s390x",
+        "relates_to_product_reference": "AppStream-10.0.GA"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "rpm-ostree-0:2025.5-1.el10.src as a component of Red Hat Enterprise Linux AppStream (v. 10)",
+          "product_id": "AppStream-10.0.GA:rpm-ostree-0:2025.5-1.el10.src"
+        },
+        "product_reference": "rpm-ostree-0:2025.5-1.el10.src",
+        "relates_to_product_reference": "AppStream-10.0.GA"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "rpm-ostree-0:2025.5-1.el10.x86_64 as a component of Red Hat Enterprise Linux AppStream (v. 10)",
+          "product_id": "AppStream-10.0.GA:rpm-ostree-0:2025.5-1.el10.x86_64"
+        },
+        "product_reference": "rpm-ostree-0:2025.5-1.el10.x86_64",
+        "relates_to_product_reference": "AppStream-10.0.GA"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "rpm-ostree-debuginfo-0:2025.5-1.el10.aarch64 as a component of Red Hat Enterprise Linux AppStream (v. 10)",
+          "product_id": "AppStream-10.0.GA:rpm-ostree-debuginfo-0:2025.5-1.el10.aarch64"
+        },
+        "product_reference": "rpm-ostree-debuginfo-0:2025.5-1.el10.aarch64",
+        "relates_to_product_reference": "AppStream-10.0.GA"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "rpm-ostree-debuginfo-0:2025.5-1.el10.ppc64le as a component of Red Hat Enterprise Linux AppStream (v. 10)",
+          "product_id": "AppStream-10.0.GA:rpm-ostree-debuginfo-0:2025.5-1.el10.ppc64le"
+        },
+        "product_reference": "rpm-ostree-debuginfo-0:2025.5-1.el10.ppc64le",
+        "relates_to_product_reference": "AppStream-10.0.GA"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "rpm-ostree-debuginfo-0:2025.5-1.el10.s390x as a component of Red Hat Enterprise Linux AppStream (v. 10)",
+          "product_id": "AppStream-10.0.GA:rpm-ostree-debuginfo-0:2025.5-1.el10.s390x"
+        },
+        "product_reference": "rpm-ostree-debuginfo-0:2025.5-1.el10.s390x",
+        "relates_to_product_reference": "AppStream-10.0.GA"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "rpm-ostree-debuginfo-0:2025.5-1.el10.x86_64 as a component of Red Hat Enterprise Linux AppStream (v. 10)",
+          "product_id": "AppStream-10.0.GA:rpm-ostree-debuginfo-0:2025.5-1.el10.x86_64"
+        },
+        "product_reference": "rpm-ostree-debuginfo-0:2025.5-1.el10.x86_64",
+        "relates_to_product_reference": "AppStream-10.0.GA"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "rpm-ostree-debugsource-0:2025.5-1.el10.aarch64 as a component of Red Hat Enterprise Linux AppStream (v. 10)",
+          "product_id": "AppStream-10.0.GA:rpm-ostree-debugsource-0:2025.5-1.el10.aarch64"
+        },
+        "product_reference": "rpm-ostree-debugsource-0:2025.5-1.el10.aarch64",
+        "relates_to_product_reference": "AppStream-10.0.GA"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "rpm-ostree-debugsource-0:2025.5-1.el10.ppc64le as a component of Red Hat Enterprise Linux AppStream (v. 10)",
+          "product_id": "AppStream-10.0.GA:rpm-ostree-debugsource-0:2025.5-1.el10.ppc64le"
+        },
+        "product_reference": "rpm-ostree-debugsource-0:2025.5-1.el10.ppc64le",
+        "relates_to_product_reference": "AppStream-10.0.GA"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "rpm-ostree-debugsource-0:2025.5-1.el10.s390x as a component of Red Hat Enterprise Linux AppStream (v. 10)",
+          "product_id": "AppStream-10.0.GA:rpm-ostree-debugsource-0:2025.5-1.el10.s390x"
+        },
+        "product_reference": "rpm-ostree-debugsource-0:2025.5-1.el10.s390x",
+        "relates_to_product_reference": "AppStream-10.0.GA"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "rpm-ostree-debugsource-0:2025.5-1.el10.x86_64 as a component of Red Hat Enterprise Linux AppStream (v. 10)",
+          "product_id": "AppStream-10.0.GA:rpm-ostree-debugsource-0:2025.5-1.el10.x86_64"
+        },
+        "product_reference": "rpm-ostree-debugsource-0:2025.5-1.el10.x86_64",
+        "relates_to_product_reference": "AppStream-10.0.GA"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "rpm-ostree-libs-0:2025.5-1.el10.aarch64 as a component of Red Hat Enterprise Linux AppStream (v. 10)",
+          "product_id": "AppStream-10.0.GA:rpm-ostree-libs-0:2025.5-1.el10.aarch64"
+        },
+        "product_reference": "rpm-ostree-libs-0:2025.5-1.el10.aarch64",
+        "relates_to_product_reference": "AppStream-10.0.GA"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "rpm-ostree-libs-0:2025.5-1.el10.ppc64le as a component of Red Hat Enterprise Linux AppStream (v. 10)",
+          "product_id": "AppStream-10.0.GA:rpm-ostree-libs-0:2025.5-1.el10.ppc64le"
+        },
+        "product_reference": "rpm-ostree-libs-0:2025.5-1.el10.ppc64le",
+        "relates_to_product_reference": "AppStream-10.0.GA"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "rpm-ostree-libs-0:2025.5-1.el10.s390x as a component of Red Hat Enterprise Linux AppStream (v. 10)",
+          "product_id": "AppStream-10.0.GA:rpm-ostree-libs-0:2025.5-1.el10.s390x"
+        },
+        "product_reference": "rpm-ostree-libs-0:2025.5-1.el10.s390x",
+        "relates_to_product_reference": "AppStream-10.0.GA"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "rpm-ostree-libs-0:2025.5-1.el10.x86_64 as a component of Red Hat Enterprise Linux AppStream (v. 10)",
+          "product_id": "AppStream-10.0.GA:rpm-ostree-libs-0:2025.5-1.el10.x86_64"
+        },
+        "product_reference": "rpm-ostree-libs-0:2025.5-1.el10.x86_64",
+        "relates_to_product_reference": "AppStream-10.0.GA"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "rpm-ostree-libs-debuginfo-0:2025.5-1.el10.aarch64 as a component of Red Hat Enterprise Linux AppStream (v. 10)",
+          "product_id": "AppStream-10.0.GA:rpm-ostree-libs-debuginfo-0:2025.5-1.el10.aarch64"
+        },
+        "product_reference": "rpm-ostree-libs-debuginfo-0:2025.5-1.el10.aarch64",
+        "relates_to_product_reference": "AppStream-10.0.GA"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "rpm-ostree-libs-debuginfo-0:2025.5-1.el10.ppc64le as a component of Red Hat Enterprise Linux AppStream (v. 10)",
+          "product_id": "AppStream-10.0.GA:rpm-ostree-libs-debuginfo-0:2025.5-1.el10.ppc64le"
+        },
+        "product_reference": "rpm-ostree-libs-debuginfo-0:2025.5-1.el10.ppc64le",
+        "relates_to_product_reference": "AppStream-10.0.GA"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "rpm-ostree-libs-debuginfo-0:2025.5-1.el10.s390x as a component of Red Hat Enterprise Linux AppStream (v. 10)",
+          "product_id": "AppStream-10.0.GA:rpm-ostree-libs-debuginfo-0:2025.5-1.el10.s390x"
+        },
+        "product_reference": "rpm-ostree-libs-debuginfo-0:2025.5-1.el10.s390x",
+        "relates_to_product_reference": "AppStream-10.0.GA"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "rpm-ostree-libs-debuginfo-0:2025.5-1.el10.x86_64 as a component of Red Hat Enterprise Linux AppStream (v. 10)",
+          "product_id": "AppStream-10.0.GA:rpm-ostree-libs-debuginfo-0:2025.5-1.el10.x86_64"
+        },
+        "product_reference": "rpm-ostree-libs-debuginfo-0:2025.5-1.el10.x86_64",
+        "relates_to_product_reference": "AppStream-10.0.GA"
+      }
+    ]
+  },
+  "vulnerabilities": [
+    {
+      "cve": "CVE-2024-2905",
+      "cwe": {
+        "id": "CWE-732",
+        "name": "Incorrect Permission Assignment for Critical Resource"
+      },
+      "discovery_date": "2024-03-26T00:00:00+00:00",
+      "ids": [
+        {
+          "system_name": "Red Hat Bugzilla ID",
+          "text": "2271585"
+        }
+      ],
+      "notes": [
+        {
+          "category": "description",
+          "text": "A security vulnerability has been discovered within rpm-ostree, pertaining to the /etc/shadow file in default builds having the world-readable bit enabled. This issue arises from the default permissions being set at a higher level than recommended, potentially exposing sensitive authentication data to unauthorized access.",
+          "title": "Vulnerability description"
+        },
+        {
+          "category": "summary",
+          "text": "rpm-ostree: world-readable /etc/shadow file",
+          "title": "Vulnerability summary"
+        },
+        {
+          "category": "other",
+          "text": "This vulnerability lets local, unconfined applications read the hashed password for all users of the system from those files. To gain further access to the system, those hashed passwords need to be brute-forced to discover the real passwords that may be used to authenticate as a more privileged user on the system, for example over SSH.\n\nOn systems with SELinux enabled and in enforcing mode, access to those files is limited to unconfined (usually interactive) users, unconfined systemd services and privileged containers. Confined daemons, users and containers are not able to access them.\n\n\nOnly OpenShift clusters installed on OCP version 4.14 and later are affected.\nOpenShift Clusters installed on previous OCP releases or updated to 4.14 and later are not affected, because /etc/shadow is usually “locally modified” and the local version remains.\nClusters with no passwords set for any users (i.e. only SSH keys were used; the OpenShift default) are not impacted by this vulnerability even though it is present on the node.",
+          "title": "Statement"
+        },
+        {
+          "category": "general",
+          "text": "The CVSS score(s) listed for this vulnerability do not reflect the associated product's status, and are included for informational purposes to better understand the severity of this vulnerability.",
+          "title": "CVSS score applicability"
+        }
+      ],
+      "product_status": {
+        "fixed": [
+          "AppStream-10.0.GA:rpm-ostree-0:2025.5-1.el10.aarch64",
+          "AppStream-10.0.GA:rpm-ostree-0:2025.5-1.el10.ppc64le",
+          "AppStream-10.0.GA:rpm-ostree-0:2025.5-1.el10.s390x",
+          "AppStream-10.0.GA:rpm-ostree-0:2025.5-1.el10.src",
+          "AppStream-10.0.GA:rpm-ostree-0:2025.5-1.el10.x86_64",
+          "AppStream-10.0.GA:rpm-ostree-debuginfo-0:2025.5-1.el10.aarch64",
+          "AppStream-10.0.GA:rpm-ostree-debuginfo-0:2025.5-1.el10.ppc64le",
+          "AppStream-10.0.GA:rpm-ostree-debuginfo-0:2025.5-1.el10.s390x",
+          "AppStream-10.0.GA:rpm-ostree-debuginfo-0:2025.5-1.el10.x86_64",
+          "AppStream-10.0.GA:rpm-ostree-debugsource-0:2025.5-1.el10.aarch64",
+          "AppStream-10.0.GA:rpm-ostree-debugsource-0:2025.5-1.el10.ppc64le",
+          "AppStream-10.0.GA:rpm-ostree-debugsource-0:2025.5-1.el10.s390x",
+          "AppStream-10.0.GA:rpm-ostree-debugsource-0:2025.5-1.el10.x86_64",
+          "AppStream-10.0.GA:rpm-ostree-libs-0:2025.5-1.el10.aarch64",
+          "AppStream-10.0.GA:rpm-ostree-libs-0:2025.5-1.el10.ppc64le",
+          "AppStream-10.0.GA:rpm-ostree-libs-0:2025.5-1.el10.s390x",
+          "AppStream-10.0.GA:rpm-ostree-libs-0:2025.5-1.el10.x86_64",
+          "AppStream-10.0.GA:rpm-ostree-libs-debuginfo-0:2025.5-1.el10.aarch64",
+          "AppStream-10.0.GA:rpm-ostree-libs-debuginfo-0:2025.5-1.el10.ppc64le",
+          "AppStream-10.0.GA:rpm-ostree-libs-debuginfo-0:2025.5-1.el10.s390x",
+          "AppStream-10.0.GA:rpm-ostree-libs-debuginfo-0:2025.5-1.el10.x86_64"
+        ]
+      },
+      "references": [
+        {
+          "category": "self",
+          "summary": "Canonical URL",
+          "url": "https://access.redhat.com/security/cve/CVE-2024-2905"
+        },
+        {
+          "category": "external",
+          "summary": "RHBZ#2271585",
+          "url": "https://bugzilla.redhat.com/show_bug.cgi?id=2271585"
+        },
+        {
+          "category": "external",
+          "summary": "https://www.cve.org/CVERecord?id=CVE-2024-2905",
+          "url": "https://www.cve.org/CVERecord?id=CVE-2024-2905"
+        },
+        {
+          "category": "external",
+          "summary": "https://nvd.nist.gov/vuln/detail/CVE-2024-2905",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2024-2905"
+        },
+        {
+          "category": "external",
+          "summary": "https://github.com/coreos/rpm-ostree/security/advisories/GHSA-2m76-cwhg-7wv6",
+          "url": "https://github.com/coreos/rpm-ostree/security/advisories/GHSA-2m76-cwhg-7wv6"
+        }
+      ],
+      "release_date": "2024-04-09T11:00:00+00:00",
+      "remediations": [
+        {
+          "category": "vendor_fix",
+          "date": "2025-05-13T11:53:36+00:00",
+          "details": "For details on how to apply this update, which includes the changes described in this advisory, refer to:\n\nhttps://access.redhat.com/articles/11258",
+          "product_ids": [
+            "AppStream-10.0.GA:rpm-ostree-0:2025.5-1.el10.aarch64",
+            "AppStream-10.0.GA:rpm-ostree-0:2025.5-1.el10.ppc64le",
+            "AppStream-10.0.GA:rpm-ostree-0:2025.5-1.el10.s390x",
+            "AppStream-10.0.GA:rpm-ostree-0:2025.5-1.el10.src",
+            "AppStream-10.0.GA:rpm-ostree-0:2025.5-1.el10.x86_64",
+            "AppStream-10.0.GA:rpm-ostree-debuginfo-0:2025.5-1.el10.aarch64",
+            "AppStream-10.0.GA:rpm-ostree-debuginfo-0:2025.5-1.el10.ppc64le",
+            "AppStream-10.0.GA:rpm-ostree-debuginfo-0:2025.5-1.el10.s390x",
+            "AppStream-10.0.GA:rpm-ostree-debuginfo-0:2025.5-1.el10.x86_64",
+            "AppStream-10.0.GA:rpm-ostree-debugsource-0:2025.5-1.el10.aarch64",
+            "AppStream-10.0.GA:rpm-ostree-debugsource-0:2025.5-1.el10.ppc64le",
+            "AppStream-10.0.GA:rpm-ostree-debugsource-0:2025.5-1.el10.s390x",
+            "AppStream-10.0.GA:rpm-ostree-debugsource-0:2025.5-1.el10.x86_64",
+            "AppStream-10.0.GA:rpm-ostree-libs-0:2025.5-1.el10.aarch64",
+            "AppStream-10.0.GA:rpm-ostree-libs-0:2025.5-1.el10.ppc64le",
+            "AppStream-10.0.GA:rpm-ostree-libs-0:2025.5-1.el10.s390x",
+            "AppStream-10.0.GA:rpm-ostree-libs-0:2025.5-1.el10.x86_64",
+            "AppStream-10.0.GA:rpm-ostree-libs-debuginfo-0:2025.5-1.el10.aarch64",
+            "AppStream-10.0.GA:rpm-ostree-libs-debuginfo-0:2025.5-1.el10.ppc64le",
+            "AppStream-10.0.GA:rpm-ostree-libs-debuginfo-0:2025.5-1.el10.s390x",
+            "AppStream-10.0.GA:rpm-ostree-libs-debuginfo-0:2025.5-1.el10.x86_64"
+          ],
+          "restart_required": {
+            "category": "none"
+          },
+          "url": "https://access.redhat.com/errata/RHBA-2025:4872"
+        },
+        {
+          "category": "workaround",
+          "details": "If you need to apply the fix immediately, you can run the following commands, using credentials that have administrator access to an OpenShift cluster:\n\n# List current permissions for all nodes\nfor node in $( oc get nodes -oname) ; do echo $node ; oc debug $node -- bash -c \"ls -alhZ /host/etc/*shadow*\"; done\n\n# Set correct permissions\nfor node in $( oc get nodes -oname) ; do echo $node ; oc debug $node -- chmod --verbose 0000 /host/etc/shadow /host/etc/gshadow /host/etc/shadow- /host/etc/gshadow-; done\n\nAs a precaution, we recommend rotating all user credentials stored in those files.",
+          "product_ids": [
+            "AppStream-10.0.GA:rpm-ostree-0:2025.5-1.el10.aarch64",
+            "AppStream-10.0.GA:rpm-ostree-0:2025.5-1.el10.ppc64le",
+            "AppStream-10.0.GA:rpm-ostree-0:2025.5-1.el10.s390x",
+            "AppStream-10.0.GA:rpm-ostree-0:2025.5-1.el10.src",
+            "AppStream-10.0.GA:rpm-ostree-0:2025.5-1.el10.x86_64",
+            "AppStream-10.0.GA:rpm-ostree-debuginfo-0:2025.5-1.el10.aarch64",
+            "AppStream-10.0.GA:rpm-ostree-debuginfo-0:2025.5-1.el10.ppc64le",
+            "AppStream-10.0.GA:rpm-ostree-debuginfo-0:2025.5-1.el10.s390x",
+            "AppStream-10.0.GA:rpm-ostree-debuginfo-0:2025.5-1.el10.x86_64",
+            "AppStream-10.0.GA:rpm-ostree-debugsource-0:2025.5-1.el10.aarch64",
+            "AppStream-10.0.GA:rpm-ostree-debugsource-0:2025.5-1.el10.ppc64le",
+            "AppStream-10.0.GA:rpm-ostree-debugsource-0:2025.5-1.el10.s390x",
+            "AppStream-10.0.GA:rpm-ostree-debugsource-0:2025.5-1.el10.x86_64",
+            "AppStream-10.0.GA:rpm-ostree-libs-0:2025.5-1.el10.aarch64",
+            "AppStream-10.0.GA:rpm-ostree-libs-0:2025.5-1.el10.ppc64le",
+            "AppStream-10.0.GA:rpm-ostree-libs-0:2025.5-1.el10.s390x",
+            "AppStream-10.0.GA:rpm-ostree-libs-0:2025.5-1.el10.x86_64",
+            "AppStream-10.0.GA:rpm-ostree-libs-debuginfo-0:2025.5-1.el10.aarch64",
+            "AppStream-10.0.GA:rpm-ostree-libs-debuginfo-0:2025.5-1.el10.ppc64le",
+            "AppStream-10.0.GA:rpm-ostree-libs-debuginfo-0:2025.5-1.el10.s390x",
+            "AppStream-10.0.GA:rpm-ostree-libs-debuginfo-0:2025.5-1.el10.x86_64"
+          ]
+        }
+      ],
+      "scores": [
+        {
+          "cvss_v3": {
+            "attackComplexity": "LOW",
+            "attackVector": "LOCAL",
+            "availabilityImpact": "NONE",
+            "baseScore": 6.2,
+            "baseSeverity": "MEDIUM",
+            "confidentialityImpact": "HIGH",
+            "integrityImpact": "NONE",
+            "privilegesRequired": "NONE",
+            "scope": "UNCHANGED",
+            "userInteraction": "NONE",
+            "vectorString": "CVSS:3.1/AV:L/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+            "version": "3.1"
+          },
+          "products": [
+            "AppStream-10.0.GA:rpm-ostree-0:2025.5-1.el10.aarch64",
+            "AppStream-10.0.GA:rpm-ostree-0:2025.5-1.el10.ppc64le",
+            "AppStream-10.0.GA:rpm-ostree-0:2025.5-1.el10.s390x",
+            "AppStream-10.0.GA:rpm-ostree-0:2025.5-1.el10.src",
+            "AppStream-10.0.GA:rpm-ostree-0:2025.5-1.el10.x86_64",
+            "AppStream-10.0.GA:rpm-ostree-debuginfo-0:2025.5-1.el10.aarch64",
+            "AppStream-10.0.GA:rpm-ostree-debuginfo-0:2025.5-1.el10.ppc64le",
+            "AppStream-10.0.GA:rpm-ostree-debuginfo-0:2025.5-1.el10.s390x",
+            "AppStream-10.0.GA:rpm-ostree-debuginfo-0:2025.5-1.el10.x86_64",
+            "AppStream-10.0.GA:rpm-ostree-debugsource-0:2025.5-1.el10.aarch64",
+            "AppStream-10.0.GA:rpm-ostree-debugsource-0:2025.5-1.el10.ppc64le",
+            "AppStream-10.0.GA:rpm-ostree-debugsource-0:2025.5-1.el10.s390x",
+            "AppStream-10.0.GA:rpm-ostree-debugsource-0:2025.5-1.el10.x86_64",
+            "AppStream-10.0.GA:rpm-ostree-libs-0:2025.5-1.el10.aarch64",
+            "AppStream-10.0.GA:rpm-ostree-libs-0:2025.5-1.el10.ppc64le",
+            "AppStream-10.0.GA:rpm-ostree-libs-0:2025.5-1.el10.s390x",
+            "AppStream-10.0.GA:rpm-ostree-libs-0:2025.5-1.el10.x86_64",
+            "AppStream-10.0.GA:rpm-ostree-libs-debuginfo-0:2025.5-1.el10.aarch64",
+            "AppStream-10.0.GA:rpm-ostree-libs-debuginfo-0:2025.5-1.el10.ppc64le",
+            "AppStream-10.0.GA:rpm-ostree-libs-debuginfo-0:2025.5-1.el10.s390x",
+            "AppStream-10.0.GA:rpm-ostree-libs-debuginfo-0:2025.5-1.el10.x86_64"
+          ]
+        }
+      ],
+      "threats": [
+        {
+          "category": "impact",
+          "details": "Moderate"
+        }
+      ],
+      "title": "rpm-ostree: world-readable /etc/shadow file"
+    }
+  ]
+}

@@ -1,6 +1,26 @@
-use goose::goose::{GooseUser, TransactionResult};
+use goose::goose::{GooseUser, TransactionError, TransactionResult};
 use serde_json::json;
+use std::sync::{
+    Arc,
+    atomic::{AtomicUsize, Ordering},
+};
 use urlencoding::encode;
+
+pub async fn upload_advisories(
+    user: &mut GooseUser,
+    advisory_files: Vec<String>,
+    counter: Arc<AtomicUsize>,
+) -> TransactionResult {
+    let index = counter.fetch_add(1, Ordering::Relaxed) % advisory_files.len();
+    let file_path = &advisory_files[index];
+
+    let file_bytes = tokio::fs::read(file_path).await.map_err(|e| {
+        TransactionError::Custom(format!("Failed to read file {}: {:?}", file_path, e))
+    })?;
+
+    let _response = user.post("/api/v2/advisory", file_bytes).await?;
+    Ok(())
+}
 
 pub async fn list_advisory(user: &mut GooseUser) -> TransactionResult {
     let _response = user.get("/api/v2/advisory").await?;

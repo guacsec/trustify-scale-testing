@@ -91,17 +91,50 @@ pub(crate) struct Scenario {
 
     #[serde(with = "required")]
     pub get_purl_details: Option<String>,
+
+    #[serde(skip)]
+    pub upload_advisories: Option<Vec<String>>,
 }
 
 impl Scenario {
+    /// Load advisory files from UPLOAD_FILE_PATH directory
+    fn load_advisory_files() -> Option<Vec<String>> {
+        let s: Option<Option<Vec<String>>> =
+            std::env::var("UPLOAD_FILE_PATH")
+                .ok()
+                .map(|upload_file_path| {
+                    std::fs::read_dir(format!("{}/advisories", &upload_file_path))
+                        .ok()
+                        .map(|entries| {
+                            entries
+                                .filter_map(|entry| {
+                                    let path = entry.ok()?.path();
+                                    if path.extension()? == "json" {
+                                        Some(path.to_string_lossy().to_string())
+                                    } else {
+                                        None
+                                    }
+                                })
+                                .collect::<Vec<String>>()
+                        })
+                });
+
+        s.unwrap_or_default()
+    }
+
     /// Load a scenario file, or evaluate one
     pub async fn load(scenario_file: Option<&str>) -> anyhow::Result<Self> {
         if let Some(scenario_file) = scenario_file {
-            Ok(serde_json5::from_reader(BufReader::new(
+            let mut scenario: Scenario = serde_json5::from_reader(BufReader::new(
                 std::fs::File::open(scenario_file)
                     .with_context(|| format!("opening scenario file: {scenario_file}"))?,
             ))
-            .context("reading scenario file")?)
+            .context("reading scenario file")?;
+
+            // Load advisory files from UPLOAD_FILE_PATH directory for file-based scenarios too
+            scenario.upload_advisories = Self::load_advisory_files();
+
+            Ok(scenario)
         } else {
             Self::eval().await
         }
@@ -122,6 +155,9 @@ impl Scenario {
         let analyze_purl = Some(loader.analysis_purl().await?);
         let get_purl_details = Some(loader.purl_details().await?);
 
+        // Load advisory files from UPLOAD_FILE_PATH directory
+        let advisory_files = Self::load_advisory_files();
+
         Ok(Self {
             get_sbom: large_sbom_digest.clone(),
             get_sbom_advisories: large_sbom_digest.clone(),
@@ -134,6 +170,7 @@ impl Scenario {
             sbom_license_ids,
             analyze_purl,
             get_purl_details,
+            upload_advisories: advisory_files,
         })
     }
 }

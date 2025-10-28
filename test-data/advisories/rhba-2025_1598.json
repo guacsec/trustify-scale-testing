@@ -1,0 +1,979 @@
+{
+  "document": {
+    "aggregate_severity": {
+      "namespace": "https://access.redhat.com/security/updates/classification/",
+      "text": "Moderate"
+    },
+    "category": "csaf_security_advisory",
+    "csaf_version": "2.0",
+    "distribution": {
+      "text": "Copyright © Red Hat, Inc. All rights reserved.",
+      "tlp": {
+        "label": "WHITE",
+        "url": "https://www.first.org/tlp/"
+      }
+    },
+    "lang": "en",
+    "notes": [
+      {
+        "category": "summary",
+        "text": "Red Hat Quay 3.12.8 is now available with bug fixes.\n\nRed Hat Product Security has rated this update as having a security impact of Important. A Common Vulnerability Scoring System (CVSS) base score, which gives a detailed severity rating, is available for each vulnerability from the CVE link(s) in the References section.",
+        "title": "Topic"
+      },
+      {
+        "category": "general",
+        "text": "Quay 3.12.8",
+        "title": "Details"
+      },
+      {
+        "category": "legal_disclaimer",
+        "text": "This content is licensed under the Creative Commons Attribution 4.0 International License (https://creativecommons.org/licenses/by/4.0/). If you distribute this content, or a modified version of it, you must provide attribution to Red Hat Inc. and provide a link to the original.",
+        "title": "Terms of Use"
+      }
+    ],
+    "publisher": {
+      "category": "vendor",
+      "contact_details": "https://access.redhat.com/security/team/contact/",
+      "issuing_authority": "Red Hat Product Security is responsible for vulnerability handling across all Red Hat products and services.",
+      "name": "Red Hat Product Security",
+      "namespace": "https://www.redhat.com"
+    },
+    "references": [
+      {
+        "category": "self",
+        "summary": "https://access.redhat.com/errata/RHBA-2025:1598",
+        "url": "https://access.redhat.com/errata/RHBA-2025:1598"
+      },
+      {
+        "category": "self",
+        "summary": "Canonical URL",
+        "url": "https://security.access.redhat.com/data/csaf/v2/advisories/2025/rhba-2025_1598.json"
+      }
+    ],
+    "title": "Red Hat Bug Fix Advisory: Red Hat Quay v3.12.8 bug fix release",
+    "tracking": {
+      "current_release_date": "2025-10-24T11:19:40+00:00",
+      "generator": {
+        "date": "2025-10-24T11:19:40+00:00",
+        "engine": {
+          "name": "Red Hat SDEngine",
+          "version": "4.6.10"
+        }
+      },
+      "id": "RHBA-2025:1598",
+      "initial_release_date": "2025-02-24T03:44:11+00:00",
+      "revision_history": [
+        {
+          "date": "2025-02-24T03:44:11+00:00",
+          "number": "1",
+          "summary": "Initial version"
+        },
+        {
+          "date": "2025-02-24T03:44:11+00:00",
+          "number": "2",
+          "summary": "Last updated version"
+        },
+        {
+          "date": "2025-10-24T11:19:40+00:00",
+          "number": "3",
+          "summary": "Last generated version"
+        }
+      ],
+      "status": "final",
+      "version": "3"
+    }
+  },
+  "product_tree": {
+    "branches": [
+      {
+        "branches": [
+          {
+            "branches": [
+              {
+                "category": "product_name",
+                "name": "Quay v3",
+                "product": {
+                  "name": "Quay v3",
+                  "product_id": "8Base-Quay-3",
+                  "product_identification_helper": {
+                    "cpe": "cpe:/a:redhat:quay:3::el8"
+                  }
+                }
+              }
+            ],
+            "category": "product_family",
+            "name": "Red Hat Quay"
+          },
+          {
+            "branches": [
+              {
+                "category": "product_version",
+                "name": "quay/quay-bridge-operator-bundle@sha256:5a20c2d291a56f0d660071f7d4636ca0bbcf094e9cc4380e64901fcf49e30ea8_ppc64le",
+                "product": {
+                  "name": "quay/quay-bridge-operator-bundle@sha256:5a20c2d291a56f0d660071f7d4636ca0bbcf094e9cc4380e64901fcf49e30ea8_ppc64le",
+                  "product_id": "quay/quay-bridge-operator-bundle@sha256:5a20c2d291a56f0d660071f7d4636ca0bbcf094e9cc4380e64901fcf49e30ea8_ppc64le",
+                  "product_identification_helper": {
+                    "purl": "pkg:oci/quay-bridge-operator-bundle@sha256:5a20c2d291a56f0d660071f7d4636ca0bbcf094e9cc4380e64901fcf49e30ea8?arch=ppc64le&repository_url=registry.redhat.io/quay/quay-bridge-operator-bundle&tag=v3.12.8-3"
+                  }
+                }
+              },
+              {
+                "category": "product_version",
+                "name": "quay/quay-bridge-operator-rhel8@sha256:fd0d3139530d2a99a3e053d07266d14dccd73ac18e7ef073619de415069520dd_ppc64le",
+                "product": {
+                  "name": "quay/quay-bridge-operator-rhel8@sha256:fd0d3139530d2a99a3e053d07266d14dccd73ac18e7ef073619de415069520dd_ppc64le",
+                  "product_id": "quay/quay-bridge-operator-rhel8@sha256:fd0d3139530d2a99a3e053d07266d14dccd73ac18e7ef073619de415069520dd_ppc64le",
+                  "product_identification_helper": {
+                    "purl": "pkg:oci/quay-bridge-operator-rhel8@sha256:fd0d3139530d2a99a3e053d07266d14dccd73ac18e7ef073619de415069520dd?arch=ppc64le&repository_url=registry.redhat.io/quay/quay-bridge-operator-rhel8&tag=v3.12.8-1"
+                  }
+                }
+              },
+              {
+                "category": "product_version",
+                "name": "quay/quay-builder-rhel8@sha256:f86fda437718ae80028a49aa919790ea19dabc38f8d41431a4366ae5001e46e9_ppc64le",
+                "product": {
+                  "name": "quay/quay-builder-rhel8@sha256:f86fda437718ae80028a49aa919790ea19dabc38f8d41431a4366ae5001e46e9_ppc64le",
+                  "product_id": "quay/quay-builder-rhel8@sha256:f86fda437718ae80028a49aa919790ea19dabc38f8d41431a4366ae5001e46e9_ppc64le",
+                  "product_identification_helper": {
+                    "purl": "pkg:oci/quay-builder-rhel8@sha256:f86fda437718ae80028a49aa919790ea19dabc38f8d41431a4366ae5001e46e9?arch=ppc64le&repository_url=registry.redhat.io/quay/quay-builder-rhel8&tag=v3.12.8-2"
+                  }
+                }
+              },
+              {
+                "category": "product_version",
+                "name": "quay/quay-builder-qemu-rhcos-rhel8@sha256:b91aec3d3f9cf8a4204e6e13e27035802693a8517b14e59db2535fe789e7a33e_ppc64le",
+                "product": {
+                  "name": "quay/quay-builder-qemu-rhcos-rhel8@sha256:b91aec3d3f9cf8a4204e6e13e27035802693a8517b14e59db2535fe789e7a33e_ppc64le",
+                  "product_id": "quay/quay-builder-qemu-rhcos-rhel8@sha256:b91aec3d3f9cf8a4204e6e13e27035802693a8517b14e59db2535fe789e7a33e_ppc64le",
+                  "product_identification_helper": {
+                    "purl": "pkg:oci/quay-builder-qemu-rhcos-rhel8@sha256:b91aec3d3f9cf8a4204e6e13e27035802693a8517b14e59db2535fe789e7a33e?arch=ppc64le&repository_url=registry.redhat.io/quay/quay-builder-qemu-rhcos-rhel8&tag=v3.12.8-1"
+                  }
+                }
+              },
+              {
+                "category": "product_version",
+                "name": "quay/clair-rhel8@sha256:bf9818512c7fe88272fb8f7fc4a255d6bc5e3842582e4fd891558a89d406d8e9_ppc64le",
+                "product": {
+                  "name": "quay/clair-rhel8@sha256:bf9818512c7fe88272fb8f7fc4a255d6bc5e3842582e4fd891558a89d406d8e9_ppc64le",
+                  "product_id": "quay/clair-rhel8@sha256:bf9818512c7fe88272fb8f7fc4a255d6bc5e3842582e4fd891558a89d406d8e9_ppc64le",
+                  "product_identification_helper": {
+                    "purl": "pkg:oci/clair-rhel8@sha256:bf9818512c7fe88272fb8f7fc4a255d6bc5e3842582e4fd891558a89d406d8e9?arch=ppc64le&repository_url=registry.redhat.io/quay/clair-rhel8&tag=v3.12.8-1"
+                  }
+                }
+              },
+              {
+                "category": "product_version",
+                "name": "quay/quay-container-security-operator-bundle@sha256:c81af92a6092273dea45a9dee56bbb8a246b566402497b1746fa4817a3cece39_ppc64le",
+                "product": {
+                  "name": "quay/quay-container-security-operator-bundle@sha256:c81af92a6092273dea45a9dee56bbb8a246b566402497b1746fa4817a3cece39_ppc64le",
+                  "product_id": "quay/quay-container-security-operator-bundle@sha256:c81af92a6092273dea45a9dee56bbb8a246b566402497b1746fa4817a3cece39_ppc64le",
+                  "product_identification_helper": {
+                    "purl": "pkg:oci/quay-container-security-operator-bundle@sha256:c81af92a6092273dea45a9dee56bbb8a246b566402497b1746fa4817a3cece39?arch=ppc64le&repository_url=registry.redhat.io/quay/quay-container-security-operator-bundle&tag=v3.12.8-1"
+                  }
+                }
+              },
+              {
+                "category": "product_version",
+                "name": "quay/quay-container-security-operator-rhel8@sha256:6a5acdbb57f870efddfb93095522c3640f9ad6256c54a20f4790874d13322560_ppc64le",
+                "product": {
+                  "name": "quay/quay-container-security-operator-rhel8@sha256:6a5acdbb57f870efddfb93095522c3640f9ad6256c54a20f4790874d13322560_ppc64le",
+                  "product_id": "quay/quay-container-security-operator-rhel8@sha256:6a5acdbb57f870efddfb93095522c3640f9ad6256c54a20f4790874d13322560_ppc64le",
+                  "product_identification_helper": {
+                    "purl": "pkg:oci/quay-container-security-operator-rhel8@sha256:6a5acdbb57f870efddfb93095522c3640f9ad6256c54a20f4790874d13322560?arch=ppc64le&repository_url=registry.redhat.io/quay/quay-container-security-operator-rhel8&tag=v3.12.8-1"
+                  }
+                }
+              },
+              {
+                "category": "product_version",
+                "name": "quay/quay-operator-bundle@sha256:6cea661a5c6e0a5927b3a5a06129fc03e6678132faf9e3da5f498d8457fb2211_ppc64le",
+                "product": {
+                  "name": "quay/quay-operator-bundle@sha256:6cea661a5c6e0a5927b3a5a06129fc03e6678132faf9e3da5f498d8457fb2211_ppc64le",
+                  "product_id": "quay/quay-operator-bundle@sha256:6cea661a5c6e0a5927b3a5a06129fc03e6678132faf9e3da5f498d8457fb2211_ppc64le",
+                  "product_identification_helper": {
+                    "purl": "pkg:oci/quay-operator-bundle@sha256:6cea661a5c6e0a5927b3a5a06129fc03e6678132faf9e3da5f498d8457fb2211?arch=ppc64le&repository_url=registry.redhat.io/quay/quay-operator-bundle&tag=v3.12.8-4"
+                  }
+                }
+              },
+              {
+                "category": "product_version",
+                "name": "quay/quay-operator-rhel8@sha256:ee4755634f7be2e4a68ef4ae4d89cde8964d1ea62fa233b10f7456ff82cbe9fc_ppc64le",
+                "product": {
+                  "name": "quay/quay-operator-rhel8@sha256:ee4755634f7be2e4a68ef4ae4d89cde8964d1ea62fa233b10f7456ff82cbe9fc_ppc64le",
+                  "product_id": "quay/quay-operator-rhel8@sha256:ee4755634f7be2e4a68ef4ae4d89cde8964d1ea62fa233b10f7456ff82cbe9fc_ppc64le",
+                  "product_identification_helper": {
+                    "purl": "pkg:oci/quay-operator-rhel8@sha256:ee4755634f7be2e4a68ef4ae4d89cde8964d1ea62fa233b10f7456ff82cbe9fc?arch=ppc64le&repository_url=registry.redhat.io/quay/quay-operator-rhel8&tag=v3.12.8-2"
+                  }
+                }
+              },
+              {
+                "category": "product_version",
+                "name": "quay/quay-rhel8@sha256:ab2aac7247b0d75e6fcd2e5788067cf9130075c93c917da8145e5b1629d96d72_ppc64le",
+                "product": {
+                  "name": "quay/quay-rhel8@sha256:ab2aac7247b0d75e6fcd2e5788067cf9130075c93c917da8145e5b1629d96d72_ppc64le",
+                  "product_id": "quay/quay-rhel8@sha256:ab2aac7247b0d75e6fcd2e5788067cf9130075c93c917da8145e5b1629d96d72_ppc64le",
+                  "product_identification_helper": {
+                    "purl": "pkg:oci/quay-rhel8@sha256:ab2aac7247b0d75e6fcd2e5788067cf9130075c93c917da8145e5b1629d96d72?arch=ppc64le&repository_url=registry.redhat.io/quay/quay-rhel8&tag=v3.12.8-2"
+                  }
+                }
+              }
+            ],
+            "category": "architecture",
+            "name": "ppc64le"
+          },
+          {
+            "branches": [
+              {
+                "category": "product_version",
+                "name": "quay/quay-bridge-operator-bundle@sha256:9b37ea0b977e20326facc581b6980b187cfc0d5e5ed6eb1e6a6c8794321ec994_s390x",
+                "product": {
+                  "name": "quay/quay-bridge-operator-bundle@sha256:9b37ea0b977e20326facc581b6980b187cfc0d5e5ed6eb1e6a6c8794321ec994_s390x",
+                  "product_id": "quay/quay-bridge-operator-bundle@sha256:9b37ea0b977e20326facc581b6980b187cfc0d5e5ed6eb1e6a6c8794321ec994_s390x",
+                  "product_identification_helper": {
+                    "purl": "pkg:oci/quay-bridge-operator-bundle@sha256:9b37ea0b977e20326facc581b6980b187cfc0d5e5ed6eb1e6a6c8794321ec994?arch=s390x&repository_url=registry.redhat.io/quay/quay-bridge-operator-bundle&tag=v3.12.8-3"
+                  }
+                }
+              },
+              {
+                "category": "product_version",
+                "name": "quay/quay-bridge-operator-rhel8@sha256:bdda4ec419724ce68af416eaebb2b6e4be16ea2c33595be506cf2fd5beef4056_s390x",
+                "product": {
+                  "name": "quay/quay-bridge-operator-rhel8@sha256:bdda4ec419724ce68af416eaebb2b6e4be16ea2c33595be506cf2fd5beef4056_s390x",
+                  "product_id": "quay/quay-bridge-operator-rhel8@sha256:bdda4ec419724ce68af416eaebb2b6e4be16ea2c33595be506cf2fd5beef4056_s390x",
+                  "product_identification_helper": {
+                    "purl": "pkg:oci/quay-bridge-operator-rhel8@sha256:bdda4ec419724ce68af416eaebb2b6e4be16ea2c33595be506cf2fd5beef4056?arch=s390x&repository_url=registry.redhat.io/quay/quay-bridge-operator-rhel8&tag=v3.12.8-1"
+                  }
+                }
+              },
+              {
+                "category": "product_version",
+                "name": "quay/quay-builder-rhel8@sha256:edaa246672ae95f8a7c7fa00ec6aade33204ff37128cdec7b390c0d8f6573f13_s390x",
+                "product": {
+                  "name": "quay/quay-builder-rhel8@sha256:edaa246672ae95f8a7c7fa00ec6aade33204ff37128cdec7b390c0d8f6573f13_s390x",
+                  "product_id": "quay/quay-builder-rhel8@sha256:edaa246672ae95f8a7c7fa00ec6aade33204ff37128cdec7b390c0d8f6573f13_s390x",
+                  "product_identification_helper": {
+                    "purl": "pkg:oci/quay-builder-rhel8@sha256:edaa246672ae95f8a7c7fa00ec6aade33204ff37128cdec7b390c0d8f6573f13?arch=s390x&repository_url=registry.redhat.io/quay/quay-builder-rhel8&tag=v3.12.8-2"
+                  }
+                }
+              },
+              {
+                "category": "product_version",
+                "name": "quay/quay-builder-qemu-rhcos-rhel8@sha256:bfc9435099f0b0cde9b43df3982b6164e08bdf7dc0691af197555f029cf78563_s390x",
+                "product": {
+                  "name": "quay/quay-builder-qemu-rhcos-rhel8@sha256:bfc9435099f0b0cde9b43df3982b6164e08bdf7dc0691af197555f029cf78563_s390x",
+                  "product_id": "quay/quay-builder-qemu-rhcos-rhel8@sha256:bfc9435099f0b0cde9b43df3982b6164e08bdf7dc0691af197555f029cf78563_s390x",
+                  "product_identification_helper": {
+                    "purl": "pkg:oci/quay-builder-qemu-rhcos-rhel8@sha256:bfc9435099f0b0cde9b43df3982b6164e08bdf7dc0691af197555f029cf78563?arch=s390x&repository_url=registry.redhat.io/quay/quay-builder-qemu-rhcos-rhel8&tag=v3.12.8-1"
+                  }
+                }
+              },
+              {
+                "category": "product_version",
+                "name": "quay/clair-rhel8@sha256:8c4dc7ffe59ab71bafc90e57b4c8f31879e18127d7c688ad13fc74b218b81b90_s390x",
+                "product": {
+                  "name": "quay/clair-rhel8@sha256:8c4dc7ffe59ab71bafc90e57b4c8f31879e18127d7c688ad13fc74b218b81b90_s390x",
+                  "product_id": "quay/clair-rhel8@sha256:8c4dc7ffe59ab71bafc90e57b4c8f31879e18127d7c688ad13fc74b218b81b90_s390x",
+                  "product_identification_helper": {
+                    "purl": "pkg:oci/clair-rhel8@sha256:8c4dc7ffe59ab71bafc90e57b4c8f31879e18127d7c688ad13fc74b218b81b90?arch=s390x&repository_url=registry.redhat.io/quay/clair-rhel8&tag=v3.12.8-1"
+                  }
+                }
+              },
+              {
+                "category": "product_version",
+                "name": "quay/quay-container-security-operator-bundle@sha256:d8039e2970871d4d252f38d18587a5a7f0cdee34cceb15645e52f37b8d943f59_s390x",
+                "product": {
+                  "name": "quay/quay-container-security-operator-bundle@sha256:d8039e2970871d4d252f38d18587a5a7f0cdee34cceb15645e52f37b8d943f59_s390x",
+                  "product_id": "quay/quay-container-security-operator-bundle@sha256:d8039e2970871d4d252f38d18587a5a7f0cdee34cceb15645e52f37b8d943f59_s390x",
+                  "product_identification_helper": {
+                    "purl": "pkg:oci/quay-container-security-operator-bundle@sha256:d8039e2970871d4d252f38d18587a5a7f0cdee34cceb15645e52f37b8d943f59?arch=s390x&repository_url=registry.redhat.io/quay/quay-container-security-operator-bundle&tag=v3.12.8-1"
+                  }
+                }
+              },
+              {
+                "category": "product_version",
+                "name": "quay/quay-container-security-operator-rhel8@sha256:46322de9eeb0681da5ab4d83432ce7a8791ae604e59ec162fcf96319cc248d02_s390x",
+                "product": {
+                  "name": "quay/quay-container-security-operator-rhel8@sha256:46322de9eeb0681da5ab4d83432ce7a8791ae604e59ec162fcf96319cc248d02_s390x",
+                  "product_id": "quay/quay-container-security-operator-rhel8@sha256:46322de9eeb0681da5ab4d83432ce7a8791ae604e59ec162fcf96319cc248d02_s390x",
+                  "product_identification_helper": {
+                    "purl": "pkg:oci/quay-container-security-operator-rhel8@sha256:46322de9eeb0681da5ab4d83432ce7a8791ae604e59ec162fcf96319cc248d02?arch=s390x&repository_url=registry.redhat.io/quay/quay-container-security-operator-rhel8&tag=v3.12.8-1"
+                  }
+                }
+              },
+              {
+                "category": "product_version",
+                "name": "quay/quay-operator-bundle@sha256:a91bb0d5e3becd59cadf51d323d1063ff675d277f9dfc7670570b1754badfacb_s390x",
+                "product": {
+                  "name": "quay/quay-operator-bundle@sha256:a91bb0d5e3becd59cadf51d323d1063ff675d277f9dfc7670570b1754badfacb_s390x",
+                  "product_id": "quay/quay-operator-bundle@sha256:a91bb0d5e3becd59cadf51d323d1063ff675d277f9dfc7670570b1754badfacb_s390x",
+                  "product_identification_helper": {
+                    "purl": "pkg:oci/quay-operator-bundle@sha256:a91bb0d5e3becd59cadf51d323d1063ff675d277f9dfc7670570b1754badfacb?arch=s390x&repository_url=registry.redhat.io/quay/quay-operator-bundle&tag=v3.12.8-4"
+                  }
+                }
+              },
+              {
+                "category": "product_version",
+                "name": "quay/quay-operator-rhel8@sha256:9659a3fe53bbf44d60fea61c970daa8356f27b0a9bba4233157c5856cc338a6b_s390x",
+                "product": {
+                  "name": "quay/quay-operator-rhel8@sha256:9659a3fe53bbf44d60fea61c970daa8356f27b0a9bba4233157c5856cc338a6b_s390x",
+                  "product_id": "quay/quay-operator-rhel8@sha256:9659a3fe53bbf44d60fea61c970daa8356f27b0a9bba4233157c5856cc338a6b_s390x",
+                  "product_identification_helper": {
+                    "purl": "pkg:oci/quay-operator-rhel8@sha256:9659a3fe53bbf44d60fea61c970daa8356f27b0a9bba4233157c5856cc338a6b?arch=s390x&repository_url=registry.redhat.io/quay/quay-operator-rhel8&tag=v3.12.8-2"
+                  }
+                }
+              },
+              {
+                "category": "product_version",
+                "name": "quay/quay-rhel8@sha256:e0dd2dcd0b89ba9969136ae3ae5df87fe22e061031f1d1bd1b260782a7069ea7_s390x",
+                "product": {
+                  "name": "quay/quay-rhel8@sha256:e0dd2dcd0b89ba9969136ae3ae5df87fe22e061031f1d1bd1b260782a7069ea7_s390x",
+                  "product_id": "quay/quay-rhel8@sha256:e0dd2dcd0b89ba9969136ae3ae5df87fe22e061031f1d1bd1b260782a7069ea7_s390x",
+                  "product_identification_helper": {
+                    "purl": "pkg:oci/quay-rhel8@sha256:e0dd2dcd0b89ba9969136ae3ae5df87fe22e061031f1d1bd1b260782a7069ea7?arch=s390x&repository_url=registry.redhat.io/quay/quay-rhel8&tag=v3.12.8-2"
+                  }
+                }
+              }
+            ],
+            "category": "architecture",
+            "name": "s390x"
+          },
+          {
+            "branches": [
+              {
+                "category": "product_version",
+                "name": "quay/quay-bridge-operator-bundle@sha256:689ff61a796a64d8c00aa430f34ffcceed2d89a3a3cc087b805f1fae33e80ea6_amd64",
+                "product": {
+                  "name": "quay/quay-bridge-operator-bundle@sha256:689ff61a796a64d8c00aa430f34ffcceed2d89a3a3cc087b805f1fae33e80ea6_amd64",
+                  "product_id": "quay/quay-bridge-operator-bundle@sha256:689ff61a796a64d8c00aa430f34ffcceed2d89a3a3cc087b805f1fae33e80ea6_amd64",
+                  "product_identification_helper": {
+                    "purl": "pkg:oci/quay-bridge-operator-bundle@sha256:689ff61a796a64d8c00aa430f34ffcceed2d89a3a3cc087b805f1fae33e80ea6?arch=amd64&repository_url=registry.redhat.io/quay/quay-bridge-operator-bundle&tag=v3.12.8-3"
+                  }
+                }
+              },
+              {
+                "category": "product_version",
+                "name": "quay/quay-bridge-operator-rhel8@sha256:8f7ea21b962abb00500141db4abf43d7c80ed585cbddcbe37c491bdbca1690d7_amd64",
+                "product": {
+                  "name": "quay/quay-bridge-operator-rhel8@sha256:8f7ea21b962abb00500141db4abf43d7c80ed585cbddcbe37c491bdbca1690d7_amd64",
+                  "product_id": "quay/quay-bridge-operator-rhel8@sha256:8f7ea21b962abb00500141db4abf43d7c80ed585cbddcbe37c491bdbca1690d7_amd64",
+                  "product_identification_helper": {
+                    "purl": "pkg:oci/quay-bridge-operator-rhel8@sha256:8f7ea21b962abb00500141db4abf43d7c80ed585cbddcbe37c491bdbca1690d7?arch=amd64&repository_url=registry.redhat.io/quay/quay-bridge-operator-rhel8&tag=v3.12.8-1"
+                  }
+                }
+              },
+              {
+                "category": "product_version",
+                "name": "quay/quay-builder-rhel8@sha256:6fdbffa2ddf6f5ede8c00755c5d6f57c494ddea63b59f6e288dc5217c7d81050_amd64",
+                "product": {
+                  "name": "quay/quay-builder-rhel8@sha256:6fdbffa2ddf6f5ede8c00755c5d6f57c494ddea63b59f6e288dc5217c7d81050_amd64",
+                  "product_id": "quay/quay-builder-rhel8@sha256:6fdbffa2ddf6f5ede8c00755c5d6f57c494ddea63b59f6e288dc5217c7d81050_amd64",
+                  "product_identification_helper": {
+                    "purl": "pkg:oci/quay-builder-rhel8@sha256:6fdbffa2ddf6f5ede8c00755c5d6f57c494ddea63b59f6e288dc5217c7d81050?arch=amd64&repository_url=registry.redhat.io/quay/quay-builder-rhel8&tag=v3.12.8-2"
+                  }
+                }
+              },
+              {
+                "category": "product_version",
+                "name": "quay/quay-builder-qemu-rhcos-rhel8@sha256:af6a7a92aa23a114da79903c205499c3843de181c8fab0195fb6c5d493fa1168_amd64",
+                "product": {
+                  "name": "quay/quay-builder-qemu-rhcos-rhel8@sha256:af6a7a92aa23a114da79903c205499c3843de181c8fab0195fb6c5d493fa1168_amd64",
+                  "product_id": "quay/quay-builder-qemu-rhcos-rhel8@sha256:af6a7a92aa23a114da79903c205499c3843de181c8fab0195fb6c5d493fa1168_amd64",
+                  "product_identification_helper": {
+                    "purl": "pkg:oci/quay-builder-qemu-rhcos-rhel8@sha256:af6a7a92aa23a114da79903c205499c3843de181c8fab0195fb6c5d493fa1168?arch=amd64&repository_url=registry.redhat.io/quay/quay-builder-qemu-rhcos-rhel8&tag=v3.12.8-1"
+                  }
+                }
+              },
+              {
+                "category": "product_version",
+                "name": "quay/clair-rhel8@sha256:cdda23eec3cf0caf153089fb59be85ecaa50a3918ef78e0f11892045f9918ef3_amd64",
+                "product": {
+                  "name": "quay/clair-rhel8@sha256:cdda23eec3cf0caf153089fb59be85ecaa50a3918ef78e0f11892045f9918ef3_amd64",
+                  "product_id": "quay/clair-rhel8@sha256:cdda23eec3cf0caf153089fb59be85ecaa50a3918ef78e0f11892045f9918ef3_amd64",
+                  "product_identification_helper": {
+                    "purl": "pkg:oci/clair-rhel8@sha256:cdda23eec3cf0caf153089fb59be85ecaa50a3918ef78e0f11892045f9918ef3?arch=amd64&repository_url=registry.redhat.io/quay/clair-rhel8&tag=v3.12.8-1"
+                  }
+                }
+              },
+              {
+                "category": "product_version",
+                "name": "quay/quay-container-security-operator-bundle@sha256:4ea1ef2482482789b30017f5221d7f64875e5550664da63098c8151a51bd3ede_amd64",
+                "product": {
+                  "name": "quay/quay-container-security-operator-bundle@sha256:4ea1ef2482482789b30017f5221d7f64875e5550664da63098c8151a51bd3ede_amd64",
+                  "product_id": "quay/quay-container-security-operator-bundle@sha256:4ea1ef2482482789b30017f5221d7f64875e5550664da63098c8151a51bd3ede_amd64",
+                  "product_identification_helper": {
+                    "purl": "pkg:oci/quay-container-security-operator-bundle@sha256:4ea1ef2482482789b30017f5221d7f64875e5550664da63098c8151a51bd3ede?arch=amd64&repository_url=registry.redhat.io/quay/quay-container-security-operator-bundle&tag=v3.12.8-1"
+                  }
+                }
+              },
+              {
+                "category": "product_version",
+                "name": "quay/quay-container-security-operator-rhel8@sha256:5d63f41839d712a348c91d7a90593ba332cab8e77f2238cc885792af9b45e89a_amd64",
+                "product": {
+                  "name": "quay/quay-container-security-operator-rhel8@sha256:5d63f41839d712a348c91d7a90593ba332cab8e77f2238cc885792af9b45e89a_amd64",
+                  "product_id": "quay/quay-container-security-operator-rhel8@sha256:5d63f41839d712a348c91d7a90593ba332cab8e77f2238cc885792af9b45e89a_amd64",
+                  "product_identification_helper": {
+                    "purl": "pkg:oci/quay-container-security-operator-rhel8@sha256:5d63f41839d712a348c91d7a90593ba332cab8e77f2238cc885792af9b45e89a?arch=amd64&repository_url=registry.redhat.io/quay/quay-container-security-operator-rhel8&tag=v3.12.8-1"
+                  }
+                }
+              },
+              {
+                "category": "product_version",
+                "name": "quay/quay-operator-bundle@sha256:ea077de1039e87e20f699ab2a68fa4f825898f7164bf071cc9404653789e352f_amd64",
+                "product": {
+                  "name": "quay/quay-operator-bundle@sha256:ea077de1039e87e20f699ab2a68fa4f825898f7164bf071cc9404653789e352f_amd64",
+                  "product_id": "quay/quay-operator-bundle@sha256:ea077de1039e87e20f699ab2a68fa4f825898f7164bf071cc9404653789e352f_amd64",
+                  "product_identification_helper": {
+                    "purl": "pkg:oci/quay-operator-bundle@sha256:ea077de1039e87e20f699ab2a68fa4f825898f7164bf071cc9404653789e352f?arch=amd64&repository_url=registry.redhat.io/quay/quay-operator-bundle&tag=v3.12.8-4"
+                  }
+                }
+              },
+              {
+                "category": "product_version",
+                "name": "quay/quay-operator-rhel8@sha256:0702ae5634f99cb0775acdf0c9173a2a119816dd4e593462a9b0573ace330e2b_amd64",
+                "product": {
+                  "name": "quay/quay-operator-rhel8@sha256:0702ae5634f99cb0775acdf0c9173a2a119816dd4e593462a9b0573ace330e2b_amd64",
+                  "product_id": "quay/quay-operator-rhel8@sha256:0702ae5634f99cb0775acdf0c9173a2a119816dd4e593462a9b0573ace330e2b_amd64",
+                  "product_identification_helper": {
+                    "purl": "pkg:oci/quay-operator-rhel8@sha256:0702ae5634f99cb0775acdf0c9173a2a119816dd4e593462a9b0573ace330e2b?arch=amd64&repository_url=registry.redhat.io/quay/quay-operator-rhel8&tag=v3.12.8-2"
+                  }
+                }
+              },
+              {
+                "category": "product_version",
+                "name": "quay/quay-rhel8@sha256:1a839e21cba19ea055e39f944620264bacb434fb1b6f2120fc3b8d7c3a29aae0_amd64",
+                "product": {
+                  "name": "quay/quay-rhel8@sha256:1a839e21cba19ea055e39f944620264bacb434fb1b6f2120fc3b8d7c3a29aae0_amd64",
+                  "product_id": "quay/quay-rhel8@sha256:1a839e21cba19ea055e39f944620264bacb434fb1b6f2120fc3b8d7c3a29aae0_amd64",
+                  "product_identification_helper": {
+                    "purl": "pkg:oci/quay-rhel8@sha256:1a839e21cba19ea055e39f944620264bacb434fb1b6f2120fc3b8d7c3a29aae0?arch=amd64&repository_url=registry.redhat.io/quay/quay-rhel8&tag=v3.12.8-2"
+                  }
+                }
+              }
+            ],
+            "category": "architecture",
+            "name": "amd64"
+          }
+        ],
+        "category": "vendor",
+        "name": "Red Hat"
+      }
+    ],
+    "relationships": [
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "quay/clair-rhel8@sha256:8c4dc7ffe59ab71bafc90e57b4c8f31879e18127d7c688ad13fc74b218b81b90_s390x as a component of Quay v3",
+          "product_id": "8Base-Quay-3:quay/clair-rhel8@sha256:8c4dc7ffe59ab71bafc90e57b4c8f31879e18127d7c688ad13fc74b218b81b90_s390x"
+        },
+        "product_reference": "quay/clair-rhel8@sha256:8c4dc7ffe59ab71bafc90e57b4c8f31879e18127d7c688ad13fc74b218b81b90_s390x",
+        "relates_to_product_reference": "8Base-Quay-3"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "quay/clair-rhel8@sha256:bf9818512c7fe88272fb8f7fc4a255d6bc5e3842582e4fd891558a89d406d8e9_ppc64le as a component of Quay v3",
+          "product_id": "8Base-Quay-3:quay/clair-rhel8@sha256:bf9818512c7fe88272fb8f7fc4a255d6bc5e3842582e4fd891558a89d406d8e9_ppc64le"
+        },
+        "product_reference": "quay/clair-rhel8@sha256:bf9818512c7fe88272fb8f7fc4a255d6bc5e3842582e4fd891558a89d406d8e9_ppc64le",
+        "relates_to_product_reference": "8Base-Quay-3"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "quay/clair-rhel8@sha256:cdda23eec3cf0caf153089fb59be85ecaa50a3918ef78e0f11892045f9918ef3_amd64 as a component of Quay v3",
+          "product_id": "8Base-Quay-3:quay/clair-rhel8@sha256:cdda23eec3cf0caf153089fb59be85ecaa50a3918ef78e0f11892045f9918ef3_amd64"
+        },
+        "product_reference": "quay/clair-rhel8@sha256:cdda23eec3cf0caf153089fb59be85ecaa50a3918ef78e0f11892045f9918ef3_amd64",
+        "relates_to_product_reference": "8Base-Quay-3"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "quay/quay-bridge-operator-bundle@sha256:5a20c2d291a56f0d660071f7d4636ca0bbcf094e9cc4380e64901fcf49e30ea8_ppc64le as a component of Quay v3",
+          "product_id": "8Base-Quay-3:quay/quay-bridge-operator-bundle@sha256:5a20c2d291a56f0d660071f7d4636ca0bbcf094e9cc4380e64901fcf49e30ea8_ppc64le"
+        },
+        "product_reference": "quay/quay-bridge-operator-bundle@sha256:5a20c2d291a56f0d660071f7d4636ca0bbcf094e9cc4380e64901fcf49e30ea8_ppc64le",
+        "relates_to_product_reference": "8Base-Quay-3"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "quay/quay-bridge-operator-bundle@sha256:689ff61a796a64d8c00aa430f34ffcceed2d89a3a3cc087b805f1fae33e80ea6_amd64 as a component of Quay v3",
+          "product_id": "8Base-Quay-3:quay/quay-bridge-operator-bundle@sha256:689ff61a796a64d8c00aa430f34ffcceed2d89a3a3cc087b805f1fae33e80ea6_amd64"
+        },
+        "product_reference": "quay/quay-bridge-operator-bundle@sha256:689ff61a796a64d8c00aa430f34ffcceed2d89a3a3cc087b805f1fae33e80ea6_amd64",
+        "relates_to_product_reference": "8Base-Quay-3"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "quay/quay-bridge-operator-bundle@sha256:9b37ea0b977e20326facc581b6980b187cfc0d5e5ed6eb1e6a6c8794321ec994_s390x as a component of Quay v3",
+          "product_id": "8Base-Quay-3:quay/quay-bridge-operator-bundle@sha256:9b37ea0b977e20326facc581b6980b187cfc0d5e5ed6eb1e6a6c8794321ec994_s390x"
+        },
+        "product_reference": "quay/quay-bridge-operator-bundle@sha256:9b37ea0b977e20326facc581b6980b187cfc0d5e5ed6eb1e6a6c8794321ec994_s390x",
+        "relates_to_product_reference": "8Base-Quay-3"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "quay/quay-bridge-operator-rhel8@sha256:8f7ea21b962abb00500141db4abf43d7c80ed585cbddcbe37c491bdbca1690d7_amd64 as a component of Quay v3",
+          "product_id": "8Base-Quay-3:quay/quay-bridge-operator-rhel8@sha256:8f7ea21b962abb00500141db4abf43d7c80ed585cbddcbe37c491bdbca1690d7_amd64"
+        },
+        "product_reference": "quay/quay-bridge-operator-rhel8@sha256:8f7ea21b962abb00500141db4abf43d7c80ed585cbddcbe37c491bdbca1690d7_amd64",
+        "relates_to_product_reference": "8Base-Quay-3"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "quay/quay-bridge-operator-rhel8@sha256:bdda4ec419724ce68af416eaebb2b6e4be16ea2c33595be506cf2fd5beef4056_s390x as a component of Quay v3",
+          "product_id": "8Base-Quay-3:quay/quay-bridge-operator-rhel8@sha256:bdda4ec419724ce68af416eaebb2b6e4be16ea2c33595be506cf2fd5beef4056_s390x"
+        },
+        "product_reference": "quay/quay-bridge-operator-rhel8@sha256:bdda4ec419724ce68af416eaebb2b6e4be16ea2c33595be506cf2fd5beef4056_s390x",
+        "relates_to_product_reference": "8Base-Quay-3"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "quay/quay-bridge-operator-rhel8@sha256:fd0d3139530d2a99a3e053d07266d14dccd73ac18e7ef073619de415069520dd_ppc64le as a component of Quay v3",
+          "product_id": "8Base-Quay-3:quay/quay-bridge-operator-rhel8@sha256:fd0d3139530d2a99a3e053d07266d14dccd73ac18e7ef073619de415069520dd_ppc64le"
+        },
+        "product_reference": "quay/quay-bridge-operator-rhel8@sha256:fd0d3139530d2a99a3e053d07266d14dccd73ac18e7ef073619de415069520dd_ppc64le",
+        "relates_to_product_reference": "8Base-Quay-3"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "quay/quay-builder-qemu-rhcos-rhel8@sha256:af6a7a92aa23a114da79903c205499c3843de181c8fab0195fb6c5d493fa1168_amd64 as a component of Quay v3",
+          "product_id": "8Base-Quay-3:quay/quay-builder-qemu-rhcos-rhel8@sha256:af6a7a92aa23a114da79903c205499c3843de181c8fab0195fb6c5d493fa1168_amd64"
+        },
+        "product_reference": "quay/quay-builder-qemu-rhcos-rhel8@sha256:af6a7a92aa23a114da79903c205499c3843de181c8fab0195fb6c5d493fa1168_amd64",
+        "relates_to_product_reference": "8Base-Quay-3"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "quay/quay-builder-qemu-rhcos-rhel8@sha256:b91aec3d3f9cf8a4204e6e13e27035802693a8517b14e59db2535fe789e7a33e_ppc64le as a component of Quay v3",
+          "product_id": "8Base-Quay-3:quay/quay-builder-qemu-rhcos-rhel8@sha256:b91aec3d3f9cf8a4204e6e13e27035802693a8517b14e59db2535fe789e7a33e_ppc64le"
+        },
+        "product_reference": "quay/quay-builder-qemu-rhcos-rhel8@sha256:b91aec3d3f9cf8a4204e6e13e27035802693a8517b14e59db2535fe789e7a33e_ppc64le",
+        "relates_to_product_reference": "8Base-Quay-3"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "quay/quay-builder-qemu-rhcos-rhel8@sha256:bfc9435099f0b0cde9b43df3982b6164e08bdf7dc0691af197555f029cf78563_s390x as a component of Quay v3",
+          "product_id": "8Base-Quay-3:quay/quay-builder-qemu-rhcos-rhel8@sha256:bfc9435099f0b0cde9b43df3982b6164e08bdf7dc0691af197555f029cf78563_s390x"
+        },
+        "product_reference": "quay/quay-builder-qemu-rhcos-rhel8@sha256:bfc9435099f0b0cde9b43df3982b6164e08bdf7dc0691af197555f029cf78563_s390x",
+        "relates_to_product_reference": "8Base-Quay-3"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "quay/quay-builder-rhel8@sha256:6fdbffa2ddf6f5ede8c00755c5d6f57c494ddea63b59f6e288dc5217c7d81050_amd64 as a component of Quay v3",
+          "product_id": "8Base-Quay-3:quay/quay-builder-rhel8@sha256:6fdbffa2ddf6f5ede8c00755c5d6f57c494ddea63b59f6e288dc5217c7d81050_amd64"
+        },
+        "product_reference": "quay/quay-builder-rhel8@sha256:6fdbffa2ddf6f5ede8c00755c5d6f57c494ddea63b59f6e288dc5217c7d81050_amd64",
+        "relates_to_product_reference": "8Base-Quay-3"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "quay/quay-builder-rhel8@sha256:edaa246672ae95f8a7c7fa00ec6aade33204ff37128cdec7b390c0d8f6573f13_s390x as a component of Quay v3",
+          "product_id": "8Base-Quay-3:quay/quay-builder-rhel8@sha256:edaa246672ae95f8a7c7fa00ec6aade33204ff37128cdec7b390c0d8f6573f13_s390x"
+        },
+        "product_reference": "quay/quay-builder-rhel8@sha256:edaa246672ae95f8a7c7fa00ec6aade33204ff37128cdec7b390c0d8f6573f13_s390x",
+        "relates_to_product_reference": "8Base-Quay-3"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "quay/quay-builder-rhel8@sha256:f86fda437718ae80028a49aa919790ea19dabc38f8d41431a4366ae5001e46e9_ppc64le as a component of Quay v3",
+          "product_id": "8Base-Quay-3:quay/quay-builder-rhel8@sha256:f86fda437718ae80028a49aa919790ea19dabc38f8d41431a4366ae5001e46e9_ppc64le"
+        },
+        "product_reference": "quay/quay-builder-rhel8@sha256:f86fda437718ae80028a49aa919790ea19dabc38f8d41431a4366ae5001e46e9_ppc64le",
+        "relates_to_product_reference": "8Base-Quay-3"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "quay/quay-container-security-operator-bundle@sha256:4ea1ef2482482789b30017f5221d7f64875e5550664da63098c8151a51bd3ede_amd64 as a component of Quay v3",
+          "product_id": "8Base-Quay-3:quay/quay-container-security-operator-bundle@sha256:4ea1ef2482482789b30017f5221d7f64875e5550664da63098c8151a51bd3ede_amd64"
+        },
+        "product_reference": "quay/quay-container-security-operator-bundle@sha256:4ea1ef2482482789b30017f5221d7f64875e5550664da63098c8151a51bd3ede_amd64",
+        "relates_to_product_reference": "8Base-Quay-3"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "quay/quay-container-security-operator-bundle@sha256:c81af92a6092273dea45a9dee56bbb8a246b566402497b1746fa4817a3cece39_ppc64le as a component of Quay v3",
+          "product_id": "8Base-Quay-3:quay/quay-container-security-operator-bundle@sha256:c81af92a6092273dea45a9dee56bbb8a246b566402497b1746fa4817a3cece39_ppc64le"
+        },
+        "product_reference": "quay/quay-container-security-operator-bundle@sha256:c81af92a6092273dea45a9dee56bbb8a246b566402497b1746fa4817a3cece39_ppc64le",
+        "relates_to_product_reference": "8Base-Quay-3"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "quay/quay-container-security-operator-bundle@sha256:d8039e2970871d4d252f38d18587a5a7f0cdee34cceb15645e52f37b8d943f59_s390x as a component of Quay v3",
+          "product_id": "8Base-Quay-3:quay/quay-container-security-operator-bundle@sha256:d8039e2970871d4d252f38d18587a5a7f0cdee34cceb15645e52f37b8d943f59_s390x"
+        },
+        "product_reference": "quay/quay-container-security-operator-bundle@sha256:d8039e2970871d4d252f38d18587a5a7f0cdee34cceb15645e52f37b8d943f59_s390x",
+        "relates_to_product_reference": "8Base-Quay-3"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "quay/quay-container-security-operator-rhel8@sha256:46322de9eeb0681da5ab4d83432ce7a8791ae604e59ec162fcf96319cc248d02_s390x as a component of Quay v3",
+          "product_id": "8Base-Quay-3:quay/quay-container-security-operator-rhel8@sha256:46322de9eeb0681da5ab4d83432ce7a8791ae604e59ec162fcf96319cc248d02_s390x"
+        },
+        "product_reference": "quay/quay-container-security-operator-rhel8@sha256:46322de9eeb0681da5ab4d83432ce7a8791ae604e59ec162fcf96319cc248d02_s390x",
+        "relates_to_product_reference": "8Base-Quay-3"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "quay/quay-container-security-operator-rhel8@sha256:5d63f41839d712a348c91d7a90593ba332cab8e77f2238cc885792af9b45e89a_amd64 as a component of Quay v3",
+          "product_id": "8Base-Quay-3:quay/quay-container-security-operator-rhel8@sha256:5d63f41839d712a348c91d7a90593ba332cab8e77f2238cc885792af9b45e89a_amd64"
+        },
+        "product_reference": "quay/quay-container-security-operator-rhel8@sha256:5d63f41839d712a348c91d7a90593ba332cab8e77f2238cc885792af9b45e89a_amd64",
+        "relates_to_product_reference": "8Base-Quay-3"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "quay/quay-container-security-operator-rhel8@sha256:6a5acdbb57f870efddfb93095522c3640f9ad6256c54a20f4790874d13322560_ppc64le as a component of Quay v3",
+          "product_id": "8Base-Quay-3:quay/quay-container-security-operator-rhel8@sha256:6a5acdbb57f870efddfb93095522c3640f9ad6256c54a20f4790874d13322560_ppc64le"
+        },
+        "product_reference": "quay/quay-container-security-operator-rhel8@sha256:6a5acdbb57f870efddfb93095522c3640f9ad6256c54a20f4790874d13322560_ppc64le",
+        "relates_to_product_reference": "8Base-Quay-3"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "quay/quay-operator-bundle@sha256:6cea661a5c6e0a5927b3a5a06129fc03e6678132faf9e3da5f498d8457fb2211_ppc64le as a component of Quay v3",
+          "product_id": "8Base-Quay-3:quay/quay-operator-bundle@sha256:6cea661a5c6e0a5927b3a5a06129fc03e6678132faf9e3da5f498d8457fb2211_ppc64le"
+        },
+        "product_reference": "quay/quay-operator-bundle@sha256:6cea661a5c6e0a5927b3a5a06129fc03e6678132faf9e3da5f498d8457fb2211_ppc64le",
+        "relates_to_product_reference": "8Base-Quay-3"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "quay/quay-operator-bundle@sha256:a91bb0d5e3becd59cadf51d323d1063ff675d277f9dfc7670570b1754badfacb_s390x as a component of Quay v3",
+          "product_id": "8Base-Quay-3:quay/quay-operator-bundle@sha256:a91bb0d5e3becd59cadf51d323d1063ff675d277f9dfc7670570b1754badfacb_s390x"
+        },
+        "product_reference": "quay/quay-operator-bundle@sha256:a91bb0d5e3becd59cadf51d323d1063ff675d277f9dfc7670570b1754badfacb_s390x",
+        "relates_to_product_reference": "8Base-Quay-3"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "quay/quay-operator-bundle@sha256:ea077de1039e87e20f699ab2a68fa4f825898f7164bf071cc9404653789e352f_amd64 as a component of Quay v3",
+          "product_id": "8Base-Quay-3:quay/quay-operator-bundle@sha256:ea077de1039e87e20f699ab2a68fa4f825898f7164bf071cc9404653789e352f_amd64"
+        },
+        "product_reference": "quay/quay-operator-bundle@sha256:ea077de1039e87e20f699ab2a68fa4f825898f7164bf071cc9404653789e352f_amd64",
+        "relates_to_product_reference": "8Base-Quay-3"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "quay/quay-operator-rhel8@sha256:0702ae5634f99cb0775acdf0c9173a2a119816dd4e593462a9b0573ace330e2b_amd64 as a component of Quay v3",
+          "product_id": "8Base-Quay-3:quay/quay-operator-rhel8@sha256:0702ae5634f99cb0775acdf0c9173a2a119816dd4e593462a9b0573ace330e2b_amd64"
+        },
+        "product_reference": "quay/quay-operator-rhel8@sha256:0702ae5634f99cb0775acdf0c9173a2a119816dd4e593462a9b0573ace330e2b_amd64",
+        "relates_to_product_reference": "8Base-Quay-3"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "quay/quay-operator-rhel8@sha256:9659a3fe53bbf44d60fea61c970daa8356f27b0a9bba4233157c5856cc338a6b_s390x as a component of Quay v3",
+          "product_id": "8Base-Quay-3:quay/quay-operator-rhel8@sha256:9659a3fe53bbf44d60fea61c970daa8356f27b0a9bba4233157c5856cc338a6b_s390x"
+        },
+        "product_reference": "quay/quay-operator-rhel8@sha256:9659a3fe53bbf44d60fea61c970daa8356f27b0a9bba4233157c5856cc338a6b_s390x",
+        "relates_to_product_reference": "8Base-Quay-3"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "quay/quay-operator-rhel8@sha256:ee4755634f7be2e4a68ef4ae4d89cde8964d1ea62fa233b10f7456ff82cbe9fc_ppc64le as a component of Quay v3",
+          "product_id": "8Base-Quay-3:quay/quay-operator-rhel8@sha256:ee4755634f7be2e4a68ef4ae4d89cde8964d1ea62fa233b10f7456ff82cbe9fc_ppc64le"
+        },
+        "product_reference": "quay/quay-operator-rhel8@sha256:ee4755634f7be2e4a68ef4ae4d89cde8964d1ea62fa233b10f7456ff82cbe9fc_ppc64le",
+        "relates_to_product_reference": "8Base-Quay-3"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "quay/quay-rhel8@sha256:1a839e21cba19ea055e39f944620264bacb434fb1b6f2120fc3b8d7c3a29aae0_amd64 as a component of Quay v3",
+          "product_id": "8Base-Quay-3:quay/quay-rhel8@sha256:1a839e21cba19ea055e39f944620264bacb434fb1b6f2120fc3b8d7c3a29aae0_amd64"
+        },
+        "product_reference": "quay/quay-rhel8@sha256:1a839e21cba19ea055e39f944620264bacb434fb1b6f2120fc3b8d7c3a29aae0_amd64",
+        "relates_to_product_reference": "8Base-Quay-3"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "quay/quay-rhel8@sha256:ab2aac7247b0d75e6fcd2e5788067cf9130075c93c917da8145e5b1629d96d72_ppc64le as a component of Quay v3",
+          "product_id": "8Base-Quay-3:quay/quay-rhel8@sha256:ab2aac7247b0d75e6fcd2e5788067cf9130075c93c917da8145e5b1629d96d72_ppc64le"
+        },
+        "product_reference": "quay/quay-rhel8@sha256:ab2aac7247b0d75e6fcd2e5788067cf9130075c93c917da8145e5b1629d96d72_ppc64le",
+        "relates_to_product_reference": "8Base-Quay-3"
+      },
+      {
+        "category": "default_component_of",
+        "full_product_name": {
+          "name": "quay/quay-rhel8@sha256:e0dd2dcd0b89ba9969136ae3ae5df87fe22e061031f1d1bd1b260782a7069ea7_s390x as a component of Quay v3",
+          "product_id": "8Base-Quay-3:quay/quay-rhel8@sha256:e0dd2dcd0b89ba9969136ae3ae5df87fe22e061031f1d1bd1b260782a7069ea7_s390x"
+        },
+        "product_reference": "quay/quay-rhel8@sha256:e0dd2dcd0b89ba9969136ae3ae5df87fe22e061031f1d1bd1b260782a7069ea7_s390x",
+        "relates_to_product_reference": "8Base-Quay-3"
+      }
+    ]
+  },
+  "vulnerabilities": [
+    {
+      "cve": "CVE-2020-11023",
+      "cwe": {
+        "id": "CWE-79",
+        "name": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')"
+      },
+      "discovery_date": "2020-06-23T00:00:00+00:00",
+      "ids": [
+        {
+          "system_name": "Red Hat Bugzilla ID",
+          "text": "1850004"
+        }
+      ],
+      "notes": [
+        {
+          "category": "description",
+          "text": "A flaw was found in jQuery. HTML containing \\<option\\> elements from untrusted sources are passed, even after sanitizing, to one of jQuery's DOM manipulation methods, which may execute untrusted code. The highest threat from this vulnerability is to data confidentiality and integrity.",
+          "title": "Vulnerability description"
+        },
+        {
+          "category": "summary",
+          "text": "jquery: Untrusted code execution via <option> tag in HTML passed to DOM manipulation methods",
+          "title": "Vulnerability summary"
+        },
+        {
+          "category": "other",
+          "text": "Red Hat Enterprise Linux versions 6, 7, and 8 ship a vulnerable version of JQuery in the `pcs` component. As PCS does not accept untrusted input, the vulnerable code cannot be controlled by an attacker.\n\nMultiple Red Hat offerings use doxygen to build documentation. During this process an affected jquery.js file can be included in the resulting package. The 'gcc' and 'tbb' packages were potentially vulnerable via this method.\n\nOpenShift Container Platform 4 is not affected because even though it uses the 'gcc' component, vulnerable code is limited within the libstdc++-docs rpm package, which is not shipped.\n\nWithin regulated environments, a combination of the following controls acts as a significant barrier to successfully exploiting a CWE-79: Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting') vulnerability and therefore downgrades the severity of this particular CVE from Moderate to Low.\n\nStatic code analysis controls ensure that security flaws, including XSS vulnerabilities, are detected early in development by scanning code for improper input handling. This prevents vulnerable code from reaching production and encourages our developers to follow secure coding practices. System monitoring controls play a crucial role in detecting and responding to XSS attacks by analyzing logs, monitoring user behavior, and generating alerts for suspicious activity. Meanwhile, AWS WAF (Web Application Firewall) adds an extra layer of defense by filtering and blocking malicious input before it reaches the platform and/or application. Together, these controls create a defense-in-depth approach, reducing the risk of XSS exploitation by preventing, detecting, and mitigating attacks at multiple levels.",
+          "title": "Statement"
+        },
+        {
+          "category": "general",
+          "text": "The CVSS score(s) listed for this vulnerability do not reflect the associated product's status, and are included for informational purposes to better understand the severity of this vulnerability.",
+          "title": "CVSS score applicability"
+        }
+      ],
+      "product_status": {
+        "fixed": [
+          "8Base-Quay-3:quay/clair-rhel8@sha256:8c4dc7ffe59ab71bafc90e57b4c8f31879e18127d7c688ad13fc74b218b81b90_s390x",
+          "8Base-Quay-3:quay/clair-rhel8@sha256:bf9818512c7fe88272fb8f7fc4a255d6bc5e3842582e4fd891558a89d406d8e9_ppc64le",
+          "8Base-Quay-3:quay/clair-rhel8@sha256:cdda23eec3cf0caf153089fb59be85ecaa50a3918ef78e0f11892045f9918ef3_amd64",
+          "8Base-Quay-3:quay/quay-bridge-operator-bundle@sha256:5a20c2d291a56f0d660071f7d4636ca0bbcf094e9cc4380e64901fcf49e30ea8_ppc64le",
+          "8Base-Quay-3:quay/quay-bridge-operator-bundle@sha256:689ff61a796a64d8c00aa430f34ffcceed2d89a3a3cc087b805f1fae33e80ea6_amd64",
+          "8Base-Quay-3:quay/quay-bridge-operator-bundle@sha256:9b37ea0b977e20326facc581b6980b187cfc0d5e5ed6eb1e6a6c8794321ec994_s390x",
+          "8Base-Quay-3:quay/quay-bridge-operator-rhel8@sha256:8f7ea21b962abb00500141db4abf43d7c80ed585cbddcbe37c491bdbca1690d7_amd64",
+          "8Base-Quay-3:quay/quay-bridge-operator-rhel8@sha256:bdda4ec419724ce68af416eaebb2b6e4be16ea2c33595be506cf2fd5beef4056_s390x",
+          "8Base-Quay-3:quay/quay-bridge-operator-rhel8@sha256:fd0d3139530d2a99a3e053d07266d14dccd73ac18e7ef073619de415069520dd_ppc64le",
+          "8Base-Quay-3:quay/quay-builder-qemu-rhcos-rhel8@sha256:af6a7a92aa23a114da79903c205499c3843de181c8fab0195fb6c5d493fa1168_amd64",
+          "8Base-Quay-3:quay/quay-builder-qemu-rhcos-rhel8@sha256:b91aec3d3f9cf8a4204e6e13e27035802693a8517b14e59db2535fe789e7a33e_ppc64le",
+          "8Base-Quay-3:quay/quay-builder-qemu-rhcos-rhel8@sha256:bfc9435099f0b0cde9b43df3982b6164e08bdf7dc0691af197555f029cf78563_s390x",
+          "8Base-Quay-3:quay/quay-builder-rhel8@sha256:6fdbffa2ddf6f5ede8c00755c5d6f57c494ddea63b59f6e288dc5217c7d81050_amd64",
+          "8Base-Quay-3:quay/quay-builder-rhel8@sha256:edaa246672ae95f8a7c7fa00ec6aade33204ff37128cdec7b390c0d8f6573f13_s390x",
+          "8Base-Quay-3:quay/quay-builder-rhel8@sha256:f86fda437718ae80028a49aa919790ea19dabc38f8d41431a4366ae5001e46e9_ppc64le",
+          "8Base-Quay-3:quay/quay-container-security-operator-bundle@sha256:4ea1ef2482482789b30017f5221d7f64875e5550664da63098c8151a51bd3ede_amd64",
+          "8Base-Quay-3:quay/quay-container-security-operator-bundle@sha256:c81af92a6092273dea45a9dee56bbb8a246b566402497b1746fa4817a3cece39_ppc64le",
+          "8Base-Quay-3:quay/quay-container-security-operator-bundle@sha256:d8039e2970871d4d252f38d18587a5a7f0cdee34cceb15645e52f37b8d943f59_s390x",
+          "8Base-Quay-3:quay/quay-container-security-operator-rhel8@sha256:46322de9eeb0681da5ab4d83432ce7a8791ae604e59ec162fcf96319cc248d02_s390x",
+          "8Base-Quay-3:quay/quay-container-security-operator-rhel8@sha256:5d63f41839d712a348c91d7a90593ba332cab8e77f2238cc885792af9b45e89a_amd64",
+          "8Base-Quay-3:quay/quay-container-security-operator-rhel8@sha256:6a5acdbb57f870efddfb93095522c3640f9ad6256c54a20f4790874d13322560_ppc64le",
+          "8Base-Quay-3:quay/quay-operator-bundle@sha256:6cea661a5c6e0a5927b3a5a06129fc03e6678132faf9e3da5f498d8457fb2211_ppc64le",
+          "8Base-Quay-3:quay/quay-operator-bundle@sha256:a91bb0d5e3becd59cadf51d323d1063ff675d277f9dfc7670570b1754badfacb_s390x",
+          "8Base-Quay-3:quay/quay-operator-bundle@sha256:ea077de1039e87e20f699ab2a68fa4f825898f7164bf071cc9404653789e352f_amd64",
+          "8Base-Quay-3:quay/quay-operator-rhel8@sha256:0702ae5634f99cb0775acdf0c9173a2a119816dd4e593462a9b0573ace330e2b_amd64",
+          "8Base-Quay-3:quay/quay-operator-rhel8@sha256:9659a3fe53bbf44d60fea61c970daa8356f27b0a9bba4233157c5856cc338a6b_s390x",
+          "8Base-Quay-3:quay/quay-operator-rhel8@sha256:ee4755634f7be2e4a68ef4ae4d89cde8964d1ea62fa233b10f7456ff82cbe9fc_ppc64le",
+          "8Base-Quay-3:quay/quay-rhel8@sha256:1a839e21cba19ea055e39f944620264bacb434fb1b6f2120fc3b8d7c3a29aae0_amd64",
+          "8Base-Quay-3:quay/quay-rhel8@sha256:ab2aac7247b0d75e6fcd2e5788067cf9130075c93c917da8145e5b1629d96d72_ppc64le",
+          "8Base-Quay-3:quay/quay-rhel8@sha256:e0dd2dcd0b89ba9969136ae3ae5df87fe22e061031f1d1bd1b260782a7069ea7_s390x"
+        ]
+      },
+      "references": [
+        {
+          "category": "self",
+          "summary": "Canonical URL",
+          "url": "https://access.redhat.com/security/cve/CVE-2020-11023"
+        },
+        {
+          "category": "external",
+          "summary": "RHBZ#1850004",
+          "url": "https://bugzilla.redhat.com/show_bug.cgi?id=1850004"
+        },
+        {
+          "category": "external",
+          "summary": "https://www.cve.org/CVERecord?id=CVE-2020-11023",
+          "url": "https://www.cve.org/CVERecord?id=CVE-2020-11023"
+        },
+        {
+          "category": "external",
+          "summary": "https://nvd.nist.gov/vuln/detail/CVE-2020-11023",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2020-11023"
+        },
+        {
+          "category": "external",
+          "summary": "https://blog.jquery.com/2020/04/10/jquery-3-5-0-released/",
+          "url": "https://blog.jquery.com/2020/04/10/jquery-3-5-0-released/"
+        },
+        {
+          "category": "external",
+          "summary": "https://www.cisa.gov/known-exploited-vulnerabilities-catalog",
+          "url": "https://www.cisa.gov/known-exploited-vulnerabilities-catalog"
+        }
+      ],
+      "release_date": "2020-04-29T00:00:00+00:00",
+      "remediations": [
+        {
+          "category": "vendor_fix",
+          "date": "2025-02-24T03:44:11+00:00",
+          "details": "Before applying this update, make sure all previously released errata relevant to your system have been applied.\n\nFor details on how to apply this update, refer to:\n\nhttps://access.redhat.com/articles/11258",
+          "product_ids": [
+            "8Base-Quay-3:quay/clair-rhel8@sha256:8c4dc7ffe59ab71bafc90e57b4c8f31879e18127d7c688ad13fc74b218b81b90_s390x",
+            "8Base-Quay-3:quay/clair-rhel8@sha256:bf9818512c7fe88272fb8f7fc4a255d6bc5e3842582e4fd891558a89d406d8e9_ppc64le",
+            "8Base-Quay-3:quay/clair-rhel8@sha256:cdda23eec3cf0caf153089fb59be85ecaa50a3918ef78e0f11892045f9918ef3_amd64",
+            "8Base-Quay-3:quay/quay-bridge-operator-bundle@sha256:5a20c2d291a56f0d660071f7d4636ca0bbcf094e9cc4380e64901fcf49e30ea8_ppc64le",
+            "8Base-Quay-3:quay/quay-bridge-operator-bundle@sha256:689ff61a796a64d8c00aa430f34ffcceed2d89a3a3cc087b805f1fae33e80ea6_amd64",
+            "8Base-Quay-3:quay/quay-bridge-operator-bundle@sha256:9b37ea0b977e20326facc581b6980b187cfc0d5e5ed6eb1e6a6c8794321ec994_s390x",
+            "8Base-Quay-3:quay/quay-bridge-operator-rhel8@sha256:8f7ea21b962abb00500141db4abf43d7c80ed585cbddcbe37c491bdbca1690d7_amd64",
+            "8Base-Quay-3:quay/quay-bridge-operator-rhel8@sha256:bdda4ec419724ce68af416eaebb2b6e4be16ea2c33595be506cf2fd5beef4056_s390x",
+            "8Base-Quay-3:quay/quay-bridge-operator-rhel8@sha256:fd0d3139530d2a99a3e053d07266d14dccd73ac18e7ef073619de415069520dd_ppc64le",
+            "8Base-Quay-3:quay/quay-builder-qemu-rhcos-rhel8@sha256:af6a7a92aa23a114da79903c205499c3843de181c8fab0195fb6c5d493fa1168_amd64",
+            "8Base-Quay-3:quay/quay-builder-qemu-rhcos-rhel8@sha256:b91aec3d3f9cf8a4204e6e13e27035802693a8517b14e59db2535fe789e7a33e_ppc64le",
+            "8Base-Quay-3:quay/quay-builder-qemu-rhcos-rhel8@sha256:bfc9435099f0b0cde9b43df3982b6164e08bdf7dc0691af197555f029cf78563_s390x",
+            "8Base-Quay-3:quay/quay-builder-rhel8@sha256:6fdbffa2ddf6f5ede8c00755c5d6f57c494ddea63b59f6e288dc5217c7d81050_amd64",
+            "8Base-Quay-3:quay/quay-builder-rhel8@sha256:edaa246672ae95f8a7c7fa00ec6aade33204ff37128cdec7b390c0d8f6573f13_s390x",
+            "8Base-Quay-3:quay/quay-builder-rhel8@sha256:f86fda437718ae80028a49aa919790ea19dabc38f8d41431a4366ae5001e46e9_ppc64le",
+            "8Base-Quay-3:quay/quay-container-security-operator-bundle@sha256:4ea1ef2482482789b30017f5221d7f64875e5550664da63098c8151a51bd3ede_amd64",
+            "8Base-Quay-3:quay/quay-container-security-operator-bundle@sha256:c81af92a6092273dea45a9dee56bbb8a246b566402497b1746fa4817a3cece39_ppc64le",
+            "8Base-Quay-3:quay/quay-container-security-operator-bundle@sha256:d8039e2970871d4d252f38d18587a5a7f0cdee34cceb15645e52f37b8d943f59_s390x",
+            "8Base-Quay-3:quay/quay-container-security-operator-rhel8@sha256:46322de9eeb0681da5ab4d83432ce7a8791ae604e59ec162fcf96319cc248d02_s390x",
+            "8Base-Quay-3:quay/quay-container-security-operator-rhel8@sha256:5d63f41839d712a348c91d7a90593ba332cab8e77f2238cc885792af9b45e89a_amd64",
+            "8Base-Quay-3:quay/quay-container-security-operator-rhel8@sha256:6a5acdbb57f870efddfb93095522c3640f9ad6256c54a20f4790874d13322560_ppc64le",
+            "8Base-Quay-3:quay/quay-operator-bundle@sha256:6cea661a5c6e0a5927b3a5a06129fc03e6678132faf9e3da5f498d8457fb2211_ppc64le",
+            "8Base-Quay-3:quay/quay-operator-bundle@sha256:a91bb0d5e3becd59cadf51d323d1063ff675d277f9dfc7670570b1754badfacb_s390x",
+            "8Base-Quay-3:quay/quay-operator-bundle@sha256:ea077de1039e87e20f699ab2a68fa4f825898f7164bf071cc9404653789e352f_amd64",
+            "8Base-Quay-3:quay/quay-operator-rhel8@sha256:0702ae5634f99cb0775acdf0c9173a2a119816dd4e593462a9b0573ace330e2b_amd64",
+            "8Base-Quay-3:quay/quay-operator-rhel8@sha256:9659a3fe53bbf44d60fea61c970daa8356f27b0a9bba4233157c5856cc338a6b_s390x",
+            "8Base-Quay-3:quay/quay-operator-rhel8@sha256:ee4755634f7be2e4a68ef4ae4d89cde8964d1ea62fa233b10f7456ff82cbe9fc_ppc64le",
+            "8Base-Quay-3:quay/quay-rhel8@sha256:1a839e21cba19ea055e39f944620264bacb434fb1b6f2120fc3b8d7c3a29aae0_amd64",
+            "8Base-Quay-3:quay/quay-rhel8@sha256:ab2aac7247b0d75e6fcd2e5788067cf9130075c93c917da8145e5b1629d96d72_ppc64le",
+            "8Base-Quay-3:quay/quay-rhel8@sha256:e0dd2dcd0b89ba9969136ae3ae5df87fe22e061031f1d1bd1b260782a7069ea7_s390x"
+          ],
+          "restart_required": {
+            "category": "none"
+          },
+          "url": "https://access.redhat.com/errata/RHBA-2025:1598"
+        },
+        {
+          "category": "workaround",
+          "details": "Red Hat has investigated whether a possible mitigation exists for this issue, and has not been able to identify a practical example. Please update the affected package as soon as possible.",
+          "product_ids": [
+            "8Base-Quay-3:quay/clair-rhel8@sha256:8c4dc7ffe59ab71bafc90e57b4c8f31879e18127d7c688ad13fc74b218b81b90_s390x",
+            "8Base-Quay-3:quay/clair-rhel8@sha256:bf9818512c7fe88272fb8f7fc4a255d6bc5e3842582e4fd891558a89d406d8e9_ppc64le",
+            "8Base-Quay-3:quay/clair-rhel8@sha256:cdda23eec3cf0caf153089fb59be85ecaa50a3918ef78e0f11892045f9918ef3_amd64",
+            "8Base-Quay-3:quay/quay-bridge-operator-bundle@sha256:5a20c2d291a56f0d660071f7d4636ca0bbcf094e9cc4380e64901fcf49e30ea8_ppc64le",
+            "8Base-Quay-3:quay/quay-bridge-operator-bundle@sha256:689ff61a796a64d8c00aa430f34ffcceed2d89a3a3cc087b805f1fae33e80ea6_amd64",
+            "8Base-Quay-3:quay/quay-bridge-operator-bundle@sha256:9b37ea0b977e20326facc581b6980b187cfc0d5e5ed6eb1e6a6c8794321ec994_s390x",
+            "8Base-Quay-3:quay/quay-bridge-operator-rhel8@sha256:8f7ea21b962abb00500141db4abf43d7c80ed585cbddcbe37c491bdbca1690d7_amd64",
+            "8Base-Quay-3:quay/quay-bridge-operator-rhel8@sha256:bdda4ec419724ce68af416eaebb2b6e4be16ea2c33595be506cf2fd5beef4056_s390x",
+            "8Base-Quay-3:quay/quay-bridge-operator-rhel8@sha256:fd0d3139530d2a99a3e053d07266d14dccd73ac18e7ef073619de415069520dd_ppc64le",
+            "8Base-Quay-3:quay/quay-builder-qemu-rhcos-rhel8@sha256:af6a7a92aa23a114da79903c205499c3843de181c8fab0195fb6c5d493fa1168_amd64",
+            "8Base-Quay-3:quay/quay-builder-qemu-rhcos-rhel8@sha256:b91aec3d3f9cf8a4204e6e13e27035802693a8517b14e59db2535fe789e7a33e_ppc64le",
+            "8Base-Quay-3:quay/quay-builder-qemu-rhcos-rhel8@sha256:bfc9435099f0b0cde9b43df3982b6164e08bdf7dc0691af197555f029cf78563_s390x",
+            "8Base-Quay-3:quay/quay-builder-rhel8@sha256:6fdbffa2ddf6f5ede8c00755c5d6f57c494ddea63b59f6e288dc5217c7d81050_amd64",
+            "8Base-Quay-3:quay/quay-builder-rhel8@sha256:edaa246672ae95f8a7c7fa00ec6aade33204ff37128cdec7b390c0d8f6573f13_s390x",
+            "8Base-Quay-3:quay/quay-builder-rhel8@sha256:f86fda437718ae80028a49aa919790ea19dabc38f8d41431a4366ae5001e46e9_ppc64le",
+            "8Base-Quay-3:quay/quay-container-security-operator-bundle@sha256:4ea1ef2482482789b30017f5221d7f64875e5550664da63098c8151a51bd3ede_amd64",
+            "8Base-Quay-3:quay/quay-container-security-operator-bundle@sha256:c81af92a6092273dea45a9dee56bbb8a246b566402497b1746fa4817a3cece39_ppc64le",
+            "8Base-Quay-3:quay/quay-container-security-operator-bundle@sha256:d8039e2970871d4d252f38d18587a5a7f0cdee34cceb15645e52f37b8d943f59_s390x",
+            "8Base-Quay-3:quay/quay-container-security-operator-rhel8@sha256:46322de9eeb0681da5ab4d83432ce7a8791ae604e59ec162fcf96319cc248d02_s390x",
+            "8Base-Quay-3:quay/quay-container-security-operator-rhel8@sha256:5d63f41839d712a348c91d7a90593ba332cab8e77f2238cc885792af9b45e89a_amd64",
+            "8Base-Quay-3:quay/quay-container-security-operator-rhel8@sha256:6a5acdbb57f870efddfb93095522c3640f9ad6256c54a20f4790874d13322560_ppc64le",
+            "8Base-Quay-3:quay/quay-operator-bundle@sha256:6cea661a5c6e0a5927b3a5a06129fc03e6678132faf9e3da5f498d8457fb2211_ppc64le",
+            "8Base-Quay-3:quay/quay-operator-bundle@sha256:a91bb0d5e3becd59cadf51d323d1063ff675d277f9dfc7670570b1754badfacb_s390x",
+            "8Base-Quay-3:quay/quay-operator-bundle@sha256:ea077de1039e87e20f699ab2a68fa4f825898f7164bf071cc9404653789e352f_amd64",
+            "8Base-Quay-3:quay/quay-operator-rhel8@sha256:0702ae5634f99cb0775acdf0c9173a2a119816dd4e593462a9b0573ace330e2b_amd64",
+            "8Base-Quay-3:quay/quay-operator-rhel8@sha256:9659a3fe53bbf44d60fea61c970daa8356f27b0a9bba4233157c5856cc338a6b_s390x",
+            "8Base-Quay-3:quay/quay-operator-rhel8@sha256:ee4755634f7be2e4a68ef4ae4d89cde8964d1ea62fa233b10f7456ff82cbe9fc_ppc64le",
+            "8Base-Quay-3:quay/quay-rhel8@sha256:1a839e21cba19ea055e39f944620264bacb434fb1b6f2120fc3b8d7c3a29aae0_amd64",
+            "8Base-Quay-3:quay/quay-rhel8@sha256:ab2aac7247b0d75e6fcd2e5788067cf9130075c93c917da8145e5b1629d96d72_ppc64le",
+            "8Base-Quay-3:quay/quay-rhel8@sha256:e0dd2dcd0b89ba9969136ae3ae5df87fe22e061031f1d1bd1b260782a7069ea7_s390x"
+          ]
+        }
+      ],
+      "scores": [
+        {
+          "cvss_v3": {
+            "attackComplexity": "LOW",
+            "attackVector": "NETWORK",
+            "availabilityImpact": "NONE",
+            "baseScore": 6.1,
+            "baseSeverity": "MEDIUM",
+            "confidentialityImpact": "LOW",
+            "integrityImpact": "LOW",
+            "privilegesRequired": "NONE",
+            "scope": "CHANGED",
+            "userInteraction": "REQUIRED",
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:L/A:N",
+            "version": "3.1"
+          },
+          "products": [
+            "8Base-Quay-3:quay/clair-rhel8@sha256:8c4dc7ffe59ab71bafc90e57b4c8f31879e18127d7c688ad13fc74b218b81b90_s390x",
+            "8Base-Quay-3:quay/clair-rhel8@sha256:bf9818512c7fe88272fb8f7fc4a255d6bc5e3842582e4fd891558a89d406d8e9_ppc64le",
+            "8Base-Quay-3:quay/clair-rhel8@sha256:cdda23eec3cf0caf153089fb59be85ecaa50a3918ef78e0f11892045f9918ef3_amd64",
+            "8Base-Quay-3:quay/quay-bridge-operator-bundle@sha256:5a20c2d291a56f0d660071f7d4636ca0bbcf094e9cc4380e64901fcf49e30ea8_ppc64le",
+            "8Base-Quay-3:quay/quay-bridge-operator-bundle@sha256:689ff61a796a64d8c00aa430f34ffcceed2d89a3a3cc087b805f1fae33e80ea6_amd64",
+            "8Base-Quay-3:quay/quay-bridge-operator-bundle@sha256:9b37ea0b977e20326facc581b6980b187cfc0d5e5ed6eb1e6a6c8794321ec994_s390x",
+            "8Base-Quay-3:quay/quay-bridge-operator-rhel8@sha256:8f7ea21b962abb00500141db4abf43d7c80ed585cbddcbe37c491bdbca1690d7_amd64",
+            "8Base-Quay-3:quay/quay-bridge-operator-rhel8@sha256:bdda4ec419724ce68af416eaebb2b6e4be16ea2c33595be506cf2fd5beef4056_s390x",
+            "8Base-Quay-3:quay/quay-bridge-operator-rhel8@sha256:fd0d3139530d2a99a3e053d07266d14dccd73ac18e7ef073619de415069520dd_ppc64le",
+            "8Base-Quay-3:quay/quay-builder-qemu-rhcos-rhel8@sha256:af6a7a92aa23a114da79903c205499c3843de181c8fab0195fb6c5d493fa1168_amd64",
+            "8Base-Quay-3:quay/quay-builder-qemu-rhcos-rhel8@sha256:b91aec3d3f9cf8a4204e6e13e27035802693a8517b14e59db2535fe789e7a33e_ppc64le",
+            "8Base-Quay-3:quay/quay-builder-qemu-rhcos-rhel8@sha256:bfc9435099f0b0cde9b43df3982b6164e08bdf7dc0691af197555f029cf78563_s390x",
+            "8Base-Quay-3:quay/quay-builder-rhel8@sha256:6fdbffa2ddf6f5ede8c00755c5d6f57c494ddea63b59f6e288dc5217c7d81050_amd64",
+            "8Base-Quay-3:quay/quay-builder-rhel8@sha256:edaa246672ae95f8a7c7fa00ec6aade33204ff37128cdec7b390c0d8f6573f13_s390x",
+            "8Base-Quay-3:quay/quay-builder-rhel8@sha256:f86fda437718ae80028a49aa919790ea19dabc38f8d41431a4366ae5001e46e9_ppc64le",
+            "8Base-Quay-3:quay/quay-container-security-operator-bundle@sha256:4ea1ef2482482789b30017f5221d7f64875e5550664da63098c8151a51bd3ede_amd64",
+            "8Base-Quay-3:quay/quay-container-security-operator-bundle@sha256:c81af92a6092273dea45a9dee56bbb8a246b566402497b1746fa4817a3cece39_ppc64le",
+            "8Base-Quay-3:quay/quay-container-security-operator-bundle@sha256:d8039e2970871d4d252f38d18587a5a7f0cdee34cceb15645e52f37b8d943f59_s390x",
+            "8Base-Quay-3:quay/quay-container-security-operator-rhel8@sha256:46322de9eeb0681da5ab4d83432ce7a8791ae604e59ec162fcf96319cc248d02_s390x",
+            "8Base-Quay-3:quay/quay-container-security-operator-rhel8@sha256:5d63f41839d712a348c91d7a90593ba332cab8e77f2238cc885792af9b45e89a_amd64",
+            "8Base-Quay-3:quay/quay-container-security-operator-rhel8@sha256:6a5acdbb57f870efddfb93095522c3640f9ad6256c54a20f4790874d13322560_ppc64le",
+            "8Base-Quay-3:quay/quay-operator-bundle@sha256:6cea661a5c6e0a5927b3a5a06129fc03e6678132faf9e3da5f498d8457fb2211_ppc64le",
+            "8Base-Quay-3:quay/quay-operator-bundle@sha256:a91bb0d5e3becd59cadf51d323d1063ff675d277f9dfc7670570b1754badfacb_s390x",
+            "8Base-Quay-3:quay/quay-operator-bundle@sha256:ea077de1039e87e20f699ab2a68fa4f825898f7164bf071cc9404653789e352f_amd64",
+            "8Base-Quay-3:quay/quay-operator-rhel8@sha256:0702ae5634f99cb0775acdf0c9173a2a119816dd4e593462a9b0573ace330e2b_amd64",
+            "8Base-Quay-3:quay/quay-operator-rhel8@sha256:9659a3fe53bbf44d60fea61c970daa8356f27b0a9bba4233157c5856cc338a6b_s390x",
+            "8Base-Quay-3:quay/quay-operator-rhel8@sha256:ee4755634f7be2e4a68ef4ae4d89cde8964d1ea62fa233b10f7456ff82cbe9fc_ppc64le",
+            "8Base-Quay-3:quay/quay-rhel8@sha256:1a839e21cba19ea055e39f944620264bacb434fb1b6f2120fc3b8d7c3a29aae0_amd64",
+            "8Base-Quay-3:quay/quay-rhel8@sha256:ab2aac7247b0d75e6fcd2e5788067cf9130075c93c917da8145e5b1629d96d72_ppc64le",
+            "8Base-Quay-3:quay/quay-rhel8@sha256:e0dd2dcd0b89ba9969136ae3ae5df87fe22e061031f1d1bd1b260782a7069ea7_s390x"
+          ]
+        }
+      ],
+      "threats": [
+        {
+          "category": "exploit_status",
+          "date": "2025-01-23T00:00:00+00:00",
+          "details": "CISA: https://www.cisa.gov/known-exploited-vulnerabilities-catalog"
+        },
+        {
+          "category": "impact",
+          "details": "Moderate"
+        }
+      ],
+      "title": "jquery: Untrusted code execution via <option> tag in HTML passed to DOM manipulation methods"
+    }
+  ]
+}

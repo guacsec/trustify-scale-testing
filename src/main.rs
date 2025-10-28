@@ -15,30 +15,80 @@ use crate::{
 };
 use anyhow::Context;
 use goose::prelude::*;
-use std::{str::FromStr, sync::Arc, time::Duration};
+use std::{
+    str::FromStr,
+    sync::{Arc, atomic::AtomicUsize},
+    time::Duration,
+};
 
 const MAX_ID_DISPLAY: usize = 32;
 
 /// Define a transaction and use its function identifier as name
 macro_rules! tx {
+    // No params
     ($n:ident) => {
         transaction!($n).set_name(stringify!($n))
     };
+
+    // 1 param, auto display (redirects to custom display with auto-generated name)
     ($n:ident($v1:expr)) => {{
+        tx!($n($v1), name: &format!("{}[{}]", stringify!($n), utils::truncate_middle($v1, MAX_ID_DISPLAY)))
+    }};
+
+    // 1 param, custom display
+    ($n:ident($v1:expr), name: $display:expr) => {{
         let v1 = ($v1).clone();
+        let display = $display;
         Transaction::new(Arc::new({
             let v1 = v1.clone();
             move |s| Box::pin($n(v1.clone(), s))
         }))
-        .set_name(&format!(
-            "{}[{}]",
-            stringify!($n),
-            utils::truncate_middle(v1, MAX_ID_DISPLAY)
-        ))
+        .set_name(&display)
     }};
+
+    // 2 params, auto display
+    ($n:ident($v1:expr, $v2:expr)) => {{
+        tx!($n($v1, $v2), name: &format!("{}[{}]", stringify!($n), utils::truncate_middle($v1, MAX_ID_DISPLAY)))
+    }};
+
+    // 2 params, custom display
+    ($n:ident($v1:expr, $v2:expr), name: $display:expr) => {{
+        let v1 = ($v1).clone();
+        let v2 = ($v2).clone();
+        let display = $display;
+        Transaction::new(Arc::new({
+            let v1 = v1.clone();
+            let v2 = v2.clone();
+            move |s| Box::pin($n(s, v1.clone(), v2.clone()))
+        }))
+        .set_name(&display)
+    }};
+
+    // Optional, 1 param, auto display
     ($s:ident.$n:ident?($v1:expr)) => {
         if let Some(value) = ($v1).clone() {
             $s = $s.register_transaction(tx!($n(value.clone())));
+        }
+    };
+
+    // Optional, 1 param, custom display
+    ($s:ident.$n:ident?($v1:expr), name: $display:expr) => {
+        if let Some(value) = ($v1).clone() {
+            $s = $s.register_transaction(tx!($n(value.clone()), name: $display));
+        }
+    };
+
+    // Optional, 2 params, auto display
+    ($s:ident.$n:ident?($v1:expr, $v2:expr)) => {
+        if let Some(value) = ($v1).clone() {
+            $s = $s.register_transaction(tx!($n(value.clone(), $v2)));
+        }
+    };
+
+    // Optional, 2 params, custom display
+    ($s:ident.$n:ident?($v1:expr, $v2:expr), name: $display:expr) => {
+        if let Some(value) = ($v1).clone() {
+            $s = $s.register_transaction(tx!($n(value.clone(), $v2), name: $display));
         }
     };
 }
@@ -149,12 +199,33 @@ async fn main() -> Result<(), anyhow::Error> {
                 "RestAPIUserSlow",
                 wait_time_from,
                 wait_time_to,
-                custom_client,
+                custom_client.clone(),
             )?
             .set_weight(1)?
             .register_transaction(tx!(search_licenses))
             .register_transaction(tx!(search_sboms_by_license))
             .register_transaction(tx!(search_purls_by_license))
+        })
+        .register_scenario({
+            let mut s = create_scenario(
+                "RestAPIUploadFiles",
+                wait_time_from,
+                wait_time_to,
+                custom_client.clone(),
+            )?
+            .set_weight(1)?;
+
+            // Create atomic counter for upload advisory_files
+            let advisory_files_counter = Arc::new(AtomicUsize::new(0));
+
+            // Register delete transaction if pool is available
+            if let Some(files) = scenario.upload_advisories.clone() {
+                tx!(s.upload_advisories?(
+                            Some(files.clone()),
+                            advisory_files_counter.clone()
+                        ), name: format!("upload_advisories[{}]", files.len()))
+            }
+            s
         })
         // .register_scenario(
         //     scenario!("GraphQLUser")
