@@ -96,6 +96,12 @@ pub(crate) struct Scenario {
 
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub delete_sbom_pool: Option<Vec<String>>,
+
+    #[serde(with = "required")]
+    pub download_advisory: Option<String>,
+
+    #[serde(with = "required")]
+    pub get_advisory: Option<String>,
 }
 
 impl Scenario {
@@ -135,6 +141,8 @@ impl Scenario {
                 .map(|sbom_id| format!("urn:uuid:{sbom_id}"))
                 .collect(),
         );
+        let download_advisory = Some(loader.download_advisory().await?);
+        let get_advisory = Some(loader.download_advisory().await?);
 
         Ok(Self {
             get_sbom: large_sbom_digest.clone(),
@@ -150,6 +158,8 @@ impl Scenario {
             get_purl_details,
             get_recommendations: recommendations_purl,
             delete_sbom_pool,
+            download_advisory,
+            get_advisory,
         })
     }
 }
@@ -355,6 +365,16 @@ LIMIT 100
             .into_iter()
             .map(|row| row.get::<String, _>("id"))
             .collect())
+    }
+
+    /// A advisory ID for download and query the advisory details
+    pub async fn download_advisory(&self) -> anyhow::Result<String> {
+        self.find(
+            r#"
+SELECT id::text as result
+FROM public.advisory order by modified desc limit 1;"#,
+        )
+        .await
     }
 }
 
