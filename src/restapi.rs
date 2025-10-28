@@ -2,6 +2,15 @@ use goose::goose::{GooseUser, TransactionResult};
 use serde_json::json;
 use urlencoding::encode;
 
+pub async fn list_advisory_labels(user: &mut GooseUser) -> TransactionResult {
+    let mut uri = format!("/api/v2/advisory-labels?filter_text={}", encode("type"));
+
+    uri.push_str(&format!("&limit={}", 1000));
+    let _response = user.get(&uri).await?;
+
+    Ok(())
+}
+
 pub async fn list_advisory(user: &mut GooseUser) -> TransactionResult {
     let _response = user.get("/api/v2/advisory").await?;
 
