@@ -142,7 +142,8 @@ async fn main() -> Result<(), anyhow::Error> {
             tx!(s.get_sbom_license_ids?(scenario.sbom_license_ids.clone()));
             tx!(s.post_vulnerability_analyze?(scenario.analyze_purl.clone()));
             tx!(s.get_purl_details?(scenario.get_purl_details.clone()));
-
+            tx!(s.download_advisory?(scenario.download_advisory.clone()));
+            tx!(s.get_advisory?(scenario.get_advisory.clone()));
             s
         })
         .register_scenario({

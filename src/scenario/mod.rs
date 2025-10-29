@@ -91,6 +91,12 @@ pub(crate) struct Scenario {
 
     #[serde(with = "required")]
     pub get_purl_details: Option<String>,
+
+    #[serde(with = "required")]
+    pub download_advisory: Option<String>,
+
+    #[serde(with = "required")]
+    pub get_advisory: Option<String>,
 }
 
 impl Scenario {
@@ -121,6 +127,8 @@ impl Scenario {
         let sbom_license_ids = large_sbom_id.clone().map(|id| format!("urn:uuid:{id}"));
         let analyze_purl = Some(loader.analysis_purl().await?);
         let get_purl_details = Some(loader.purl_details().await?);
+        let download_advisory = Some(loader.download_advisory().await?);
+        let get_advisory = Some(loader.download_advisory().await?);
 
         Ok(Self {
             get_sbom: large_sbom_digest.clone(),
@@ -134,6 +142,8 @@ impl Scenario {
             sbom_license_ids,
             analyze_purl,
             get_purl_details,
+            download_advisory,
+            get_advisory,
         })
     }
 }
@@ -273,6 +283,14 @@ ORDER BY
     license_count DESC
 LIMIT 1;
 "#,
+        )
+        .await
+    }
+    pub async fn download_advisory(&self) -> anyhow::Result<String> {
+        self.find(
+            r#"
+SELECT id::text as result
+FROM public.advisory order by modified desc limit 1;"#,
         )
         .await
     }
