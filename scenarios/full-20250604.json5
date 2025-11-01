@@ -111,5 +111,6 @@
     "urn:uuid:01973122-384d-7002-886f-11dddf5040ad",
     "urn:uuid:01973122-3a0e-73f0-9596-baceb84383aa",
     "urn:uuid:01973122-3bdd-78a3-898a-fb67c06387ed"
-  ]
+  ],
+  "upload_advisory_file": "./test-data/advisories/rhba-2024_11505.json.xz"
 }

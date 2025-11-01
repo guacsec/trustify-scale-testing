@@ -211,7 +211,7 @@ async fn main() -> Result<(), anyhow::Error> {
                 "RestAPIUserDelete",
                 wait_time_from,
                 wait_time_to,
-                custom_client,
+                custom_client.clone(),
             )?
             .set_weight(1)?
             // With 100 SBOM IDs this ensure they all delete something in the sequential situation
@@ -222,6 +222,21 @@ async fn main() -> Result<(), anyhow::Error> {
                             scenario.delete_sbom_pool.clone(),
                             delete_counter.clone()
                         ), name: format!("delete_sbom_from_pool_sequential[{} SBOMs]", pool.len()))
+            }
+            s
+        })
+        .register_scenario({
+            let mut s = create_scenario(
+                "RestAPIUploadAndDeleteFiles",
+                wait_time_from,
+                wait_time_to,
+                custom_client,
+            )?
+            .set_weight(1)?;
+
+            if let Some(file) = &scenario.upload_advisory_file {
+                // Use sequential transaction execution to ensure immediate deletion after upload
+                s = s.register_transaction(tx!(upload_and_immediately_delete(file.to_string())));
             }
             s
         })
