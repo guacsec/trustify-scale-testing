@@ -1,10 +1,8 @@
-use crate::utils::DisplayVec;
+use crate::utils::{DisplayVec, GooseUserData, generate_advisory_content_async};
 use anyhow::Context;
 use goose::goose::{GooseMethod, GooseRequest, GooseUser, TransactionError, TransactionResult};
-use reqwest::{Client, RequestBuilder};
-
-use crate::utils::GooseUserData;
 use rand::Rng;
+use reqwest::{Client, RequestBuilder};
 use serde_json::json;
 use std::sync::{
     Arc,
@@ -40,7 +38,7 @@ pub async fn find_random_advisory(
     user: &mut GooseUser,
 ) -> TransactionResult {
     // Generate random offset using the provided total
-    let offset = rand::thread_rng().gen_range(0..=total_advisories);
+    let offset = rand::rng().random_range(0..=total_advisories);
     let url = format!("/api/v2/advisory?offset={}&limit=1", offset);
 
     let response = user.get(&url).await?;
@@ -66,8 +64,24 @@ pub async fn find_random_advisory(
     ))))
 }
 
+/// Upload advisory data and extract advisory ID from response
+pub async fn upload_advisory(file_bytes: Vec<u8>, user: &mut GooseUser) -> TransactionResult {
+    let generate_advisory_str = generate_advisory_content_async(file_bytes).await?;
+    let response = user.post("/api/v2/advisory", generate_advisory_str).await?;
+    let v = response.response?.json::<serde_json::Value>().await?;
+
+    if let Some(id_str) = v["id"].as_str() {
+        let advisory_id = id_str.to_string();
+        user.set_session_data(GooseUserData {
+            advisory_id: Some(advisory_id.clone()),
+        });
+    }
+
+    Ok(())
+}
+
 pub async fn get_advisory(id: String, user: &mut GooseUser) -> TransactionResult {
-    let uri = format!("/api/v2/advisory/{}", encode(&format!("urn:uuid:{}", id)));
+    let uri: String = format!("/api/v2/advisory/{}", encode(&format!("urn:uuid:{}", id)));
 
     let _response = user.get(&uri).await?;
 
@@ -94,6 +108,14 @@ pub async fn list_advisory_labels(user: &mut GooseUser) -> TransactionResult {
 
     let _response = user.get(&uri).await?;
 
+    Ok(())
+}
+
+/// Delete advisory by ID
+pub async fn delete_advisory(user: &mut GooseUser) -> TransactionResult {
+    let advisory_id = get_advisory_id(user)?;
+    let uri = format!("/api/v2/advisory/{}", advisory_id);
+    let _response = user.delete(&uri).await?;
     Ok(())
 }
 
