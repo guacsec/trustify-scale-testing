@@ -1,4 +1,4 @@
-use goose::goose::{GooseUser, TransactionResult};
+use goose::goose::{GooseUser, TransactionError, TransactionResult};
 use serde_json::json;
 use std::sync::{
     Arc,
@@ -7,6 +7,54 @@ use std::sync::{
 use urlencoding::encode;
 
 use crate::utils::DisplayVec;
+
+/// Upload file and return advisory ID
+pub async fn upload_advisory_and_get_id(
+    advisory_file: String,
+    user: &mut GooseUser,
+) -> Result<String, Box<TransactionError>> {
+    let file_bytes = tokio::fs::read(&advisory_file).await.map_err(|e| {
+        Box::new(TransactionError::Custom(format!(
+            "Failed to read file {}: {}",
+            advisory_file, e
+        )))
+    })?;
+
+    let response = user.post("/api/v2/advisory", file_bytes).await?;
+    let v = response.response?.json::<serde_json::Value>().await?;
+
+    let advisory_id = v["id"]
+        .as_str()
+        .ok_or_else(|| {
+            Box::new(TransactionError::Custom(
+                "Missing advisory ID in response".to_string(),
+            ))
+        })?
+        .to_string();
+
+    Ok(advisory_id)
+}
+
+/// Delete advisory by ID
+pub async fn delete_advisory_by_id(advisory_id: String, user: &mut GooseUser) -> TransactionResult {
+    let uri = format!("/api/v2/advisory/{}", advisory_id);
+    user.delete(&uri).await?;
+    Ok(())
+}
+
+/// Sequential execution: upload and then immediately delete
+pub async fn upload_and_immediately_delete(
+    advisory_file: String,
+    user: &mut GooseUser,
+) -> TransactionResult {
+    // 1. Upload file and get ID
+    let advisory_id = upload_advisory_and_get_id(advisory_file, user).await?;
+
+    // 2. Immediately delete (no waiting required)
+    delete_advisory_by_id(advisory_id, user).await?;
+
+    Ok(())
+}
 
 pub async fn list_advisory(user: &mut GooseUser) -> TransactionResult {
     let _response = user.get("/api/v2/advisory").await?;

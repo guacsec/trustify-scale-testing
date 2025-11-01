@@ -4,8 +4,7 @@ use crate::{scenario::purl::CanonicalPurl, utils::DisplayVec};
 use anyhow::{Context, anyhow};
 use serde_json::Value;
 use sqlx::{Executor, Row, postgres::PgRow};
-use std::io::BufReader;
-
+use std::{io::BufReader, path::PathBuf};
 /// implement to that we can explicitly state what we want
 mod required {
     use serde::{
@@ -96,6 +95,9 @@ pub(crate) struct Scenario {
 
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub delete_sbom_pool: Option<Vec<String>>,
+
+    #[serde(with = "required")]
+    pub upload_advisory_file: Option<String>,
 }
 
 impl Scenario {
@@ -136,6 +138,9 @@ impl Scenario {
                 .collect(),
         );
 
+        // Get advisory file paths from the advisories subdirectory within UPLOAD_FILE_PATH
+        let advisory_files = loader.load_advisory_files()?;
+
         Ok(Self {
             get_sbom: large_sbom_digest.clone(),
             get_sbom_advisories: large_sbom_digest.clone(),
@@ -150,6 +155,9 @@ impl Scenario {
             get_purl_details,
             get_recommendations: recommendations_purl,
             delete_sbom_pool,
+            upload_advisory_file: advisory_files
+                .first()
+                .map(|p| p.to_string_lossy().to_string()),
         })
     }
 }
@@ -355,6 +363,56 @@ LIMIT 100
             .into_iter()
             .map(|row| row.get::<String, _>("id"))
             .collect())
+    }
+    /// Load advisory files from UPLOAD_FILE_PATH directory, or fall back to CARGO_WORKSPACE_ROOT
+    fn load_advisory_files(&self) -> anyhow::Result<Vec<PathBuf>> {
+        // Try UPLOAD_FILE_PATH first, then fall back to CARGO_WORKSPACE_ROOT
+        let base_path = std::env::var("UPLOAD_FILE_PATH")
+            .or_else(|_| std::env::var("CARGO_WORKSPACE_ROOT"))
+            .ok();
+
+        if let Some(base_path) = base_path {
+            let advisories_dir: PathBuf = [&base_path, "advisories"].iter().collect();
+
+            match std::fs::read_dir(&advisories_dir) {
+                Ok(entries) => {
+                    let files: Vec<PathBuf> = entries
+                        .filter_map(|entry| {
+                            let path = entry.ok()?.path();
+                            if path.extension()? == "json.xz" {
+                                Some(path)
+                            } else {
+                                None
+                            }
+                        })
+                        .collect();
+
+                    if files.is_empty() {
+                        return Err(anyhow::anyhow!(
+                            "No advisory files found in {}",
+                            advisories_dir.display()
+                        ));
+                    } else {
+                        log::info!(
+                            "Found {} advisory files in {}",
+                            files.len(),
+                            advisories_dir.display()
+                        );
+                    }
+
+                    Ok(files)
+                }
+                Err(e) => Err(anyhow::anyhow!(
+                    "Failed to read advisories directory {}: {}, please check if the directory exists",
+                    advisories_dir.display(),
+                    e
+                )),
+            }
+        } else {
+            Err(anyhow::anyhow!(
+                "Neither UPLOAD_FILE_PATH nor CARGO_WORKSPACE_ROOT environment variables are set"
+            ))
+        }
     }
 }
 
