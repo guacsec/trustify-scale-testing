@@ -1,5 +1,7 @@
 use crate::utils::DisplayVec;
-use goose::goose::{GooseUser, TransactionResult};
+use goose::goose::{GooseMethod, GooseRequest, GooseUser, TransactionResult};
+use reqwest::{Client, RequestBuilder};
+
 use serde_json::json;
 use std::sync::{
     Arc,
@@ -65,6 +67,56 @@ pub async fn search_advisory(user: &mut GooseUser) -> TransactionResult {
     let _response = user.get("/api/v2/advisory?q=CVE-2021-").await?;
 
     Ok(())
+}
+
+async fn send_advisory_label_request(
+    advisory_id: String,
+    user: &mut GooseUser,
+    method: GooseMethod,
+    source: &str,
+    client_method: fn(&Client, String) -> RequestBuilder,
+) -> TransactionResult {
+    let path = format!("/api/v2/advisory/{}/label", advisory_id);
+    let json = json!({
+        "source": source,
+        "foo": "bar",
+        "space": "with space",
+        "empty": "",
+    });
+
+    let url = user.build_url(&path)?;
+
+    let reqwest_request_builder = client_method(&user.client, url);
+    let goose_request = GooseRequest::builder()
+        .method(method)
+        .path(path.as_str())
+        .set_request_builder(reqwest_request_builder.json(&json))
+        .build();
+    let _response = user.request(goose_request).await?;
+
+    Ok(())
+}
+
+pub async fn put_advisory_labels(advisory_id: String, user: &mut GooseUser) -> TransactionResult {
+    send_advisory_label_request(
+        advisory_id,
+        user,
+        GooseMethod::Put,
+        "It's a put request",
+        Client::put,
+    )
+    .await
+}
+
+pub async fn patch_advisory_labels(advisory_id: String, user: &mut GooseUser) -> TransactionResult {
+    send_advisory_label_request(
+        advisory_id,
+        user,
+        GooseMethod::Patch,
+        "It's a patch request",
+        Client::patch,
+    )
+    .await
 }
 
 pub async fn list_importer(user: &mut GooseUser) -> TransactionResult {
