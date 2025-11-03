@@ -113,5 +113,7 @@
     "urn:uuid:01973122-3bdd-78a3-898a-fb67c06387ed"
   ],
   "download_advisory": "24ae57c3-4b57-4f4e-82c1-83ae26059a89",
-  "get_advisory": "24ae57c3-4b57-4f4e-82c1-83ae26059a89"
+  "get_advisory": "24ae57c3-4b57-4f4e-82c1-83ae26059a89",
+  "put_advisory_lables": "urn:uuid:24ae57c3-4b57-4f4e-82c1-83ae26059a89",
+  "patch_advisory_lables": "urn:uuid:9ffb1a1b-14e0-4abb-943a-76906daa54aa"
 }

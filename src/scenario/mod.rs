@@ -102,6 +102,11 @@ pub(crate) struct Scenario {
 
     #[serde(with = "required")]
     pub get_advisory: Option<String>,
+
+    pub put_advisory_lables: Option<String>,
+
+    #[serde(with = "required")]
+    pub patch_advisory_lables: Option<String>,
 }
 
 impl Scenario {
@@ -144,6 +149,12 @@ impl Scenario {
         let download_advisory = Some(loader.download_advisory().await?);
         let get_advisory = Some(loader.download_advisory().await?);
 
+        let put_advisory_lables = Some(format!("urn:uuid:{}", loader.put_advisory_lables().await?));
+        let patch_advisory_lables = Some(format!(
+            "urn:uuid:{}",
+            loader.patch_advisory_lables().await?
+        ));
+
         Ok(Self {
             get_sbom: large_sbom_digest.clone(),
             get_sbom_advisories: large_sbom_digest.clone(),
@@ -160,6 +171,8 @@ impl Scenario {
             delete_sbom_pool,
             download_advisory,
             get_advisory,
+            put_advisory_lables,
+            patch_advisory_lables,
         })
     }
 }
@@ -373,6 +386,28 @@ LIMIT 100
             r#"
 SELECT id::text as result
 FROM public.advisory order by modified desc limit 1;"#,
+        )
+        .await
+    }
+    
+    /// A advisory ID for put labels
+    pub async fn put_advisory_lables(&self) -> anyhow::Result<String> {
+        self.find(
+            r#"
+SELECT id::text as result
+FROM public.advisory  where labels is not null order by modified desc limit 1;
+"#,
+        )
+        .await
+    }
+
+    /// A advisory ID for patch labels
+    pub async fn patch_advisory_lables(&self) -> anyhow::Result<String> {
+        self.find(
+            r#"
+SELECT id::text as result
+FROM public.advisory  where labels is not null order by modified desc OFFSET 1 limit 1;
+"#,
         )
         .await
     }
