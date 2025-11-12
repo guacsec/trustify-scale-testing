@@ -103,10 +103,11 @@ pub(crate) struct Scenario {
     #[serde(with = "required")]
     pub get_advisory: Option<String>,
 
-    pub put_advisory_lables: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub put_advisory_lables: Option<Vec<String>>,
 
-    #[serde(with = "required")]
-    pub patch_advisory_lables: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub patch_advisory_lables: Option<Vec<String>>,
 }
 
 impl Scenario {
@@ -149,11 +150,22 @@ impl Scenario {
         let download_advisory = Some(loader.download_advisory().await?);
         let get_advisory = Some(loader.download_advisory().await?);
 
-        let put_advisory_lables = Some(format!("urn:uuid:{}", loader.put_advisory_lables().await?));
-        let patch_advisory_lables = Some(format!(
-            "urn:uuid:{}",
-            loader.patch_advisory_lables().await?
-        ));
+        let put_advisory_lables = Some(
+            loader
+                .put_advisory_lables()
+                .await?
+                .iter()
+                .map(|advisory_id| format!("urn:uuid:{advisory_id}"))
+                .collect(),
+        );
+        let patch_advisory_lables = Some(
+            loader
+                .patch_advisory_lables()
+                .await?
+                .iter()
+                .map(|advisory_id| format!("urn:uuid:{advisory_id}"))
+                .collect(),
+        );
 
         Ok(Self {
             get_sbom: large_sbom_digest.clone(),
@@ -389,27 +401,31 @@ FROM public.advisory order by modified desc limit 1;"#,
         )
         .await
     }
-    
-    /// A advisory ID for put labels
-    pub async fn put_advisory_lables(&self) -> anyhow::Result<String> {
-        self.find(
-            r#"
-SELECT id::text as result
-FROM public.advisory  where labels is not null order by modified desc limit 1;
-"#,
-        )
-        .await
+
+    /// Advisory IDs for put labels
+    pub async fn put_advisory_lables(&self) -> anyhow::Result<Vec<String>> {
+        let mut db = crate::db::connect(&self.db).await?;
+
+        let rows = sqlx::query("SELECT id::text as id FROM public.advisory  where labels is not null order by modified desc limit 20;")
+            .fetch_all(&mut db)
+            .await?;
+        Ok(rows
+            .into_iter()
+            .map(|row| row.get::<String, _>("id"))
+            .collect())
     }
 
-    /// A advisory ID for patch labels
-    pub async fn patch_advisory_lables(&self) -> anyhow::Result<String> {
-        self.find(
-            r#"
-SELECT id::text as result
-FROM public.advisory  where labels is not null order by modified desc OFFSET 1 limit 1;
-"#,
-        )
-        .await
+    /// Advisory IDs for patch labels
+    pub async fn patch_advisory_lables(&self) -> anyhow::Result<Vec<String>> {
+        let mut db = crate::db::connect(&self.db).await?;
+
+        let rows = sqlx::query("SELECT id::text as id FROM public.advisory  where labels is not null order by modified desc OFFSET 20 limit 20;")
+            .fetch_all(&mut db)
+            .await?;
+        Ok(rows
+            .into_iter()
+            .map(|row| row.get::<String, _>("id"))
+            .collect())
     }
 }
 

@@ -192,10 +192,22 @@ async fn main() -> Result<(), anyhow::Error> {
             tx!(s.post_vulnerability_analyze?(scenario.analyze_purl.clone()));
             tx!(s.get_purl_details?(scenario.get_purl_details.clone()));
             tx!(s.get_recommendations?(scenario.get_recommendations.clone()));
-            tx!(s.put_advisory_labels?(scenario.put_advisory_lables.clone()));
-            tx!(s.patch_advisory_labels?(
-                scenario.patch_advisory_lables.clone()
-            ));
+
+            // Register put Advisory labels transaction if pool is available
+            let put_advisory_labels_counter = Arc::new(std::sync::atomic::AtomicUsize::new(0));
+            if let Some(_advisory_ids) = scenario.put_advisory_lables.clone() {
+                tx!(s.put_advisory_labels?(scenario.put_advisory_lables.clone(),
+                 put_advisory_labels_counter.clone()),
+                 name: format!("put_advisory_labels"));
+            }
+
+            // Register patch Advisory labels transaction if pool is available
+            let patch_advisory_labels_counter = Arc::new(std::sync::atomic::AtomicUsize::new(0));
+            if let Some(_advisory_ids) = scenario.patch_advisory_lables.clone() {
+                tx!(s.patch_advisory_labels?(scenario.patch_advisory_lables.clone(), 
+                patch_advisory_labels_counter.clone()),
+                name: format!("patch_advisory_labels"));
+            }
 
             tx!(s.download_advisory?(scenario.download_advisory.clone()));
             tx!(s.get_advisory?(scenario.get_advisory.clone()));
@@ -228,7 +240,8 @@ async fn main() -> Result<(), anyhow::Error> {
                 tx!(s.delete_sbom_from_pool_sequential?(
                             scenario.delete_sbom_pool.clone(),
                             delete_counter.clone()
-                        ), name: format!("delete_sbom_from_pool_sequential[{} SBOMs]", pool.len()))
+                        ),
+                         name: format!("delete_sbom_from_pool_sequential[{} SBOMs]", pool.len()))
             }
             s
         })
