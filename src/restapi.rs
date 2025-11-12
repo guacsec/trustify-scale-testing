@@ -69,6 +69,7 @@ pub async fn search_advisory(user: &mut GooseUser) -> TransactionResult {
     Ok(())
 }
 
+/// Send Advisory labels request
 async fn send_advisory_label_request(
     advisory_id: String,
     user: &mut GooseUser,
@@ -97,9 +98,14 @@ async fn send_advisory_label_request(
     Ok(())
 }
 
-pub async fn put_advisory_labels(advisory_id: String, user: &mut GooseUser) -> TransactionResult {
+/// Send Advisory labels request using PUT method
+pub async fn put_advisory_labels(
+    advisory_ids: Vec<String>,
+    counter: Arc<AtomicUsize>,
+    user: &mut GooseUser,
+) -> TransactionResult {
     send_advisory_label_request(
-        advisory_id,
+        advisory_ids[counter.fetch_add(1, Ordering::Relaxed) % advisory_ids.len()].clone(),
         user,
         GooseMethod::Put,
         "It's a put request",
@@ -108,9 +114,14 @@ pub async fn put_advisory_labels(advisory_id: String, user: &mut GooseUser) -> T
     .await
 }
 
-pub async fn patch_advisory_labels(advisory_id: String, user: &mut GooseUser) -> TransactionResult {
+/// Send Advisory labels request using PATCH method
+pub async fn patch_advisory_labels(
+    advisory_ids: Vec<String>,
+    counter: Arc<AtomicUsize>,
+    user: &mut GooseUser,
+) -> TransactionResult {
     send_advisory_label_request(
-        advisory_id,
+        advisory_ids[counter.fetch_add(1, Ordering::Relaxed) % advisory_ids.len()].clone(),
         user,
         GooseMethod::Patch,
         "It's a patch request",
