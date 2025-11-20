@@ -180,7 +180,8 @@ async fn main() -> Result<(), anyhow::Error> {
             .register_transaction(tx!(list_sboms_paginated))
             .register_transaction(tx!(get_analysis_status))
             .register_transaction(tx!(get_analysis_latest_cpe))
-            .register_transaction(tx!(list_advisory_labels));
+            .register_transaction(tx!(list_advisory_labels))
+            .register_transaction(tx!(list_sbom_labels));
 
             tx!(s.get_sbom?(scenario.get_sbom.clone()));
             tx!(s.get_sbom_advisories?(scenario.get_sbom_advisories.clone()));
@@ -195,6 +196,7 @@ async fn main() -> Result<(), anyhow::Error> {
 
             tx!(s.download_advisory?(scenario.download_advisory.clone()));
             tx!(s.get_advisory?(scenario.get_advisory.clone()));
+            tx!(s.count_by_package?(scenario.count_by_package.clone()));
             s
         })
         .register_scenario({

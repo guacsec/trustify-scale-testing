@@ -113,5 +113,6 @@
     "urn:uuid:01973122-3bdd-78a3-898a-fb67c06387ed"
   ],
   "download_advisory": "24ae57c3-4b57-4f4e-82c1-83ae26059a89",
-  "get_advisory": "24ae57c3-4b57-4f4e-82c1-83ae26059a89"
+  "get_advisory": "24ae57c3-4b57-4f4e-82c1-83ae26059a89",
+  "count_by_package": "pkg:generic/redhat/commons-beanutils-commons-beanutils@"
 }

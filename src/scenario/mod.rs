@@ -102,6 +102,9 @@ pub(crate) struct Scenario {
 
     #[serde(with = "required")]
     pub get_advisory: Option<String>,
+
+    #[serde(with = "required")]
+    pub count_by_package: Option<String>,
 }
 
 impl Scenario {
@@ -143,6 +146,10 @@ impl Scenario {
         );
         let download_advisory = Some(loader.download_advisory().await?);
         let get_advisory = Some(loader.download_advisory().await?);
+        let count_by_package_result = Some(loader.count_by_package().await?);
+        let count_by_package =
+            count_by_package_result.ok_or_else(|| anyhow!("no count-by-package result"))?;
+        let count_by_package = serde_json::from_str::<serde_json::Value>(&count_by_package)?;
 
         Ok(Self {
             get_sbom: large_sbom_digest.clone(),
@@ -160,6 +167,13 @@ impl Scenario {
             delete_sbom_pool,
             download_advisory,
             get_advisory,
+            count_by_package: Some(format!(
+                "pkg:{}/{}/{}@{}",
+                count_by_package["type"].as_str().unwrap_or(""),
+                count_by_package["namespace"].as_str().unwrap_or(""),
+                count_by_package["name"].as_str().unwrap_or(""),
+                count_by_package["version"].as_str().unwrap_or("")
+            )),
         })
     }
 }
@@ -373,6 +387,15 @@ LIMIT 100
             r#"
 SELECT id::text as result
 FROM public.advisory order by modified desc limit 1;"#,
+        )
+        .await
+    }
+
+    /// A purl for count-by-package query
+    pub async fn count_by_package(&self) -> anyhow::Result<String> {
+        self.find(
+            r#"
+select purl::text as result from qualified_purl qp order by qp.timestamp desc limit 1;"#,
         )
         .await
     }
