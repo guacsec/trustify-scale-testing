@@ -197,6 +197,23 @@ async fn main() -> Result<(), anyhow::Error> {
             tx!(s.download_advisory?(scenario.download_advisory.clone()));
             tx!(s.get_advisory?(scenario.get_advisory.clone()));
             tx!(s.count_by_package?(scenario.count_by_package.clone()));
+
+            // Register put sbom labels transaction if pool is available
+            let put_sbom_labels_counter = Arc::new(std::sync::atomic::AtomicUsize::new(0));
+            if let Some(_sbom_ids) = scenario.put_sbom_lables.clone() {
+                tx!(s.put_sbom_labels?(scenario.put_sbom_lables.clone(),
+                 put_sbom_labels_counter.clone()),
+                 name: format!("put_sbom_labels"));
+            }
+
+            // Register patch sbom labels transaction if pool is available
+            let patch_sbom_labels_counter = Arc::new(std::sync::atomic::AtomicUsize::new(0));
+            if let Some(_sbom_ids) = scenario.patch_sbom_lables.clone() {
+                tx!(s.patch_sbom_labels?(scenario.patch_sbom_lables.clone(),
+                patch_sbom_labels_counter.clone()),
+                name: format!("patch_sbom_labels"));
+            }
+
             s
         })
         .register_scenario({

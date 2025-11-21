@@ -36,6 +36,44 @@ async fn send_request(
     Ok(())
 }
 
+/// Send Sbom labels request using PUT method
+pub async fn put_sbom_labels(
+    sbom_ids: Vec<String>,
+    counter: Arc<AtomicUsize>,
+    user: &mut GooseUser,
+) -> TransactionResult {
+    let path = format!(
+        "/api/v2/sbom/{}/label",
+        sbom_ids[counter.fetch_add(1, Ordering::Relaxed) % sbom_ids.len()].clone()
+    );
+    let json = json!({
+        "source": "It's a put request",
+        "foo": "bar",
+        "space": "with space",
+        "empty": "",
+    });
+    send_request(path, user, GooseMethod::Put, json, Client::put).await
+}
+
+/// Send Sbom labels request using PATCH method
+pub async fn patch_sbom_labels(
+    sbom_ids: Vec<String>,
+    counter: Arc<AtomicUsize>,
+    user: &mut GooseUser,
+) -> TransactionResult {
+    let path = format!(
+        "/api/v2/sbom/{}/label",
+        sbom_ids[counter.fetch_add(1, Ordering::Relaxed) % sbom_ids.len()].clone()
+    );
+    let json = json!({
+        "source": "It's a patch request",
+        "foo": "bar",
+        "space": "with space",
+        "empty": "",
+    });
+    send_request(path, user, GooseMethod::Patch, json, Client::patch).await
+}
+
 pub async fn get_advisory(id: String, user: &mut GooseUser) -> TransactionResult {
     let uri = format!("/api/v2/advisory/{}", encode(&format!("urn:uuid:{}", id)));
 
