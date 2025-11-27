@@ -180,7 +180,9 @@ async fn main() -> Result<(), anyhow::Error> {
             .register_transaction(tx!(list_sboms_paginated))
             .register_transaction(tx!(get_analysis_status))
             .register_transaction(tx!(get_analysis_latest_cpe))
-            .register_transaction(tx!(list_advisory_labels));
+            .register_transaction(tx!(list_advisory_labels))
+            .register_transaction(tx!(patch_advisory_labels))
+            .register_transaction(tx!(put_advisory_labels));
 
             tx!(s.get_sbom?(scenario.get_sbom.clone()));
             tx!(s.get_sbom_advisories?(scenario.get_sbom_advisories.clone()));
@@ -192,22 +194,6 @@ async fn main() -> Result<(), anyhow::Error> {
             tx!(s.post_vulnerability_analyze?(scenario.analyze_purl.clone()));
             tx!(s.get_purl_details?(scenario.get_purl_details.clone()));
             tx!(s.get_recommendations?(scenario.get_recommendations.clone()));
-
-            // Register put Advisory labels transaction if pool is available
-            let put_advisory_labels_counter = Arc::new(std::sync::atomic::AtomicUsize::new(0));
-            if let Some(_advisory_ids) = scenario.put_advisory_lables.clone() {
-                tx!(s.put_advisory_labels?(scenario.put_advisory_lables.clone(),
-                 put_advisory_labels_counter.clone()),
-                 name: format!("put_advisory_labels"));
-            }
-
-            // Register patch Advisory labels transaction if pool is available
-            let patch_advisory_labels_counter = Arc::new(std::sync::atomic::AtomicUsize::new(0));
-            if let Some(_advisory_ids) = scenario.patch_advisory_lables.clone() {
-                tx!(s.patch_advisory_labels?(scenario.patch_advisory_lables.clone(), 
-                patch_advisory_labels_counter.clone()),
-                name: format!("patch_advisory_labels"));
-            }
 
             tx!(s.download_advisory?(scenario.download_advisory.clone()));
             tx!(s.get_advisory?(scenario.get_advisory.clone()));

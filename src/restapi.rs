@@ -1,13 +1,18 @@
 use crate::utils::DisplayVec;
-use goose::goose::{GooseMethod, GooseRequest, GooseUser, TransactionResult};
+use goose::goose::{GooseMethod, GooseRequest, GooseUser, TransactionError, TransactionResult};
 use reqwest::{Client, RequestBuilder};
 
+use rand::Rng;
 use serde_json::json;
 use std::sync::{
     Arc,
     atomic::{AtomicUsize, Ordering},
 };
+use tokio::sync::OnceCell;
 use urlencoding::encode;
+
+// Static variable to store advisory total count
+static ADVISORY_TOTAL: OnceCell<u64> = OnceCell::const_new();
 
 pub async fn get_advisory(id: String, user: &mut GooseUser) -> TransactionResult {
     let uri = format!("/api/v2/advisory/{}", encode(&format!("urn:uuid:{}", id)));
@@ -46,6 +51,46 @@ pub async fn list_advisory(user: &mut GooseUser) -> TransactionResult {
     Ok(())
 }
 
+/// Get advisory total count and store it in static OnceCell
+async fn get_advisory_total(user: &mut GooseUser) -> Result<u64, Box<TransactionError>> {
+    let response = user.get("/api/v2/advisory").await?;
+    let json_data = response.response?.json::<serde_json::Value>().await?;
+
+    // Extract total from the response
+    if let Some(total) = json_data.get("total").and_then(|t| t.as_u64()) {
+        log::info!("Advisory total count: {}", total);
+        return Ok(total);
+    }
+
+    Err(Box::new(TransactionError::Custom(
+        "Failed to get advisory total count".to_string(),
+    )))
+}
+
+/// Get cached advisory total count, fetch if not available using get_or_init
+async fn get_cached_advisory_total(user: &mut GooseUser) -> Result<u64, Box<TransactionError>> {
+    // Try to get from cache first
+    if let Some(&total) = ADVISORY_TOTAL.get() {
+        return Ok(total);
+    }
+
+    // If not cached, fetch it and handle errors properly
+    match get_advisory_total(user).await {
+        Ok(total) => {
+            // Store in cache for future use
+            let _ = ADVISORY_TOTAL.set(total);
+            Ok(total)
+        }
+        Err(e) => {
+            // Propagate the error with context instead of silently returning 0
+            Err(Box::new(TransactionError::Custom(format!(
+                "Failed to get advisory total count: {}",
+                e
+            ))))
+        }
+    }
+}
+
 pub async fn list_advisory_paginated(user: &mut GooseUser) -> TransactionResult {
     let _response = user.get("/api/v2/advisory?offset=100&limit=10").await?;
 
@@ -68,6 +113,37 @@ pub async fn search_advisory(user: &mut GooseUser) -> TransactionResult {
 
     Ok(())
 }
+
+/// List advisory with random offset and limit=1, return advisory ID
+async fn list_advisory_random_single(
+    user: &mut GooseUser,
+) -> Result<String, Box<TransactionError>> {
+    let total = get_cached_advisory_total(user).await?;
+    // Generate random offset
+    let offset = rand::thread_rng().gen_range(0..=total);
+    let url = format!("/api/v2/advisory?offset={}&limit=1", offset);
+
+    let response = user.get(&url).await?;
+    let json_data = response.response?.json::<serde_json::Value>().await?;
+
+    // Extract advisory ID from the response
+    if let Some(items) = json_data.get("items").and_then(|i| i.as_array()) {
+        if let Some(first_item) = items.first() {
+            if let Some(id) = first_item.get("uuid").and_then(|u| u.as_str()) {
+                log::info!("Listing advisory with offset {}: {}", offset, id);
+                return Ok(id.to_string());
+            }
+        }
+    }
+
+    // Return error if no advisory found
+    Err(Box::new(TransactionError::Custom(format!(
+        "No advisory found at offset: {}",
+        offset
+    ))))
+}
+
+//
 
 /// Send Advisory labels request
 async fn send_advisory_label_request(
@@ -99,13 +175,10 @@ async fn send_advisory_label_request(
 }
 
 /// Send Advisory labels request using PUT method
-pub async fn put_advisory_labels(
-    advisory_ids: Vec<String>,
-    counter: Arc<AtomicUsize>,
-    user: &mut GooseUser,
-) -> TransactionResult {
+pub async fn put_advisory_labels(user: &mut GooseUser) -> TransactionResult {
+    let advisory_id = list_advisory_random_single(user).await?;
     send_advisory_label_request(
-        advisory_ids[counter.fetch_add(1, Ordering::Relaxed) % advisory_ids.len()].clone(),
+        advisory_id,
         user,
         GooseMethod::Put,
         "It's a put request",
@@ -115,13 +188,10 @@ pub async fn put_advisory_labels(
 }
 
 /// Send Advisory labels request using PATCH method
-pub async fn patch_advisory_labels(
-    advisory_ids: Vec<String>,
-    counter: Arc<AtomicUsize>,
-    user: &mut GooseUser,
-) -> TransactionResult {
+pub async fn patch_advisory_labels(user: &mut GooseUser) -> TransactionResult {
+    let advisory_id = list_advisory_random_single(user).await?;
     send_advisory_label_request(
-        advisory_ids[counter.fetch_add(1, Ordering::Relaxed) % advisory_ids.len()].clone(),
+        advisory_id,
         user,
         GooseMethod::Patch,
         "It's a patch request",
