@@ -180,9 +180,7 @@ async fn main() -> Result<(), anyhow::Error> {
             .register_transaction(tx!(list_sboms_paginated))
             .register_transaction(tx!(get_analysis_status))
             .register_transaction(tx!(get_analysis_latest_cpe))
-            .register_transaction(tx!(list_advisory_labels))
-            .register_transaction(tx!(patch_advisory_labels))
-            .register_transaction(tx!(put_advisory_labels));
+            .register_transaction(tx!(list_advisory_labels));
 
             tx!(s.get_sbom?(scenario.get_sbom.clone()));
             tx!(s.get_sbom_advisories?(scenario.get_sbom_advisories.clone()));
@@ -216,7 +214,7 @@ async fn main() -> Result<(), anyhow::Error> {
                 "RestAPIUserDelete",
                 wait_time_from,
                 wait_time_to,
-                custom_client,
+                custom_client.clone(),
             )?
             .set_weight(1)?
             // With 100 SBOM IDs this ensure they all delete something in the sequential situation
@@ -231,6 +229,19 @@ async fn main() -> Result<(), anyhow::Error> {
             }
             s
         })
+        .register_scenario({
+            create_scenario(
+                "RestAdvisoryLableUser",
+                wait_time_from,
+                wait_time_to,
+                custom_client,
+            )?
+            .set_weight(5)?
+            .register_transaction(tx!(get_advisory_total).set_on_start())
+            .register_transaction(tx!(list_advisory_random_single))
+            .register_transaction(tx!(put_advisory_labels))
+            .register_transaction(tx!(patch_advisory_labels))
+        })
         // .register_scenario(
         //     scenario!("GraphQLUser")
         //         // .set_weight(1)?
@@ -241,13 +252,13 @@ async fn main() -> Result<(), anyhow::Error> {
         //             Duration::from_secs(wait_time_to),
         //         )?
         //         .register_transaction(tx!(g_get_advisories))
-        //         .register_transaction(tx!(g_get_advisory_by_id))
+        //         .register_transaction(transactiontx!(g_get_advisory_by_id))
         //         .register_transaction(tx!(g_get_organization_by_name))
         //         .register_transaction(tx!(g_get_sbom_by_id))
         //         .register_transaction(tx!(g_get_sbom_by_labels))
         //         .register_transaction(tx!(g_cves_by_sbom))
         //         .register_transaction(tx!(g_get_vulnerability_by_id))
-        //         .register_transaction(tx!(g_get_vulnerabilities)),
+        //         .register_(tx!(g_get_vulnerabilities)),
         // )
         .execute()
         .await?;
