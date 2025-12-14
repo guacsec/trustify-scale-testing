@@ -23,6 +23,12 @@ impl<T: std::fmt::Display> std::fmt::Display for DisplayVec<T> {
     }
 }
 
+#[derive(Clone)]
+pub struct GooseUserData {
+    pub advisory_id: Option<String>,
+    pub total_advisories: Option<u64>,
+}
+
 #[cfg(test)]
 mod test {
     use super::*;
