@@ -1,4 +1,5 @@
 use crate::utils::DisplayVec;
+use anyhow::Context;
 use goose::goose::{GooseMethod, GooseRequest, GooseUser, TransactionError, TransactionResult};
 use reqwest::{Client, RequestBuilder};
 
@@ -11,46 +12,35 @@ use std::sync::{
 };
 use urlencoding::encode;
 
-/// Get advisory total count
-pub async fn get_advisory_total(user: &mut GooseUser) -> TransactionResult {
-    let response = user.get("/api/v2/advisory").await?;
-    let json_data = response.response?.json::<serde_json::Value>().await?;
+/// Fetch advisory total count once at application startup
+pub async fn get_advisory_total(host: String) -> Result<u64, anyhow::Error> {
+    let url = format!("{}/api/v2/advisory", host.trim_end_matches('/'));
 
-    // Extract total from the response
+    log::info!("Fetching advisory total from: {}", url);
+
+    let response = reqwest::get(&url)
+        .await
+        .context("Failed to send request to get advisory total")?
+        .error_for_status()
+        .context("Failed to get advisory total")?;
+
+    let json_data = response.json::<serde_json::Value>().await?;
+
     if let Some(total) = json_data.get("total").and_then(|t| t.as_u64()) {
-        log::info!("Advisory total count: {}", total);
-        user.set_session_data(GooseUserData {
-            total_advisories: Some(total),
-            advisory_id: None,
-        });
-        return Ok(());
+        return Ok(total);
     }
-    Err(Box::new(TransactionError::Custom(
+    Err(anyhow::anyhow!(
         "Failed to get advisory total count".to_string(),
-    )))
+    ))
 }
 
-/// List advisory with random offset and limit=1
-pub async fn list_advisory_random_single(user: &mut GooseUser) -> TransactionResult {
-    // Get the total count first
-    let total = {
-        let goose_user_data = user
-            .get_session_data_mut::<GooseUserData>()
-            .ok_or_else(|| {
-                Box::new(TransactionError::Custom(
-                    "No GooseUserData found, please initialize user data first".to_string(),
-                ))
-            })?;
-
-        goose_user_data.total_advisories.ok_or_else(|| {
-            Box::new(TransactionError::Custom(
-                "No total_advisories found in GooseUserData".to_string(),
-            ))
-        })?
-    };
-
-    // Generate random offset
-    let offset = rand::thread_rng().gen_range(0..=total);
+/// Get a random advisory ID
+pub async fn find_random_advisory(
+    total_advisories: u64,
+    user: &mut GooseUser,
+) -> TransactionResult {
+    // Generate random offset using the provided total
+    let offset = rand::thread_rng().gen_range(0..=total_advisories);
     let url = format!("/api/v2/advisory?offset={}&limit=1", offset);
 
     let response = user.get(&url).await?;
@@ -62,16 +52,9 @@ pub async fn list_advisory_random_single(user: &mut GooseUser) -> TransactionRes
             if let Some(id) = first_item.get("uuid").and_then(|u| u.as_str()) {
                 log::info!("Listing advisory with offset {}: {}", offset, id);
 
-                let goose_user_data =
-                    user.get_session_data_mut::<GooseUserData>()
-                        .ok_or_else(|| {
-                            Box::new(TransactionError::Custom(
-                                "No GooseUserData found, please initialize user data first"
-                                    .to_string(),
-                            ))
-                        })?;
-                goose_user_data.advisory_id = Some(id.to_string());
-
+                user.set_session_data(GooseUserData {
+                    advisory_id: Some(id.to_string()),
+                });
                 return Ok(());
             }
         }
@@ -173,8 +156,8 @@ async fn send_advisory_label_request(
     Ok(())
 }
 
-/// Send Advisory labels request using PUT method
-pub async fn put_advisory_labels(user: &mut GooseUser) -> TransactionResult {
+/// Get advisory ID from Goose user data
+fn get_advisory_id(user: &mut GooseUser) -> Result<String, Box<TransactionError>> {
     let advisory_id = {
         let goose_user_data = user
             .get_session_data_mut::<GooseUserData>()
@@ -190,6 +173,12 @@ pub async fn put_advisory_labels(user: &mut GooseUser) -> TransactionResult {
             ))
         })?
     };
+    Ok(advisory_id)
+}
+
+/// Send Advisory labels request using PUT method
+pub async fn put_advisory_labels(user: &mut GooseUser) -> TransactionResult {
+    let advisory_id = get_advisory_id(user)?;
     send_advisory_label_request(
         advisory_id,
         user,

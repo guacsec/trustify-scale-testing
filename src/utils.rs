@@ -23,10 +23,12 @@ impl<T: std::fmt::Display> std::fmt::Display for DisplayVec<T> {
     }
 }
 
+/// This struct is used to store user-specific data that is needed for Goose transactions.
+///
+/// The advisory ID is randomly selected from the available advisories.
 #[derive(Clone)]
 pub struct GooseUserData {
     pub advisory_id: Option<String>,
-    pub total_advisories: Option<u64>,
 }
 
 #[cfg(test)]
