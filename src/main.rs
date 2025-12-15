@@ -230,17 +230,27 @@ async fn main() -> Result<(), anyhow::Error> {
             s
         })
         .register_scenario({
-            create_scenario(
+            let mut s = create_scenario(
                 "RestAdvisoryLableUser",
                 wait_time_from,
                 wait_time_to,
                 custom_client,
             )?
-            .set_weight(5)?
-            .register_transaction(tx!(get_advisory_total).set_on_start())
-            .register_transaction(tx!(list_advisory_random_single))
-            .register_transaction(tx!(put_advisory_labels))
-            .register_transaction(tx!(patch_advisory_labels))
+            .set_weight(5)?;
+            // Register advisory label transactions if host is available.
+            // Since the scenario object doesn't provide host information, we use environment
+            let host = s
+                .host
+                .clone()
+                .or_else(|| std::env::var("HOST").ok())
+                .unwrap_or_else(|| "http://localhost:8080".to_string());
+            let total_advisories = restapi::get_advisory_total(host).await.ok();
+            if let Some(total) = total_advisories {
+                tx!(s.find_random_advisory?(Some(total)));
+                s = s.register_transaction(tx!(put_advisory_labels));
+                s = s.register_transaction(tx!(patch_advisory_labels));
+            }
+            s
         })
         // .register_scenario(
         //     scenario!("GraphQLUser")
@@ -252,13 +262,13 @@ async fn main() -> Result<(), anyhow::Error> {
         //             Duration::from_secs(wait_time_to),
         //         )?
         //         .register_transaction(tx!(g_get_advisories))
-        //         .register_transaction(transactiontx!(g_get_advisory_by_id))
+        //         .register_transaction(tx!(g_get_advisory_by_id))
         //         .register_transaction(tx!(g_get_organization_by_name))
         //         .register_transaction(tx!(g_get_sbom_by_id))
         //         .register_transaction(tx!(g_get_sbom_by_labels))
         //         .register_transaction(tx!(g_cves_by_sbom))
         //         .register_transaction(tx!(g_get_vulnerability_by_id))
-        //         .register_(tx!(g_get_vulnerabilities)),
+        //         .register_transaction(tx!(g_get_vulnerabilities)),
         // )
         .execute()
         .await?;
