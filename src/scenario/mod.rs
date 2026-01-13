@@ -102,6 +102,15 @@ pub(crate) struct Scenario {
 
     #[serde(with = "required")]
     pub get_advisory: Option<String>,
+
+    #[serde(with = "required")]
+    pub count_by_package: Option<String>,
+
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub patch_sbom_lables: Option<Vec<String>>,
+
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub put_sbom_lables: Option<Vec<String>>,
 }
 
 impl Scenario {
@@ -143,6 +152,26 @@ impl Scenario {
         );
         let download_advisory = Some(loader.download_advisory().await?);
         let get_advisory = Some(loader.download_advisory().await?);
+        let count_by_package_result = Some(loader.count_by_package().await?);
+        let count_by_package =
+            count_by_package_result.ok_or_else(|| anyhow!("no count-by-package result"))?;
+        let count_by_package = serde_json::from_str::<serde_json::Value>(&count_by_package)?;
+        let put_sbom_lables = Some(
+            loader
+                .put_sbom_lables()
+                .await?
+                .iter()
+                .map(|sbom_id| format!("urn:uuid:{sbom_id}"))
+                .collect(),
+        );
+        let patch_sbom_lables = Some(
+            loader
+                .patch_sbom_lables()
+                .await?
+                .iter()
+                .map(|sbom_id| format!("urn:uuid:{sbom_id}"))
+                .collect(),
+        );
 
         Ok(Self {
             get_sbom: large_sbom_digest.clone(),
@@ -160,6 +189,15 @@ impl Scenario {
             delete_sbom_pool,
             download_advisory,
             get_advisory,
+            count_by_package: Some(format!(
+                "pkg:{}/{}/{}@{}",
+                count_by_package["type"].as_str().unwrap_or(""),
+                count_by_package["namespace"].as_str().unwrap_or(""),
+                count_by_package["name"].as_str().unwrap_or(""),
+                count_by_package["version"].as_str().unwrap_or("")
+            )),
+            patch_sbom_lables,
+            put_sbom_lables,
         })
     }
 }
@@ -375,6 +413,43 @@ SELECT id::text as result
 FROM public.advisory order by modified desc limit 1;"#,
         )
         .await
+    }
+
+    /// A purl for count-by-package query
+    pub async fn count_by_package(&self) -> anyhow::Result<String> {
+        self.find(
+            r#"
+select purl::text as result from qualified_purl qp order by qp.timestamp desc limit 1;"#,
+        )
+        .await
+    }
+
+    /// sbom IDs for put labels
+    pub async fn put_sbom_lables(&self) -> anyhow::Result<Vec<String>> {
+        let mut db = crate::db::connect(&self.db).await?;
+
+        let rows = sqlx::query(
+            "SELECT sbom_id::text as id FROM public.sbom order by published desc limit 20;",
+        )
+        .fetch_all(&mut db)
+        .await?;
+        Ok(rows
+            .into_iter()
+            .map(|row| row.get::<String, _>("id"))
+            .collect())
+    }
+
+    /// sbom IDs for patch labels
+    pub async fn patch_sbom_lables(&self) -> anyhow::Result<Vec<String>> {
+        let mut db = crate::db::connect(&self.db).await?;
+
+        let rows = sqlx::query("SELECT sbom_id::text as id FROM public.sbom order by published desc OFFSET 20 limit 20;")
+            .fetch_all(&mut db)
+            .await?;
+        Ok(rows
+            .into_iter()
+            .map(|row| row.get::<String, _>("id"))
+            .collect())
     }
 }
 

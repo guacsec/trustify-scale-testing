@@ -1,11 +1,78 @@
 use crate::utils::DisplayVec;
-use goose::goose::{GooseUser, TransactionResult};
+use goose::goose::{GooseMethod, GooseRequest, GooseUser, TransactionResult};
+use reqwest::{Client, RequestBuilder};
+use serde_json::Value as JsonValue;
 use serde_json::json;
 use std::sync::{
     Arc,
     atomic::{AtomicUsize, Ordering},
 };
 use urlencoding::encode;
+
+// send_request sends a request to the server
+//
+// path is the path of the request, e.g. "/api/v2/sbom/count-by-package"
+// user is the GooseUser to send the request with
+// method is the HTTP method to use, e.g. GooseMethod::Get
+// value is the JSON value to send in the request body
+// client_method is the reqwest method to use, e.g. Client::get
+async fn send_request(
+    path: String,
+    user: &mut GooseUser,
+    method: GooseMethod,
+    value: JsonValue,
+    client_method: fn(&Client, String) -> RequestBuilder,
+) -> TransactionResult {
+    let url = user.build_url(&path)?;
+
+    let reqwest_request_builder = client_method(&user.client, url);
+    let goose_request = GooseRequest::builder()
+        .method(method)
+        .path(path.as_str())
+        .set_request_builder(reqwest_request_builder.json(&value))
+        .build();
+    let _response = user.request(goose_request).await?;
+
+    Ok(())
+}
+
+/// Send Sbom labels request using PUT method
+pub async fn put_sbom_labels(
+    sbom_ids: Vec<String>,
+    counter: Arc<AtomicUsize>,
+    user: &mut GooseUser,
+) -> TransactionResult {
+    let path = format!(
+        "/api/v2/sbom/{}/label",
+        sbom_ids[counter.fetch_add(1, Ordering::Relaxed) % sbom_ids.len()].clone()
+    );
+    let json = json!({
+        "source": "It's a put request",
+        "foo": "bar",
+        "space": "with space",
+        "empty": "",
+    });
+    send_request(path, user, GooseMethod::Put, json, Client::put).await
+}
+
+/// Send Sbom labels request using PATCH method
+pub async fn patch_sbom_labels(
+    sbom_ids: Vec<String>,
+    counter: Arc<AtomicUsize>,
+    user: &mut GooseUser,
+) -> TransactionResult {
+    let path = format!(
+        "/api/v2/sbom/{}/label",
+        sbom_ids[counter.fetch_add(1, Ordering::Relaxed) % sbom_ids.len()].clone()
+    );
+    let json = json!({
+        "source": "It's a patch request",
+        "foo": "bar",
+        "space": "with space",
+        "empty": "",
+    });
+    send_request(path, user, GooseMethod::Patch, json, Client::patch).await
+}
 
 pub async fn get_advisory(id: String, user: &mut GooseUser) -> TransactionResult {
     let uri = format!("/api/v2/advisory/{}", encode(&format!("urn:uuid:{}", id)));
@@ -22,6 +89,42 @@ pub async fn download_advisory(id: String, user: &mut GooseUser) -> TransactionR
     );
 
     let _response = user.get(&uri).await?;
+
+    Ok(())
+}
+
+pub async fn list_sbom_labels(user: &mut GooseUser) -> TransactionResult {
+    let filter_text = json!([
+        { "key": "source"},
+    ]);
+
+    let uri = format!(
+        "/api/v2/sbom-labels?filter_text={}&limit={}",
+        encode(&filter_text.to_string()),
+        1000
+    );
+
+    let _response = user.get(&uri).await?;
+
+    Ok(())
+}
+
+pub async fn count_by_package(purl: String, user: &mut GooseUser) -> TransactionResult {
+    let filter_text = json!([
+      {
+        "purl": purl,
+        "cpe": null
+      }
+    ]);
+
+    send_request(
+        "/api/v2/sbom/count-by-package".to_string(),
+        user,
+        GooseMethod::Get,
+        filter_text,
+        Client::get,
+    )
+    .await?;
 
     Ok(())
 }
