@@ -47,17 +47,16 @@ pub async fn find_random_advisory(
     let json_data = response.response?.json::<serde_json::Value>().await?;
 
     // Extract advisory ID from the response
-    if let Some(items) = json_data.get("items").and_then(|i| i.as_array()) {
-        if let Some(first_item) = items.first() {
-            if let Some(id) = first_item.get("uuid").and_then(|u| u.as_str()) {
-                log::info!("Listing advisory with offset {}: {}", offset, id);
+    if let Some(items) = json_data.get("items").and_then(|i| i.as_array())
+        && let Some(first_item) = items.first()
+        && let Some(id) = first_item.get("uuid").and_then(|u| u.as_str())
+    {
+        log::info!("Listing advisory with offset {}: {}", offset, id);
 
-                user.set_session_data(GooseUserData {
-                    advisory_id: Some(id.to_string()),
-                });
-                return Ok(());
-            }
-        }
+        user.set_session_data(GooseUserData {
+            advisory_id: Some(id.to_string()),
+        });
+        return Ok(());
     }
 
     // Return error if no advisory found
