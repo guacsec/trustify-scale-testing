@@ -15,7 +15,11 @@ use crate::{
 };
 use anyhow::Context;
 use goose::prelude::*;
-use std::{str::FromStr, sync::Arc, time::Duration};
+use std::{
+    str::FromStr,
+    sync::{Arc, atomic::AtomicUsize},
+    time::Duration,
+};
 
 const MAX_ID_DISPLAY: usize = 32;
 
@@ -125,8 +129,13 @@ async fn main() -> Result<(), anyhow::Error> {
     };
 
     // Create atomic counter for sequential delete strategy
-    let delete_counter = Arc::new(std::sync::atomic::AtomicUsize::new(0));
+    let delete_counter = Arc::new(AtomicUsize::new(0));
 
+    let advisory_file = utils::load_advisory_files()?;
+    let advisory_file_path = advisory_file
+        .to_str()
+        .ok_or_else(|| anyhow::anyhow!("Invalid UTF-8 path"))?;
+    let base_content = utils::read_upload_file(advisory_file_path).await?;
     GooseAttack::initialize()?
         .test_start(
             Transaction::new(Arc::new({
@@ -234,7 +243,7 @@ async fn main() -> Result<(), anyhow::Error> {
                 "RestAdvisoryLableUser",
                 wait_time_from,
                 wait_time_to,
-                custom_client,
+                custom_client.clone(),
             )?
             .set_weight(5)?;
             // Register advisory label transactions if host is available.
@@ -250,6 +259,20 @@ async fn main() -> Result<(), anyhow::Error> {
                 s = s.register_transaction(tx!(put_advisory_labels));
                 s = s.register_transaction(tx!(patch_advisory_labels));
             }
+            s
+        })
+        .register_scenario({
+            let mut s = create_scenario(
+                "RestAPIUploadAndDeleteFiles",
+                wait_time_from,
+                wait_time_to,
+                custom_client,
+            )?
+            .set_weight(5)?;
+            // Register upload and delete transactions
+            s = s.register_transaction(tx!(upload_advisory(base_content),name: "upload_advisory"));
+            s = s.register_transaction(tx!(delete_advisory));
+
             s
         })
         // .register_scenario(
