@@ -1,10 +1,8 @@
 use crate::utils::DisplayVec;
+use crate::utils::GooseUserData;
 use anyhow::Context;
 use goose::goose::{GooseMethod, GooseRequest, GooseUser, TransactionError, TransactionResult};
 use reqwest::{Client, RequestBuilder};
-
-use crate::utils::GooseUserData;
-use rand::Rng;
 use serde_json::json;
 use std::sync::{
     Arc,
@@ -40,7 +38,7 @@ pub async fn find_random_advisory(
     user: &mut GooseUser,
 ) -> TransactionResult {
     // Generate random offset using the provided total
-    let offset = rand::thread_rng().gen_range(0..=total_advisories);
+    let offset = rand::rng().gen_range(0..=total_advisories);
     let url = format!("/api/v2/advisory?offset={}&limit=1", offset);
 
     let response = user.get(&url).await?;

@@ -76,7 +76,7 @@ cargo run --bin xtask generate-dump
 ```
 
 Or, download one from the S3 bucket. e.g.:
-`https://trustify-dumps.s3.eu-west-1.amazonaws.com/20250604T002104Z/dump.sql.gz`
+`https://trustify-dumps.s3.eu-west-1.amazonaws.com/20251104T064548Z/dump.sql.gz`
 
 Then, add the dump to the compose startup `trustify/etc/deploy/compose/compose.yaml` (in the `trustify` repository):
 
