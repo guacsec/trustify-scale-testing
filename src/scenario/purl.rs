@@ -16,16 +16,16 @@ pub struct CanonicalPurl {
 }
 
 impl Display for CanonicalPurl {
-    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+    fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
         let mut purl = PackageUrl::new(&self.ty, &self.name).map_err(|_| fmt::Error)?;
         if let Some(ns) = &self.namespace {
-            purl.with_namespace(ns);
+            let _ = purl.with_namespace(ns);
         }
         if let Some(version) = &self.version {
-            purl.with_version(version);
+            let _ = purl.with_version(version);
         }
         for (key, value) in &self.qualifiers {
-            purl.add_qualifier(key, value).map_err(|_| fmt::Error)?;
+            let _ = purl.add_qualifier(key, value).map_err(|_| fmt::Error)?;
         }
         Display::fmt(&purl, f)
     }

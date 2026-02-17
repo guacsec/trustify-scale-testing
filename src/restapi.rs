@@ -2,7 +2,8 @@ use crate::utils::DisplayVec;
 use crate::utils::GooseUserData;
 use anyhow::Context;
 use goose::goose::{GooseMethod, GooseRequest, GooseUser, TransactionError, TransactionResult};
-use reqwest::{Client, RequestBuilder};
+use rand::prelude::*;
+use reqwest_12::{Client, RequestBuilder, get};
 use serde_json::json;
 use std::sync::{
     Arc,
@@ -16,7 +17,7 @@ pub async fn get_advisory_total(host: String) -> Result<u64, anyhow::Error> {
 
     log::info!("Fetching advisory total from: {}", url);
 
-    let response = reqwest::get(&url)
+    let response = get(&url)
         .await
         .context("Failed to send request to get advisory total")?
         .error_for_status()
@@ -38,7 +39,7 @@ pub async fn find_random_advisory(
     user: &mut GooseUser,
 ) -> TransactionResult {
     // Generate random offset using the provided total
-    let offset = rand::rng().gen_range(0..=total_advisories);
+    let offset = rand::rng().random_range(0..total_advisories);
     let url = format!("/api/v2/advisory?offset={}&limit=1", offset);
 
     let response = user.get(&url).await?;

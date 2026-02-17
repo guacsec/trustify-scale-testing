@@ -310,7 +310,7 @@ async fn set_custom_client(
     provider: &OpenIdTokenProvider,
     user: &mut GooseUser,
 ) -> anyhow::Result<()> {
-    use reqwest::{Client, header};
+    use reqwest::header;
 
     log::debug!("Creating a new custom client");
 
@@ -334,7 +334,7 @@ async fn set_custom_client(
         .unwrap_or(Duration::from_secs(300));
 
     // Build a custom client.
-    let builder = Client::builder()
+    let builder = reqwest_12::Client::builder()
         .default_headers(headers)
         .user_agent("loadtest-ua")
         .timeout(timeout);
