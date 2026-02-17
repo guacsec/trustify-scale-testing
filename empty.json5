@@ -11,4 +11,6 @@
   "analyze_purl": null,
   "get_purl_details": null,
   "delete_sbom_pool": null,
+  "download_advisory": null,
+  "get_advisory": null,
 }
