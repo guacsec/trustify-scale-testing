@@ -1,6 +1,5 @@
 // The simplest loadtest example
 mod db;
-mod graphql;
 mod oidc;
 mod restapi;
 mod scenario;
@@ -8,7 +7,6 @@ mod utils;
 mod website;
 
 use crate::{
-    // graphql::*,
     oidc::{OpenIdTokenProvider, OpenIdTokenProviderConfigArguments},
     restapi::*,
     website::*,
@@ -252,24 +250,6 @@ async fn main() -> Result<(), anyhow::Error> {
             }
             s
         })
-        // .register_scenario(
-        //     scenario!("GraphQLUser")
-        //         // .set_weight(1)?
-        //         .register_transaction(custom_client.set_name("logon"))
-        //         // After each transactions runs, sleep randomly from 5 to 15 seconds.
-        //         .set_wait_time(
-        //             Duration::from_secs(wait_time_from),
-        //             Duration::from_secs(wait_time_to),
-        //         )?
-        //         .register_transaction(tx!(g_get_advisories))
-        //         .register_transaction(tx!(g_get_advisory_by_id))
-        //         .register_transaction(tx!(g_get_organization_by_name))
-        //         .register_transaction(tx!(g_get_sbom_by_id))
-        //         .register_transaction(tx!(g_get_sbom_by_labels))
-        //         .register_transaction(tx!(g_cves_by_sbom))
-        //         .register_transaction(tx!(g_get_vulnerability_by_id))
-        //         .register_transaction(tx!(g_get_vulnerabilities)),
-        // )
         .execute()
         .await?;
 
