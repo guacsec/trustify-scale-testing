@@ -111,7 +111,7 @@ is not reproducible, and should only be used for local testing.
 It is possible to generate the content for a scenario file by setting the environment variable `GENERATE_SCENARIO=true`:
 
 ```bash
-env GENERATE_SCENARIO=true DATABASE_URL=postgresql://postgres:trustify@localhost:5432/trustify cargo run --release 
+env GENERATE_SCENARIO=true DATABASE_URL=postgresql://postgres:trustify@localhost:5432/trustify cargo run --release
 ```
 
 ## Request timeouts
@@ -143,11 +143,11 @@ debug = true
 cargo clean ; cargo build --release
 ```
 
-* Open a terminal and start trustify with heaptrack and graphql feature
+* Open a terminal and start trustify with heaptrack
 
 ```shell
 cd target/release/
-TRUSTD_WITH_GRAPHQL=true heaptrack ./trustd api --db-password eggs --devmode --auth-disabled
+heaptrack ./trustd api --db-password eggs --devmode --auth-disabled
 ```
 
 * Run loadtest
