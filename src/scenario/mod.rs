@@ -232,6 +232,7 @@ order by num desc
 "#,
         )
         .await
+        .context("max_vuln")
     }
 
     /// A purl
@@ -252,6 +253,7 @@ limit 1
             let purl: CanonicalPurl = serde_json::from_value(value)?;
             Ok::<String, anyhow::Error>(purl.to_string())
         })
+        .context("sbom_purl")
     }
 
     /// A purl with vulnerabilities
@@ -284,29 +286,31 @@ limit 1
             let purl: CanonicalPurl = serde_json::from_value(value)?;
             Ok::<String, anyhow::Error>(purl.to_string())
         })
+        .context("analysis_purl")
     }
 
     /// A purl ID for details lookup
     pub async fn purl_details(&self) -> anyhow::Result<String> {
         self.find(
             r#"
-SELECT 
+SELECT
     spr.qualified_purl_id::text AS result,
     COUNT(DISTINCT spl.license_id) AS license_count
-FROM 
+FROM
     sbom_package_purl_ref spr
-JOIN 
+JOIN
     sbom_package sp ON spr.sbom_id = sp.sbom_id AND spr.node_id = sp.node_id
-JOIN 
+JOIN
     sbom_package_license spl ON sp.sbom_id = spl.sbom_id AND sp.node_id = spl.node_id
-GROUP BY 
+GROUP BY
     spr.qualified_purl_id
-ORDER BY 
+ORDER BY
     license_count DESC
 LIMIT 1;
 "#,
         )
         .await
+        .context("purl_details")
     }
 
     // A purl whose version matches redhat-[0-9]+$ regex
@@ -375,6 +379,7 @@ SELECT id::text as result
 FROM public.advisory order by modified desc limit 1;"#,
         )
         .await
+        .context("download_advisory")
     }
 }
 
