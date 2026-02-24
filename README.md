@@ -147,7 +147,7 @@ cargo clean ; cargo build --release
 
 ```shell
 cd target/release/
-heaptrack ./trustd api --db-password eggs --devmode --auth-disabled
+heaptrack ./trustd api --devmode --auth-disabled
 ```
 
 * Run loadtest
