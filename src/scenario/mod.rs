@@ -300,7 +300,7 @@ FROM
     sbom_package_purl_ref spr
 JOIN
     sbom_package sp ON spr.sbom_id = sp.sbom_id AND spr.node_id = sp.node_id
-JOIN
+LEFT JOIN
     sbom_package_license spl ON sp.sbom_id = spl.sbom_id AND sp.node_id = spl.node_id
 GROUP BY
     spr.qualified_purl_id
@@ -339,25 +339,22 @@ LIMIT 10;
     }
 
     /// Get a pool of deletable SBOMs (up to 100)
-    /// These SBOMs are selected based on having certain licenses that make them good candidates for deletion testing
+    /// These SBOMs are selected based on having the most packages
     pub async fn deletable_sboms(&self) -> anyhow::Result<Vec<String>> {
         let mut db = crate::db::connect(&self.db).await?;
 
         let rows = sqlx::query(
             r#"
 SELECT
-    a.sbom_id::text as id
+    a.sbom_id::text as id,
+    count(b.*) as package_count
 FROM
     sbom a
-    JOIN sbom_node b ON a.sbom_id = b.sbom_id
-    JOIN sbom_package c ON b.sbom_id = c.sbom_id AND b.node_id = c.node_id
-    JOIN sbom_package_license d ON c.sbom_id = d.sbom_id AND c.node_id = d.node_id
-    JOIN license e ON d.license_id = e.id
-WHERE
-    e.text IN ('GPLv3+ with exceptions', 'Apache-2.0', 'MIT', 'BSD-3-Clause')
+    JOIN sbom_package b ON a.sbom_id = b.sbom_id
 GROUP BY
     a.sbom_id
 ORDER BY
+    package_count DESC,
     a.sbom_id
 LIMIT 100
 "#,
