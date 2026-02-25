@@ -184,7 +184,7 @@ impl Loader {
 
         db.fetch_optional(sql)
             .await?
-            .ok_or_else(|| anyhow!("nothing found"))
+            .ok_or_else(|| anyhow!("no matching row found in database query"))
     }
 
     /// Find all rows
@@ -216,7 +216,7 @@ limit 1
 "#,
             )
             .await
-            .context("large_sbom")?;
+            .context("function large_sbom: no SBOMs found in database")?;
 
         Ok((row.get("id"), row.get("sha")))
     }
@@ -236,7 +236,7 @@ order by num desc
 "#,
         )
         .await
-        .context("max_vuln")
+        .context("function max_vuln: no vulnerabilities found in database")
     }
 
     /// A purl
@@ -257,7 +257,7 @@ limit 1
             let purl: CanonicalPurl = serde_json::from_value(value)?;
             Ok::<String, anyhow::Error>(purl.to_string())
         })
-        .context("sbom_purl")
+        .context("function sbom_purl: no SBOM packages found in database")
     }
 
     /// A purl with vulnerabilities
@@ -290,7 +290,7 @@ limit 1
             let purl: CanonicalPurl = serde_json::from_value(value)?;
             Ok::<String, anyhow::Error>(purl.to_string())
         })
-        .context("analysis_purl")
+        .context("function analysis_purl: no affected PURLs found in database")
     }
 
     /// A purl ID for details lookup
@@ -314,7 +314,7 @@ LIMIT 1;
 "#,
         )
         .await
-        .context("purl_details")
+        .context("function purl_details: no PURLs found in database")
     }
 
     // A purl whose version matches redhat-[0-9]+$ regex
@@ -380,7 +380,7 @@ SELECT id::text as result
 FROM public.advisory order by modified desc limit 1;"#,
         )
         .await
-        .context("download_advisory")
+        .context("function download_advisory: no advisories found in database")
     }
 }
 
