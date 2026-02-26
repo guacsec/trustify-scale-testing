@@ -343,23 +343,28 @@ LIMIT 10;
     }
 
     /// Get a pool of deletable SBOMs (up to 100)
-    /// These SBOMs are selected based on having the most packages
+    /// These SBOMs are selected from around the median package count
     pub async fn deletable_sboms(&self) -> anyhow::Result<Vec<String>> {
         let mut db = crate::db::connect(&self.db).await?;
 
         let rows = sqlx::query(
             r#"
-SELECT
-    a.sbom_id::text as id,
-    count(b.*) as package_count
-FROM
-    sbom a
-    JOIN sbom_package b ON a.sbom_id = b.sbom_id
-GROUP BY
-    a.sbom_id
-ORDER BY
-    package_count DESC,
-    a.sbom_id
+WITH counts AS (
+    SELECT
+        sbom_id,
+        COUNT(*)::bigint AS package_count
+    FROM sbom_package
+    GROUP BY sbom_id
+),
+med AS (
+    SELECT
+        percentile_disc(0.5) WITHIN GROUP (ORDER BY package_count) AS median_count
+    FROM counts
+)
+SELECT c.sbom_id::text AS id
+FROM counts c
+CROSS JOIN med
+ORDER BY ABS(c.package_count - med.median_count), c.package_count, c.sbom_id
 LIMIT 100
 "#,
         )
