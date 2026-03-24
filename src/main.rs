@@ -8,7 +8,7 @@ mod website;
 
 use crate::{
     oidc::{OpenIdTokenProvider, OpenIdTokenProviderConfigArguments},
-    restapi::*,
+    restapi::{advisory::*, analysis::*, misc::*, purl::*, sbom::*, vulnerability::*},
     website::*,
 };
 use anyhow::Context;
@@ -175,7 +175,9 @@ async fn main() -> Result<(), anyhow::Error> {
             .register_transaction(tx!(search_exact_purl))
             .register_transaction(tx!(list_products))
             .register_transaction(tx!(list_sboms))
+            .register_transaction(tx!(list_sboms_v2))
             .register_transaction(tx!(list_sboms_paginated))
+            .register_transaction(tx!(list_sboms_paginated_v2))
             .register_transaction(tx!(get_analysis_status))
             .register_transaction(tx!(get_analysis_latest_cpe))
             .register_transaction(tx!(list_advisory_labels));
@@ -242,7 +244,7 @@ async fn main() -> Result<(), anyhow::Error> {
                 .clone()
                 .or_else(|| std::env::var("HOST").ok())
                 .unwrap_or_else(|| "http://localhost:8080".to_string());
-            let total_advisories = restapi::get_advisory_total(host).await.ok();
+            let total_advisories = get_advisory_total(host).await.ok();
             if let Some(total) = total_advisories {
                 tx!(s.find_random_advisory?(Some(total)));
                 s = s.register_transaction(tx!(put_advisory_labels));

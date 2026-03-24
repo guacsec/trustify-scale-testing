@@ -13,3 +13,4 @@ target/
 
 report.*
 baseline.json
+/.serena

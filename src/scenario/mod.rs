@@ -147,8 +147,8 @@ impl Scenario {
         Ok(Self {
             get_sbom: large_sbom_digest.clone(),
             get_sbom_advisories: large_sbom_digest.clone(),
-            get_sbom_related: large_sbom_id.clone(),
-            get_sbom_packages: large_sbom_id.clone(),
+            get_sbom_related: large_sbom_id.as_ref().map(|id| format!("uri:uuid:{id}")),
+            get_sbom_packages: large_sbom_id.as_ref().map(|id| format!("uri:uuid:{id}")),
 
             get_vulnerability: max_vuln,
 
