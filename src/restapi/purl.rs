@@ -39,6 +39,18 @@ pub async fn search_purls_by_license(user: &mut GooseUser) -> TransactionResult 
     Ok(())
 }
 
+pub async fn list_base_purls(user: &mut GooseUser) -> TransactionResult {
+    let _response = user.get("/api/v2/purl/base").await?;
+
+    Ok(())
+}
+
+pub async fn get_base_purl(key: String, user: &mut GooseUser) -> TransactionResult {
+    let _response = user.get(&format!("/api/v2/purl/base/{key}")).await?;
+
+    Ok(())
+}
+
 pub async fn get_recommendations(
     purls: DisplayVec<String>,
     user: &mut GooseUser,

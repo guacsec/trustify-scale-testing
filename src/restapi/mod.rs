@@ -3,4 +3,5 @@ pub mod analysis;
 pub mod misc;
 pub mod purl;
 pub mod sbom;
+pub mod sbom_group;
 pub mod vulnerability;

@@ -25,5 +25,17 @@
   ],
   "delete_sbom_pool": null,
   "download_advisory": "f1e5eb17-2f31-418f-9b46-c11f52398375",
-  "get_advisory": "f1e5eb17-2f31-418f-9b46-c11f52398375"
+  "get_advisory": "f1e5eb17-2f31-418f-9b46-c11f52398375",
+  "download_sbom": "sha256:a04260d90fbbbc5f4e1f25754bbfa46771140c06c2bc351ea6046a828fcd17e5",
+  "get_sbom_license_export": "urn:uuid:019cf03d-89b1-7aa1-876e-43a3bfd8a2f5",
+  "count_sbom_by_package": "pkg:oci/web-terminal-operator-bundle@sha256:376684e2041f93229961a5d42caea9676974bae7b04c3359ca79b62b7843ff9d?repository_url=registry.redhat.io/web-terminal/web-terminal-operator-bundle&tag=1.15-1770672845",
+  "get_sbom_group": null,
+  "get_product": "761f2bc9-f3a4-50d5-8ee5-fd2aa3aef38b",
+  "get_organization": "53d3fae7-574a-4a52-b66b-5a704e8b289a",
+  "get_base_purl": "golang:k8s.io/apimachinery/third_party/forked/golang/reflect",
+  "get_analysis_component": "sha256:a04260d90fbbbc5f4e1f25754bbfa46771140c06c2bc351ea6046a828fcd17e5",
+  "render_sbom_graph": "urn:uuid:019cf03d-89b1-7aa1-876e-43a3bfd8a2f5",
+  "get_importer": null,
+  "get_weakness": "CWE-79",
+  "get_spdx_license": "MIT"
 }

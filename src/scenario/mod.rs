@@ -102,6 +102,42 @@ pub(crate) struct Scenario {
 
     #[serde(with = "required")]
     pub get_advisory: Option<String>,
+
+    #[serde(with = "required")]
+    pub download_sbom: Option<String>,
+
+    #[serde(with = "required")]
+    pub get_sbom_license_export: Option<String>,
+
+    #[serde(with = "required")]
+    pub count_sbom_by_package: Option<String>,
+
+    #[serde(with = "required")]
+    pub get_sbom_group: Option<String>,
+
+    #[serde(with = "required")]
+    pub get_product: Option<String>,
+
+    #[serde(with = "required")]
+    pub get_organization: Option<String>,
+
+    #[serde(with = "required")]
+    pub get_base_purl: Option<String>,
+
+    #[serde(with = "required")]
+    pub get_analysis_component: Option<String>,
+
+    #[serde(with = "required")]
+    pub render_sbom_graph: Option<String>,
+
+    #[serde(with = "required")]
+    pub get_importer: Option<String>,
+
+    #[serde(with = "required")]
+    pub get_weakness: Option<String>,
+
+    #[serde(with = "required")]
+    pub get_spdx_license: Option<String>,
 }
 
 impl Scenario {
@@ -144,6 +180,12 @@ impl Scenario {
         let download_advisory = Some(loader.download_advisory().await?);
         let get_advisory = Some(loader.download_advisory().await?);
 
+        let get_sbom_group = loader.sbom_group().await.ok();
+        let get_product = loader.product().await.ok();
+        let get_organization = loader.organization().await.ok();
+        let get_base_purl = loader.base_purl().await.ok();
+        let get_importer = loader.importer().await.ok();
+
         Ok(Self {
             get_sbom: large_sbom_digest.clone(),
             get_sbom_advisories: large_sbom_digest.clone(),
@@ -152,7 +194,7 @@ impl Scenario {
 
             get_vulnerability: max_vuln,
 
-            sbom_by_package: sbom_purl,
+            sbom_by_package: sbom_purl.clone(),
             sbom_license_ids,
             analyze_purl,
             get_purl_details,
@@ -160,6 +202,19 @@ impl Scenario {
             delete_sbom_pool,
             download_advisory,
             get_advisory,
+
+            download_sbom: large_sbom_digest.clone(),
+            get_sbom_license_export: large_sbom_id.as_ref().map(|id| format!("urn:uuid:{id}")),
+            count_sbom_by_package: sbom_purl,
+            get_sbom_group,
+            get_product,
+            get_organization,
+            get_base_purl,
+            get_analysis_component: large_sbom_digest,
+            render_sbom_graph: large_sbom_id.as_ref().map(|id| format!("urn:uuid:{id}")),
+            get_importer,
+            get_weakness: Some("CWE-79".to_string()),
+            get_spdx_license: Some("MIT".to_string()),
         })
     }
 }
@@ -381,6 +436,51 @@ FROM public.advisory order by modified desc limit 1;"#,
         )
         .await
         .context("function download_advisory: no advisories found in database")
+    }
+
+    /// An SBOM group UUID
+    pub async fn sbom_group(&self) -> anyhow::Result<String> {
+        self.find("SELECT id::text as result FROM sbom_group LIMIT 1")
+            .await
+            .context("function sbom_group: no SBOM groups found in database")
+    }
+
+    /// A product UUID
+    pub async fn product(&self) -> anyhow::Result<String> {
+        self.find("SELECT id::text as result FROM product LIMIT 1")
+            .await
+            .context("function product: no products found in database")
+    }
+
+    /// An organization UUID
+    pub async fn organization(&self) -> anyhow::Result<String> {
+        self.find("SELECT id::text as result FROM organization LIMIT 1")
+            .await
+            .context("function organization: no organizations found in database")
+    }
+
+    /// A base PURL key (type:namespace/name or type:name)
+    pub async fn base_purl(&self) -> anyhow::Result<String> {
+        self.find(
+            r#"
+SELECT
+    CASE
+        WHEN namespace IS NOT NULL AND namespace != ''
+        THEN type || ':' || namespace || '/' || name
+        ELSE type || ':' || name
+    END as result
+FROM base_purl
+LIMIT 1"#,
+        )
+        .await
+        .context("function base_purl: no base PURLs found in database")
+    }
+
+    /// An importer name
+    pub async fn importer(&self) -> anyhow::Result<String> {
+        self.find("SELECT name as result FROM importer LIMIT 1")
+            .await
+            .context("function importer: no importers found in database")
     }
 }
 
