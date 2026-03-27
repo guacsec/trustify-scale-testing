@@ -234,8 +234,7 @@ async fn main() -> Result<(), anyhow::Error> {
             .register_transaction(search_tx("/api/v2/weakness", "q=description~injection"))
             .register_transaction(search_tx("/api/v2/weakness", "sort=id:asc"))
             .register_transaction(search_tx("/api/v2/group/sbom", "totals=true"))
-            .register_transaction(search_tx("/api/v2/group/sbom", "parents=resolve"))
-            ;
+            .register_transaction(search_tx("/api/v2/group/sbom", "parents=resolve"));
 
             tx!(s.get_sbom?(scenario.get_sbom.clone()));
             tx!(s.get_sbom_advisories?(scenario.get_sbom_advisories.clone()));
@@ -305,7 +304,9 @@ async fn main() -> Result<(), anyhow::Error> {
             // TODO: .register_transaction(search_tx("/api/v2/analysis/component", "q=curl&relationships=contains,dependency"))
             ;
 
-            tx!(s.get_analysis_component?(scenario.get_analysis_component.clone()));
+            tx!(s.get_analysis_component?(
+                scenario.get_analysis_component.clone()
+            ));
             tx!(s.render_sbom_graph_dot?(scenario.render_sbom_graph.clone()));
 
             s
