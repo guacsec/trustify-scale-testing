@@ -200,8 +200,6 @@ async fn main() -> Result<(), anyhow::Error> {
             .register_transaction(tx!(list_sboms_v2))
             .register_transaction(tx!(list_sboms_paginated))
             .register_transaction(tx!(list_sboms_paginated_v2))
-            .register_transaction(tx!(get_analysis_status))
-            .register_transaction(tx!(get_analysis_latest_cpe))
             .register_transaction(tx!(list_advisory_labels))
             .register_transaction(tx!(list_sbom_labels))
             .register_transaction(tx!(list_base_purls))
@@ -209,8 +207,6 @@ async fn main() -> Result<(), anyhow::Error> {
             .register_transaction(tx!(list_spdx_licenses))
             .register_transaction(tx!(list_weaknesses))
             .register_transaction(tx!(list_sbom_groups))
-            // TODO: .register_transaction(tx!(search_analysis_component))
-            // TODO: .register_transaction(tx!(search_latest_component))
             .register_transaction(tx!(post_vulnerability_analyze_v3))
             .register_transaction(tx!(get_system_info))
             .register_transaction(tx!(post_extract_sbom_purls))
@@ -239,8 +235,6 @@ async fn main() -> Result<(), anyhow::Error> {
             .register_transaction(search_tx("/api/v2/weakness", "sort=id:asc"))
             .register_transaction(search_tx("/api/v2/group/sbom", "totals=true"))
             .register_transaction(search_tx("/api/v2/group/sbom", "parents=resolve"))
-            // TODO: .register_transaction(search_tx("/api/v2/analysis/component","q=openssl&descendants=1"))
-            // TODO: .register_transaction(search_tx("/api/v2/analysis/component", "q=curl&relationships=contains,dependency"))
             ;
 
             tx!(s.get_sbom?(scenario.get_sbom.clone()));
@@ -271,9 +265,6 @@ async fn main() -> Result<(), anyhow::Error> {
             tx!(s.get_product?(scenario.get_product.clone()));
             tx!(s.get_organization?(scenario.get_organization.clone()));
             tx!(s.get_base_purl?(scenario.get_base_purl.clone()));
-            tx!(s.get_analysis_component?(
-                scenario.get_analysis_component.clone()
-            ));
             tx!(s.get_importer?(scenario.get_importer.clone()));
             tx!(s.get_importer_report?(scenario.get_importer.clone()));
             tx!(s.get_weakness?(scenario.get_weakness.clone()));
@@ -281,7 +272,7 @@ async fn main() -> Result<(), anyhow::Error> {
             s
         })
         .register_scenario({
-            let mut s = create_scenario(
+            let s = create_scenario(
                 "RestAPIUserSlow",
                 wait_time_from,
                 wait_time_to,
@@ -296,6 +287,25 @@ async fn main() -> Result<(), anyhow::Error> {
             .register_transaction(search_tx("/api/v2/license/spdx/license", "q=apache"))
             .register_transaction(search_tx("/api/v2/license/spdx/license", "q=gpl"));
 
+            s
+        })
+        .register_scenario({
+            let mut s = create_scenario(
+                "AnalysisUser",
+                wait_time_from,
+                wait_time_to,
+                custom_client.clone(),
+            )?
+            .set_weight(2)?
+            .register_transaction(tx!(get_analysis_status))
+            .register_transaction(tx!(get_analysis_latest_cpe))
+            // TODO: .register_transaction(tx!(search_analysis_component))
+            // TODO: .register_transaction(tx!(search_latest_component))
+            // TODO: .register_transaction(search_tx("/api/v2/analysis/component","q=openssl&descendants=1"))
+            // TODO: .register_transaction(search_tx("/api/v2/analysis/component", "q=curl&relationships=contains,dependency"))
+            ;
+
+            tx!(s.get_analysis_component?(scenario.get_analysis_component.clone()));
             tx!(s.render_sbom_graph_dot?(scenario.render_sbom_graph.clone()));
 
             s
