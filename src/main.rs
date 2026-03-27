@@ -28,8 +28,7 @@ const MAX_ID_DISPLAY: usize = 32;
 /// # Arguments
 /// * `path`  — The URL path, e.g. `"/api/v2/advisory"`.
 /// * `query` — The pre-encoded query string (without the leading `?`),
-///             e.g. `"q=title~openssl"` or `"sort=modified:desc"`.
-
+///   e.g. `"q=title~openssl"` or `"sort=modified:desc"`.
 fn search_tx(path: &'static str, query: &'static str) -> Transaction {
     Transaction::new(Arc::new(move |user| {
         Box::pin(async move {
@@ -282,7 +281,7 @@ async fn main() -> Result<(), anyhow::Error> {
             s
         })
         .register_scenario({
-            let mut s = create_scenario(
+            create_scenario(
                 "RestAPIUserSlow",
                 wait_time_from,
                 wait_time_to,
@@ -295,10 +294,8 @@ async fn main() -> Result<(), anyhow::Error> {
             .register_transaction(search_tx("/api/v2/license", "q=license~Apache"))
             .register_transaction(search_tx("/api/v2/license", "q=license~GPL"))
             .register_transaction(search_tx("/api/v2/license/spdx/license", "q=apache"))
-            .register_transaction(search_tx("/api/v2/license/spdx/license", "q=gpl"));
-
+            .register_transaction(search_tx("/api/v2/license/spdx/license", "q=gpl"))
             // TODO: tx!(s.render_sbom_graph_dot?(scenario.render_sbom_graph.clone()));
-            s
         })
         .register_scenario({
             let mut s = create_scenario(

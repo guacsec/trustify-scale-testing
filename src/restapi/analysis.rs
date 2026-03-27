@@ -1,3 +1,5 @@
+#![allow(unused)]
+
 use goose::goose::{GooseUser, TransactionResult};
 use urlencoding::encode;
 
