@@ -466,8 +466,8 @@ FROM public.advisory order by modified desc limit 1;"#,
 SELECT
     CASE
         WHEN namespace IS NOT NULL AND namespace != ''
-        THEN type || ':' || namespace || '/' || name
-        ELSE type || ':' || name
+        THEN 'pkg:' || type || '/' || namespace || '/' || name
+        ELSE 'pkg:' || type || '/' || name
     END as result
 FROM base_purl
 LIMIT 1"#,

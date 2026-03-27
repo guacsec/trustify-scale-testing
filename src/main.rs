@@ -217,7 +217,7 @@ async fn main() -> Result<(), anyhow::Error> {
             .register_transaction(search_tx("/api/v2/advisory", "q=title~openssl"))
             .register_transaction(search_tx("/api/v2/advisory", "q=modified>3 days ago"))
             .register_transaction(search_tx("/api/v2/advisory", "sort=modified:desc"))
-            .register_transaction(search_tx("/api/v2/advisory", "deprecated=consider"))
+            .register_transaction(search_tx("/api/v2/advisory", "deprecated=Consider"))
             .register_transaction(search_tx("/api/v3/sbom", "q=name~redhat"))
             .register_transaction(search_tx("/api/v3/sbom", "q=published>2024-01-01"))
             .register_transaction(search_tx("/api/v3/sbom", "sort=ingested:desc"))

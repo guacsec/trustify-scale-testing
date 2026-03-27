@@ -96,6 +96,10 @@ pub async fn post_extract_sbom_purls(user: &mut GooseUser) -> TransactionResult 
                 "SPDXID": "SPDXRef-DOCUMENT",
                 "name": "load-test-doc",
                 "documentNamespace": "https://example.com/load-test",
+                "creationInfo": {
+                    "created": "2024-01-01T00:00:00Z",
+                    "creators": ["Tool: scale-testing"]
+                },
                 "packages": [
                     {
                         "SPDXID": "SPDXRef-Package",

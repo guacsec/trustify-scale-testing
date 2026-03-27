@@ -1,6 +1,7 @@
 use crate::utils::DisplayVec;
 use goose::goose::{GooseUser, TransactionResult};
 use serde_json::json;
+use urlencoding::encode;
 
 pub async fn list_packages(user: &mut GooseUser) -> TransactionResult {
     let _response = user.get("/api/v2/purl").await?;
@@ -46,7 +47,9 @@ pub async fn list_base_purls(user: &mut GooseUser) -> TransactionResult {
 }
 
 pub async fn get_base_purl(key: String, user: &mut GooseUser) -> TransactionResult {
-    let _response = user.get(&format!("/api/v2/purl/base/{key}")).await?;
+    let _response = user
+        .get(&format!("/api/v2/purl/base/{}", encode(&key)))
+        .await?;
 
     Ok(())
 }

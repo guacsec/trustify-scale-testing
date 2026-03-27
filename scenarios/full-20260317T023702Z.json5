@@ -1,12 +1,13 @@
 {
   "get_sbom": "sha256:a04260d90fbbbc5f4e1f25754bbfa46771140c06c2bc351ea6046a828fcd17e5",
-  // "get_sbom_advisories": null,
-  "get_sbom_advisories": "sha256:a04260d90fbbbc5f4e1f25754bbfa46771140c06c2bc351ea6046a828fcd17e5",
+  // FIXME: "get_sbom_advisories": "sha256:a04260d90fbbbc5f4e1f25754bbfa46771140c06c2bc351ea6046a828fcd17e5",
+  "get_sbom_advisories": null,
   // "get_sbom_packages": null,
   "get_sbom_packages": "urn:uuid:019cf03d-89b1-7aa1-876e-43a3bfd8a2f5",
   // "get_sbom_related": null,
   "get_sbom_related": "urn:uuid:019cf03d-89b1-7aa1-876e-43a3bfd8a2f5",
-  "get_vulnerability": "CVE-2023-39325",
+  // FIXME: "get_vulnerability": "CVE-2023-39325",
+  "get_vulnerability": null,
   "sbom_by_package": "pkg:oci/web-terminal-operator-bundle@sha256:376684e2041f93229961a5d42caea9676974bae7b04c3359ca79b62b7843ff9d?repository_url=registry.redhat.io/web-terminal/web-terminal-operator-bundle&tag=1.15-1770672845",
   "sbom_license_ids": "urn:uuid:019cf03d-89b1-7aa1-876e-43a3bfd8a2f5",
   "analyze_purl": "pkg:rpm/redhat/squid",
@@ -32,10 +33,12 @@
   "get_sbom_group": null,
   "get_product": "761f2bc9-f3a4-50d5-8ee5-fd2aa3aef38b",
   "get_organization": "53d3fae7-574a-4a52-b66b-5a704e8b289a",
-  "get_base_purl": "golang:k8s.io/apimachinery/third_party/forked/golang/reflect",
+  "get_base_purl": "pkg:golang/k8s.io/apimachinery/third_party/forked/golang/reflect",
   "get_analysis_component": "sha256:a04260d90fbbbc5f4e1f25754bbfa46771140c06c2bc351ea6046a828fcd17e5",
   "render_sbom_graph": "urn:uuid:019cf03d-89b1-7aa1-876e-43a3bfd8a2f5",
   "get_importer": null,
-  "get_weakness": "CWE-79",
+  // FIXME: "get_weakness": "CWE-79",
+  "get_weakness": null,
+  // we don't have weakness data
   "get_spdx_license": "MIT"
 }

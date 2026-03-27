@@ -1,5 +1,6 @@
 use goose::goose::{GooseMethod, GooseRequest, GooseUser, TransactionResult};
 use reqwest_12::Client;
+use serde_json::json;
 use std::sync::{
     Arc,
     atomic::{AtomicUsize, Ordering},
@@ -101,12 +102,13 @@ pub async fn get_sbom_license_export(id: String, user: &mut GooseUser) -> Transa
 }
 
 pub async fn count_sbom_by_package(purl: String, user: &mut GooseUser) -> TransactionResult {
-    let _response = user
-        .get(&format!(
-            "/api/v2/sbom/count-by-package?purl={}",
-            encode(&purl)
-        ))
-        .await?;
+    let url = user.build_url("/api/v2/sbom/count-by-package")?;
+    let goose_request = GooseRequest::builder()
+        .method(GooseMethod::Get)
+        .path("/api/v2/sbom/count-by-package")
+        .set_request_builder(Client::get(&user.client, url).json(&json!([{"purl": purl}])))
+        .build();
+    let _response = user.request(goose_request).await?;
 
     Ok(())
 }
