@@ -281,7 +281,7 @@ async fn main() -> Result<(), anyhow::Error> {
             s
         })
         .register_scenario({
-            create_scenario(
+            let mut s = create_scenario(
                 "RestAPIUserSlow",
                 wait_time_from,
                 wait_time_to,
@@ -294,8 +294,11 @@ async fn main() -> Result<(), anyhow::Error> {
             .register_transaction(search_tx("/api/v2/license", "q=license~Apache"))
             .register_transaction(search_tx("/api/v2/license", "q=license~GPL"))
             .register_transaction(search_tx("/api/v2/license/spdx/license", "q=apache"))
-            .register_transaction(search_tx("/api/v2/license/spdx/license", "q=gpl"))
-            // TODO: tx!(s.render_sbom_graph_dot?(scenario.render_sbom_graph.clone()));
+            .register_transaction(search_tx("/api/v2/license/spdx/license", "q=gpl"));
+
+            tx!(s.render_sbom_graph_dot?(scenario.render_sbom_graph.clone()));
+
+            s
         })
         .register_scenario({
             let mut s = create_scenario(
