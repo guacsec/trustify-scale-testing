@@ -271,7 +271,7 @@ async fn main() -> Result<(), anyhow::Error> {
             s
         })
         .register_scenario({
-            let s = create_scenario(
+            create_scenario(
                 "RestAPIUserSlow",
                 wait_time_from,
                 wait_time_to,
@@ -284,9 +284,7 @@ async fn main() -> Result<(), anyhow::Error> {
             .register_transaction(search_tx("/api/v2/license", "q=license~Apache"))
             .register_transaction(search_tx("/api/v2/license", "q=license~GPL"))
             .register_transaction(search_tx("/api/v2/license/spdx/license", "q=apache"))
-            .register_transaction(search_tx("/api/v2/license/spdx/license", "q=gpl"));
-
-            s
+            .register_transaction(search_tx("/api/v2/license/spdx/license", "q=gpl"))
         })
         .register_scenario({
             let mut s = create_scenario(
