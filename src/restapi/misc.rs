@@ -1,29 +1,6 @@
 use goose::goose::{GooseUser, TransactionResult};
 use serde_json::json;
 
-pub async fn list_importer(user: &mut GooseUser) -> TransactionResult {
-    let _response = user.get("/api/v2/importer").await?;
-
-    Ok(())
-}
-
-pub async fn list_organizations(user: &mut GooseUser) -> TransactionResult {
-    let _response = user.get("/api/v2/organization").await?;
-
-    Ok(())
-}
-
-pub async fn list_products(user: &mut GooseUser) -> TransactionResult {
-    let _response = user.get("/api/v2/product").await?;
-
-    Ok(())
-}
-
-pub async fn search_licenses(user: &mut GooseUser) -> TransactionResult {
-    let _response = user.get("/api/v2/license?q=ASL&sort=license:desc").await?;
-    Ok(())
-}
-
 pub async fn get_product(id: String, user: &mut GooseUser) -> TransactionResult {
     let _response = user.get(&format!("/api/v2/product/{id}")).await?;
 
@@ -48,18 +25,6 @@ pub async fn get_importer_report(name: String, user: &mut GooseUser) -> Transact
     Ok(())
 }
 
-pub async fn list_licenses(user: &mut GooseUser) -> TransactionResult {
-    let _response = user.get("/api/v2/license").await?;
-
-    Ok(())
-}
-
-pub async fn list_spdx_licenses(user: &mut GooseUser) -> TransactionResult {
-    let _response = user.get("/api/v2/license/spdx/license").await?;
-
-    Ok(())
-}
-
 pub async fn get_spdx_license(id: String, user: &mut GooseUser) -> TransactionResult {
     let _response = user
         .get(&format!("/api/v2/license/spdx/license/{id}"))
@@ -68,20 +33,8 @@ pub async fn get_spdx_license(id: String, user: &mut GooseUser) -> TransactionRe
     Ok(())
 }
 
-pub async fn list_weaknesses(user: &mut GooseUser) -> TransactionResult {
-    let _response = user.get("/api/v2/weakness").await?;
-
-    Ok(())
-}
-
 pub async fn get_weakness(id: String, user: &mut GooseUser) -> TransactionResult {
     let _response = user.get(&format!("/api/v2/weakness/{id}")).await?;
-
-    Ok(())
-}
-
-pub async fn get_system_info(user: &mut GooseUser) -> TransactionResult {
-    let _response = user.get("/.well-known/trustify").await?;
 
     Ok(())
 }

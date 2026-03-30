@@ -19,24 +19,33 @@ use std::{str::FromStr, sync::Arc, time::Duration};
 
 const MAX_ID_DISPLAY: usize = 32;
 
-/// Creates a named goose [`Transaction`] that issues a single `GET path?query` request.
+/// Creates a named goose [`Transaction`] that issues a single `GET` request.
 ///
-/// Each call produces a transaction whose goose metric name is `"path?query"`, giving
-/// every query variant its own stable row in the load-test report so results are
-/// directly comparable across runs.
+/// If `query` is non-empty the URL becomes `path?query`, otherwise just `path`.
+/// The transaction's metric name is set to the resulting URL, giving every
+/// variant its own stable row in the load-test report.
 ///
 /// # Arguments
 /// * `path`  — The URL path, e.g. `"/api/v2/advisory"`.
-/// * `query` — The pre-encoded query string (without the leading `?`),
-///   e.g. `"q=title~openssl"` or `"sort=modified:desc"`.
-fn search_tx(path: &'static str, query: &'static str) -> Transaction {
-    Transaction::new(Arc::new(move |user| {
-        Box::pin(async move {
-            let _response = user.get(&format!("{}?{}", path, query)).await?;
-            Ok(())
-        })
+/// * `query` — The pre-encoded query string without the leading `?`,
+///   e.g. `"q=title~openssl"`, or `""` for no query string.
+fn list_tx(path: &'static str, query: &'static str) -> Transaction {
+    let url = if query.is_empty() {
+        path.to_string()
+    } else {
+        format!("{}?{}", path, query)
+    };
+    Transaction::new(Arc::new({
+        let url = url.clone();
+        move |user| {
+            let url = url.clone();
+            Box::pin(async move {
+                let _response = user.get(&url).await?;
+                Ok(())
+            })
+        }
     }))
-    .set_name(&format!("{}?{}", path, query))
+    .set_name(&url)
 }
 
 /// Define a transaction and use its function identifier as name
@@ -183,58 +192,58 @@ async fn main() -> Result<(), anyhow::Error> {
                 custom_client.clone(),
             )?
             .set_weight(5)?
-            .register_transaction(tx!(list_organizations))
-            .register_transaction(tx!(list_advisory))
-            .register_transaction(tx!(list_advisory_paginated))
-            .register_transaction(tx!(get_advisory_by_doc_id))
-            .register_transaction(tx!(search_advisory))
-            .register_transaction(tx!(list_vulnerabilities))
-            .register_transaction(tx!(list_vulnerabilities_paginated))
-            .register_transaction(tx!(list_importer))
-            .register_transaction(tx!(list_packages))
-            .register_transaction(tx!(list_packages_paginated))
-            .register_transaction(tx!(search_purls))
-            .register_transaction(tx!(search_exact_purl))
-            .register_transaction(tx!(list_products))
-            .register_transaction(tx!(list_sboms))
-            .register_transaction(tx!(list_sboms_v2))
-            .register_transaction(tx!(list_sboms_paginated))
-            .register_transaction(tx!(list_sboms_paginated_v2))
+            .register_transaction(list_tx("/api/v2/organization", ""))
+            .register_transaction(list_tx("/api/v2/advisory", ""))
+            .register_transaction(list_tx("/api/v2/advisory", "offset=100&limit=10"))
+            .register_transaction(list_tx("/api/v2/advisory", "q=identifier%3dCVE-2022-0981"))
+            .register_transaction(list_tx("/api/v2/advisory", "q=CVE-2021-"))
+            .register_transaction(list_tx("/api/v2/vulnerability", ""))
+            .register_transaction(list_tx("/api/v2/vulnerability", "offset=100&limit=10"))
+            .register_transaction(list_tx("/api/v2/importer", ""))
+            .register_transaction(list_tx("/api/v2/purl", ""))
+            .register_transaction(list_tx("/api/v2/purl", "offset=100&limit=10"))
+            .register_transaction(list_tx("/api/v2/purl", "q=curl"))
+            .register_transaction(list_tx("/api/v2/purl", "q=name=curl"))
+            .register_transaction(list_tx("/api/v2/product", ""))
+            .register_transaction(list_tx("/api/v3/sbom", ""))
+            .register_transaction(list_tx("/api/v2/sbom", ""))
+            .register_transaction(list_tx("/api/v3/sbom", "offset=100&limit=10"))
+            .register_transaction(list_tx("/api/v2/sbom", "offset=100&limit=10"))
             .register_transaction(tx!(list_advisory_labels))
-            .register_transaction(tx!(list_sbom_labels))
-            .register_transaction(tx!(list_base_purls))
-            .register_transaction(tx!(list_licenses))
-            .register_transaction(tx!(list_spdx_licenses))
-            .register_transaction(tx!(list_weaknesses))
-            .register_transaction(tx!(list_sbom_groups))
+            .register_transaction(list_tx("/api/v2/sbom-labels", ""))
+            .register_transaction(list_tx("/api/v2/purl/base", ""))
+            .register_transaction(list_tx("/api/v2/license", ""))
+            .register_transaction(list_tx("/api/v2/license/spdx/license", ""))
+            .register_transaction(list_tx("/api/v2/weakness", ""))
+            .register_transaction(list_tx("/api/v2/group/sbom", ""))
             .register_transaction(tx!(post_vulnerability_analyze_v3))
-            .register_transaction(tx!(get_system_info))
+            .register_transaction(list_tx("/.well-known/trustify", ""))
             .register_transaction(tx!(post_extract_sbom_purls))
-            .register_transaction(search_tx("/api/v2/advisory", "q=title~openssl"))
-            .register_transaction(search_tx("/api/v2/advisory", "q=modified>3 days ago"))
-            .register_transaction(search_tx("/api/v2/advisory", "sort=modified:desc"))
-            .register_transaction(search_tx("/api/v2/advisory", "deprecated=Consider"))
-            .register_transaction(search_tx("/api/v3/sbom", "q=name~redhat"))
-            .register_transaction(search_tx("/api/v3/sbom", "q=published>2024-01-01"))
-            .register_transaction(search_tx("/api/v3/sbom", "sort=ingested:desc"))
-            .register_transaction(search_tx("/api/v3/sbom", "q=label:type=product"))
-            .register_transaction(search_tx("/api/v2/vulnerability", "q=base_severity=high"))
-            .register_transaction(search_tx("/api/v2/vulnerability", "q=base_score>=7.0"))
-            .register_transaction(search_tx("/api/v2/vulnerability", "q=cwes=CWE-79"))
-            .register_transaction(search_tx("/api/v2/vulnerability", "sort=base_score:desc"))
-            .register_transaction(search_tx("/api/v2/purl", "q=purl:ty=rpm"))
-            .register_transaction(search_tx("/api/v2/purl", "q=purl:namespace=redhat"))
-            .register_transaction(search_tx("/api/v2/purl", "sort=purl:name:asc"))
-            .register_transaction(search_tx("/api/v2/purl/base", "q=type=rpm"))
-            .register_transaction(search_tx("/api/v2/purl/base", "q=namespace=redhat"))
-            .register_transaction(search_tx("/api/v2/purl/base", "sort=name:asc"))
-            .register_transaction(search_tx("/api/v2/organization", "sort=name:asc"))
-            .register_transaction(search_tx("/api/v2/product", "q=name~openshift"))
-            .register_transaction(search_tx("/api/v2/product", "sort=name:asc"))
-            .register_transaction(search_tx("/api/v2/weakness", "q=description~injection"))
-            .register_transaction(search_tx("/api/v2/weakness", "sort=id:asc"))
-            .register_transaction(search_tx("/api/v2/group/sbom", "totals=true"))
-            .register_transaction(search_tx("/api/v2/group/sbom", "parents=resolve"));
+            .register_transaction(list_tx("/api/v2/advisory", "q=title~openssl"))
+            .register_transaction(list_tx("/api/v2/advisory", "q=modified>3 days ago"))
+            .register_transaction(list_tx("/api/v2/advisory", "sort=modified:desc"))
+            .register_transaction(list_tx("/api/v2/advisory", "deprecated=Consider"))
+            .register_transaction(list_tx("/api/v3/sbom", "q=name~redhat"))
+            .register_transaction(list_tx("/api/v3/sbom", "q=published>2024-01-01"))
+            .register_transaction(list_tx("/api/v3/sbom", "sort=ingested:desc"))
+            .register_transaction(list_tx("/api/v3/sbom", "q=label:type=product"))
+            .register_transaction(list_tx("/api/v2/vulnerability", "q=base_severity=high"))
+            .register_transaction(list_tx("/api/v2/vulnerability", "q=base_score>=7.0"))
+            .register_transaction(list_tx("/api/v2/vulnerability", "q=cwes=CWE-79"))
+            .register_transaction(list_tx("/api/v2/vulnerability", "sort=base_score:desc"))
+            .register_transaction(list_tx("/api/v2/purl", "q=purl:ty=rpm"))
+            .register_transaction(list_tx("/api/v2/purl", "q=purl:namespace=redhat"))
+            .register_transaction(list_tx("/api/v2/purl", "sort=purl:name:asc"))
+            .register_transaction(list_tx("/api/v2/purl/base", "q=type=rpm"))
+            .register_transaction(list_tx("/api/v2/purl/base", "q=namespace=redhat"))
+            .register_transaction(list_tx("/api/v2/purl/base", "sort=name:asc"))
+            .register_transaction(list_tx("/api/v2/organization", "sort=name:asc"))
+            .register_transaction(list_tx("/api/v2/product", "q=name~openshift"))
+            .register_transaction(list_tx("/api/v2/product", "sort=name:asc"))
+            .register_transaction(list_tx("/api/v2/weakness", "q=description~injection"))
+            .register_transaction(list_tx("/api/v2/weakness", "sort=id:asc"))
+            .register_transaction(list_tx("/api/v2/group/sbom", "totals=true"))
+            .register_transaction(list_tx("/api/v2/group/sbom", "parents=resolve"));
 
             tx!(s.get_sbom?(scenario.get_sbom.clone()));
             tx!(s.get_sbom_advisories?(scenario.get_sbom_advisories.clone()));
@@ -278,13 +287,13 @@ async fn main() -> Result<(), anyhow::Error> {
                 custom_client.clone(),
             )?
             .set_weight(1)?
-            .register_transaction(tx!(search_licenses))
-            .register_transaction(tx!(search_sboms_by_license))
-            .register_transaction(tx!(search_purls_by_license))
-            .register_transaction(search_tx("/api/v2/license", "q=license~Apache"))
-            .register_transaction(search_tx("/api/v2/license", "q=license~GPL"))
-            .register_transaction(search_tx("/api/v2/license/spdx/license", "q=apache"))
-            .register_transaction(search_tx("/api/v2/license/spdx/license", "q=gpl"))
+            .register_transaction(list_tx("/api/v2/license", "q=ASL&sort=license:desc"))
+            .register_transaction(list_tx("/api/v2/sbom", "q=license~GPL&sort=name:desc"))
+            .register_transaction(list_tx("/api/v2/purl", "q=license~GPLv3+ with exceptions|Apache&sort=name:desc"))
+            .register_transaction(list_tx("/api/v2/license", "q=license~Apache"))
+            .register_transaction(list_tx("/api/v2/license", "q=license~GPL"))
+            .register_transaction(list_tx("/api/v2/license/spdx/license", "q=apache"))
+            .register_transaction(list_tx("/api/v2/license/spdx/license", "q=gpl"))
         })
         .register_scenario({
             let mut s = create_scenario(
@@ -294,8 +303,8 @@ async fn main() -> Result<(), anyhow::Error> {
                 custom_client.clone(),
             )?
             .set_weight(2)?
-            .register_transaction(tx!(get_analysis_status))
-            .register_transaction(tx!(get_analysis_latest_cpe))
+            .register_transaction(list_tx("/api/v2/analysis/status", ""))
+            .register_transaction(list_tx("/api/v2/analysis/latest/component/cpe%3A%2Fa%3Aredhat%3Aopenshift_builds%3A1.3%3A%3Ael9", ""))
             // TODO: .register_transaction(tx!(search_analysis_component))
             // TODO: .register_transaction(tx!(search_latest_component))
             // TODO: .register_transaction(search_tx("/api/v2/analysis/component","q=openssl&descendants=1"))
@@ -322,10 +331,10 @@ async fn main() -> Result<(), anyhow::Error> {
             // Register delete transaction if pool is available
             if let Some(pool) = scenario.delete_sbom_pool.clone() {
                 tx!(s.delete_sbom_from_pool_sequential?(
-                            scenario.delete_sbom_pool.clone(),
-                            delete_counter.clone()
-                        ),
-                         name: format!("delete_sbom_from_pool_sequential[{} SBOMs]", pool.len()))
+                    scenario.delete_sbom_pool.clone(),
+                    delete_counter.clone()
+                ),
+                name: format! ("delete_sbom_from_pool_sequential[{} SBOMs]", pool.len()))
             }
             s
         })

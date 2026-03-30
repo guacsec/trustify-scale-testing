@@ -7,30 +7,6 @@ use std::sync::{
 };
 use urlencoding::encode;
 
-pub async fn list_sboms(user: &mut GooseUser) -> TransactionResult {
-    let _response = user.get("/api/v3/sbom").await?;
-
-    Ok(())
-}
-
-pub async fn list_sboms_v2(user: &mut GooseUser) -> TransactionResult {
-    let _response = user.get("/api/v2/sbom").await?;
-
-    Ok(())
-}
-
-pub async fn list_sboms_paginated(user: &mut GooseUser) -> TransactionResult {
-    let _response = user.get("/api/v3/sbom?offset=100&limit=10").await?;
-
-    Ok(())
-}
-
-pub async fn list_sboms_paginated_v2(user: &mut GooseUser) -> TransactionResult {
-    let _response = user.get("/api/v2/sbom?offset=100&limit=10").await?;
-
-    Ok(())
-}
-
 pub async fn get_sbom(sbom_id: String, user: &mut GooseUser) -> TransactionResult {
     let _response = user.get(&format!("/api/v2/sbom/{sbom_id}")).await?;
 
@@ -78,13 +54,6 @@ pub async fn get_sbom_license_ids(sbom_id: String, user: &mut GooseUser) -> Tran
     Ok(())
 }
 
-pub async fn search_sboms_by_license(user: &mut GooseUser) -> TransactionResult {
-    let _response = user
-        .get("/api/v2/sbom?q=license~GPL&sort=name:desc")
-        .await?;
-    Ok(())
-}
-
 pub async fn download_sbom(key: String, user: &mut GooseUser) -> TransactionResult {
     let _response = user
         .get(&format!("/api/v2/sbom/{}/download", encode(&key)))
@@ -109,12 +78,6 @@ pub async fn count_sbom_by_package(purl: String, user: &mut GooseUser) -> Transa
         .set_request_builder(Client::get(&user.client, url).json(&json!([{"purl": purl}])))
         .build();
     let _response = user.request(goose_request).await?;
-
-    Ok(())
-}
-
-pub async fn list_sbom_labels(user: &mut GooseUser) -> TransactionResult {
-    let _response = user.get("/api/v2/sbom-labels").await?;
 
     Ok(())
 }

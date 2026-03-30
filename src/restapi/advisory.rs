@@ -86,32 +86,6 @@ pub async fn list_advisory_labels(user: &mut GooseUser) -> TransactionResult {
     Ok(())
 }
 
-pub async fn list_advisory(user: &mut GooseUser) -> TransactionResult {
-    let _response = user.get("/api/v2/advisory").await?;
-
-    Ok(())
-}
-
-pub async fn list_advisory_paginated(user: &mut GooseUser) -> TransactionResult {
-    let _response = user.get("/api/v2/advisory?offset=100&limit=10").await?;
-
-    Ok(())
-}
-
-pub async fn get_advisory_by_doc_id(user: &mut GooseUser) -> TransactionResult {
-    let _response = user
-        .get("/api/v2/advisory?q=identifier%3dCVE-2022-0981")
-        .await?;
-
-    Ok(())
-}
-
-pub async fn search_advisory(user: &mut GooseUser) -> TransactionResult {
-    let _response = user.get("/api/v2/advisory?q=CVE-2021-").await?;
-
-    Ok(())
-}
-
 async fn send_advisory_label_request(
     advisory_id: String,
     user: &mut GooseUser,
