@@ -7,7 +7,7 @@ use serde_json::json;
 use urlencoding::encode;
 
 pub async fn get_advisory_total(host: String) -> Result<u64, anyhow::Error> {
-    let url = format!("{}/api/v2/advisory", host.trim_end_matches('/'));
+    let url = format!("{}/api/v3/advisory", host.trim_end_matches('/'));
 
     log::info!("Fetching advisory total from: {}", url);
 
@@ -32,7 +32,7 @@ pub async fn find_random_advisory(
     user: &mut GooseUser,
 ) -> TransactionResult {
     let offset = rand::rng().random_range(0..total_advisories);
-    let url = format!("/api/v2/advisory?offset={}&limit=1", offset);
+    let url = format!("/api/v3/advisory?offset={}&limit=1", offset);
 
     let response = user.get(&url).await?;
     let json_data = response.response?.json::<serde_json::Value>().await?;
@@ -56,7 +56,7 @@ pub async fn find_random_advisory(
 }
 
 pub async fn get_advisory(id: String, user: &mut GooseUser) -> TransactionResult {
-    let uri = format!("/api/v2/advisory/{}", encode(&format!("urn:uuid:{}", id)));
+    let uri = format!("/api/v3/advisory/{}", encode(&format!("urn:uuid:{}", id)));
 
     let _response = user.get(&uri).await?;
 
@@ -65,7 +65,7 @@ pub async fn get_advisory(id: String, user: &mut GooseUser) -> TransactionResult
 
 pub async fn download_advisory(id: String, user: &mut GooseUser) -> TransactionResult {
     let uri = format!(
-        "/api/v2/advisory/{}/download",
+        "/api/v3/advisory/{}/download",
         encode(&format!("urn:uuid:{}", id))
     );
 

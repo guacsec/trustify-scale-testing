@@ -4,7 +4,7 @@ use serde_json::json;
 use urlencoding::encode;
 
 pub async fn get_purl_details(purl_id: String, user: &mut GooseUser) -> TransactionResult {
-    let _response = user.get(&format!("/api/v2/purl/{purl_id}")).await?;
+    let _response = user.get(&format!("/api/v3/purl/{purl_id}")).await?;
 
     Ok(())
 }

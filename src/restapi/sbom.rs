@@ -15,7 +15,7 @@ pub async fn get_sbom(sbom_id: String, user: &mut GooseUser) -> TransactionResul
 
 pub async fn get_sbom_advisories(sbom_id: String, user: &mut GooseUser) -> TransactionResult {
     let _response = user
-        .get(&format!("/api/v2/sbom/{sbom_id}/advisory"))
+        .get(&format!("/api/v3/sbom/{sbom_id}/advisory"))
         .await?;
 
     Ok(())
