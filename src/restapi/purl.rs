@@ -17,15 +17,18 @@ pub async fn get_base_purl(key: String, user: &mut GooseUser) -> TransactionResu
     Ok(())
 }
 
+/// Send a recommend request with a subset of PURLs determined by `batch_size`.
 pub async fn get_recommendations(
     purls: DisplayVec<String>,
+    batch_size: usize,
     user: &mut GooseUser,
 ) -> TransactionResult {
+    let batch: Vec<&String> = purls.0.iter().take(batch_size).collect();
     let _response = user
         .post_json(
             "/api/v2/purl/recommend",
             &json!({
-             "purls": purls
+             "purls": batch
             }),
         )
         .await?;

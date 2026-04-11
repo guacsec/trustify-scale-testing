@@ -254,7 +254,16 @@ async fn main() -> Result<(), anyhow::Error> {
             tx!(s.get_sbom_license_ids?(scenario.sbom_license_ids.clone()));
             tx!(s.post_vulnerability_analyze?(scenario.analyze_purl.clone()));
             tx!(s.get_purl_details?(scenario.get_purl_details.clone()));
-            tx!(s.get_recommendations?(scenario.get_recommendations.clone()));
+            // Register recommend transactions with different batch sizes for concurrency testing
+            if let Some(purls) = scenario.get_recommendations.clone() {
+                for batch_size in [25, 50, 128] {
+                    let actual_size = batch_size.min(purls.0.len());
+                    s = s.register_transaction(
+                        tx!(get_recommendations(purls.clone(), actual_size),
+                            name: &format!("get_recommendations[batch={}]", actual_size)),
+                    );
+                }
+            }
 
             tx!(s.download_advisory?(scenario.download_advisory.clone()));
             tx!(s.get_advisory?(scenario.get_advisory.clone()));

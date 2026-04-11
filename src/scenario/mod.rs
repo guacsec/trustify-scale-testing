@@ -382,7 +382,7 @@ FROM
     qualified_purl
 WHERE
     purl->>'version' ~ 'redhat-[0-9]+$'
-LIMIT 10;
+LIMIT 128;
 "#,
         )
         .await
