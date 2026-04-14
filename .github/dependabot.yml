@@ -1,0 +1,8 @@
+version: 2
+updates:
+  - package-ecosystem: "cargo"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+    ignore: # until we decide what to do with this duplicate dependency
+      - dependency-name: "reqwest"
