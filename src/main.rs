@@ -26,7 +26,7 @@ const MAX_ID_DISPLAY: usize = 32;
 /// variant its own stable row in the load-test report.
 ///
 /// # Arguments
-/// * `path`  — The URL path, e.g. `"/api/v2/advisory"`.
+/// * `path`  — The URL path, e.g. `"/api/v3/advisory"`.
 /// * `query` — The pre-encoded query string without the leading `?`,
 ///   e.g. `"q=title~openssl"`, or `""` for no query string.
 fn list_tx(path: &'static str, query: &'static str) -> Transaction {
@@ -192,30 +192,30 @@ async fn main() -> Result<(), anyhow::Error> {
                 custom_client.clone(),
             )?
             .set_weight(5)?
-            .register_transaction(list_tx("/api/v2/organization", ""))
+            .register_transaction(list_tx("/api/v3/organization", ""))
             .register_transaction(list_tx("/api/v3/advisory", ""))
             .register_transaction(list_tx("/api/v3/advisory", "offset=100&limit=10"))
             .register_transaction(list_tx("/api/v3/advisory", "q=identifier%3dCVE-2022-0981"))
             .register_transaction(list_tx("/api/v3/advisory", "q=CVE-2021-"))
             .register_transaction(list_tx("/api/v3/vulnerability", ""))
             .register_transaction(list_tx("/api/v3/vulnerability", "offset=100&limit=10"))
-            .register_transaction(list_tx("/api/v2/importer", ""))
-            .register_transaction(list_tx("/api/v2/purl", ""))
-            .register_transaction(list_tx("/api/v2/purl", "offset=100&limit=10"))
-            .register_transaction(list_tx("/api/v2/purl", "q=curl"))
-            .register_transaction(list_tx("/api/v2/purl", "q=name=curl"))
-            .register_transaction(list_tx("/api/v2/product", ""))
+            .register_transaction(list_tx("/api/v3/importer", ""))
+            .register_transaction(list_tx("/api/v3/purl", ""))
+            .register_transaction(list_tx("/api/v3/purl", "offset=100&limit=10"))
+            .register_transaction(list_tx("/api/v3/purl", "q=curl"))
+            .register_transaction(list_tx("/api/v3/purl", "q=name=curl"))
+            .register_transaction(list_tx("/api/v3/product", ""))
             .register_transaction(list_tx("/api/v3/sbom", ""))
-            .register_transaction(list_tx("/api/v2/sbom", ""))
+            .register_transaction(list_tx("/api/v3/sbom", ""))
             .register_transaction(list_tx("/api/v3/sbom", "offset=100&limit=10"))
-            .register_transaction(list_tx("/api/v2/sbom", "offset=100&limit=10"))
+            .register_transaction(list_tx("/api/v3/sbom", "offset=100&limit=10"))
             .register_transaction(tx!(list_advisory_labels))
-            .register_transaction(list_tx("/api/v2/sbom-labels", ""))
-            .register_transaction(list_tx("/api/v2/purl/base", ""))
-            .register_transaction(list_tx("/api/v2/license", ""))
-            .register_transaction(list_tx("/api/v2/license/spdx/license", ""))
-            .register_transaction(list_tx("/api/v2/weakness", ""))
-            .register_transaction(list_tx("/api/v2/group/sbom", ""))
+            .register_transaction(list_tx("/api/v3/sbom-labels", ""))
+            .register_transaction(list_tx("/api/v3/purl/base", ""))
+            .register_transaction(list_tx("/api/v3/license", ""))
+            .register_transaction(list_tx("/api/v3/license/spdx/license", ""))
+            .register_transaction(list_tx("/api/v3/weakness", ""))
+            .register_transaction(list_tx("/api/v3/group/sbom", ""))
             .register_transaction(tx!(post_vulnerability_analyze_v3))
             .register_transaction(list_tx("/.well-known/trustify", ""))
             .register_transaction(tx!(post_extract_sbom_purls))
@@ -231,19 +231,19 @@ async fn main() -> Result<(), anyhow::Error> {
             .register_transaction(list_tx("/api/v3/vulnerability", "q=base_score>=7.0"))
             .register_transaction(list_tx("/api/v3/vulnerability", "q=cwes=CWE-79"))
             .register_transaction(list_tx("/api/v3/vulnerability", "sort=base_score:desc"))
-            .register_transaction(list_tx("/api/v2/purl", "q=purl:ty=rpm"))
-            .register_transaction(list_tx("/api/v2/purl", "q=purl:namespace=redhat"))
-            .register_transaction(list_tx("/api/v2/purl", "sort=purl:name:asc"))
-            .register_transaction(list_tx("/api/v2/purl/base", "q=type=rpm"))
-            .register_transaction(list_tx("/api/v2/purl/base", "q=namespace=redhat"))
-            .register_transaction(list_tx("/api/v2/purl/base", "sort=name:asc"))
-            .register_transaction(list_tx("/api/v2/organization", "sort=name:asc"))
-            .register_transaction(list_tx("/api/v2/product", "q=name~openshift"))
-            .register_transaction(list_tx("/api/v2/product", "sort=name:asc"))
-            .register_transaction(list_tx("/api/v2/weakness", "q=description~injection"))
-            .register_transaction(list_tx("/api/v2/weakness", "sort=id:asc"))
-            .register_transaction(list_tx("/api/v2/group/sbom", "totals=true"))
-            .register_transaction(list_tx("/api/v2/group/sbom", "parents=resolve"));
+            .register_transaction(list_tx("/api/v3/purl", "q=purl:ty=rpm"))
+            .register_transaction(list_tx("/api/v3/purl", "q=purl:namespace=redhat"))
+            .register_transaction(list_tx("/api/v3/purl", "sort=purl:name:asc"))
+            .register_transaction(list_tx("/api/v3/purl/base", "q=type=rpm"))
+            .register_transaction(list_tx("/api/v3/purl/base", "q=namespace=redhat"))
+            .register_transaction(list_tx("/api/v3/purl/base", "sort=name:asc"))
+            .register_transaction(list_tx("/api/v3/organization", "sort=name:asc"))
+            .register_transaction(list_tx("/api/v3/product", "q=name~openshift"))
+            .register_transaction(list_tx("/api/v3/product", "sort=name:asc"))
+            .register_transaction(list_tx("/api/v3/weakness", "q=description~injection"))
+            .register_transaction(list_tx("/api/v3/weakness", "sort=id:asc"))
+            .register_transaction(list_tx("/api/v3/group/sbom", "totals=true"))
+            .register_transaction(list_tx("/api/v3/group/sbom", "parents=resolve"));
 
             tx!(s.get_sbom?(scenario.get_sbom.clone()));
             tx!(s.get_sbom_advisories?(scenario.get_sbom_advisories.clone()));
@@ -297,13 +297,13 @@ async fn main() -> Result<(), anyhow::Error> {
                 custom_client.clone(),
             )?
             .set_weight(1)?
-            .register_transaction(list_tx("/api/v2/license", "q=ASL&sort=license:desc"))
-            .register_transaction(list_tx("/api/v2/sbom", "q=license~GPL&sort=name:desc"))
-            .register_transaction(list_tx("/api/v2/purl", "q=license~GPLv3+ with exceptions|Apache&sort=name:desc"))
-            .register_transaction(list_tx("/api/v2/license", "q=license~Apache"))
-            .register_transaction(list_tx("/api/v2/license", "q=license~GPL"))
-            .register_transaction(list_tx("/api/v2/license/spdx/license", "q=apache"))
-            .register_transaction(list_tx("/api/v2/license/spdx/license", "q=gpl"))
+            .register_transaction(list_tx("/api/v3/license", "q=ASL&sort=license:desc"))
+            .register_transaction(list_tx("/api/v3/sbom", "q=license~GPL&sort=name:desc"))
+            .register_transaction(list_tx("/api/v3/purl", "q=license~GPLv3+ with exceptions|Apache&sort=name:desc"))
+            .register_transaction(list_tx("/api/v3/license", "q=license~Apache"))
+            .register_transaction(list_tx("/api/v3/license", "q=license~GPL"))
+            .register_transaction(list_tx("/api/v3/license/spdx/license", "q=apache"))
+            .register_transaction(list_tx("/api/v3/license/spdx/license", "q=gpl"))
         })
         .register_scenario({
             let mut s = create_scenario(
@@ -313,12 +313,12 @@ async fn main() -> Result<(), anyhow::Error> {
                 custom_client.clone(),
             )?
             .set_weight(2)?
-            .register_transaction(list_tx("/api/v2/analysis/status", ""))
-            .register_transaction(list_tx("/api/v2/analysis/latest/component/cpe%3A%2Fa%3Aredhat%3Aopenshift_builds%3A1.3%3A%3Ael9", ""))
+            .register_transaction(list_tx("/api/v3/analysis/status", ""))
+            .register_transaction(list_tx("/api/v3/analysis/latest/component/cpe%3A%2Fa%3Aredhat%3Aopenshift_builds%3A1.3%3A%3Ael9", ""))
             // TODO: .register_transaction(tx!(search_analysis_component))
             // TODO: .register_transaction(tx!(search_latest_component))
-            // TODO: .register_transaction(search_tx("/api/v2/analysis/component","q=openssl&descendants=1"))
-            // TODO: .register_transaction(search_tx("/api/v2/analysis/component", "q=curl&relationships=contains,dependency"))
+            // TODO: .register_transaction(search_tx("/api/v3/analysis/component","q=openssl&descendants=1"))
+            // TODO: .register_transaction(search_tx("/api/v3/analysis/component", "q=curl&relationships=contains,dependency"))
             ;
 
             tx!(s.get_analysis_component?(

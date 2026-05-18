@@ -11,7 +11,7 @@ pub async fn get_purl_details(purl_id: String, user: &mut GooseUser) -> Transact
 
 pub async fn get_base_purl(key: String, user: &mut GooseUser) -> TransactionResult {
     let _response = user
-        .get(&format!("/api/v2/purl/base/{}", encode(&key)))
+        .get(&format!("/api/v3/purl/base/{}", encode(&key)))
         .await?;
 
     Ok(())
@@ -26,7 +26,7 @@ pub async fn get_recommendations(
     let batch: Vec<&String> = purls.0.iter().take(batch_size).collect();
     let _response = user
         .post_json(
-            "/api/v2/purl/recommend",
+            "/api/v3/purl/recommend",
             &json!({
              "purls": batch
             }),

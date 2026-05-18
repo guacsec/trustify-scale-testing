@@ -76,7 +76,7 @@ pub async fn download_advisory(id: String, user: &mut GooseUser) -> TransactionR
 
 pub async fn list_advisory_labels(user: &mut GooseUser) -> TransactionResult {
     let uri = format!(
-        "/api/v2/advisory-labels?filter_text={}&limit={}",
+        "/api/v3/advisory-labels?filter_text={}&limit={}",
         encode("type"),
         1000
     );
@@ -93,7 +93,7 @@ async fn send_advisory_label_request(
     source: &str,
     client_method: fn(&Client, String) -> RequestBuilder,
 ) -> TransactionResult {
-    let path = format!("/api/v2/advisory/{}/label", advisory_id);
+    let path = format!("/api/v3/advisory/{}/label", advisory_id);
     let json = json!({
         "source": source,
         "foo": "bar",
