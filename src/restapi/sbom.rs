@@ -8,7 +8,7 @@ use std::sync::{
 use urlencoding::encode;
 
 pub async fn get_sbom(sbom_id: String, user: &mut GooseUser) -> TransactionResult {
-    let _response = user.get(&format!("/api/v2/sbom/{sbom_id}")).await?;
+    let _response = user.get(&format!("/api/v3/sbom/{sbom_id}")).await?;
 
     Ok(())
 }
@@ -23,21 +23,21 @@ pub async fn get_sbom_advisories(sbom_id: String, user: &mut GooseUser) -> Trans
 
 pub async fn get_sbom_packages(sbom_id: String, user: &mut GooseUser) -> TransactionResult {
     let _response = user
-        .get(&format!("/api/v2/sbom/{sbom_id}/packages"))
+        .get(&format!("/api/v3/sbom/{sbom_id}/packages"))
         .await?;
 
     Ok(())
 }
 
 pub async fn get_sbom_related(sbom_id: String, user: &mut GooseUser) -> TransactionResult {
-    let _response = user.get(&format!("/api/v2/sbom/{sbom_id}/related")).await?;
+    let _response = user.get(&format!("/api/v3/sbom/{sbom_id}/related")).await?;
 
     Ok(())
 }
 
 pub async fn sbom_by_package(purl: String, user: &mut GooseUser) -> TransactionResult {
     let _response = user
-        .get(&format!("/api/v2/sbom/by-package?purl={}", encode(&purl)))
+        .get(&format!("/api/v3/sbom/by-package?purl={}", encode(&purl)))
         .await?;
 
     Ok(())
@@ -46,7 +46,7 @@ pub async fn sbom_by_package(purl: String, user: &mut GooseUser) -> TransactionR
 pub async fn get_sbom_license_ids(sbom_id: String, user: &mut GooseUser) -> TransactionResult {
     let _response = user
         .get(&format!(
-            "/api/v2/sbom/{}/all-license-ids",
+            "/api/v3/sbom/{}/all-license-ids",
             encode(&sbom_id)
         ))
         .await?;
@@ -56,7 +56,7 @@ pub async fn get_sbom_license_ids(sbom_id: String, user: &mut GooseUser) -> Tran
 
 pub async fn download_sbom(key: String, user: &mut GooseUser) -> TransactionResult {
     let _response = user
-        .get(&format!("/api/v2/sbom/{}/download", encode(&key)))
+        .get(&format!("/api/v3/sbom/{}/download", encode(&key)))
         .await?;
 
     Ok(())
@@ -64,17 +64,17 @@ pub async fn download_sbom(key: String, user: &mut GooseUser) -> TransactionResu
 
 pub async fn get_sbom_license_export(id: String, user: &mut GooseUser) -> TransactionResult {
     let _response = user
-        .get(&format!("/api/v2/sbom/{}/license-export", encode(&id)))
+        .get(&format!("/api/v3/sbom/{}/license-export", encode(&id)))
         .await?;
 
     Ok(())
 }
 
 pub async fn count_sbom_by_package(purl: String, user: &mut GooseUser) -> TransactionResult {
-    let url = user.build_url("/api/v2/sbom/count-by-package")?;
+    let url = user.build_url("/api/v3/sbom/count-by-package")?;
     let goose_request = GooseRequest::builder()
         .method(GooseMethod::Get)
-        .path("/api/v2/sbom/count-by-package")
+        .path("/api/v3/sbom/count-by-package")
         .set_request_builder(Client::get(&user.client, url).json(&json!([{"purl": purl}])))
         .build();
     let _response = user.request(goose_request).await?;
@@ -105,7 +105,7 @@ async fn send_sbom_label_request(
     client_method: fn(&Client, String) -> reqwest_12::RequestBuilder,
 ) -> TransactionResult {
     use serde_json::json;
-    let path = format!("/api/v2/sbom/{}/label", encode(&sbom_id));
+    let path = format!("/api/v3/sbom/{}/label", encode(&sbom_id));
     let json = json!({
         "source": source,
         "load-test": "true",
@@ -131,7 +131,7 @@ pub async fn delete_sbom_from_pool_sequential(
     let index = counter.fetch_add(1, Ordering::Relaxed);
     if index < pool.len() {
         let sbom_id = &pool[index];
-        let _response = user.delete(&format!("/api/v2/sbom/{sbom_id}")).await?;
+        let _response = user.delete(&format!("/api/v3/sbom/{sbom_id}")).await?;
     }
     Ok(())
 }
