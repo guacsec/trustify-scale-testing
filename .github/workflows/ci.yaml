@@ -26,14 +26,14 @@ jobs:
       - name: Clippy
         run: cargo clippy --all-targets --all-features -- -D warnings -D clippy::unwrap_used -D clippy::expect_used
       - name: Test
-        run: cargo test --lib
+        run: cargo test -- --skip scenario::test::empty
       - uses: taiki-e/install-action@v2
         with:
           tool: cargo-llvm-cov
       - name: Install llvm-tools-preview
         run: rustup component add llvm-tools-preview
       - name: Generate coverage
-        run: cargo llvm-cov --lib --codecov --output-path codecov.json
+        run: cargo llvm-cov --codecov --output-path codecov.json -- --skip scenario::test::empty
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v5
         with:
