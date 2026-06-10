@@ -539,4 +539,41 @@ mod test {
         let _ = serde_json5::from_str::<super::Scenario>(include_str!("../../empty.json5"))
             .expect("Must be ok");
     }
+
+    #[test]
+    fn full_scenario_roundtrip() {
+        let json = r#"{
+            "get_sbom": "sha256:abc",
+            "get_sbom_advisories": "sha256:abc",
+            "get_sbom_packages": "urn:uuid:abc",
+            "get_sbom_related": "urn:uuid:abc",
+            "get_vulnerability": "CVE-2024-1234",
+            "sbom_by_package": "pkg:rpm/redhat/openssl@3.0.0",
+            "sbom_license_ids": "urn:uuid:abc",
+            "analyze_purl": "pkg:rpm/redhat/curl@7.0.0",
+            "get_purl_details": "some-id",
+            "get_recommendations": ["pkg:rpm/redhat/a@1", "pkg:rpm/redhat/b@2"],
+            "delete_sbom_pool": ["urn:uuid:del1", "urn:uuid:del2"],
+            "download_advisory": "adv-123",
+            "get_advisory": "adv-123",
+            "download_sbom": "sha256:abc",
+            "get_sbom_license_export": "urn:uuid:abc",
+            "count_sbom_by_package": "pkg:rpm/redhat/openssl@3.0.0",
+            "get_sbom_group": "group-uuid",
+            "get_product": "prod-uuid",
+            "get_organization": "org-uuid",
+            "get_base_purl": "pkg:rpm/redhat/openssl",
+            "get_analysis_component": "sha256:abc",
+            "render_sbom_graph": "urn:uuid:abc",
+            "get_importer": "my-importer",
+            "get_weakness": "CWE-79",
+            "get_spdx_license": "MIT"
+        }"#;
+
+        let scenario: super::Scenario = serde_json::from_str(json).expect("Must deserialize");
+        let back = serde_json::to_string_pretty(&scenario).expect("Must serialize");
+        let scenario2: super::Scenario =
+            serde_json::from_str(&back).expect("Must deserialize again");
+        assert_eq!(scenario, scenario2);
+    }
 }
