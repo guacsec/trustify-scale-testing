@@ -43,4 +43,30 @@ mod test {
         assert_eq!("012…5678", truncate_middle("012345678", 8),);
         assert_eq!("012…5678", truncate_middle("012345678012345678", 8));
     }
+
+    #[test]
+    fn display_vec_single() {
+        let v = DisplayVec(vec!["only"]);
+        assert_eq!(v.to_string(), "only");
+    }
+
+    #[test]
+    fn display_vec_empty() {
+        let v: DisplayVec<String> = DisplayVec(vec![]);
+        assert_eq!(v.to_string(), "");
+    }
+
+    #[test]
+    fn display_vec_integers() {
+        let v = DisplayVec(vec![1, 2, 3]);
+        assert_eq!(v.to_string(), "1,2,3");
+    }
+
+    #[test]
+    fn display_vec_serde_roundtrip() {
+        let v: DisplayVec<String> = DisplayVec(vec!["x".into(), "y".into()]);
+        let json = serde_json::to_string(&v).unwrap();
+        let back: DisplayVec<String> = serde_json::from_str(&json).unwrap();
+        assert_eq!(v, back);
+    }
 }
