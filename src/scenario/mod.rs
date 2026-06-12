@@ -229,12 +229,12 @@ impl Loader {
     }
 
     /// Find a row using [`Self::find_row`] and return the column `"result"`.
-    async fn find(&self, sql: &str) -> anyhow::Result<String> {
+    async fn find(&self, sql: &'static str) -> anyhow::Result<String> {
         Ok(self.find_row(sql).await?.get("result"))
     }
 
     /// Find a row, errors when none was found
-    async fn find_row(&self, sql: &str) -> anyhow::Result<PgRow> {
+    async fn find_row(&self, sql: &'static str) -> anyhow::Result<PgRow> {
         let mut db = crate::db::connect(&self.db).await?;
 
         db.fetch_optional(sql)
@@ -243,7 +243,7 @@ impl Loader {
     }
 
     /// Find all rows
-    async fn find_rows(&self, sql: &str) -> anyhow::Result<Vec<PgRow>> {
+    async fn find_rows(&self, sql: &'static str) -> anyhow::Result<Vec<PgRow>> {
         let mut db = crate::db::connect(&self.db).await?;
 
         Ok(db.fetch_all(sql).await?)
