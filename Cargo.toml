@@ -20,7 +20,7 @@ reqwest_12 = { version = "0.12", package = "reqwest" }
 serde = { version = "1", features = ["derive"] }
 serde_json5 = "0.2.1"
 serde_json = "1"
-sqlx = { version = "0.8.6", default-features = false, features = ["runtime-tokio", "tls-native-tls", "uuid", "json"] }
+sqlx = { version = "0.9", default-features = false, features = ["runtime-tokio", "tls-native-tls", "uuid", "json"] }
 tokio = { version = "1.52.3", features = ["sync"] }
 urlencoding = "2"
 packageurl = "0.6.0"
