@@ -301,7 +301,7 @@ order by num desc
 select
     b.purl as result
 from
-    sbom_package_purl_ref a
+    sbom_node_purl_ref a
     left join qualified_purl b on a.qualified_purl_id = b.id
 limit 1
 "#,
@@ -356,7 +356,7 @@ SELECT
     spr.qualified_purl_id::text AS result,
     COUNT(DISTINCT spl.license_id) AS license_count
 FROM
-    sbom_package_purl_ref spr
+    sbom_node_purl_ref spr
 JOIN
     sbom_package sp ON spr.sbom_id = sp.sbom_id AND spr.node_id = sp.node_id
 LEFT JOIN
